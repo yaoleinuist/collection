@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>btkjsite.com.common</groupId>
@@ -33,11 +33,12 @@
 		<spring.version>3.2.2.RELEASE</spring.version>
 	    <slf4j-release-version>1.7.13</slf4j-release-version>
         <junit.version>4.11</junit.version>
+        <mapper.version>3.3.0</mapper.version>
+        
 	</properties>
 
 	<dependencies>
-	
-		   <!-- Test Dependency Begin -->
+	 <!-- Test Dependency Begin -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
@@ -69,6 +70,12 @@
 			    <groupId>net.sf.jmimemagic</groupId>
 			    <artifactId>jmimemagic</artifactId>
 			    <version>0.1.3</version>
+			    <exclusions>
+			    	<exclusion>
+			    		<groupId>xerces</groupId>
+			    		<artifactId>xercesImpl</artifactId>
+			    	</exclusion>
+			    </exclusions>
 			</dependency>
 		
 			<dependency>
@@ -237,16 +244,11 @@
 				<version>1.1.41</version>
 			</dependency>
 			
-		    <dependency>
-		      <groupId>org</groupId>
-		      <artifactId>json</artifactId>
-		      <version>json</version>
-	        </dependency>
-	        
-	 	    <dependency>
-			  <groupId>org.json.simple</groupId>
-			  <artifactId>json_simple</artifactId>
-			  <version>1.1</version>
+ 
+			<dependency>
+				<groupId>org.json</groupId>
+				<artifactId>json</artifactId>
+				<version>20090211</version>
 			</dependency>
 			<!-- json end -->
 			
@@ -263,12 +265,12 @@
 				<version>2.3.19</version>
 			</dependency>
 
-		    <dependency>
+ 		    <dependency>
 	            <groupId>com.alibaba</groupId>
 	            <artifactId>druid</artifactId>
-	            <version>1.0.9</version>
-	        </dependency>
-
+	            <version>1.0.9</version>  
+	        </dependency>  
+ 
 
 	        <dependency>
 	          	<groupId>org.jsoup</groupId>
@@ -331,6 +333,14 @@
 				<version>2.2.2</version>
 			</dependency>
 		    <!-- cglib动态代理 end -->
+			
+			
+			<dependency>
+			    <groupId>org.aspectj</groupId>
+			    <artifactId>aspectjtools</artifactId>
+			    <version>1.8.3</version>
+			</dependency>
+			
 			
 			 <!-- 添加spring依赖包 begin -->
 	        <dependency>
@@ -404,7 +414,25 @@
 	        </dependency>
 	        <!-- mybatis依赖包 end-->
 	        
-
+	       <dependency>
+				<groupId>tk.mybatis</groupId>
+				<artifactId>mapper</artifactId>
+				<version>${mapper.version}</version>
+			</dependency>
+	        
+			<!-- j2ee web spec -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+				<scope>provided</scope>
+			</dependency>
 
 
 
@@ -416,6 +444,7 @@
 	        </dependency>
 			<!-- Mysql Driver End -->
 	        
+		  
 	</dependencies>
  
 
@@ -436,7 +465,7 @@
 			</plugin>
 			
 			<!--生成mybatis配置文件插件-->
-            <plugin>
+            <!--<plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.2</version>
@@ -448,7 +477,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -465,5 +494,9 @@
 			</plugin>
 		</plugins>
 	</build>
-
+ 
+ 
+	<modules>
+		<module>technology</module>
+	</modules>
 </project>

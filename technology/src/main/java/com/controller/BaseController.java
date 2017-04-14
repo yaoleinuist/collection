@@ -1,0 +1,306 @@
+package com.controller;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.util.StringUtil;
+import com.util.page.PageParam;
+ 
+
+/**
+ * Created by lzh  
+ */
+public class BaseController<T> {
+ 
+
+	public HttpServletRequest request; 
+	public HttpServletResponse response ;
+	public HttpSession session ;
+  
+	public static  Logger logger  = LoggerFactory.getLogger(BaseController.class);
+ 
+
+    public boolean checkIsPhone(String userAgent){
+        String phoneReg = "\\b(ip(hone|od)|android|opera m(ob|in)i"
+                +"|windows (phone|ce)|blackberry"
+                +"|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp"
+                +"|laystation portable)|nokia|fennec|htc[-_]"
+                +"|mobile|up.browser|[1-4][0-9]{2}x[1-4][0-9]{2})\\b";
+        //移动设备正则匹配：手机端、平板
+        Pattern phonePat = Pattern.compile(phoneReg, Pattern.CASE_INSENSITIVE);
+        // 匹配
+        Matcher matcherPhone = phonePat.matcher(userAgent);
+        if(matcherPhone.find()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+//    @ExceptionHandler(Exception.class)
+//    public String handleException(Exception ex,HttpServletRequest request){
+//        return "redirecct:/";
+//    }
+// 
+ 
+    
+    @ModelAttribute
+    public void setReqAndResp(HttpServletRequest request,HttpServletResponse response) {
+ 
+    	this.request=request;
+    	this.response=response;
+    	this.session=request.getSession(true);
+    	
+    }
+ 
+	public HttpServletResponse getResponse() {
+	 
+		return response;
+	}
+
+ 
+	public HttpSession getSession() {
+ 
+		return session;
+	
+	}
+ 
+	
+	public void writeJson(String param) {
+		
+		response.setContentType("Content-type:application/json;charset=UTF-8");
+		try {
+			response.getWriter().write(param);
+			response.getWriter().flush();
+			response.getWriter().close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+ 
+	/**
+     * 根据名字获取cookie
+     * @param request
+     * @param name cookie名字
+     * @return
+     */
+    public  Cookie getCookieByName(HttpServletRequest request,String name){
+        Map<String,Cookie> cookieMap = ReadCookieMap(request);
+        if(cookieMap.containsKey(name)){
+            Cookie cookie = (Cookie)cookieMap.get(name);
+            return cookie;
+        }else{
+            return null;
+        }   
+    }
+      
+    /**
+     * 读取所有cookie
+     * 注意二、从客户端读取Cookie时，包括maxAge在内的其他属性都是不可读的，也不会被提交。浏览器提交Cookie时只会提交name与value属性。maxAge属性只被浏览器用来判断Cookie是否过期
+     * @param request
+     * @param response
+     */
+ 
+    public void showCookies(HttpServletRequest request,HttpServletResponse response ){
+         
+        Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
+        if (null==cookies) {
+            System.out.println("没有cookie=========");
+        } else {
+            for(Cookie cookie : cookies){
+                System.out.println("name:"+cookie.getName()+",value:"+ cookie.getValue());
+            }
+        }
+         
+    }
+    /**
+     * 添加cookie
+     * @param response
+     * @param name
+     * @param value
+     */
+ 
+    public void addCookie(HttpServletResponse response,String name,String value){
+        Cookie cookie = new Cookie(name.trim(), value.trim());
+        cookie.setMaxAge(30 * 60);// 设置为30min
+        cookie.setPath("/");
+        System.out.println("已添加===============");
+        response.addCookie(cookie);
+    }
+      
+    /**
+     * 将cookie封装到Map里面
+     * @param request
+     * @return
+     */
+    private  Map<String,Cookie> ReadCookieMap(HttpServletRequest request){  
+        Map<String,Cookie> cookieMap = new HashMap<String,Cookie>();
+        Cookie[] cookies = request.getCookies();
+        if(null!=cookies){
+            for(Cookie cookie : cookies){
+                cookieMap.put(cookie.getName(), cookie);
+            }
+        }
+        return cookieMap;
+    }
+    /**
+     * 修改cookie
+     * @param request
+     * @param response
+     * @param name
+     * @param value
+     * 注意一、修改、删除Cookie时，新建的Cookie除value、maxAge之外的所有属性，例如name、path、domain等，都要与原Cookie完全一样。否则，浏览器将视为两个不同的Cookie不予覆盖，导致修改、删除失败。
+     */
+ 
+    public void editCookie(HttpServletRequest request,HttpServletResponse response,String name,String value){
+        Cookie[] cookies = request.getCookies();
+        if (null==cookies) {
+            System.out.println("没有cookie==============");
+        } else {
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals(name)){
+                    System.out.println("原值为:"+cookie.getValue());
+                    cookie.setValue(value);
+                    cookie.setPath("/");
+                    cookie.setMaxAge(30 * 60);// 设置为30min
+                    System.out.println("被修改的cookie名字为:"+cookie.getName()+",新值为:"+cookie.getValue());
+                    response.addCookie(cookie);
+                    break;
+                }
+            }
+        }
+         
+    }
+    public void delCookie(HttpServletRequest request,HttpServletResponse response,String name){
+        Cookie[] cookies = request.getCookies();
+        if (null==cookies) {
+            System.out.println("没有cookie==============");
+        } else {
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals(name)){
+                    cookie.setValue(null);
+                    cookie.setMaxAge(0);// 立即销毁cookie
+                    cookie.setPath("/");
+                    System.out.println("被删除的cookie名字为:"+cookie.getName());
+                    response.addCookie(cookie);
+                    break;
+                }
+            }
+        }
+    }
+ // ///////////////////////request方法扩展//////////////////////////
+ 	/**
+ 	 * 根据参数名从HttpRequest中获取Double类型的参数值，无值则返回null .
+ 	 * 
+ 	 * @param key
+ 	 *            .
+ 	 * @return DoubleValue or null .
+ 	 */
+ 	public Double getDouble(String key) {
+ 		String value = request.getParameter(key);
+ 		if (!StringUtil.isEmpty(value)) {
+ 			return Double.parseDouble(value);
+ 		}
+ 		return null;
+ 	}
+
+ 	/**
+ 	 * 根据参数名从HttpRequest中获取Integer类型的参数值，无值则返回null .
+ 	 * 
+ 	 * @param key
+ 	 *            .
+ 	 * @return IntegerValue or null .
+ 	 */
+ 	public Integer getInteger(String key) {
+ 		String value = request.getParameter(key);
+ 		if (!StringUtil.isEmpty(value)) {
+ 			return Integer.parseInt(value);
+ 		}
+ 		return null;
+ 	}
+
+ 	/**
+ 	 * 根据参数名从HttpRequest中获取Long类型的参数值，无值则返回null .
+ 	 * 
+ 	 * @param key
+ 	 *            .
+ 	 * @return LongValue or null .
+ 	 */
+ 	public Long getLong(String key) {
+ 		String value = request.getParameter(key);
+ 		if (!StringUtil.isEmpty(value)) {
+ 			return Long.parseLong(value);
+ 		}
+ 		return null;
+ 	}
+
+ 	/**
+ 	 * 根据参数名从HttpRequest中获取String类型的参数值，无值则返回null .
+ 	 * 
+ 	 * @param key
+ 	 *            .
+ 	 * @return String or null .
+ 	 */
+ 	public String getString(String key) {
+ 		return request.getParameter(key);
+ 	}
+ 	
+
+	// ///////////////////////////////////////////////////////////////
+	// ///////////////// 结合DWZ-UI的分页参数获取方法 ///////////////////////////
+	/**
+	 * 获取当前页（DWZ-UI分页查询参数）.<br/>
+	 * 如果没有值则默认返回1.
+	 * 
+	 * @author WuShuicheng.
+	 */
+	private int getPageNum() {
+		// 当前页数
+		String pageNumStr = request.getParameter("pageNum");
+		int pageNum = 1;
+		if (!StringUtil.isEmpty(pageNumStr)) {
+			pageNum = Integer.valueOf(pageNumStr);
+		}
+		return pageNum;
+	}
+
+	/**
+	 * 获取每页记录数（DWZ-UI分页查询参数）.<br/>
+	 * 如果没有值则默认返回15.
+	 * 
+	 * @author WuShuicheng.
+	 */
+	private int getNumPerPage() {
+		String numPerPageStr = request.getParameter("numPerPage");
+		int numPerPage = 15;
+		if (StringUtil.isEmpty(numPerPageStr)) {
+			numPerPage = Integer.parseInt(numPerPageStr);
+		}
+		return numPerPage;
+	}
+
+	/**
+	 * 获取分页参数，包含当前页、每页记录数.
+	 * 
+	 * @return PageParam .
+	 */
+	public PageParam getPageParam() {
+		return new PageParam(getPageNum(), getNumPerPage());
+	}
+ 
+}
+

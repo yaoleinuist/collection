@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.entity.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="BIT" />
+    <result column="site" property="site" jdbcType="VARCHAR" />
+    <result column="fixedtel" property="fixedtel" jdbcType="VARCHAR" />
+    <result column="establishmentDate" property="establishmentdate" jdbcType="TIMESTAMP" />
+    <result column="scale" property="scale" jdbcType="INTEGER" />
+    <result column="license" property="license" jdbcType="INTEGER" />
+    <result column="idfront" property="idfront" jdbcType="INTEGER" />
+    <result column="idopposite" property="idopposite" jdbcType="INTEGER" />
+    <result column="works1" property="works1" jdbcType="VARCHAR" />
+    <result column="works2" property="works2" jdbcType="VARCHAR" />
+    <result column="works3" property="works3" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="INTEGER" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="del" property="del" jdbcType="INTEGER" />
+    <result column="remianSpace" property="remianspace" jdbcType="INTEGER" />
+    <result column="authentication" property="authentication" jdbcType="INTEGER" />
+    <result column="contacts" property="contacts" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+  </resultMap>
+ 
+  
+</mapper>
