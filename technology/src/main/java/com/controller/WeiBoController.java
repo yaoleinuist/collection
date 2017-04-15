@@ -2,6 +2,7 @@ package com.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+ 
 import java.io.InputStreamReader;
 
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import com.weibo4j.Oauth;
 import com.weibo4j.http.AccessToken;
 import com.weibo4j.model.WeiboException;
 import com.weibo4j.util.BareBonesBrowserLaunch;
+import com.util.WeiboOauthClient;
  
 
 @Controller
@@ -49,8 +51,11 @@ public class WeiBoController extends BaseController{
 		
 	    System.out.println("accessToken="+accessTokenStr);
 	    System.out.println("uid="+uid);
-	    System.out.println("openId="+openId);
 		
+		System.out.println("getAccess_token");
+		System.out.println("code="+code);
+		
+	 
 	}
 	
 	@RequestMapping(value="/test")
@@ -62,6 +67,7 @@ public class WeiBoController extends BaseController{
 	}
 	
 	
+ 
 	public static void main(String[] args) throws WeiboException, IOException {
  
 		Oauth oauth = new Oauth();
@@ -80,5 +86,6 @@ public class WeiBoController extends BaseController{
 				e.printStackTrace();
 			}
 		}
+ 
 	}
 }
