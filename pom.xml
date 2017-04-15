@@ -13,12 +13,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
-		<!-- common projects -->
-		<edu-common.version>1.0-SNAPSHOT</edu-common.version>
-		<edu-common-config.version>1.0-SNAPSHOT</edu-common-config.version>
-		<edu-common-core.version>1.0-SNAPSHOT</edu-common-core.version>
-		<edu-common-web.version>1.0-SNAPSHOT</edu-common-web.version>
+ 
 
 		
 		<!-- facade projects -->
@@ -54,7 +49,7 @@
 	 
 			<!-- Test Dependency End -->
 
-		<!-- Common Dependency Begin -->
+	    	<!-- Common Dependency Begin -->
 			<dependency>
 				<groupId>antlr</groupId>
 				<artifactId>antlr</artifactId>
@@ -136,6 +131,13 @@
 				<artifactId>commons-cli</artifactId>
 				<version>1.2</version>
 			</dependency>
+			
+			  <dependency>
+				<groupId>commons-httpclient</groupId>
+				<artifactId>commons-httpclient</artifactId>
+				<version>3.1</version>
+		 	 </dependency>
+		 	 
 			<dependency>
 				<groupId>dom4j</groupId>
 				<artifactId>dom4j</artifactId>
@@ -498,5 +500,6 @@
  
 	<modules>
 		<module>technology</module>
+		<module>weibo4j-oauth2</module>
 	</modules>
 </project>

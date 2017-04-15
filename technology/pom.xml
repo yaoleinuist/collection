@@ -16,7 +16,7 @@
 	<url>http://maven.apache.org</url>
     <name>technology</name>
  
-  <properties>
+    <properties>
   	    <technology>1.0-SNAPSHOT</technology>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- 主要依赖库的版本定义 -->
@@ -24,7 +24,13 @@
         <spring.version>3.2.2.RELEASE</spring.version>
 	</properties>
   
- 
+ 	<dependencies>
+		<dependency>
+		  <groupId>btkjsite.com.common</groupId>
+		  <artifactId>weibo4j-oauth2</artifactId>
+		  <version>1.0-SNAPSHOT</version>
+		</dependency>
+	 </dependencies>
 
   <build>
         <finalName>technology</finalName>
