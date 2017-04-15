@@ -4,6 +4,9 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="weibo4j-oauth2-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/weibo4j-oauth2/weibo4j-oauth2">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="technology"/>
         <property name="java-output-path" value="/technology/target/classes"/>
     </wb-module>
