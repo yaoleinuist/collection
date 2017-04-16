@@ -21,5 +21,7 @@ public class Weibo implements java.io.Serializable {
 	protected String  sign;
 	
 	protected String  sign_type;
+	
+	protected String source; //为业务方分配的请求ID
 
 }

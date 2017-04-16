@@ -1,9 +1,8 @@
 package com.weibo4j.model;
 
-import com.weibo4j.org.json.JSONException;
-import com.weibo4j.org.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
-public class Address extends WeiboResponse {
+public class AddressModel extends WeiboResponse {
 
 	
 	private String province; //省
@@ -13,17 +12,16 @@ public class Address extends WeiboResponse {
 	private String mobile;//收货人手机号
 	private String address;
 	
-	Address(JSONObject json) throws WeiboException {
-		try {
-			province = json.getString("province");
-			city = json.getString("city");
-			area = json.getString("area");
-			name = json.getString("name");
-			mobile = json.getString("mobile");
-			address = json.getString("address");
-		} catch (JSONException jsone) {
-			throw new WeiboException(jsone.getMessage() + ":" + json.toString(), jsone);
-		}
+	public AddressModel(String jsonStr) throws WeiboException {
+		
+		JSONObject jsonObject=  JSONObject.parseObject(jsonStr);
+		JSONObject json= JSONObject.parseObject(jsonObject.get("data").toString());
+		province = json.getString("province");
+		city = json.getString("city");
+		area = json.getString("area");
+		name = json.getString("name");
+		mobile = json.getString("mobile");
+		address = json.getString("address");
 	}
 	
 	public String getProvince() {
