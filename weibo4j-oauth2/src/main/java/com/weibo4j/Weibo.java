@@ -13,5 +13,13 @@ public class Weibo implements java.io.Serializable {
 //			int maxSize);
 	
 	protected String access_token;
+	
+	protected String uid;
+	
+	protected int ts; //精确到秒的十位时间戳
+	
+	protected String  sign;
+	
+	protected String  sign_type;
 
 }
