@@ -15,13 +15,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
  
 
-		
-		<!-- facade projects -->
-		<edu-facade-user.version>1.0-SNAPSHOT</edu-facade-user.version>
-		
-		<!-- service projects -->
-		<edu-service-user.version>1.0-SNAPSHOT</edu-service-user.version>
-		
 		<!-- web projects -->
 		<edu-web-boss.version>1.0-SNAPSHOT</edu-web-boss.version>
 	    <mybatis-generator-core>1.3.2</mybatis-generator-core>

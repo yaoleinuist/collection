@@ -51,8 +51,6 @@ public class WeiBoController extends BaseController{
 		
 	    System.out.println("accessToken="+accessTokenStr);
 	    System.out.println("uid="+uid);
-		
-		System.out.println("getAccess_token");
 		System.out.println("code="+code);
 		
 	 

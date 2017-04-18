@@ -41,7 +41,6 @@ public class Address extends Weibo {
 	public AddressModel showReceiveAddress() throws WeiboException {
 
 		
-		
 		Map<String,String> params =new HashMap<>();
 		params.put("ts",String.valueOf(System.currentTimeMillis()).toString().substring(0,10));
 		params.put(sign_type,sign_type);

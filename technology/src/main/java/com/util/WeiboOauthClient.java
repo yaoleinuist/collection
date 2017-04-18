@@ -18,16 +18,17 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.weibo4j.util.WeiboConfig;
  
  
 
 public class WeiboOauthClient {
+	
+	private String WEIBO_APPKEY=WeiboConfig.getValue("client_ID");
 
-	private String WEIBO_APPKEY="417033542";
+	private String WEIBO_APPSECRET=WeiboConfig.getValue("client_SERCRET");
 
-	private String WEIBO_APPSECRET="8b1a8be6b9559672e08488390185dfcd";
-
-	private String WEIBO_CALLBACK="http://33075698.all123.net:8080/technology/weibo/getAccess_token";
+	private String WEIBO_CALLBACK=WeiboConfig.getValue("redirect_URI");
 
 	private String WEIBO_APPKEY_OLD;
 

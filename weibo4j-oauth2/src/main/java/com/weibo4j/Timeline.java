@@ -761,7 +761,7 @@ public class Timeline extends Weibo {
 	 * @param id
 	 *            需要查询的微博ID，批量模式下，用半角逗号分隔，最多不超过20个。
 	 * @param type
-	 *            获取类型，1：微博、2：评论、3：私信，默认为1。
+	 *            获取类型，1：微博、2：评论、3： ，默认为1。
 	 * @param is_batch
 	 *            是否使用批量模式，0：否、1：是，默认为0。
 	 * @return Status's mid

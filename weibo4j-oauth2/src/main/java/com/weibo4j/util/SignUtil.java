@@ -13,15 +13,16 @@ import org.apache.commons.lang.StringUtils;
 import sun.misc.BASE64Encoder;
 
 public class SignUtil {
-
 	public static String getSign(TreeMap<String, String> treemap, String cilentId) {
 
 		StringBuffer A = new StringBuffer();
 		Iterator titer = treemap.entrySet().iterator();
 		while (titer.hasNext()) {
 			Map.Entry ent = (Map.Entry) titer.next();
-			String key = ent.getKey().toString();
-			String value = ent.getValue().toString();
+			
+		 
+			String key = ent.getKey()==null?  null:ent.getKey().toString();
+			String value = ent.getValue()==null?  null:ent.getValue().toString();
 
 			if (StringUtils.isEmpty(value)) {
 				continue;

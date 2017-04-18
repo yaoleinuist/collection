@@ -22,13 +22,7 @@ public class DisplayWindowModel extends WeiboResponse {
 	
 	private String  buy_url;
 	
-	public DisplayWindowModel(String jsonStr) throws WeiboException {
-		
-		JSONObject jsonObject=  JSONObject.parseObject(jsonStr);
-		JSONObject json= JSONObject.parseObject(jsonObject.get("data").toString());
  
-	}
-
 	public String getTitle() {
 		return title;
 	}
