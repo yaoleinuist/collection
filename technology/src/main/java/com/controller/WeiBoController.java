@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.examples.oauth2.Log;
 import com.util.WeiboOauthClient;
@@ -23,7 +25,8 @@ public class WeiBoController extends BaseController{
 
 	
 	@RequestMapping(value="/getAccess_token")
-	public void getAccessToken(String code){
+	@ResponseBody
+	public String getAccessToken(String code){
  
 		System.out.println("code="+code);
 		
@@ -53,6 +56,7 @@ public class WeiBoController extends BaseController{
 	    System.out.println("uid="+uid);
 		System.out.println("code="+code);
 		
+		return "test";
 	 
 	}
 	
