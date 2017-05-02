@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>btkjsite.com.common</groupId>
+	<groupId>com.lzhsite</groupId>
 	<artifactId>maven-parent</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -439,7 +439,11 @@
 	        </dependency>
 			<!-- Mysql Driver End -->
 	        
-		  
+		    <dependency>
+				<groupId>org.elasticsearch</groupId>
+				<artifactId>elasticsearch</artifactId>
+				<version>1.0.1</version>
+		</dependency>
 	</dependencies>
  
 
@@ -492,7 +496,8 @@
  
  
 	<modules>
-		<module>technology</module>
-		<module>weibo4j-oauth2</module>
+		<module>lzh-technology</module>
+		<module>lzh-weibo4j</module>
+		<module>lzh-elasticsearch</module>
 	</modules>
 </project>
