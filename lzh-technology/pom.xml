@@ -33,7 +33,7 @@
 	 </dependencies>
 
   <build>
-        <finalName>technology</finalName>
+        <finalName>lzh-technology</finalName>
         <plugins>
         	 <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
