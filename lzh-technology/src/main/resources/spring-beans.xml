@@ -29,5 +29,5 @@
 		</property>
 	</bean>
  
-
+    <bean id="sessionService" class="com.service.SessionService"></bean>
 </beans>

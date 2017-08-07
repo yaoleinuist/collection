@@ -1,4 +1,4 @@
-package com.util.redislockframework;
+package com.technology.redis.redislockframework;
 
 import java.util.ArrayList;
 import java.util.HashMap;

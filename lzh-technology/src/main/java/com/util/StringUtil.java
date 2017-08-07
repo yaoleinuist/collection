@@ -1,13 +1,13 @@
 package com.util;
 
 import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,87 +15,96 @@ import org.apache.log4j.Logger;
 
 /**
  * @author Orion
- * @version 1.0 创建时间：Aug 16, 2016 11:15:55 AM
- * 类说明 处理字符串
+ * @version 1.0 创建时间：Aug 16, 2016 11:15:55 AM 类说明 处理字符串
  */
 
 public class StringUtil {
-	
-	 private static Logger log = Logger.getLogger(StringUtil.class);
-	 
-	 public static String str;
-	 
-	 public static final String EMPTY_STRING = "";
- 
-	
+
+	private static Logger log = Logger.getLogger(StringUtil.class);
+
+	public static String str;
+
+	public static final String EMPTY_STRING = "";
+
+	/**
+	 * 出去null和""
+	 * 
+	 * @param src
+	 * @return
+	 */
+	public static String formatNull(String src) {
+		return (src == null || "null".equals(src)) ? "" : src;
+	}
+
+	public static String getUuid() {
+		return UUID.randomUUID().toString();
+	}
+
 	/**
 	 * 字符串不为null 或者 ""返回true 否则返回false
+	 * 
 	 * @param str
 	 * @return
 	 */
-	public static boolean isNotEmpty(String str){
-		if(null == str || "".equals(str) || str.length() == 0){
+	public static boolean isNotEmpty(String str) {
+		if (null == str || "".equals(str) || str.length() == 0) {
 			return false;
-		}else{
+		} else {
 			return true;
 		}
-		
-		
+
 	}
-	public static String format(String str){
-		if(str.equals("是")){
+
+	public static String format(String str) {
+		if (str.equals("是")) {
 			return "0";
-		}else if(str.equals("否")){
+		} else if (str.equals("否")) {
 			return "1";
 		}
 		return "";
 	}
+
 	//
-	public static boolean isValidDate(String s)
-    {
-        try
-        {    
-        	 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-             dateFormat.parse(s);
-             return true;
-         }
-        catch (Exception e)
-        {
-            return false;
-        }
-    }
-	
-	public static boolean isEmpty (Object o) {
+	public static boolean isValidDate(String s) {
+		try {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			dateFormat.parse(s);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public static boolean isEmpty(Object o) {
 		return o == null || "".equals(o);
 	}
-	
-	public static boolean isEmpty (List l) {
+
+	public static boolean isEmpty(List l) {
 		return l == null || l.size() == 0;
 	}
-	
-	public static boolean isNull (Object o) {
+
+	public static boolean isNull(Object o) {
 		return o == null || o.equals("null");
 	}
-	
-	public static String getString (Object o) {
+
+	public static String getString(Object o) {
 		String s = "";
 		try {
 			s = o.toString();
 		} catch (Exception e) {
-			
+
 		}
 		return s;
 	}
-	
-	public static String append(String... strarr){
+
+	public static String append(String... strarr) {
 		StringBuffer sb = new StringBuffer();
-		for(String str: strarr){
+		for (String str : strarr) {
 			sb.append(str);
 		}
 		return sb.toString();
 	}
-	
-	
+
 	/**
 	 * 根据指定的字符分割字符串
 	 * 
@@ -195,21 +204,17 @@ public class StringUtil {
 		}
 		return sb.toString();
 	}
-	
-	
-	public static String toString(Object str){
-		return toString(str,null);
-	}
-	
 
-	public static String toString(Object str,String nullValue) {
+	public static String toString(Object str) {
+		return toString(str, null);
+	}
+
+	public static String toString(Object str, String nullValue) {
 		if (str == null) {
 			return nullValue;
 		}
 		return str.toString();
 	}
-
- 
 
 	/**
 	 * String.split方法的特殊字符处理。
@@ -241,46 +246,46 @@ public class StringUtil {
 		}
 		return symbol;
 	}
-	
-	public static String unicode2String(String unicodeStr){  
-	    StringBuffer sb = new StringBuffer();  
-	    String str[] = unicodeStr.toUpperCase().split("U");  
-	    for(int i=0;i<str.length;i++){  
-	      if(str[i].equals("")) continue;  
-	      char c = (char)Integer.parseInt(str[i].trim(),16);  
-	      sb.append(c);  
-	    }  
-	    return sb.toString();  
-	  }  
-	
-	public static String string2Unicode(String s) {  
-	    try {  
-	      StringBuffer out = new StringBuffer("");  
-	      byte[] bytes = s.getBytes("unicode");  
-	      for (int i = 2; i < bytes.length - 1; i += 2) {  
-	        out.append("u");  
-	        String str = Integer.toHexString(bytes[i + 1] & 0xff);  
-	        for (int j = str.length(); j < 2; j++) {  
-	          out.append("0");  
-	        }  
-	        String str1 = Integer.toHexString(bytes[i] & 0xff);  
-	  
-	        out.append(str);  
-	        out.append(str1);  
-	        out.append(" ");  
-	      }  
-	      return out.toString().toUpperCase();  
-	    }  
-	    catch (UnsupportedEncodingException e) {  
-	      e.printStackTrace();  
-	      return null;  
-	    }  
-	  }   
 
-    public static boolean isPhone(String mobiles) {
-        Pattern p = Pattern.compile("^(177|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-        Matcher m = p.matcher(mobiles);
-        return m.matches();
-    }
+	public static String unicode2String(String unicodeStr) {
+		StringBuffer sb = new StringBuffer();
+		String str[] = unicodeStr.toUpperCase().split("U");
+		for (int i = 0; i < str.length; i++) {
+			if (str[i].equals(""))
+				continue;
+			char c = (char) Integer.parseInt(str[i].trim(), 16);
+			sb.append(c);
+		}
+		return sb.toString();
+	}
+
+	public static String string2Unicode(String s) {
+		try {
+			StringBuffer out = new StringBuffer("");
+			byte[] bytes = s.getBytes("unicode");
+			for (int i = 2; i < bytes.length - 1; i += 2) {
+				out.append("u");
+				String str = Integer.toHexString(bytes[i + 1] & 0xff);
+				for (int j = str.length(); j < 2; j++) {
+					out.append("0");
+				}
+				String str1 = Integer.toHexString(bytes[i] & 0xff);
+
+				out.append(str);
+				out.append(str1);
+				out.append(" ");
+			}
+			return out.toString().toUpperCase();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static boolean isPhone(String mobiles) {
+		Pattern p = Pattern.compile("^(177|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+		Matcher m = p.matcher(mobiles);
+		return m.matches();
+	}
 
 }

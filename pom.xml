@@ -429,7 +429,17 @@
 				<scope>provided</scope>
 			</dependency>
 
-
+			<!-- redis -->
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-redis</artifactId>
+				<version>1.5.2.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>redis.clients</groupId>
+				<artifactId>jedis</artifactId>
+				<version>2.6.2</version>
+			</dependency>
 
 			<!-- Mysql Driver Begin -->
 	        <dependency>

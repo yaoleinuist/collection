@@ -1,4 +1,4 @@
-package com.util.redislockframework;
+package com.technology.redis.redislockframework;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
