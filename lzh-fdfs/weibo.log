@@ -201,3 +201,37 @@
 54   DEBUG [2017-04-27 17:59:58]  POSThttps://api.weibo.com/oauth2/access_token
 55   DEBUG [2017-04-27 17:59:58]  Request:
 55   DEBUG [2017-04-27 17:59:58]  POSThttps://api.weibo.com/oauth2/access_token
+0    INFO  [2017-09-06 17:00:23]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:01:49]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:02:16]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:02:35]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:02:48]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:03:19]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:03:57]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:04:19]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:13:14]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:14:55]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+1    INFO  [2017-09-06 17:15:32]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:16:27]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:19:21]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:21:06]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:21:18]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:23:03]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:23:39]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:24:01]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:24:07]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+1    INFO  [2017-09-06 17:24:49]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:25:22]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:27:45]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+1    INFO  [2017-09-06 17:31:58]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+1051 ERROR [2017-09-06 17:31:59]  getConnection return null
+2056 ERROR [2017-09-06 17:32:00]  getStoreStorage return null
+3072 ERROR [2017-09-06 17:32:01]  org.csource.common.MyException: getStoreStorage fail, errno code: 0
+0    INFO  [2017-09-06 17:32:16]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+1    INFO  [2017-09-06 17:33:05]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:34:49]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+1    INFO  [2017-09-06 17:35:33]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:38:44]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:39:36]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:43:09]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
+0    INFO  [2017-09-06 17:44:04]  === CONF_FILENAME:src/main/resources/fdfs/fdfs_client.conf
