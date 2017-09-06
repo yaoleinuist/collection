@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
 /*说明： 
 	http://blog.chinaunix.net/uid-20577907-id-3519578.html
 	1、在这段程序中，一个任务就是一个Runnable类型的对象，也就是一个ThreadPoolTask类型的对象。 
@@ -19,70 +20,58 @@ import java.util.concurrent.TimeUnit;
  */
 public class TestThreadPoolExecutor2 {
 
-    private static int produceTaskSleepTime = 2;
-    private static int produceTaskMaxNumber = 10;
+	private static int produceTaskSleepTime = 2;
+	private static int produceTaskMaxNumber = 10;
 
-    public static void main(String[] args)
-    {
-        // 构造一个线程池
-        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(2, 4, 3, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(3),
-                new ThreadPoolExecutor.DiscardOldestPolicy());
+	public static void main(String[] args) {
+		// 构造一个线程池
+		ThreadPoolExecutor threadPool = new ThreadPoolExecutor(2, 4, 3, TimeUnit.SECONDS,
+				new ArrayBlockingQueue<Runnable>(3), new ThreadPoolExecutor.DiscardOldestPolicy());
 
-        for (int i = 1; i <= produceTaskMaxNumber; i++)
-        {
-            try
-            {
-                // 产生一个任务，并将其加入到线程池
-                String task = "task@ " + i;
-                System.out.println("put " + task);
-                threadPool.execute(new ThreadPoolTask(task));
+		for (int i = 1; i <= produceTaskMaxNumber; i++) {
+			try {
+				// 产生一个任务，并将其加入到线程池
+				String task = "task@ " + i;
+				System.out.println("put " + task);
+				threadPool.execute(new ThreadPoolTask(task));
 
-                // 便于观察，等待一段时间
-                Thread.sleep(produceTaskSleepTime);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }
+				// 便于观察，等待一段时间
+				Thread.sleep(produceTaskSleepTime);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
 
 /**
  * 线程池执行的任务
  */
-class ThreadPoolTask implements Runnable, Serializable
-{
-    private static final long serialVersionUID = 0;
-    private static int consumeTaskSleepTime = 2000;
-    // 保存任务所需要的数据
-    private Object threadPoolTaskData;
+class ThreadPoolTask implements Runnable, Serializable {
+	private static final long serialVersionUID = 0;
+	private static int consumeTaskSleepTime = 2000;
+	// 保存任务所需要的数据
+	private Object threadPoolTaskData;
 
-    ThreadPoolTask(Object tasks)
-    {
-        this.threadPoolTaskData = tasks;
-    }
+	ThreadPoolTask(Object tasks) {
+		this.threadPoolTaskData = tasks;
+	}
 
-    public void run()
-    {
-        // 处理一个任务，这里的处理方式太简单了，仅仅是一个打印语句
-        System.out.println(Thread.currentThread().getName());
-        System.out.println("start .." + threadPoolTaskData);
+	public void run() {
+		// 处理一个任务，这里的处理方式太简单了，仅仅是一个打印语句
+		System.out.println(Thread.currentThread().getName());
+		System.out.println("start .." + threadPoolTaskData);
 
-        try
-        {
-            // //便于观察，等待一段时间
-            Thread.sleep(consumeTaskSleepTime);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        threadPoolTaskData = null;
-    }
+		try {
+			// //便于观察，等待一段时间
+			Thread.sleep(consumeTaskSleepTime);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		threadPoolTaskData = null;
+	}
 
-    public Object getTask()
-    {
-        return this.threadPoolTaskData;
-    }
+	public Object getTask() {
+		return this.threadPoolTaskData;
+	}
 }
