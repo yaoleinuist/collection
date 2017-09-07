@@ -27,10 +27,10 @@
  	<dependencies>
 		<dependency>
 		  <groupId>com.lzhsite.component</groupId>
-		  <artifactId>lzh-weibo4j</artifactId>
+		  <artifactId>lzh-fdfs</artifactId>
 		  <version>1.0-SNAPSHOT</version>
 		</dependency>
-	 </dependencies>
+	 </dependencies>  
 
   <build>
         <finalName>lzh-technology</finalName>

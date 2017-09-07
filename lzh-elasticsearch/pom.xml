@@ -3,9 +3,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <description>elasticsearch的demo</description>
+
   <parent>
     <groupId>com.lzhsite</groupId>
-    <artifactId>maven-parent</artifactId>
+    <artifactId>lzh-maven-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
   
