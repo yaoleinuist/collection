@@ -541,5 +541,6 @@
 		<module>lzh-technology</module>
 		<module>lzh-fdfs</module>
 		<module>lzh-elasticsearch</module>
-	</modules>
+    <module>lzh-zookeeper</module>
+  </modules>
 </project>
