@@ -9,7 +9,7 @@ public class MyClient implements Watcher {
 	/**
 	 * @param args
 	 */
-	public static String url = "192.168.1.107:2181";
+	public static String url = "192.168.226.3:2181";
 
 	private final static String root = "/myConf" ;
 	//   数据库连接  URL ,username  ,passwd

@@ -110,7 +110,7 @@ public class Auth implements Watcher {
 		
 		Auth testAuth = new Auth();
 		testAuth.createConnection(SERVER_LIST,2000);
-		//伤处所有的父子节点
+		//删除所有的父子节点
 		deleteParent();
 		try {
 			zk.create(PATH, "init content".getBytes(), Ids.CREATOR_ALL_ACL, CreateMode.PERSISTENT);
