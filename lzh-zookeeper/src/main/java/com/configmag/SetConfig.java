@@ -1,4 +1,4 @@
-package com.lesson5;
+package com.configmag;
 
 
 import org.apache.zookeeper.CreateMode;
