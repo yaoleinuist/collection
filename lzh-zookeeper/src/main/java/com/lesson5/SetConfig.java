@@ -24,7 +24,7 @@ public class SetConfig {
 	
 	private final static String URLString = "10.11.1.1" ;
 	private final static String UserName = "username123" ;
-	private final static String Passwd = "password123" ;
+	private final static String Passwd = "password123";
 	
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub

@@ -3,7 +3,11 @@ package com.lesson5;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
-
+/**
+ * 配置管理
+ * @author lzhcode
+ *
+ */
 public class MyClient implements Watcher {
 
 	/**
@@ -48,6 +52,7 @@ public class MyClient implements Watcher {
 	public void initValue()
 	{
 		try {
+			//url未设置监听，服务端数据改变时无法实时获取
 			uRLString = new String(zk.getData(UrlNode, false, null)) ;
 			username = new String(zk.getData(userNameNode, true, null)) ;
 			passwd = new String(zk.getData(passWdNode, true, null)) ;
@@ -74,14 +79,13 @@ public class MyClient implements Watcher {
 		ZooKeeper zk = zkTest2.getZK() ;
 		zkTest2.initValue() ;
 		int i=0;
-		while(true)
-		{
-			System.out.println(zkTest2.getuRLString()) ;
-			System.out.println(zkTest2.getUsername()) ;
-			System.out.println(zkTest2.getPasswd()) ;
+		while(true){
+			System.out.println(zkTest2.getuRLString());
+			System.out.println(zkTest2.getUsername());
+			System.out.println(zkTest2.getPasswd());
 			System.out.println("-------------------------------------------");
 			Thread.sleep(10000);
-			i++ ;
+			i++;
 			if(i==10)
 			{
 				break;

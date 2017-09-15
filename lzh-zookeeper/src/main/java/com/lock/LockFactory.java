@@ -53,7 +53,7 @@ public class LockFactory {
      
     private static ZooKeeper getDefaultZookeeper() {
         try {
-            ZooKeeper zooKeeper = new ZooKeeper("192.168.1.107:2181", 3000, new Watcher(){
+            ZooKeeper zooKeeper = new ZooKeeper("192.168.226.3:2181", 3000, new Watcher(){
                 public void process(WatchedEvent event) {
                   System.out.println("event: " + event.getType());
                 }
