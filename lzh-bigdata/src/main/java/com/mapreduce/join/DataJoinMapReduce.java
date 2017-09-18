@@ -196,8 +196,8 @@ public class DataJoinMapReduce extends Configured implements Tool {
 		Configuration configuration = new Configuration();
 
 		args = new String[] {
-				"hdfs://hadoop-senior01.ibeifeng.com:8020/user/beifeng/join/input",
-				"hdfs://hadoop-senior01.ibeifeng.com:8020/user/beifeng/join/output2" };
+				"hdfs://192.168.226.3:8020/user/beifeng/join/input",
+				"hdfs://192.168.226.3:8020/user/beifeng/join/output2" };
 
 		// run job
 		int status = ToolRunner.run(configuration, new DataJoinMapReduce(),

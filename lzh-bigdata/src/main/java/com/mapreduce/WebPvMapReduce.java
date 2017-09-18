@@ -171,8 +171,8 @@ public class WebPvMapReduce extends Configured implements Tool {
 		Configuration configuration = new Configuration();
 
 		args = new String[] {
-				"hdfs://hadoop-senior01.ibeifeng.com:8020/user/beifeng/wordcount/input",
-				"hdfs://hadoop-senior01.ibeifeng.com:8020/user/beifeng/wordcount/output13" };
+				"hdfs://192.168.226.3:8020/user/beifeng/wordcount/input",
+				"hdfs://192.168.226.3:8020/user/beifeng/wordcount/output13" };
 
 		/*
 		 * // run job int status = new WCMapReduce().run(args);

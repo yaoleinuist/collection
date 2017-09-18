@@ -141,8 +141,8 @@ public class SecondarySortMapReduce extends Configured implements Tool {
 		Configuration configuration = new Configuration();
 
 		args = new String[] {
-				"hdfs://hadoop-senior01.ibeifeng.com:8020/user/beifeng/sort/input",
-				"hdfs://hadoop-senior01.ibeifeng.com:8020/user/beifeng/sort/output2" };
+				"hdfs://192.168.226.3:8020/user/beifeng/sort/input",
+				"hdfs://192.168.226.3:8020/user/beifeng/sort/output2" };
 
 		/*
 		 * // run job int status = new WCMapReduce().run(args);

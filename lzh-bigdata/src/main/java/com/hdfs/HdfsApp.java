@@ -9,6 +9,11 @@ import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IOUtils;
+/**
+ * http://blog.csdn.net/woaidapaopao/article/details/52006688
+ * @author lzhcode
+ *
+ */
 
 public class HdfsApp {
 
@@ -16,8 +21,7 @@ public class HdfsApp {
 
 		// creat configuration , default & site.xml
 		Configuration configuration = new Configuration();
-		// configuration.set("fs.defaultFS",
-		// "hdfs://hadoop-senior01.ibeifeng.com:8020");
+	    //configuration.set("fs.defaultFS","hdfs://192.168.226.4:8020");
 
 		// get filesystem
 		FileSystem fileSystem = FileSystem.get(configuration);
@@ -53,7 +57,7 @@ public class HdfsApp {
 		// String fileName = "/user/beifeng/temp/conf/core-site.xml";
 		// read(fileName);
 
-		String fileName = "/user/beifeng/wc.input";
+		String fileName = "\\user\\beifeng\\wc.input\\1.15";
 
 		FileSystem fileSystem = getFileSystem();
 
@@ -62,7 +66,7 @@ public class HdfsApp {
 
 		// get input Stream
 		FileInputStream inStream = new FileInputStream(new File(
-				"/opt/datas/wc.input"));
+				"D://大数据//hadoop//大数据Hadoop入门基础必知必会//03.随堂笔记//1.15"));
 
 		// write file
 		FSDataOutputStream outStream = fileSystem.create(writePath);

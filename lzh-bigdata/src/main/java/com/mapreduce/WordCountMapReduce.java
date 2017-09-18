@@ -115,8 +115,8 @@ public class WordCountMapReduce {
 	public static void main(String[] args) throws Exception {
 
 		args = new String[] {
-				"hdfs://hadoop-senior01.ibeifeng.com:8020/user/beifeng/wordcount/input",
-				"hdfs://hadoop-senior01.ibeifeng.com:8020/user/beifeng/wordcount/output6" };
+				"hdfs://192.168.226.3:8020/user/beifeng/wordcount/input",
+				"hdfs://192.168.226.3:8020/user/beifeng/wordcount/output6" };
 
 		// run job
 		int status = new WordCountMapReduce().run(args);
