@@ -18,7 +18,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.weibo4j.util.WeiboConfig;
+import com.weibo.weibo4j.util.WeiboConfig;
  
  
 
