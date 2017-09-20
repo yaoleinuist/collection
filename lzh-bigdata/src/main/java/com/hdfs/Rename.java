@@ -12,8 +12,8 @@ public class Rename {
         FileSystem hdfs=FileSystem.get(conf);
 
 
-        Path frpaht=new Path("/test");    //旧的文件名
-        Path topath=new Path("/test1");    //新的文件名
+        Path frpaht=new Path("/user/beifeng/wordcount/output6/WordCountMapReduce.txt");    //旧的文件名
+        Path topath=new Path("/user/beifeng/wordcount/output6/WordCountReduce.txt");    //新的文件名
 
         boolean isRename=hdfs.rename(frpaht, topath);
 

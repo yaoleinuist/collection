@@ -15,11 +15,11 @@ public class FileLoc {
 
     public static void main(String[] args) throws Exception {
 
-        Configuration conf=new Configuration();
+        Configuration configuration=new Configuration();
+        configuration.set("fs.defaultFS","hdfs://ns1");
+        FileSystem hdfs=FileSystem.get(configuration);
 
-        FileSystem hdfs=FileSystem.get(conf);
-
-        Path fpath=new Path("/user/hadoop/cygwin");
+        Path fpath=new Path("/opt/datas/wc.input/test");
 
        
 

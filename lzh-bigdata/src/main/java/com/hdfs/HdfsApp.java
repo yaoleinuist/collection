@@ -21,7 +21,7 @@ public class HdfsApp {
 
 		// creat configuration , default & site.xml
 		Configuration configuration = new Configuration();
-	    //configuration.set("fs.defaultFS","hdfs://192.168.226.4:8020");
+	    //configuration.set("fs.defaultFS","hdfs://ns1");
 
 		// get filesystem
 		FileSystem fileSystem = FileSystem.get(configuration);
@@ -57,7 +57,7 @@ public class HdfsApp {
 		// String fileName = "/user/beifeng/temp/conf/core-site.xml";
 		// read(fileName);
 
-		String fileName = "\\user\\beifeng\\wc.input\\1.15";
+		String fileName = "/user/beifeng/wordcount/input/WordCountMapReduce.txt";
 
 		FileSystem fileSystem = getFileSystem();
 
@@ -66,7 +66,7 @@ public class HdfsApp {
 
 		// get input Stream
 		FileInputStream inStream = new FileInputStream(new File(
-				"D://大数据//hadoop//大数据Hadoop入门基础必知必会//03.随堂笔记//1.15"));
+				"D://WordCountMapReduce.txt"));
 
 		// write file
 		FSDataOutputStream outStream = fileSystem.create(writePath);

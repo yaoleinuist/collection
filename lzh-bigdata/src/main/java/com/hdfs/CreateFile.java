@@ -14,7 +14,7 @@ public class CreateFile {
 
         byte[] buff="hello hadoop world!\n".getBytes();
 
-        Path dfs=new Path("\\opt\\datas\\wc.input");
+        Path dfs=new Path("/opt/datas/wc.input/test.txt");
        
         FSDataOutputStream outputStream=hdfs.create(dfs);
 

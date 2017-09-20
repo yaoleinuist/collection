@@ -18,7 +18,7 @@ public class GetLTime {
 
        
 
-        Path fpath =new Path("/user/hadoop/test/file1.txt");
+        Path fpath =new Path("/user/beifeng/wc.input/1.15");
 
 
         FileStatus fileStatus=hdfs.getFileStatus(fpath);
@@ -27,7 +27,7 @@ public class GetLTime {
 
        
 
-        System.out.println("file1.txt的修改时间是"+modiTime);
+        System.out.println("1.15的修改时间是"+modiTime);
 
     }
 }

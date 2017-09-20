@@ -11,7 +11,7 @@ public class DeleteFile {
 
         FileSystem hdfs=FileSystem.get(conf);
 
-        Path delef=new Path("/test1");
+        Path delef=new Path("/TestDir");
 
 
         boolean isDeleted=hdfs.delete(delef,false);

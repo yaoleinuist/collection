@@ -17,7 +17,7 @@ public class ListAllFile {
 
 		FileSystem hdfs = FileSystem.get(conf);
 
-		Path listf = new Path("/user/hadoop/test");
+		Path listf = new Path("/user/beifeng/wc.input");
 
 		FileStatus stats[] = hdfs.listStatus(listf);
 
