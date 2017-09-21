@@ -6,8 +6,8 @@ import org.apache.hadoop.io.WritableComparator;
 import com.mapreduce.io.PairWritable;
 
 /**
- * RawComparatoræ˜¯hadoopä¸ºåºåˆ—åŒ–æä¾›çš„ä¼˜åŒ–æ¥å£
- * å…è®¸ç›´æ¥æ¯”è¾ƒæ•°æ®æµä¸­çš„è®°å½•ï¼Œæ— éœ€ååºåˆ—åŒ–ä¸ºå¯¹è±¡
+ * RawComparatorÊÇhadoopÎªĞòÁĞ»¯Ìá¹©µÄÓÅ»¯½Ó¿Ú
+ * ÔÊĞíÖ±½Ó±È½ÏÊı¾İÁ÷ÖĞµÄ¼ÇÂ¼£¬ÎŞĞè·´ĞòÁĞ»¯Îª¶ÔÏó
  * @author lzhcode
  *
  */
