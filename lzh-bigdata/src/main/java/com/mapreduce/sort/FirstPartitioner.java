@@ -1,7 +1,9 @@
-package com.mapreduce;
+package com.mapreduce.sort;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Partitioner;
+
+import com.mapreduce.io.PairWritable;
 
 public class FirstPartitioner extends Partitioner<PairWritable, IntWritable> {
 

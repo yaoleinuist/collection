@@ -1,4 +1,4 @@
-package com.mapreduce;
+package com.mapreduce.cache;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +24,11 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-
+/**
+ * 把需要缓存的文件(cache.txt)分发到各个执行任务的节点上不存在的话写入否则continue，这样速度更快
+ * @author lzhcode
+ *
+ */
 public class DistributedCacheWCMapReduce extends Configured implements Tool{
 
 	/**
@@ -191,8 +195,8 @@ public class DistributedCacheWCMapReduce extends Configured implements Tool{
 	public static void main(String[] args) throws Exception {
 		
 		args = new String[]{
-				"hdfs://hadoop-yarn.beifeng.com:8020/user/beifeng/mr/distributedcache/input",//
-				"hdfs://hadoop-yarn.beifeng.com:8020/user/beifeng/mr/distributedcache/ouput"
+				"hdfs://ns1/user/beifeng/mr/distributedcache/input",//
+				"hdfs://ns1/user/beifeng/mr/distributedcache/ouput"
 		};
 		
 		// mapreduce-default.xml,mapreduce-site.xml

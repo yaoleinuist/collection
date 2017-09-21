@@ -1,4 +1,4 @@
-package com.mapreduce;
+package com.mapreduce.sort;
 
 import java.io.IOException;
 
@@ -16,12 +16,12 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-public class SecondarySortMapReduce extends Configured implements Tool {
+public class SortMapReduce extends Configured implements Tool {
 
 	// step 1: Mapper
-	public static class SecondaryMapper extends
-			Mapper<LongWritable, Text, PairWritable, IntWritable> {
-		private PairWritable mapOutputKey = new PairWritable();
+	public static class SortMapper extends
+			Mapper<LongWritable, Text, Text, IntWritable> {
+		private Text mapOutputKey = new Text();
 		private IntWritable mapOutputValue = new IntWritable();
 
 		@Override
@@ -32,14 +32,14 @@ public class SecondarySortMapReduce extends Configured implements Tool {
 			String lineValue = value.toString();
 
 			// spilt
-			String[] strs = lineValue.split(",");
+			String[] strs = lineValue.split(" ");
 
 			if (2 != strs.length) {
 				return;
 			}
 
 			// set mapoutput key
-			mapOutputKey.set(strs[0], Integer.valueOf(strs[1]));
+			mapOutputKey.set(strs[0]);
 			mapOutputValue.set(Integer.valueOf(strs[1]));
 
 			context.write(mapOutputKey, mapOutputValue);
@@ -48,13 +48,11 @@ public class SecondarySortMapReduce extends Configured implements Tool {
 	}
 
 	// step 2: Reducer
-	public static class SecondaryReducer extends
-			Reducer<PairWritable, IntWritable, Text, IntWritable> {
-
-		private Text outputKey = new Text();
+	public static class SortReducer extends
+			Reducer<Text, IntWritable, Text, IntWritable> {
 
 		@Override
-		protected void reduce(PairWritable key, Iterable<IntWritable> values,
+		protected void reduce(Text key, Iterable<IntWritable> values,
 				Context context) throws IOException, InterruptedException {
 
 			/**
@@ -67,11 +65,7 @@ public class SecondarySortMapReduce extends Configured implements Tool {
 
 			// iterator
 			for (IntWritable value : values) {
-
-				// set output key
-				outputKey.set(key.getFirst());
-
-				context.write(outputKey, value);
+				context.write(key, value);
 			}
 		}
 	}
@@ -93,7 +87,7 @@ public class SecondarySortMapReduce extends Configured implements Tool {
 
 		Job job = Job.getInstance(configuration, this.getClass()
 				.getSimpleName());
-		job.setJarByClass(SecondarySortMapReduce.class);
+		job.setJarByClass(SortMapReduce.class);
 
 		// set job
 		// input
@@ -105,30 +99,28 @@ public class SecondarySortMapReduce extends Configured implements Tool {
 		FileOutputFormat.setOutputPath(job, outPath);
 
 		// Mapper
-		job.setMapperClass(SecondaryMapper.class);
-		job.setMapOutputKeyClass(PairWritable.class);
+		job.setMapperClass(SortMapper.class);
+		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(IntWritable.class);
 
 		// ============shuffle=================
 		// 1.partitioner
-		job.setPartitionerClass(FirstPartitioner.class);
+		// job.setPartitionerClass(cls);
 
 		// 2.sort
 		// job.setSortComparatorClass(cls);
 
 		// 3.group
-		job.setGroupingComparatorClass(FirstGroupingComparator.class);
+		// job.setGroupingComparatorClass(cls);
 
 		// job.setCombinerClass(WCCombiner.class);
 
 		// ============shuffle=================
 
 		// Reducer
-		job.setReducerClass(SecondaryReducer.class);
+		job.setReducerClass(SortReducer.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
-		
-		job.setNumReduceTasks(2);
 
 		// submit job -> YARN
 		boolean isSuccess = job.waitForCompletion(true);
@@ -141,8 +133,8 @@ public class SecondarySortMapReduce extends Configured implements Tool {
 		Configuration configuration = new Configuration();
 
 		args = new String[] {
-				"hdfs://192.168.226.3:8020/user/beifeng/sort/input",
-				"hdfs://192.168.226.3:8020/user/beifeng/sort/output2" };
+				"hdfs://ns1/user/beifeng/sort/input/sort.txt",
+				"hdfs://ns1/user/beifeng/sort/output" };
 
 		/*
 		 * // run job int status = new WCMapReduce().run(args);
@@ -150,8 +142,7 @@ public class SecondarySortMapReduce extends Configured implements Tool {
 		 * System.exit(status);
 		 */
 		// run job
-		int status = ToolRunner.run(configuration,
-				new SecondarySortMapReduce(), args);
+		int status = ToolRunner.run(configuration, new SortMapReduce(), args);
 
 		// exit program
 		System.exit(status);

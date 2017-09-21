@@ -16,7 +16,13 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-
+/**
+ * job.setCombinerClass(WCCombiner.class);
+ * 可选项减少网络传输，减少本地磁盘IO流的读写
+ * 把reduce操作放在map阶段操作，是个可选项
+ * @author lzhcode
+ *
+ */
 
 public class WCMapReduce extends Configured implements Tool {
 
@@ -169,8 +175,8 @@ public class WCMapReduce extends Configured implements Tool {
 		Configuration configuration = new Configuration();
 
 		args = new String[] {
-				"hdfs://192.168.226.3:8020/user/beifeng/wordcount/input",
-				"hdfs://192.168.226.3:8020/user/beifeng/wordcount/output10"};
+				"hdfs://ns1/user/beifeng/wordcount/input/WordCountMap.txt",
+				"hdfs://ns1/user/beifeng/wordcount/output10"};
 
 		/*
 		 * // run job int status = new WCMapReduce().run(args);

@@ -5,7 +5,13 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 import org.apache.hadoop.io.WritableComparable;
-
+/**
+ * 	4、比较-》比较器
+ *	5、comparable就是一个排序接口，如果一个类实现了它，就代表着这个类支持排序
+ *	6、两个对象比较-》两个值比较
+ * @author lzhcode
+ *
+ */
 public class OrderWritable implements WritableComparable<OrderWritable> {
 
 	private String orderId;

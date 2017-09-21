@@ -16,10 +16,16 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-
+/**
+ * mapreduce模板
+ * 五个过程
+ * input->map()->shuffle->reduce()->output
+ * @author lzhcode
+ *
+ */
 public class ModuelMapReduce extends Configured implements Tool {
 
-	// step 1: Mapper
+	// step 1: Mapper 2输入参数类型,4输出参数类型
 	public static class ModuelMapper extends
 			Mapper<LongWritable, Text, Text, IntWritable> {
 
@@ -125,8 +131,8 @@ public class ModuelMapReduce extends Configured implements Tool {
 		Configuration configuration = new Configuration();
 
 		args = new String[] {
-				"hdfs://hadoop-senior01.ibeifeng.com:8020/user/beifeng/wordcount/input",
-				"hdfs://hadoop-senior01.ibeifeng.com:8020/user/beifeng/wordcount/output10" };
+				"hdfs://ns1/user/beifeng/wordcount/input",
+				"hdfs://ns1/user/beifeng/wordcount/output10" };
 
 		// run job
 		int status = ToolRunner.run(configuration, new ModuelMapReduce(), args);

@@ -18,7 +18,16 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-
+/**
+ * map端的join适用数据量较小的场景
+ * reduce的join
+ * 
+ * 
+ * 场景：把用户和订单信息join在一起
+ * cid代表用户id
+ * @author lzhcode
+ *
+ */
 public class DataJoinMapReduce extends Configured implements Tool {
 
 	// step 1: Mapper
@@ -196,8 +205,8 @@ public class DataJoinMapReduce extends Configured implements Tool {
 		Configuration configuration = new Configuration();
 
 		args = new String[] {
-				"hdfs://192.168.226.3:8020/user/beifeng/join/input",
-				"hdfs://192.168.226.3:8020/user/beifeng/join/output2" };
+				"hdfs://ns1/user/beifeng/join/input/",
+				"hdfs://ns1/user/beifeng/join/output2" };
 
 		// run job
 		int status = ToolRunner.run(configuration, new DataJoinMapReduce(),

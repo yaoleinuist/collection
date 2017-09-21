@@ -5,7 +5,13 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 import org.apache.hadoop.io.Writable;
-
+/**
+ * 	1、MR中的所有数据类型都统一的实现了writable的接口
+ *	2、当程序间传递对象或者持久化对象的时候，就需要序列化对象成字节流
+ *	3、writable就是Hadoop中序列化的格式
+ * @author lzhcode
+ *
+ */
 public class UserWritable implements Writable {
 
 	private int id;
