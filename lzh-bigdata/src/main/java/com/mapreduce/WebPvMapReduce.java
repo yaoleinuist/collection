@@ -17,7 +17,10 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-
+/**
+ * pv 网站所有点击量
+ *
+ */
 
 public class WebPvMapReduce extends Configured implements Tool {
 
@@ -171,8 +174,8 @@ public class WebPvMapReduce extends Configured implements Tool {
 		Configuration configuration = new Configuration();
 
 		args = new String[] {
-				"hdfs://192.168.226.3:8020/user/beifeng/wordcount/input",
-				"hdfs://192.168.226.3:8020/user/beifeng/wordcount/output13" };
+				"hdfs://ns1/user/beifeng/wordcount/input/2015082818",
+				"hdfs://ns1/user/beifeng/wordcount/output13" };
 
 		/*
 		 * // run job int status = new WCMapReduce().run(args);

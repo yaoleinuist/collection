@@ -3,6 +3,12 @@ package com.mapreduce;
 import org.apache.hadoop.io.RawComparator;
 import org.apache.hadoop.io.WritableComparator;
 
+/**
+ * RawComparator是hadoop为序列化提供的优化接口
+ * 允许直接比较数据流中的记录，无需反序列化为对象
+ * @author lzhcode
+ *
+ */
 public class FirstGroupingComparator implements RawComparator<PairWritable> {
 
 	public int compare(PairWritable o1, PairWritable o2) {

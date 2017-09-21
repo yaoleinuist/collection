@@ -115,8 +115,8 @@ public class WordCountMapReduce {
 	public static void main(String[] args) throws Exception {
 
 		args = new String[] {
-				"hdfs://ns1/user/beifeng/wordcount/input/WordCountMapReduce.txt",
-				"hdfs://ns1/user/beifeng/wordcount/output6/WordCountMapReduce.txt" };
+				"hdfs://ns1/user/beifeng/wordcount/input/WordCountMap.txt",
+				"hdfs://ns1/user/beifeng/wordcount/output6/" };
 
 		// run job
 		int status = new WordCountMapReduce().run(args);

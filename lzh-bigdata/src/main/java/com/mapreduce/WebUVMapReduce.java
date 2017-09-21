@@ -23,6 +23,8 @@ import java.util.Set;
 
 /**
  * Created by ibf on 2017/1/16.
+ * 
+ * 
  * 需求：获取每日各个省份UV
  *      UV:独立访客数
  *      数据：date_provice_guid
@@ -219,9 +221,9 @@ public class WebUVMapReduce extends Configured implements Tool{
 
         Configuration configuration = new Configuration();
 
-        args = new String[] {
-                "hdfs://192.168.226.3:8020/user/beifeng/web/input",
-                "hdfs://192.168.226.3:8020/user/beifeng/web/output" };
+		args = new String[] {
+				"hdfs://ns1/user/beifeng/wordcount/input/2015082818",
+				"hdfs://ns1/user/beifeng/wordcount/output12" };
 
         // run job
         int status = ToolRunner.run(configuration, new WebUVMapReduce(), args);

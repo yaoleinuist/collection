@@ -32,7 +32,7 @@ public class SortMapReduce extends Configured implements Tool {
 			String lineValue = value.toString();
 
 			// spilt
-			String[] strs = lineValue.split(",");
+			String[] strs = lineValue.split(" ");
 
 			if (2 != strs.length) {
 				return;
@@ -133,8 +133,8 @@ public class SortMapReduce extends Configured implements Tool {
 		Configuration configuration = new Configuration();
 
 		args = new String[] {
-				"hdfs://hadoop-senior01.ibeifeng.com:8020/user/beifeng/sort/input",
-				"hdfs://hadoop-senior01.ibeifeng.com:8020/user/beifeng/sort/output" };
+				"hdfs://ns1/user/beifeng/sort/input/sort.txt",
+				"hdfs://ns1/user/beifeng/sort/output" };
 
 		/*
 		 * // run job int status = new WCMapReduce().run(args);

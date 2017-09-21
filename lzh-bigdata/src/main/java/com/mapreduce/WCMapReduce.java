@@ -169,8 +169,8 @@ public class WCMapReduce extends Configured implements Tool {
 		Configuration configuration = new Configuration();
 
 		args = new String[] {
-				"hdfs://192.168.226.3:8020/user/beifeng/wordcount/input",
-				"hdfs://192.168.226.3:8020/user/beifeng/wordcount/output10"};
+				"hdfs://ns1/user/beifeng/wordcount/input",
+				"hdfs://ns1/user/beifeng/wordcount/output10"};
 
 		/*
 		 * // run job int status = new WCMapReduce().run(args);
