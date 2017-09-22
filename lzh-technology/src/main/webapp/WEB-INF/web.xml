@@ -66,9 +66,19 @@
         <servlet-name>cms</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
+     <servlet-mapping>
         <servlet-name>cms</servlet-name>
         <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+    	<servlet-name>ClassLoaderServletTest</servlet-name>
+    	<servlet-class>com.servlet.ClassLoaderServletTest</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>ClassLoaderServletTest</servlet-name>
+    	<url-pattern>/ClassLoaderServletTest</url-pattern>
     </servlet-mapping>
     
   
