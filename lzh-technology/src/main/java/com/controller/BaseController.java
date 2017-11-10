@@ -33,7 +33,6 @@ public class BaseController<T> {
  
 
     public boolean checkIsPhone(String userAgent){
-		System.out.println("aaaa");
         String phoneReg = "\\b(ip(hone|od)|android|opera m(ob|in)i"
                 +"|windows (phone|ce)|blackberry"
                 +"|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp"
@@ -60,7 +59,6 @@ public class BaseController<T> {
     
     @ModelAttribute
     public void setReqAndResp(HttpServletRequest request,HttpServletResponse response) {
-		System.out.println("aaaa");
     	this.request=request;
     	this.response=response;
     	this.session=request.getSession(true);
@@ -68,20 +66,17 @@ public class BaseController<T> {
     }
  
 	public HttpServletResponse getResponse() {
-		System.out.println("aaaa");
 		return response;
 	}
 
  
 	public HttpSession getSession() {
-		System.out.println("aaaa");
 		return session;
 	
 	}
  
 	
 	public void writeJson(String param) {
-		System.out.println("aaaa");
 		response.setContentType("Content-type:application/json;charset=UTF-8");
 		try {
 			response.getWriter().write(param);
@@ -140,7 +135,7 @@ public class BaseController<T> {
         Cookie cookie = new Cookie(name.trim(), value.trim());
         cookie.setMaxAge(30 * 60);// 设置为30min
         cookie.setPath("/");
-        System.out.println("已添加===============");
+        System.out.println("1已添加===============");
         response.addCookie(cookie);
     }
       
