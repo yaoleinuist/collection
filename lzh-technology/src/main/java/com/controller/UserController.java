@@ -27,8 +27,6 @@ public class UserController extends BaseController{
 			paramMap.put("phone", getString("phone")); // 用户姓名（模糊查询）
 			paramMap.put("name", getString("name")); // 用户姓名（模糊查询）
 			paramMap.put("status", getInteger("status")); // 状态
-
-	 
 		} catch (Exception e) {
 			logger.error("== listPmsUser exception:", e);
 		 
