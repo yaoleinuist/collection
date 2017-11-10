@@ -31,11 +31,11 @@ public class UserController extends BaseController{
 			logger.error("== listPmsUser exception:", e);
 		}
 		
-		   return prefix+"user_list3";
+		   return prefix+"user_list2";
 	}
 
 	public  void test(){
-		System.out.println("aaa");
+		System.out.println("sdsd");
 
 	}
 }
