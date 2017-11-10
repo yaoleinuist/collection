@@ -21,28 +21,7 @@ public class TestStreamController {
 	
 	@RequestMapping(value="/test1")
 	public void  name() {
-		 
-//		 //创建一个新的URL实例url
-//		 URL url = new URL("http://localhost/uploadFile/replaceFile");
-//		 //根据url建立连接
-//		 URLConnection con = url.openConnection();
-//		 
-//		 //设置该连接可写
-//		 con.setDoOutput(true);
-//		 //禁用cache
-//		 con.setUseCaches(false);
-//		 OutputStream outs=con.getOutputStream();
-//     	
-//        URL u = new URL("http://localhost/uploadFile/get?id=123");
-//        ByteArrayOutputStream os=new ByteArrayOutputStream();
-//        BufferedImage imageOrigin = ImageIO.read(u);
-//         
-//        ImageIO.write(imageOrigin, "png", os); //利用ImageIO类提供的write方法，将bi以png图片的数据模式写入流。
-//        byte b[]=os.toByteArray();
-//        outs.write(b);
-//        outs.close();
-//        
-//        url.openStream();
+
         
 	     try {
 				 URL url = new URL("http://localhost/uploadFile/replaceFile?id=203");
@@ -80,8 +59,8 @@ public class TestStreamController {
 		        out.close();   
 		   
 		        conn.getInputStream();  
-		        conn.disconnect();  
-		        
+		        conn.disconnect();
+			   System.out.println("aaaa");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
