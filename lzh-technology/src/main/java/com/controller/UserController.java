@@ -29,7 +29,6 @@ public class UserController extends BaseController{
 			paramMap.put("status", getInteger("status")); // 状态
 		} catch (Exception e) {
 			logger.error("== listPmsUser exception:", e);
-		 
 		}
 		
 		   return prefix+"user_list";
