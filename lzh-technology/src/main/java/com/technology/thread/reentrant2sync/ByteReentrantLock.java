@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.lzhsite.reentrant2sync;
+package com.technology.thread.reentrant2sync;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 

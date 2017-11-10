@@ -9,7 +9,7 @@ public class TestCPU {
 
 	public static void main(String[] args) {
 
-		ArrayList<OoMobject> list = new ArrayList<OoMobject>();
+		final ArrayList<OoMobject> list = new ArrayList<OoMobject>();
 
 		new Thread(new Runnable() {
 

@@ -1,4 +1,4 @@
-package com.lzhsite.reentrant2sync;
+package com.technology.thread.reentrant2sync;
 
 /**
  * 使用synchronized时的字节码分析。

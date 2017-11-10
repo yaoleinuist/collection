@@ -1,4 +1,4 @@
-package com.lzhsite.reentrant2sync;
+package com.technology.thread.reentrant2sync;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.Lock;

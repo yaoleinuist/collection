@@ -146,7 +146,7 @@ public class TestClassLoader {
 
 		try {
 			String result = HttpUtils.getUrlAsString("http://localhost:8080/lzh-technology/ClassLoaderServletTest",
-					new HashMap<>());
+					new HashMap<String, String>());
 			System.out.println(result);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
