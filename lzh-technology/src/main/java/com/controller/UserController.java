@@ -31,7 +31,7 @@ public class UserController extends BaseController{
 			logger.error("== listPmsUser exception:", e);
 		}
 		
-		   return prefix+"user_list";
+		   return prefix+"user_list3";
 	}
 
 	public  void test(){
