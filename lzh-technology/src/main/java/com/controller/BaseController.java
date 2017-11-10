@@ -140,7 +140,7 @@ public class BaseController<T> {
         Cookie cookie = new Cookie(name.trim(), value.trim());
         cookie.setMaxAge(30 * 60);// 设置为30min
         cookie.setPath("/");
-        System.out.println("已添加===============");
+        System.out.println("2已添加===============");
         response.addCookie(cookie);
     }
       
