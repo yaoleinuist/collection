@@ -36,4 +36,9 @@ public class UserController extends BaseController{
 		
 		   return prefix+"user_list";
 	}
+
+	public  void test(){
+
+
+	}
 }
