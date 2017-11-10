@@ -53,20 +53,20 @@ public class BaseController<T> {
 //    public String handleException(Exception ex,HttpServletRequest request){
 //        return "redirecct:/";
 //    }
-// 
- 
-    
+//
+
+
     @ModelAttribute
     public void setReqAndResp(HttpServletRequest request,HttpServletResponse response) {
- 
+
     	this.request=request;
     	this.response=response;
     	this.session=request.getSession(true);
-    	
+
     }
- 
+
 	public HttpServletResponse getResponse() {
-	 
+
 		return response;
 	}
 
@@ -105,7 +105,7 @@ public class BaseController<T> {
             return cookie;
         }else{
             return null;
-        }   
+        }
     }
       
     /**
