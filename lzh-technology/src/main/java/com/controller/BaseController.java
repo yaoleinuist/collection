@@ -32,41 +32,9 @@ public class BaseController<T> {
 	public static  Logger logger  = LoggerFactory.getLogger(BaseController.class);
  
 
-    public boolean checkIsPhone(String userAgent){
-        String phoneReg = "\\b(ip(hone|od)|android|opera m(ob|in)i"
-                +"|windows (phone|ce)|blackberry"
-                +"|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp"
-                +"|laystation portable)|nokia|fennec|htc[-_]"
-                +"|mobile|up.browser|[1-4][0-9]{2}x[1-4][0-9]{2})\\b";
-        //移动设备正则匹配：手机端、平板
-        Pattern phonePat = Pattern.compile(phoneReg, Pattern.CASE_INSENSITIVE);
-        // 匹配
-        Matcher matcherPhone = phonePat.matcher(userAgent);
-        if(matcherPhone.find()){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-//    @ExceptionHandler(Exception.class)
-//    public String handleException(Exception ex,HttpServletRequest request){
-//        return "redirecct:/";
-//    }
-// 
- 
-    
-    @ModelAttribute
-    public void setReqAndResp(HttpServletRequest request,HttpServletResponse response) {
- 
-    	this.request=request;
-    	this.response=response;
-    	this.session=request.getSession(true);
-    	
-    }
- 
 	public HttpServletResponse getResponse() {
-	 
+	// adasda
+		System.out.println("aaa");
 		return response;
 	}
 
@@ -100,12 +68,14 @@ public class BaseController<T> {
      */
     public  Cookie getCookieByName(HttpServletRequest request,String name){
         Map<String,Cookie> cookieMap = ReadCookieMap(request);
+		System.out.println("aaa");
         if(cookieMap.containsKey(name)){
             Cookie cookie = (Cookie)cookieMap.get(name);
             return cookie;
         }else{
             return null;
-        }   
+        }
+
     }
       
     /**
@@ -155,6 +125,7 @@ public class BaseController<T> {
                 cookieMap.put(cookie.getName(), cookie);
             }
         }
+		System.out.println("aaa");
         return cookieMap;
     }
     /**
