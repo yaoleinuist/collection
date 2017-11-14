@@ -21,9 +21,9 @@ public class Test {
 		um.setAge(30);
 		
 		// 新增操作
- 		//crud.addModel(um);
+ 		crud.addModel(um);
  		//crud.updateModel(um);
- 		crud.deleteModel(um.getUuid());
+ 		//crud.deleteModel(um.getUuid());
 		
 		//crud.queryUser();
 		

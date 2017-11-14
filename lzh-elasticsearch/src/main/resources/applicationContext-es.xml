@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:elasticsearch="http://www.springframework.org/schema/data/elasticsearch"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd
+		">
+		
+	<!-- 开始Spring全注解 -->	
+	<context:component-scan base-package="com.lzhsite.es.spring">	
+	</context:component-scan>
+	
+	<!-- Client client = transport-client.... -->
+	<elasticsearch:transport-client id="client"
+		cluster-name="elasticsearch" client-transport-sniff="true" 
+		cluster-nodes="192.168.226.3:9300" />
+		
+  <!-- embed模式client，数据采用UUID的方式每运行一次重置一次数据，对应data目录需要手动清空
+    <elasticsearch:node-client id="client" local="true" 
+    cluster-name="#{T(java.util.UUID).randomUUID().toString()}" 
+    http-enabled="false"
+    path-data="#{
+        T(org.ccframe.commons.util.WebContextHolder).getWarPath() + T(java.io.File).separator + 'WEB-INF' + T(java.io.File).separator
+        + 'eshome' + T(java.io.File).separator + 'esdata'
+    }"
+    path-home="#{
+        T(org.ccframe.commons.util.WebContextHolder).getWarPath() + T(java.io.File).separator + 'WEB-INF' + T(java.io.File).separator
+        + 'eshome'
+    }"
+    /> -->
+    
+	<bean name="elasticsearchTemplate"
+		class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
+		<constructor-arg name="client" ref="client" />
+	</bean>
+<!-- 	
+    cluster-nodes数据为你远程的elastic服务的端口，注意不是elasticsearch管理的端口。
+	elasticsearch节点管理端口默认用9200，这里要写9300。可以配置一个或多个节点，用逗号分隔。
+	cluster-name是你端口运行节点的集群名称。
+	注意要和你节点的elasticsearch.yml里配置的cluster-name一致，默认是elasticsearch。
+
+	embedded模式可以用于本地开发和测试。与独立节点的区别就是local为true，
+	不用配置cluster-nodes而改为配置path-home和path-data。path-home需要指向你本地的路径，
+	你可以自己写个Filter抓取ServletContext里的ContextPath来获得绝对路径，具体实现不在本文讨论。
+	 -->
+</beans>

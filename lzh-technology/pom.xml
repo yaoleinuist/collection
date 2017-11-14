@@ -1,41 +1,48 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <modelVersion>4.0.0</modelVersion>
-          
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>com.lzhsite</groupId>
-		<artifactId>maven-parent</artifactId>
+		<artifactId>lzh-maven-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-    
-    
-    <groupId>com.lzhsite.component</groupId>
+
+
+	<groupId>com.lzhsite.component</groupId>
 	<artifactId>lzh-technology</artifactId>
-    <packaging>war</packaging>
+	<packaging>war</packaging>
 	<url>http://maven.apache.org</url>
-    <name>lzh-technology</name>
- 
-    <properties>
-  	    <technology>1.0-SNAPSHOT</technology>
+	<name>lzh-technology</name>
+
+	<properties>
+		<technology>1.0-SNAPSHOT</technology>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- 主要依赖库的版本定义 -->
 		<junit.version>4.11</junit.version>
-        <spring.version>3.2.2.RELEASE</spring.version>
+		<spring.version>3.2.2.RELEASE</spring.version>
 	</properties>
-  
- 	<dependencies>
-		<dependency>
-		  <groupId>com.lzhsite.component</groupId>
-		  <artifactId>lzh-fdfs</artifactId>
-		  <version>1.0-SNAPSHOT</version>
-		</dependency>
-	 </dependencies>  
 
-  <build>
-        <finalName>lzh-technology</finalName>
-        <plugins>
-        	 <plugin>
+	<dependencies>
+		<dependency>
+			<groupId>com.lzhsite.component</groupId>
+			<artifactId>lzh-fdfs</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.lzhsite</groupId>
+			<artifactId>lzh-common</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<finalName>lzh-technology</finalName>
+		<plugins>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
@@ -47,22 +54,22 @@
 					<source>1.7</source>
 					<target>1.7</target>
 					<encoding>UTF-8</encoding>
-                    <compilerArguments>
-                       <extdirs>src\main\webapp\WEB-INF\lib</extdirs>
-                    </compilerArguments> 
+					<compilerArguments>
+						<extdirs>src\main\webapp\WEB-INF\lib</extdirs>
+					</compilerArguments>
 				</configuration>
 			</plugin>
- 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <systemPropertyVariables>
-                        <tapestry.execution-mode>Qa</tapestry.execution-mode>
-                    </systemPropertyVariables>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
- 
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<systemPropertyVariables>
+						<tapestry.execution-mode>Qa</tapestry.execution-mode>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

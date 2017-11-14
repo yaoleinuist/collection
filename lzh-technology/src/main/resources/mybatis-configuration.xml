@@ -6,8 +6,7 @@
  
  
 	<typeAliases>
-	   <package name="com.meila.cms.entity"/>
-	   <package name="com.meila.cms.model"/>
+	   <package name="com.lzhsite.entity"/>
 	</typeAliases>
 
 <!--  	<plugins>
