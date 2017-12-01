@@ -1,0 +1,13 @@
+package ${package}.dao.wemall;
+
+import ${package}.entities.wemall.${className}Entity;
+import com.xkeshi.wemall.core.dao.BaseDao;
+
+/**
+ * ${comments}
+ * 
+ * @date ${datetime}
+ */
+public interface ${className}Dao extends BaseDao<${className}Entity> {
+	
+}

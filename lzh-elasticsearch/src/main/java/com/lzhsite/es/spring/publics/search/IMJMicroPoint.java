@@ -1,14 +1,18 @@
 package com.lzhsite.es.spring.publics.search;
 
-import com.alibaba.fastjson.annotation.JSONField;
+ 
 
+import java.io.Serializable;
 import java.util.Date;
+
+import com.alibaba.fastjson.annotation.JSONField;
+import com.lzhsite.exception.MicroWebException;
+import com.lzhsite.util.JsonUtil;
 
 /**
  * 庙街数据埋点数据结构
- * Created by xiehejun on 2016/9/21.
  */
-public class IMJMicroPoint {
+public class IMJMicroPoint implements Serializable{
     /** 新添埋点**/
     @JSONField(name = "bhv_type")
     private Long bhvType;
@@ -360,4 +364,50 @@ public class IMJMicroPoint {
     public void setStayedTime(Long stayedTime) {
         this.stayedTime = stayedTime;
     }
+
+ 
+    public static void main(String[] args) {
+    	IMJMicroPoint imjMicroPoint = new IMJMicroPoint();
+    	imjMicroPoint.setBhvType(123L);
+    	imjMicroPoint.setMerchantId(123123L); 
+    	imjMicroPoint.setMerchantName("merchantName"); 
+    	imjMicroPoint.setActionTypeCode(32312L);
+    	imjMicroPoint.setStayedTime(18020190012L);
+    	imjMicroPoint.setActionTypeName("actionTypeName");
+    	imjMicroPoint.setBusiType("busiType");
+    	imjMicroPoint.setAccessModelCode(432L);
+    	imjMicroPoint.setAccessModelName("accessModelName");
+    	imjMicroPoint.setShopId(12312L);
+    	imjMicroPoint.setShopName("shopName");
+    	imjMicroPoint.setShopFullName("shopFullName");
+    	imjMicroPoint.setShopAddress("shopAddress");
+    	imjMicroPoint.setShopPhone("shopPhone");
+    	imjMicroPoint.setOpenMicroTime("1231232131233");
+    	imjMicroPoint.setOpenMicroTimeDate(new Date());
+    	imjMicroPoint.setProductId(54332L);
+    	imjMicroPoint.setProductName("productName");
+    	imjMicroPoint.setProductPrice("12312");
+    	imjMicroPoint.setProductDesc("productDesc");
+    	imjMicroPoint.setItemCategoryId(34323L);
+    	imjMicroPoint.setItemCategoryName("itemCategoryName");
+    	imjMicroPoint.setScopeType(1);
+    	imjMicroPoint.setSessionId("34323232");
+    	imjMicroPoint.setUserId("2434");
+    	imjMicroPoint.setUserName("userName");
+    	imjMicroPoint.setUserType(1);
+    	imjMicroPoint.setLoginStatus(1);
+    	imjMicroPoint.setUserPhone("18090230202");
+    	imjMicroPoint.setCreateTime("2017-01-02 12:32:21");
+    	imjMicroPoint.setCreateDt("2017-01-02 12:32:21");
+    	imjMicroPoint.setCouponInfoCode("123123");
+    	imjMicroPoint.setCouponInfoName("couponInfoName");
+    	imjMicroPoint.setCouponId(893729L);
+    	try {
+			System.out.println(JsonUtil.obj2Json(imjMicroPoint));
+		} catch (MicroWebException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+    
 }

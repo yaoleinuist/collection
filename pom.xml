@@ -128,6 +128,18 @@
 				<version>3.1</version>
 		 	 </dependency>
 		 	 
+		 	 
+		 	 <dependency>
+                <groupId>commons-configuration</groupId>
+                <artifactId>commons-configuration</artifactId>
+                <version>1.10</version>
+            </dependency>
+            <dependency>
+                <artifactId>velocity</artifactId>
+                <groupId>org.apache.velocity</groupId>
+                <version>1.7</version>
+            </dependency>
+		 	 
 			<dependency>
 				<groupId>dom4j</groupId>
 				<artifactId>dom4j</artifactId>
@@ -271,7 +283,7 @@
  		    <dependency>
 	            <groupId>com.alibaba</groupId>
 	            <artifactId>druid</artifactId>
-	            <version>1.0.9</version>  
+	            <version>1.0.29</version>  
 	        </dependency>  
  
 
@@ -695,6 +707,7 @@
 		<module>lzh-elasticsearch</module>
 	    <module>lzh-bigdata</module>
 	    <module>lzh-shiro</module>
-    <module>lzh-common</module>
+	    <module>lzh-shiro</module>
+        <module>lzh-generator</module>
   </modules>
 </project>

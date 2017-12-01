@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <description>spring-content</description>
+
+    <!--自动扫描配置-->
+    <context:component-scan base-package="com.lzhsite.generator.service"/>
+
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath*:props/datasource.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="properties" ref="configProperties" />
+    </bean>
+
+    <!-- =====================================Business datasource start=====================================-->
+    <bean id="xkeshiBusinessDatasourceMaster" class="com.alibaba.druid.pool.DruidDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!-- Connection Pooling Info -->
+        <property name="filters" value="wall,stat,log4j"/>
+        <property name="maxActive" value="${jdbc.pool.maxActive}"/>
+        <property name="initialSize" value="${jdbc.pool.initialSize}"/>
+        <property name="maxWait" value="${jdbc.pool.maxWait}"/>
+        <property name="minIdle" value="${jdbc.pool.minIdle}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.pool.timeBetweenEvictionRunsMillis}"/>
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.pool.minEvictableIdleTimeMillis}"/>
+        <property name="validationQuery" value="SELECT 'x'"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize"
+                  value="${jdbc.pool.maxPoolPreparedStatementPerConnectionSize}"/>
+        <!--监控信息输出到日志的时间-->
+        <property name="timeBetweenLogStatsMillis" value="300000"/>
+        <!-- 超过时间限制是否回收 -->
+        <property name="removeAbandoned" value="true" />
+        <!-- 超时时间；单位为秒。180秒=3分钟 -->
+        <property name="removeAbandonedTimeout" value="180" />
+        <!-- 关闭abanded连接时输出错误日志 -->
+        <property name="logAbandoned" value="true" />
+        <!-- 开启死连接检测清除 -->
+        <property name="keepAlive" value="true"/>
+        <property name="proxyFilters">
+            <list>
+                <ref bean="logFilter"/>
+                <ref bean="statFilter"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="statFilter" class="com.alibaba.druid.filter.stat.StatFilter">
+        <property name="slowSqlMillis" value="3000"/>
+        <property name="logSlowSql" value="true"/>
+        <property name="mergeSql" value="true"/>
+    </bean>
+    <bean id="logFilter" class="com.alibaba.druid.filter.logging.Slf4jLogFilter">
+        <property name="statementExecutableSqlLogEnable" value="true" />
+    </bean>
+
+    <!-- sqlSessionFactory -->
+    <bean id="xBusinessSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="xkeshiBusinessDatasourceMaster"/>
+        <property name="typeAliasesPackage" value="com.lzhsite.generator.entity"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <property name="mapperLocations">
+            <array>
+                <value>classpath*:mapper/*.xml</value>
+            </array>
+        </property>
+    </bean>
+
+    <!--  MyBatis MapperScannerConfigurer -->
+    <bean id="xBusinessMapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.lzhsite.generator.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="xBusinessSqlSessionFactory"/>
+    </bean>
+
+    <!-- 事务管理器 -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="xkeshiBusinessDatasourceMaster" />
+    </bean>
+
+    <!-- 开启事务(注解) -->
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+</beans>

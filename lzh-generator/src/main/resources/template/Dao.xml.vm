@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="${package}.dao.wemall.${className}Dao">
+
+    <resultMap type="${package}.entities.wemall.${className}Entity" id="BaseResultMap">
+#foreach($column in $columns)
+        <result property="${column.attrname}" column="${column.columnName}"/>
+#end
+    </resultMap>
+
+    <sql id="Base_Column_List">
+#foreach($column in $columns)
+	`${column.columnName}` #if($velocityCount != $columns.size()),#end
+
+#end
+    </sql>
+
+    <sql id="whereClause">
+        where 1 = 1
+#foreach($column in $columns)
+#if($column.columnName != $pk.columnName)
+        <if test="$column.attrname != null"> and `$column.columnName` = #{$column.attrname}#if($velocityCount != $columns.size()) #end</if>
+#end
+#end
+    </sql>
+
+    <insert id="save" parameterType="${package}.entities.wemall.${className}Entity"#if($pk.extra == 'auto_increment') useGeneratedKeys="true" keyProperty="$pk.attrname"#end>
+        insert into ${tableName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+#foreach($column in $columns)
+#if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
+          <if test="$column.attrname != null">
+            `$column.columnName`,
+          </if>
+#end
+#end
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+#foreach($column in $columns)
+#if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
+          <if test="$column.attrname != null">
+            #{$column.attrname},
+          </if>
+#end
+#end
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="${package}.entities.wemall.${className}Entity">
+        update ${tableName}
+        <set>
+#foreach($column in $columns)
+#if($column.columnName != $pk.columnName)
+          <if test="$column.attrname != null">
+            `$column.columnName` = #{$column.attrname}#if($velocityCount != $columns.size()), #end
+
+          </if>
+#end
+#end
+        </set>
+        where ${pk.columnName} = #{${pk.attrname}}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from ${tableName} where ${pk.columnName} = #{value}
+    </delete>
+
+    <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from ${tableName}
+        where ${pk.columnName}  = #{value}
+    </select>
+
+    <select id="find" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from ${tableName}
+        <include refid="whereClause" />
+    </select>
+
+</mapper>

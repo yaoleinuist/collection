@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lzhsite.dao.wemall.UUserDao">
+
+    <resultMap type="com.lzhsite.entities.wemall.UUserEntity" id="BaseResultMap">
+        <result property="id" column="id"/>
+        <result property="nickname" column="nickname"/>
+        <result property="email" column="email"/>
+        <result property="pswd" column="pswd"/>
+        <result property="createTime" column="create_time"/>
+        <result property="lastLoginTime" column="last_login_time"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+	`id` ,
+	`nickname` ,
+	`email` ,
+	`pswd` ,
+	`create_time` ,
+	`last_login_time` ,
+	`status` 
+    </sql>
+
+    <sql id="whereClause">
+        where 1 = 1
+        <if test="nickname != null"> and `nickname` = #{nickname} </if>
+        <if test="email != null"> and `email` = #{email} </if>
+        <if test="pswd != null"> and `pswd` = #{pswd} </if>
+        <if test="createTime != null"> and `create_time` = #{createTime} </if>
+        <if test="lastLoginTime != null"> and `last_login_time` = #{lastLoginTime} </if>
+        <if test="status != null"> and `status` = #{status}</if>
+    </sql>
+
+    <insert id="save" parameterType="com.lzhsite.entities.wemall.UUserEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into u_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="nickname != null">
+            `nickname`,
+          </if>
+          <if test="email != null">
+            `email`,
+          </if>
+          <if test="pswd != null">
+            `pswd`,
+          </if>
+          <if test="createTime != null">
+            `create_time`,
+          </if>
+          <if test="lastLoginTime != null">
+            `last_login_time`,
+          </if>
+          <if test="status != null">
+            `status`,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="nickname != null">
+            #{nickname},
+          </if>
+          <if test="email != null">
+            #{email},
+          </if>
+          <if test="pswd != null">
+            #{pswd},
+          </if>
+          <if test="createTime != null">
+            #{createTime},
+          </if>
+          <if test="lastLoginTime != null">
+            #{lastLoginTime},
+          </if>
+          <if test="status != null">
+            #{status},
+          </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.lzhsite.entities.wemall.UUserEntity">
+        update u_user
+        <set>
+          <if test="nickname != null">
+            `nickname` = #{nickname}, 
+          </if>
+          <if test="email != null">
+            `email` = #{email}, 
+          </if>
+          <if test="pswd != null">
+            `pswd` = #{pswd}, 
+          </if>
+          <if test="createTime != null">
+            `create_time` = #{createTime}, 
+          </if>
+          <if test="lastLoginTime != null">
+            `last_login_time` = #{lastLoginTime}, 
+          </if>
+          <if test="status != null">
+            `status` = #{status}
+          </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from u_user where id = #{value}
+    </delete>
+
+    <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from u_user
+        where id  = #{value}
+    </select>
+
+    <select id="find" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from u_user
+        <include refid="whereClause" />
+    </select>
+
+</mapper>
