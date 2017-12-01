@@ -5,10 +5,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.parser.Feature;
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
 
-public class RedisValueSerializer {
+public class RedisValueSerializer implements RedisSerializer<Object> {
 	 private static final byte[] EMPTY_ARRAY = new byte[0];
 	    private static SerializerFeature[] features;
 

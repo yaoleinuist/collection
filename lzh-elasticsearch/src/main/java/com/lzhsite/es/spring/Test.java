@@ -17,15 +17,14 @@ public class Test {
 		
 		UserModel um = new UserModel();
 		um.setUuid("ibeifeng03");
-		um.setName("我的笔记本1");
+		um.setName("我的笔记本2");
 		um.setAge(30);
 		
 		// 新增操作
  		crud.addModel(um);
  		//crud.updateModel(um);
  		//crud.deleteModel(um.getUuid());
-		
-		//crud.queryUser();
+		crud.queryUser();
 		
 
 	}

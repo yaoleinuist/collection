@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!--导入属性配置 -->
-    <properties resource="jdbc.properties"></properties>
+    <properties resource="prop/jdbc.properties"></properties>
 
     <!--  Mybatis  Generator 配置文件   dongfeifei   -->
     <!-- 指定jar路径  -->
@@ -26,7 +26,7 @@
         </javaTypeResolver>
 
         <!-- targetProject:自动生成代码的位置 -->
-        <javaModelGenerator targetPackage="com.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.lzhsite.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaModelGenerator>
 
@@ -34,7 +34,7 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dao.impl" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lzhsite.dao.impl" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->

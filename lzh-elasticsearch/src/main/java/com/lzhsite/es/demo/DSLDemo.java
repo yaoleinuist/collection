@@ -43,7 +43,7 @@ public class DSLDemo {
 //		        .setSize(2);
 		
 		// 带排序的查询
-		SearchRequestBuilder builder = ESHelper.getInstance()
+		SearchRequestBuilder builder = ElasticSearchHandler.getInstance()
 				.prepareSearch(INDEX_NAME)
 		        .setTypes(TYPE_NAME)
 		        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
@@ -76,7 +76,7 @@ public class DSLDemo {
 			multi_match
 
 		 */
-		SearchRequestBuilder builder = ESHelper.getInstance()
+		SearchRequestBuilder builder = ElasticSearchHandler.getInstance()
 				.prepareSearch(INDEX_NAME)
 		        .setTypes(TYPE_NAME)
 		        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
@@ -109,7 +109,7 @@ public class DSLDemo {
 	
 	
 	public static void aggsDemo(){
-		SearchRequestBuilder builder = ESHelper.getInstance()
+		SearchRequestBuilder builder = ElasticSearchHandler.getInstance()
 				.prepareSearch(INDEX_NAME)
 		        .setTypes(TYPE_NAME)
 		        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)

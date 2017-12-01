@@ -23,21 +23,21 @@ import org.elasticsearch.common.transport.InetSocketTransportAddress;
 
 //https://www.cnblogs.com/zlslch/p/6474424.html
 //http://blog.csdn.net/jek123456/article/details/67639268
-public class ESHelper {
+public class ElasticSearchHandler {
 
-    private static Log logger = LogFactory.getLog(ESHelper.class);
+    private static Log logger = LogFactory.getLog(ElasticSearchHandler.class);
 	private static TransportClient client = null;
 	
-    private static ESHelper esHelper;
+    private static ElasticSearchHandler esHelper;
 	
-    private ESHelper() {
+    private ElasticSearchHandler() {
         //使用本机做为节点
         this(ResourceBundle.getBundle("props.vip").getString("elasticSearch_ips"));
     }
 
     
 	 
-    private  ESHelper(String ipAddresses){
+    private  ElasticSearchHandler(String ipAddresses){
 		try{
 	        Settings settings =  Settings.settingsBuilder().put("cluster.name", "elasticsearch_xkeshi")
 	                .put("client.transport.ignore_cluster_name", false)
@@ -68,9 +68,9 @@ public class ESHelper {
 	
     public static Client getInstance(){
         if (null == esHelper){
-            synchronized(ESHelper.class){
+            synchronized(ElasticSearchHandler.class){
                 if (null == esHelper){
-                	esHelper = new ESHelper("192.168.226.3");
+                	esHelper = new ElasticSearchHandler("192.168.226.3");
                 }
             }
         }
@@ -82,11 +82,11 @@ public class ESHelper {
      * @param ipAddresses
      * @return
      */
-    public static ESHelper getInstance(String ipAddresses){
+    public static ElasticSearchHandler getInstance(String ipAddresses){
         if (null == esHelper){
-            synchronized(ESHelper.class){
+            synchronized(ElasticSearchHandler.class){
                 if (null == esHelper){
-                	esHelper = new ESHelper(ipAddresses);
+                	esHelper = new ElasticSearchHandler(ipAddresses);
                 }
             }
         }

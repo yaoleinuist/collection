@@ -20,21 +20,21 @@
 	<properties>
 		<technology>1.0-SNAPSHOT</technology>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- 主要依赖库的版本定义 -->
-		<junit.version>4.11</junit.version>
-		<spring.version>3.2.2.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.lzhsite.component</groupId>
 			<artifactId>lzh-fdfs</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
+		 <dependency>
+			<groupId>com.lzhsite.component</groupId>
+			<artifactId>lzh-elasticsearch</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.lzhsite</groupId>
 			<artifactId>lzh-common</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
@@ -51,8 +51,8 @@
 					<verbose>true</verbose>
 					<fork>true</fork>
 					<compilerArgument>-nowarn</compilerArgument>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
 					<encoding>UTF-8</encoding>
 					<compilerArguments>
 						<extdirs>src\main\webapp\WEB-INF\lib</extdirs>
@@ -60,16 +60,26 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<systemPropertyVariables>
-						<tapestry.execution-mode>Qa</tapestry.execution-mode>
-					</systemPropertyVariables>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.lzhsite.component</groupId>
+				<artifactId>lzh-fdfs</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.lzhsite.component</groupId>
+				<artifactId>lzh-elasticsearch</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.lzhsite</groupId>
+				<artifactId>lzh-common</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

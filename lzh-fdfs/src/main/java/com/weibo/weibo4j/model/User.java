@@ -74,6 +74,14 @@ public class User extends WeiboResponse {
 	private String verifiedReason;		  //认证原因
 	private String weihao;				  //微號
 	private String statusId;
+	
+	
+	public User(int followersCount, String name, int biFollowersCount) {
+		super();
+		this.followersCount = followersCount;
+		this.name = name;
+		this.biFollowersCount = biFollowersCount;
+	}
 	public String getVerified_reason() {
 		return verifiedReason;
 	}

@@ -8,6 +8,9 @@
         <dependent-module archiveName="lzh-fdfs-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/lzh-fdfs/lzh-fdfs">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="lzh-elasticsearch-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/lzh-elasticsearch/lzh-elasticsearch">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="lzh-common-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/lzh-common/lzh-common">
             <dependency-type>uses</dependency-type>
         </dependent-module>

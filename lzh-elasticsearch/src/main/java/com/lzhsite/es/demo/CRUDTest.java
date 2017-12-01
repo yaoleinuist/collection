@@ -28,7 +28,7 @@ public class CRUDTest {
 	public static void addModel(UserModel um){
 		
 		String userJson = JSON.toJSONString(um);
-		IndexResponse response = ESHelper.getInstance()
+		IndexResponse response = ElasticSearchHandler.getInstance()
 				.prepareIndex(INDEX_NAME, TYPE_NAME,um.getUuid())
 		        .setSource(userJson)
 		        .get();
@@ -54,7 +54,7 @@ public class CRUDTest {
 		UpdateRequest updateRequest = new UpdateRequest(INDEX_NAME, TYPE_NAME, um.getUuid())
 		        .doc(userJson);
 		try {
-			ESHelper.getInstance().update(updateRequest).get();
+			ElasticSearchHandler.getInstance().update(updateRequest).get();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
@@ -65,7 +65,7 @@ public class CRUDTest {
 	// 删除数据
 	public static void deleteModel(String uuid){
 		DeleteResponse response = 
-				ESHelper.getInstance()
+				ElasticSearchHandler.getInstance()
 				.prepareDelete(INDEX_NAME, TYPE_NAME, uuid)
 				.get();
 	}
@@ -73,7 +73,7 @@ public class CRUDTest {
 	// 根据主键查询
 	public static UserModel getByUuid(String uuid){
 		GetResponse response = 
-				ESHelper.getInstance()
+				ElasticSearchHandler.getInstance()
 				.prepareGet(INDEX_NAME, TYPE_NAME, uuid)
 				.get();
 		
@@ -86,7 +86,7 @@ public class CRUDTest {
 	// 查询全部
 	public static List<UserModel> getAll(){
 		List<UserModel> users = new ArrayList<UserModel>();
-		SearchResponse response = ESHelper.getInstance()
+		SearchResponse response = ElasticSearchHandler.getInstance()
 				.prepareSearch(INDEX_NAME)
 				.setTypes(TYPE_NAME)
 		        .execute()
@@ -114,7 +114,7 @@ public class CRUDTest {
 //				"term":{"content":"ibeifeng"}
 //			}
 //		}'
-		SearchResponse response = ESHelper.getInstance()
+		SearchResponse response = ElasticSearchHandler.getInstance()
 				.prepareSearch(INDEX_NAME)
 		        .setTypes(TYPE_NAME)
 		        .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)

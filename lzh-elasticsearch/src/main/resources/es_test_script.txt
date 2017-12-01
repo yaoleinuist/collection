@@ -56,3 +56,35 @@ curl -XPOST http://192.168.226.3:9200/index/fulltext/_search  -d'
     }
 }
 '
+
+
+1、创建索引
+curl -XPUT http://192.168.3.226:9200/ibeifeng
+
+curl -XPUT 'http://192.168.3.226:9200/ibeifeng' -d'{
+  "settings":{
+  	"index":{
+  		"number_of_shards" : 2,
+  		"number_of_replicas" : 1
+  	}
+  }
+}'
+
+========================================================
+2、插入文档
+
+	curl -XPOST http://192.168.3.226:9200/ibeifeng/produce/1 -d'
+{"name":"北风网","className":"分布式搜索引擎3","price":"33"}
+'
+==================================================================
+
+3、区分修改和新增
+   3.1 .... op_type=create
+   	curl -XPOST http://192.168.3.226:9200/ibeifeng/produce/1?op_type=create -d'
+{"name":"北风网","className":"分布式搜索引擎4","price":"44"}'
+   
+   
+   3.2 .... /_create
+   curl -XPOST http://192.168.3.226:9200/ibeifeng/produce/1/_create -d'
+{"name":"北风网","className":"分布式搜索引擎4","price":"44"}'
+   

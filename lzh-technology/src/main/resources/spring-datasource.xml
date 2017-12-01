@@ -14,7 +14,19 @@
          http://www.springframework.org/schema/tx 
          http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
          
- 
+ 	<!-- 引入属性文件 -->
+	<bean id="propertyConfigurer" class="com.lzhsite.util.config.PropertyPlaceholderConfigurer" lazy-init="false">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	    <property name="fileEncoding" value="UTF-8"/>
+		<property name="locations">
+			<list>
+		   	    <value>classpath:prop/es.properties</value>
+				<value>classpath:prop/config-dev.properties</value>
+				<value>classpath:prop/jdbc.properties</value>
+				<value>classpath:prop/redis.properties</value>
+			</list>
+		</property>
+	</bean>
 	
 	<!-- 阿里 druid数据库连接池 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">  
@@ -59,7 +71,7 @@
 
 	<!-- 配置dao -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.dao" />
+		<property name="basePackage" value="com.lzhsite.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
@@ -89,7 +101,7 @@
 		<!-- 以下的事务是声明在DAO中，但是通常都会在Service来处理多个业务对象逻辑的关系，注入删除，更新等，此时如果在执行了一个步骤之后抛出异常 
 			就会导致数据不完整，所以事务不应该在DAO层处理，而应该在service，这也就是Spring所提供的一个非常方便的工具，声明式事务 -->
 		<aop:pointcut id="allMethods"
-			expression="execution(* com.services.*.*(..))" />
+			expression="execution(* com.lzhsite.service.*.*(..))" />
 		<!-- 通过advisor来确定具体要加入事务控制的方法 -->
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="allMethods" />
 	</aop:config>

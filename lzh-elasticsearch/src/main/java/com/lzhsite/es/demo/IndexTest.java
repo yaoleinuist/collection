@@ -8,13 +8,13 @@ public class IndexTest {
 	// 创建索引
 	public static void createIndex(String indexName){
 		CreateIndexRequest create = new CreateIndexRequest(indexName);
-		ESHelper.getInstance().admin().indices().create(create);
+		ElasticSearchHandler.getInstance().admin().indices().create(create);
 	}
 	
 	// 删除索引
 	public static void deleteIndex(String indexName){
 		DeleteIndexRequest delete = new DeleteIndexRequest(indexName);
-		ESHelper.getInstance().admin().indices().delete(delete);
+		ElasticSearchHandler.getInstance().admin().indices().delete(delete);
 	}
 	
 	public static void main(String[] args) {

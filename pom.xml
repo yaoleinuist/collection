@@ -374,17 +374,19 @@
 	            <artifactId>spring-test</artifactId>
 	            <version>${spring.version}</version>
 	            <scope>test</scope>
-	            <exclusions>
-	            	<exclusion>
-	            		<groupId>org.springframework</groupId>
-	            		<artifactId>spring-core</artifactId>
-	            	</exclusion>
-	            </exclusions>
 	        </dependency>
 
  
-  
-	       
+	          <dependency>
+	            <groupId>org.springframework</groupId>
+	            <artifactId>spring-web</artifactId>
+	            <version>${spring.version}</version>
+	        </dependency>
+		    <dependency>
+	            <groupId>org.springframework</groupId>
+	            <artifactId>spring-jdbc</artifactId>
+	            <version>${spring.version}</version>
+	        </dependency>
 	        <dependency>
 	            <groupId>org.springframework</groupId>
 	            <artifactId>spring-orm</artifactId>
@@ -435,7 +437,7 @@
 			<dependency>
 				<groupId>org.springframework.data</groupId>
 				<artifactId>spring-data-redis</artifactId>
-				<version>1.5.2.RELEASE</version>
+				<version>1.6.6.RELEASE</version>
 				<exclusions>
 					<exclusion>
 						<groupId>org.springframework</groupId>
@@ -528,7 +530,12 @@
         </dependency>
  
  
-
+        <!-- joda -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.5</version>
+        </dependency>
  
 		<!-- shiro  -->
 	    <dependency>

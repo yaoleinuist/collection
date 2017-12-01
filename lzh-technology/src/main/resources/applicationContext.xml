@@ -16,7 +16,7 @@
     
 	<mvc:resources location="resources/" mapping="/resources/**"/>
  
-	<context:component-scan base-package="com.controller"/>
+	<context:component-scan base-package="com.lzhsite.controller"/>
  
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/jsp/"/>
@@ -32,4 +32,5 @@
      <import resource="classpath*:spring-beans.xml" />
      <import resource="classpath*:spring-datasource.xml" />
 	 <import resource="classpath*:spring-mvc.xml" />
+	 <import resource="classpath*:spring-es.xml" />
 </beans>

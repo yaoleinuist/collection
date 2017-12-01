@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.Test;
 
@@ -77,5 +79,14 @@ public class TestLabmda {
 
 		//使用lambda表达式写法：
 		users.sort(Comparator.comparing(User::getId));
+	}
+	@Test
+	public void test4() {
+		Stream<User> userStream = Stream.of(new User(0, "张三", 18), new User(1, "张四", 19), new User(2, "张五", 19), new User(3, "老张", 50));
+
+		Map<Integer, Integer> userMap = userStream.collect(Collectors.toMap(User::getFollowersCount, item -> item.getbiFollowersCount()));
+ 
+		System.out.println(userMap.get(5));
+	  
 	}
 }

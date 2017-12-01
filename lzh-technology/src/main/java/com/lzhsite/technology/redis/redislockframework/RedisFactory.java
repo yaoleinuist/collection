@@ -13,7 +13,7 @@ public class RedisFactory {
 	public static JedisPoolConfig getPoolConfig() throws IOException {
 		Properties properties = new Properties();
 
-		InputStream in = RedisFactory.class.getClassLoader().getResourceAsStream("redis.properties");
+		InputStream in = RedisFactory.class.getClassLoader().getResourceAsStream("prop/redis.properties");
 
 		try {
 			properties.load(in);
