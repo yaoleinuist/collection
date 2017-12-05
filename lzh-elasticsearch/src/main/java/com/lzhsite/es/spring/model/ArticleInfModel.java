@@ -1,4 +1,4 @@
-package com.lzhsite.es.spring.crud;
+package com.lzhsite.es.spring.model;
 
 import java.io.Serializable;
 

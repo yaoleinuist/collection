@@ -1,4 +1,4 @@
-package com.lzhsite.es.spring.publics.search;
+package com.lzhsite.es.spring.model;
 
  
 
@@ -12,80 +12,48 @@ import com.lzhsite.util.JsonUtil;
 /**
  * 庙街数据埋点数据结构
  */
-public class IMJMicroPoint implements Serializable{
+public class IMJMicroPointModel implements Serializable{
     /** 新添埋点**/
-    @JSONField(name = "bhv_type")
     private Long bhvType;
-    @JSONField(name = "merchant_id")
     private Long merchantId;
-    @JSONField(name = "merchant_name")
     private String merchantName;
-    @JSONField(name = "action_type_code")
     private Long actionTypeCode;
-    @JSONField(name = "stayed_time")
     private Long stayedTime;
-    @JSONField(name = "action_type_name")
     private String actionTypeName;
     @JSONField(name = "busi_type")
     private String busiType;
-    @JSONField(name = "access_model_code")
     private Long accessModelCode;
-    @JSONField(name = "access_model_name")
     private String accessModelName;
 
     /** 以下均是原微商城埋点数据**/
-    @JSONField(name = "shop_id")
     private Long shopId;
-    @JSONField(name = "shop_name")
     private String shopName;
-    @JSONField(name = "shop_full_name")
     private String shopFullName;
-    @JSONField(serialize = false)
     private String shopAddress;
     @JSONField(serialize = false)
     private String shopPhone;
-    @JSONField(name = "open_micro_time")
     private String openMicroTime;
     /** 兼容前端*/
     private Date openMicroTimeDate;
-    @JSONField(name = "product_id")
     private Long productId;
-    @JSONField(name = "product_name")
     private String productName;
-    @JSONField(name = "product_price")
     private String productPrice;
-    @JSONField(serialize = false)
     private String productDesc;
-    @JSONField(name = "item_category_id")
     private Long itemCategoryId;
-    @JSONField(name = "item_category_name")
     private String itemCategoryName;
-    @JSONField(name = "scope_type")
     private int scopeType;
-    @JSONField(name = "session_id")
     private String sessionId;
-    @JSONField(name = "user_id")
     private String userId;
-    @JSONField(name = "user_name")
     private String userName;
-    @JSONField(serialize = false)
     private int userType;
-    @JSONField(name = "login_status")
     private int loginStatus;
-    @JSONField(name = "user_phone")
     private String userPhone;
-    @JSONField(name = "create_time")
     private String createTime;
-
-    @JSONField(name = "create_dt")
     private String createDt;
 
     /** 电子券*/
-    @JSONField(name = "coupon_info_code")
     private String couponInfoCode;
-    @JSONField(name = "coupon_info_name")
     private String couponInfoName;
-    @JSONField(name = "coupon_id")
     private Long couponId;
 
     public Long getBhvType() {
@@ -367,7 +335,7 @@ public class IMJMicroPoint implements Serializable{
 
  
     public static void main(String[] args) {
-    	IMJMicroPoint imjMicroPoint = new IMJMicroPoint();
+    	IMJMicroPointModel imjMicroPoint = new IMJMicroPointModel();
     	imjMicroPoint.setBhvType(123L);
     	imjMicroPoint.setMerchantId(123123L); 
     	imjMicroPoint.setMerchantName("merchantName"); 
@@ -382,7 +350,7 @@ public class IMJMicroPoint implements Serializable{
     	imjMicroPoint.setShopFullName("shopFullName");
     	imjMicroPoint.setShopAddress("shopAddress");
     	imjMicroPoint.setShopPhone("shopPhone");
-    	imjMicroPoint.setOpenMicroTime("1231232131233");
+    	imjMicroPoint.setOpenMicroTime("2017-12-01 17:07:37");
     	imjMicroPoint.setOpenMicroTimeDate(new Date());
     	imjMicroPoint.setProductId(54332L);
     	imjMicroPoint.setProductName("productName");

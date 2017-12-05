@@ -23,6 +23,15 @@ public class BaseEntity implements Serializable {
 	private Date createTime;
 	
 	
+	public BaseEntity() {
+		super();
+	}
+
+	public BaseEntity(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	/** 主键ID **/
 	public Integer getId() {
 		return id;

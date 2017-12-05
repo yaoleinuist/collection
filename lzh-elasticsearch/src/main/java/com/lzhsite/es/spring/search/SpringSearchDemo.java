@@ -18,7 +18,7 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 
-import com.lzhsite.es.spring.crud.UserModel;
+import com.lzhsite.es.spring.model.UserModel;
 
 @Service("searchDemo")
 public class SpringSearchDemo {

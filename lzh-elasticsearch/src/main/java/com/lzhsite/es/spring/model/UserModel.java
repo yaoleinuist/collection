@@ -1,4 +1,4 @@
-package com.lzhsite.es.spring.crud;
+package com.lzhsite.es.spring.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;

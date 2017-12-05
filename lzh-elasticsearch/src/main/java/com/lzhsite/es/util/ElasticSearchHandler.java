@@ -1,4 +1,4 @@
-package com.lzhsite.es.demo;
+package com.lzhsite.es.util;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -39,7 +39,8 @@ public class ElasticSearchHandler {
 	 
     private  ElasticSearchHandler(String ipAddresses){
 		try{
-	        Settings settings =  Settings.settingsBuilder().put("cluster.name", "elasticsearch_xkeshi")
+	        Settings settings =  Settings.settingsBuilder().put("cluster.name", "elasticsearch")
+	        	    .put("node.name", "es1")
 	                .put("client.transport.ignore_cluster_name", false)
 	                .put("node.client", true)
 	                .put("client.transport.sniff", true)
@@ -109,7 +110,7 @@ public class ElasticSearchHandler {
     }
 
     /**
-     * 建立索引,索引建立好之后,会在elasticsearch-0.20.6\data\elasticsearch\nodes\0创建所以你看
+     * 建立索引,索引建立好之后,会在elasticsearch-0.20.6\data\elasticsearch\nodes\0创建索引 
      *
      * @param indexName 为索引库名，一个es集群中可以有多个索引库。 名称必须为小写
      * @param indexType Type为索引类型，是用来区分同索引库下不同类型的数据的，一个索引库下可以有多个索引类型。
@@ -150,7 +151,7 @@ public class ElasticSearchHandler {
     }
 
     /**
-     * 建立索引,索引建立好之后,会在elasticsearch-0.20.6\data\elasticsearch\nodes\0创建所以你看
+     * 建立索引,索引建立好之后,会在elasticsearch-0.20.6\data\elasticsearch\nodes\0创建索引 
      *
      * @param indexName 为索引库名，一个es集群中可以有多个索引库。 名称必须为小写
      * @param indexType Type为索引类型，是用来区分同索引库下不同类型的数据的，一个索引库下可以有多个索引类型。
@@ -192,7 +193,7 @@ public class ElasticSearchHandler {
 
 
     /***
-     * @param indexUrl "http://xkeshi_admin:xkeshi_data@192.168.181.168:9200/test"
+     * @param indexUrl "http://root:123456..@192.168.181.168:9200/test"
      */
     public void createIndex(String indexUrl) throws IOException {
         HttpPut request = new HttpPut(indexUrl);
@@ -202,7 +203,7 @@ public class ElasticSearchHandler {
     }
 
     /***
-     * @param typeUrl "http://xkeshi_admin:xkeshi_data@192.168.181.168:9200/test/angel4/_mapping"
+     * @param typeUrl "http://root:123456..@192.168.181.168:9200/test/angel4/_mapping"
      * @param typeDdl "{\"angel4\":{\"properties\":{\"created\":{\"type\":\"multi_field\",\"fields\":{\"created\":{\"type\":\"string\"},\"date\":{\"type\":\"date\"}}}}}}"
      */
     public void createType(String typeUrl, String typeDdl) throws IOException {
@@ -215,7 +216,7 @@ public class ElasticSearchHandler {
     }
 
     /***
-     * @param indexUrl "http://xkeshi_admin:xkeshi_data@192.168.181.168:9200/test"
+     * @param indexUrl "http://root:123456..@192.168.181.168:9200/test"
      */
     public CloseableHttpResponse createIndexResponse(String indexUrl) throws IOException {
         HttpPut request = new HttpPut(indexUrl);
@@ -235,7 +236,7 @@ public class ElasticSearchHandler {
     }
 
     /***
-     * @param typeUrl "http://xkeshi_admin:xkeshi_data@192.168.181.168:9200/test/angel4/_mapping"
+     * @param typeUrl "http://root:123456..@192.168.181.168:9200/test/angel4/_mapping"
      * @param typeDdl "{\"angel4\":{\"properties\":{\"created\":{\"type\":\"multi_field\",\"fields\":{\"created\":{\"type\":\"string\"},\"date\":{\"type\":\"date\"}}}}}}"
      */
     public CloseableHttpResponse createTypeWithResponse(String typeUrl, String typeDdl) throws IOException {

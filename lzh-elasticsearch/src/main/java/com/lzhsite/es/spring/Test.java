@@ -4,8 +4,8 @@ package com.lzhsite.es.spring;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.lzhsite.es.spring.crud.CRUDTest;
-import com.lzhsite.es.spring.crud.UserModel;
+import com.lzhsite.es.spring.concept.crud.CRUDTest;
+import com.lzhsite.es.spring.model.UserModel;
 
 //http://blog.csdn.net/liyantianmin/article/details/51801961
 public class Test {

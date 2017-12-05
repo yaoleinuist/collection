@@ -1,4 +1,4 @@
-package com.lzhsite.es.demo;
+package com.lzhsite.es.demo.test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,8 @@ import org.elasticsearch.search.sort.SortBuilders;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.lzhsite.es.spring.crud.UserModel;
+import com.lzhsite.es.spring.model.UserModel;
+import com.lzhsite.es.util.ElasticSearchHandler;
 
 public class CRUDTest {
 

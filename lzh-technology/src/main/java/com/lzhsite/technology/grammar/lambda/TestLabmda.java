@@ -1,5 +1,6 @@
-package com.lzhsite.technology.grammar;
+package com.lzhsite.technology.grammar.lambda;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -83,10 +84,18 @@ public class TestLabmda {
 	@Test
 	public void test4() {
 		Stream<User> userStream = Stream.of(new User(0, "张三", 18), new User(1, "张四", 19), new User(2, "张五", 19), new User(3, "老张", 50));
-
 		Map<Integer, Integer> userMap = userStream.collect(Collectors.toMap(User::getFollowersCount, item -> item.getbiFollowersCount()));
- 
 		System.out.println(userMap.get(5));
 	  
+		
+		userStream = Stream.of(new User(0, "张三", 18), new User(1, "张四", 19), new User(2, "张五", 19), new User(3, "老张", 50));
+        Integer  result = userStream.reduce(0,
+                (sum, item) -> sum+item.getbiFollowersCount(), (i, j) -> i+j);
+       // 或者这样写
+       // Integer  result = userStream.mapToInt(User::getbiFollowersCount).reduce(0,
+       //        (sum, item) -> sum+item);
+        
+        System.out.println(result);
+		
 	}
 }

@@ -1,4 +1,4 @@
-package com.lzhsite.es.spring.index;
+package com.lzhsite.es.spring.concept.index;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;

@@ -1,7 +1,9 @@
-package com.lzhsite.es.demo;
+package com.lzhsite.es.demo.test;
 
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
+
+import com.lzhsite.es.util.ElasticSearchHandler;
 
 public class IndexTest {
 

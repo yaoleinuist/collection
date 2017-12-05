@@ -1,4 +1,4 @@
-package com.lzhsite.es.spring.publics.search;
+package com.lzhsite.es.spring.model;
 
 //商品对象
 public class GoodsModel {

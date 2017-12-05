@@ -1,4 +1,4 @@
-package com.lzhsite.es.spring.crud;
+package com.lzhsite.es.spring.concept.crud;
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ import org.springframework.data.elasticsearch.core.query.UpdateQueryBuilder;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.lzhsite.es.spring.model.UserModel;
 
 
 @Service(value="CRUDTest")

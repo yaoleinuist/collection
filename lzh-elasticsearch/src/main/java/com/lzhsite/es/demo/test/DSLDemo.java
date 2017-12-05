@@ -1,4 +1,4 @@
-package com.lzhsite.es.demo;
+package com.lzhsite.es.demo.test;
 
 
 import java.util.ArrayList;
@@ -16,7 +16,8 @@ import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lzhsite.es.spring.crud.UserModel;
+import com.lzhsite.es.spring.model.UserModel;
+import com.lzhsite.es.util.ElasticSearchHandler;
 
 public class DSLDemo {
 

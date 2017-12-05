@@ -1,4 +1,4 @@
-package com.lzhsite.es.spring.publics.search;
+package com.lzhsite.es.spring.model;
 
 import java.util.List;
 

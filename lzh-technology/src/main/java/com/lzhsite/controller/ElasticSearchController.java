@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.lzhsite.es.demo.ElasticSearchHandler;
 import com.lzhsite.es.spring.constants.AppConstant;
 import com.lzhsite.es.spring.constants.SystemConstants;
-import com.lzhsite.es.spring.publics.search.IMJMicroPoint;
+import com.lzhsite.es.spring.model.IMJMicroPointModel;
+import com.lzhsite.es.util.ElasticSearchHandler;
 import com.lzhsite.util.DateFormart;
 import com.lzhsite.util.DateUtils;
 import com.lzhsite.util.ResponseUtils;
@@ -70,7 +70,7 @@ public class ElasticSearchController {
      */
     @RequestMapping( value = "/elasticSearch/imj/logs",method = RequestMethod.POST)
     @ResponseBody
-    public String logCollect(@RequestBody IMJMicroPoint imjMicroPoint){
+    public String logCollect(@RequestBody IMJMicroPointModel imjMicroPoint){
 
         StringBuffer indexName = new StringBuffer();
 
@@ -108,7 +108,7 @@ public class ElasticSearchController {
      *
      * @param imjMicroPoint
      */
-    public void initIMJMicroPoint(IMJMicroPoint imjMicroPoint) {
+    public void initIMJMicroPoint(IMJMicroPointModel imjMicroPoint) {
         try {
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'+0800'");

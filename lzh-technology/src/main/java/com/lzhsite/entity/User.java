@@ -57,7 +57,18 @@ public class User extends BaseEntity{
     private Integer sex;
  
  
-    public String getEmail() {
+    public User() {
+		super();
+	}
+
+	public User(Integer id,String name,Integer scale ,Integer sex) {
+		super(id);
+		this.name = name;
+		this.scale=scale;
+		this.sex = sex;
+	}
+
+	public String getEmail() {
         return email;
     }
 

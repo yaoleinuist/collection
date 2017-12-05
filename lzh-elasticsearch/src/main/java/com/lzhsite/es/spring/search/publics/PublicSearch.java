@@ -1,6 +1,9 @@
-package com.lzhsite.es.spring.publics.search;
+package com.lzhsite.es.spring.search.publics;
 
 import java.util.List;
+
+import com.lzhsite.es.spring.model.GoodsDescModel;
+import com.lzhsite.es.spring.model.GoodsModel;
 
 /*
  * 通用搜索演示

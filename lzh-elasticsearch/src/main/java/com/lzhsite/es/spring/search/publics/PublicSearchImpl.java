@@ -1,4 +1,4 @@
-package com.lzhsite.es.spring.publics.search;
+package com.lzhsite.es.spring.search.publics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,8 @@ import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.lzhsite.es.spring.model.GoodsDescModel;
+import com.lzhsite.es.spring.model.GoodsModel;
 
 @Service("publicSearchImpl")
 public class PublicSearchImpl implements PublicSearch{
