@@ -15,7 +15,7 @@ public interface Dialect {
      * @param limit  每页显示多少纪录条数
      * @return 分页查询的sql
      */
-    public String getLimitString(String sql, int offset, int limit);
+    String getLimitString(String sql, int offset, int limit);
     
     
     /**
@@ -27,8 +27,8 @@ public interface Dialect {
      * @param orderType 排序类型
      * @return
      */
-    public String getOrderString(String sql, String orderColumns, OrderType orderType);
+    String getOrderString(String sql, String orderColumns, OrderType orderType);
     
-    public String getPaggingString(String sql, int offset, int limit);
+    String getPaggingString(String sql, int offset, int limit);
 
 }

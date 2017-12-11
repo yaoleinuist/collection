@@ -1,6 +1,16 @@
 package com.lzhsite.db;
 
-import static org.apache.ibatis.jdbc.SqlBuilder.*;
+import static org.apache.ibatis.jdbc.SqlBuilder.BEGIN;
+import static org.apache.ibatis.jdbc.SqlBuilder.DELETE_FROM;
+import static org.apache.ibatis.jdbc.SqlBuilder.FROM;
+import static org.apache.ibatis.jdbc.SqlBuilder.INSERT_INTO;
+import static org.apache.ibatis.jdbc.SqlBuilder.SELECT;
+import static org.apache.ibatis.jdbc.SqlBuilder.SET;
+import static org.apache.ibatis.jdbc.SqlBuilder.SQL;
+import static org.apache.ibatis.jdbc.SqlBuilder.UPDATE;
+import static org.apache.ibatis.jdbc.SqlBuilder.VALUES;
+import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
+
 import java.lang.reflect.Field;
 import java.util.Map;
 
@@ -8,11 +18,14 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.lzhsite.exception.PoStructureException;
-import com.lzhsite.pojo.po.Base;
+import com.lzhsite.exception.XBusinessException;
 
 public class BaseSQLTemplate<T extends Base> {
+
+    private static final Logger logger = LoggerFactory.getLogger(BaseSQLTemplate.class);
 
 	/**
 	 *
@@ -47,13 +60,13 @@ public class BaseSQLTemplate<T extends Base> {
 			try {
 				field = clz.getDeclaredField(propertyName);
 			} catch (NoSuchFieldException | SecurityException e) {
-				throw new PoStructureException("无法在PO中找到'" + propertyName +"'属性",e);
+				throw new XBusinessException(XBusinessException.DEFAULT_FAULT_CODE, "无法在PO中找到'" + propertyName +"'属性",e);
 			}
 			String columnName = "";
 			if (field.isAnnotationPresent(Column.class)) {
 				columnName = field.getAnnotation(Column.class).name();
 			} else {
-				throw new PoStructureException("PO中所查询的属性未设置@Column注解");
+				throw new XBusinessException("PO中所查询的属性未设置@Column注解");
 			}
 			return "select * from " + getTableName(clz)
 					+ " where " + columnName + "='" + value + "' and `status` = 1 limit 1";
@@ -75,13 +88,13 @@ public class BaseSQLTemplate<T extends Base> {
 		try {
 			field = clz.getDeclaredField(propertyName);
 		} catch (NoSuchFieldException | SecurityException e) {
-			throw new PoStructureException("无法在PO中找到'" + propertyName +"'属性",e);
+			throw new XBusinessException(XBusinessException.DEFAULT_FAULT_CODE, "无法在PO中找到'" + propertyName +"'属性",e);
 		}
 		String columnName = "";
 		if (field.isAnnotationPresent(Column.class)) {
 			columnName = field.getAnnotation(Column.class).name();
 		} else {
-			throw new PoStructureException("PO中所查询的属性未设置@Column注解");
+			throw new XBusinessException("PO中所查询的属性未设置@Column注解");
 		}
 		return "select * from " + getTableName(clz)
 				+ " where " + columnName + "='" + value + "' and `status` = 1";
@@ -108,20 +121,18 @@ public class BaseSQLTemplate<T extends Base> {
             try {
                 field = clz.getDeclaredField(property.getName());
             } catch (NoSuchFieldException | SecurityException e) {
-                throw new PoStructureException("无法在PO中找到'" + property.getName() +"'属性",e);
+                throw new XBusinessException(XBusinessException.DEFAULT_FAULT_CODE, "无法在PO中找到'" + property.getName() +"'属性",e);
             }
             String columnName;
             if (field.isAnnotationPresent(Column.class)) {
                 columnName = field.getAnnotation(Column.class).name();
             } else {
-                throw new PoStructureException("PO中所查询的属性未设置@Column注解");
+                throw new XBusinessException("PO中所查询的属性未设置@Column注解");
             }
             sql = StringUtils.join(sql, columnName + "='" + property.getValue() + "' and ");
 
         }
-
-        sql = StringUtils.join(sql, " `status` = 1");
-        return sql;
+        return StringUtils.join(sql, " `status` = 1");
     }
 
     /**
@@ -138,31 +149,31 @@ public class BaseSQLTemplate<T extends Base> {
 
         String sql = StringUtils.join("select * from ", getTableName(clz), " where ");
 
-        for (Property property : properties) {
+		if(properties != null) {
+			for (Property property : properties) {
 
-            Field field;
-            try {
-                field = clz.getDeclaredField(property.getName());
-            } catch (NoSuchFieldException | SecurityException e) {
-                throw new PoStructureException("无法在PO中找到'" + property.getName() +"'属性",e);
-            }
-            String columnName;
-            if (field.isAnnotationPresent(Column.class)) {
-                columnName = field.getAnnotation(Column.class).name();
-            } else {
-                throw new PoStructureException("PO中所查询的属性未设置@Column注解");
-            }
-            sql = StringUtils.join(sql, columnName + "='" + property.getValue() + "' or ");
+				Field field;
+				try {
+					field = clz.getDeclaredField(property.getName());
+				} catch (NoSuchFieldException | SecurityException e) {
+					throw new XBusinessException(XBusinessException.DEFAULT_FAULT_CODE, "无法在PO中找到'" + property.getName() + "'属性", e);
+				}
+				String columnName;
+				if (field.isAnnotationPresent(Column.class)) {
+					columnName = field.getAnnotation(Column.class).name();
+				} else {
+					throw new XBusinessException("PO中所查询的属性未设置@Column注解");
+				}
+				sql = StringUtils.join(sql, columnName + "='" + property.getValue() + "' or ");
 
-        }
+			}
+		}
 
         //去结尾的or
         if (properties != null && properties.length > 0){
             sql = StringUtils.removeEnd(sql, "or ");
         }
-
-        sql = StringUtils.join(sql, "and `status` = 1");
-        return sql;
+        return StringUtils.join(sql, "and `status` = 1");
     }
 
     /**
@@ -179,34 +190,36 @@ public class BaseSQLTemplate<T extends Base> {
 
         String sql = StringUtils.join("select * from ", getTableName(clz), " where `status` = 1 and ");
 
-        for (int i = 0; i < properties.length ; i++) {
+		if(properties != null) {
+			for (int i = 0; i < properties.length ; i++) {
 
-            Field field;
-            try {
-                field = clz.getDeclaredField(properties[i].getName());
-            } catch (NoSuchFieldException | SecurityException e) {
-                throw new PoStructureException("无法在PO中找到'" + properties[i].getName() +"'属性",e);
-            }
-            String columnName;
-            if (field.isAnnotationPresent(Column.class)) {
-                columnName = field.getAnnotation(Column.class).name();
-            } else {
-                throw new PoStructureException("PO中所查询的属性未设置@Column注解");
-            }
+				Field field;
+				try {
+					field = clz.getDeclaredField(properties[i].getName());
+				} catch (NoSuchFieldException | SecurityException e) {
+					throw new XBusinessException(XBusinessException.DEFAULT_FAULT_CODE, "无法在PO中找到'" + properties[i].getName() +"'属性",e);
+				}
+				String columnName;
+				if (field.isAnnotationPresent(Column.class)) {
+					columnName = field.getAnnotation(Column.class).name();
+				} else {
+					throw new XBusinessException("PO中所查询的属性未设置@Column注解");
+				}
 
-            //如果是第一个属性则忽视and or
-            if (i == 0){
-                sql = StringUtils.join(sql, "( ", columnName, "='", properties[i].getValue(), "' ");
-            } else {
-                //判断是and还是or条件
-                if (StringUtils.equals(properties[i].getOperator(), "and")){
-                    sql = StringUtils.join(sql, "and ", columnName, "='", properties[i].getValue(), "' ");
-                } else {
-                    sql = StringUtils.join(sql, "or ", columnName, "='", properties[i].getValue(), "' ");
-                }
-            }
+				//如果是第一个属性则忽视and or
+				if (i == 0){
+					sql = StringUtils.join(sql, "( ", columnName, "='", properties[i].getValue(), "' ");
+				} else {
+					//判断是and还是or条件
+					if (StringUtils.equals(properties[i].getOperator(), "and")){
+						sql = StringUtils.join(sql, "and ", columnName, "='", properties[i].getValue(), "' ");
+					} else {
+						sql = StringUtils.join(sql, "or ", columnName, "='", properties[i].getValue(), "' ");
+					}
+				}
 
-        }
+			}
+		}
 
         if (properties != null && properties.length > 0){
             sql = StringUtils.join(sql, ")");
@@ -279,20 +292,20 @@ public class BaseSQLTemplate<T extends Base> {
 		return SQL();
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings("rawtypes")
 	private static String getTableName(Class clz) {
 		try {
 
             if (clz.isAnnotationPresent(Table.class)) {
                 return ((Table)clz.getAnnotation(Table.class)).name();
             } else {
-                throw new PoStructureException("PO中所查询的属性未设置@Column注解");
+                throw new XBusinessException("PO中所查询的属性未设置@Column注解");
             }
 
 		} catch (Exception e) {
-			e.printStackTrace();
+            logger.error("PO解析异常",e);
 		}
-        throw new PoStructureException("PO中缺少@Table注解");
+        throw new XBusinessException("PO中缺少@Table注解");
 
     }
 

@@ -7,6 +7,7 @@ import java.util.Date;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.lzhsite.es.spring.cilent.EsWemallRecommendClient;
 import com.lzhsite.es.spring.constants.AppConstant;
 import com.lzhsite.es.spring.constants.SystemConstants;
 import com.lzhsite.es.spring.model.IMJMicroPointModel;
+import com.lzhsite.es.spring.model.WemallRecommendModel;
 import com.lzhsite.es.util.ElasticSearchHandler;
 import com.lzhsite.util.DateFormart;
 import com.lzhsite.util.DateUtils;
@@ -61,6 +64,10 @@ public class ElasticSearchController {
     @Value("${elasticSearch.server.address}")
     private String elasticSearchServerAddress;
 
+    
+    @Autowired
+    private  EsWemallRecommendClient esWemallRecommendClient;
+    
     /**
      * 庙街日志服务类接口
      *
@@ -229,4 +236,42 @@ public class ElasticSearchController {
         }
         return typeExist;
     }
+    
+
+    
+
+
+    /**
+     *
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/saveRecommendCoupon")
+    public Object saveRecommendCoupon(@RequestBody WemallRecommendModel wemallRecommendModel) {
+ 
+ 
+    	wemallRecommendModel.setState(0);
+        Date date = new Date();
+        wemallRecommendModel.setCreateTime(date);
+        wemallRecommendModel.setUpdateTime(date);
+        esWemallRecommendClient.save(wemallRecommendModel);
+
+        return "success";
+    }
+
+    /**
+     *
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/updateState")
+    public Object updateState(@RequestBody WemallRecommendModel wemallRecommendModel) {
+        esWemallRecommendClient.updateState(wemallRecommendModel.getWemallGroupId(), "state", wemallRecommendModel.getState());
+        return "success";
+    }
+    
+    
+
 }

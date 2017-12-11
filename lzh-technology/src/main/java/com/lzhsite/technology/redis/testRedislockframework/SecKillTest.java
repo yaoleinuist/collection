@@ -36,8 +36,8 @@ public class SecKillTest {
  
 	@Test
     public void testSecKill(){
-        int threadCount = 90;
-        int splitPoint = 45;
+        int threadCount = 1600;
+        int splitPoint = 800;
         final CountDownLatch endCount = new CountDownLatch(threadCount);
         final CountDownLatch beginCount = new CountDownLatch(1);
         final SecKillImpl testClass = new SecKillImpl();
@@ -75,7 +75,6 @@ public class SecKillTest {
                         SeckillInterface proxy = (SeckillInterface) Proxy.newProxyInstance(SeckillInterface.class.getClassLoader(), 
                             new Class[]{SeckillInterface.class}, new CacheLockInterceptor(testClass));
                         proxy.secKill("test", commidityId2);
-                        //testClass.testFunc("test", 10000001L);
                         endCount.countDown();
                     } catch (InterruptedException e) {
                         // TODO Auto-generated catch block
@@ -98,7 +97,7 @@ public class SecKillTest {
             //观察秒杀结果是否正确
             System.out.println(SecKillImpl.inventory.get(commidityId1));
             System.out.println(SecKillImpl.inventory.get(commidityId2));
-            System.out.println("error count" + CacheLockInterceptor.ERROR_COUNT);
+            System.out.println("error count " + CacheLockInterceptor.ERROR_COUNT);
             System.out.println("total cost " + (System.currentTimeMillis() - startTime));
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block

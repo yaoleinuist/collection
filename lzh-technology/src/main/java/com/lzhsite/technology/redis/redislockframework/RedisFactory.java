@@ -31,7 +31,7 @@ public class RedisFactory {
 	public static RedisClient getDefaultClient() {
 		JedisPool pool = null;
 		try {
-			pool = new JedisPool(getPoolConfig(),"127.0.0.1",Protocol.DEFAULT_PORT,100000000,"123456..");
+			pool = new JedisPool(getPoolConfig(),"127.0.0.1",Protocol.DEFAULT_PORT,1000000,"123456..");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

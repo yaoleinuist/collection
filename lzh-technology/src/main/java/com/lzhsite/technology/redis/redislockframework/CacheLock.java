@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 public @interface CacheLock {
 	String lockedPrefix() default "";// redis 锁key的前缀
 
-	long timeOut() default 2000;// 锁时间
+	long timeOut() default 3;// 锁时间,3s
 
-	int expireTime() default 100000;// key在redis里存在的时间，1000S
+	int expireTime() default 3;// key在redis里存在的时间，3S
 }

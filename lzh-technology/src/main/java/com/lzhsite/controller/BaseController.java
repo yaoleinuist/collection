@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.lzhsite.util.StringUtil;
-import com.lzhsite.util.page.PageParam;
  
 
 /**
@@ -278,29 +277,7 @@ public class BaseController<T> {
 		return pageNum;
 	}
 
-	/**
-	 * 获取每页记录数（DWZ-UI分页查询参数）.<br/>
-	 * 如果没有值则默认返回15.
-	 * 
-	 * @author WuShuicheng.
-	 */
-	private int getNumPerPage() {
-		String numPerPageStr = request.getParameter("numPerPage");
-		int numPerPage = 15;
-		if (StringUtil.isEmpty(numPerPageStr)) {
-			numPerPage = Integer.parseInt(numPerPageStr);
-		}
-		return numPerPage;
-	}
-
-	/**
-	 * 获取分页参数，包含当前页、每页记录数.
-	 * 
-	 * @return PageParam .
-	 */
-	public PageParam getPageParam() {
-		return new PageParam(getPageNum(), getNumPerPage());
-	}
+ 
  
 }
 

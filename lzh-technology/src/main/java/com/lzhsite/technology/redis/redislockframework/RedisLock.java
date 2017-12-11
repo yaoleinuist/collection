@@ -3,7 +3,6 @@ package com.lzhsite.technology.redis.redislockframework;
 import java.util.Random;
 /**
  * 分布式锁
- * 经测试100进程下会出现死锁
  * @author lzhcode
  *
  */

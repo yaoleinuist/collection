@@ -5,7 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Mysql方言的实现
- *
  */
 public class MySQLDialect implements Dialect {
 
@@ -30,48 +29,46 @@ public class MySQLDialect implements Dialect {
         StringBuilder stringBuilder = new StringBuilder(sql);
         stringBuilder.append(" limit ");
         if (offset > 0) {
-            stringBuilder.append(offsetPlaceholder).append(",").append(limitPlaceholder);
+            stringBuilder.append(offsetPlaceholder).append(',').append(limitPlaceholder);
         } else {
             stringBuilder.append(limitPlaceholder);
         }
         return stringBuilder.toString();
     }
 
-	@Override
-	public String getOrderString(String sql, String orderColumns,
-			OrderType orderType) {
-		 StringBuilder stringBuilder = new StringBuilder(sql);
-		 	String type ;
-		 	switch (orderType) {
-			case DESC:
-				type = "desc";
-				break;
-			default:
-				type = "asc";
-				break;
-			}
-	        stringBuilder.append(" order by ");
-	        if (StringUtils.isNotBlank(orderColumns)) {
-	            stringBuilder.append(orderColumns).append(" ").append(type);
-	        }
-	        return stringBuilder.toString();
-	}
-	
-	@Override
-	public String getPaggingString(String sql, int offset, int limit) {
+    @Override
+    public String getOrderString(String sql, String orderColumns,
+                                 OrderType orderType) {
+        if(StringUtils.isBlank(orderColumns)){
+            return sql;
+        }
+        StringBuilder stringBuilder = new StringBuilder(sql);
+        String type;
+        if (orderType == null || orderType == OrderType.ASC) {
+            type = "asc";
+        } else {
+            type = "desc";
+        }
+        stringBuilder.append(" order by ");
+        stringBuilder.append(orderColumns).append(' ').append(type);
+        return stringBuilder.toString();
+    }
 
-		sql = sql.trim();
-		StringBuffer pagingSelect = new StringBuffer(sql.length() + 100);
+    @Override
+    public String getPaggingString(String sql, int offset, int limit) {
 
-		pagingSelect
-				.append("( ");
+        sql = sql.trim();
+        StringBuilder pagingSelect = new StringBuilder(sql.length() + 100);
 
-		pagingSelect.append(sql);
+        pagingSelect
+                .append("( ");
 
-		pagingSelect.append(" ) limit ").append(limit)
-				.append(" offset ").append(offset);
+        pagingSelect.append(sql);
 
-		return pagingSelect.toString();
-	}
+        pagingSelect.append(" ) limit ").append(limit)
+                .append(" offset ").append(offset);
+
+        return pagingSelect.toString();
+    }
 
 }

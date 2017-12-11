@@ -29,12 +29,13 @@ public class CacheLockInterceptor implements InvocationHandler {
 		String objectValue = lockedObject.toString();
 		RedisLock lock = new RedisLock(cacheLock.lockedPrefix(), objectValue);
 		boolean result = lock.lock(cacheLock.timeOut(), cacheLock.expireTime());
-		if (!result) {// 取锁失败
-			ERROR_COUNT += 1;
-			throw new CacheLockException("get lock fail");
 
-		}
 		try {
+			if (!result) {// 取锁失败
+				ERROR_COUNT += 1;
+			    //throw new CacheLockException("get lock fail");
+			    return null;
+			}
 			// 执行方法
 			return method.invoke(proxied, args);
 		} finally {

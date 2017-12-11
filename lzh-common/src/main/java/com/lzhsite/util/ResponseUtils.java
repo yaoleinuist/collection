@@ -6,7 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lzhsite.db.Query;
+import com.lzhsite.db.Pager;
 import com.lzhsite.pojo.ErrorsBean;
 import com.lzhsite.pojo.ResponseBase;
 import com.lzhsite.pojo.ResponseData;
@@ -185,7 +185,7 @@ public class ResponseUtils {
      *            分页数据
      * @return
      */
-    public static ResponseBase getResponseBase(String stat, Object model, Object collections, Query query) {
+    public static ResponseBase getResponseBase(String stat, Object model, Object collections, Pager  query) {
         ResponseBase rb = new ResponseBase();
         ResponseData rd = new ResponseData();
         rb.setState(stat);
@@ -214,7 +214,7 @@ public class ResponseUtils {
 	 * @return
 	 */
 	public static ResponseBase getResponseBase(String stat, ErrorsBean errorsBean, Object model, Object collections,
-											   Query query) {
+			Pager query) {
 		ResponseBase rb = new ResponseBase();
 		ResponseData rd = new ResponseData();
 		rb.setState(stat);
@@ -238,8 +238,8 @@ public class ResponseUtils {
      * @param rd
      * @return
      */
-	private static ResponseBase setQueryInfo(Query query, ResponseBase rb,ResponseData rd){
-        if (null == query || ( null != query && query.getTotalRows() == 0 )) {
+	private static ResponseBase setQueryInfo(Pager query, ResponseBase rb,ResponseData rd){
+        if (null == query || ( null != query && query.getTotalCount() == 0 )) {
 			rd.setCurrentPage(1);
 			rd.setTotalCount(0);
 			rd.setTotalPages(0);
@@ -250,14 +250,14 @@ public class ResponseUtils {
             rd.setCurrentPage(query.getCurrentPage());
         }
         // 总记录数
-        if (query.getTotalRows() != 0) {
-            rd.setTotalCount(query.getTotalRows());
+        if (query.getTotalCount() != 0) {
+            rd.setTotalCount(query.getTotalCount());
         }else{
 			rd.setCurrentPage(0);
 		}
         // 总页数
-        if (query.getTotalPages() != 0) {
-            rd.setTotalPages(query.getTotalPages());
+        if (query.getPageCount() != 0) {
+            rd.setTotalPages(query.getPageCount());
         }
         rb.setData(rd);
         return rb;

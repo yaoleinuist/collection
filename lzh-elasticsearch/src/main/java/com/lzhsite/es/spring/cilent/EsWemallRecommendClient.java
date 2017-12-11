@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 import com.lzhsite.es.spring.model.WemallRecommendModel;
-import com.lzhsite.es.util.EsOperateCallback;
-import com.lzhsite.es.util.EsOperateParam;
-import com.lzhsite.es.util.EsOperateSdk;
-import com.lzhsite.es.util.EsOperateTemplate;
+import com.lzhsite.es.spring.util.EsOperateCallback;
+import com.lzhsite.es.spring.util.EsOperateParam;
+import com.lzhsite.es.spring.util.EsOperateSdk;
+import com.lzhsite.es.spring.util.EsOperateTemplate;
 
 /**
  * Created by majingqiang on 2017/6/20.

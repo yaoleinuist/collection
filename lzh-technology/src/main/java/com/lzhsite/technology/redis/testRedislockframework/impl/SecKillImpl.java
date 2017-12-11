@@ -9,8 +9,8 @@ public class SecKillImpl implements SeckillInterface {
 	public static Map<Long, Long> inventory;
 	static {
 		inventory = new HashMap<>();
-		inventory.put(10000001L, 10000l);
-		inventory.put(10000002L, 10000l);
+		inventory.put(10000001L, 500L);
+		inventory.put(10000002L, 500L);
 	}
 
 	@Override
@@ -21,7 +21,12 @@ public class SecKillImpl implements SeckillInterface {
 
 	// 模拟秒杀操作，姑且认为一个秒杀就是将库存减一，实际情景要复杂的多
 	public Long reduceInventory(Long commodityId) {
-		inventory.put(commodityId, inventory.get(commodityId) - 1);
+		
+		//防止超卖
+		if(inventory.get(commodityId)!=0){
+			inventory.put(commodityId, inventory.get(commodityId) - 1);
+		}
+	
 		return inventory.get(commodityId);
 	}
 

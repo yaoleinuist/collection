@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lzhsite.dao.UserMapper;
-import com.lzhsite.util.page.PageBean;
 
 @Controller
 @RequestMapping("/user")

@@ -3,12 +3,15 @@ package com.lzhsite.db;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.ErrorContext;
 import org.apache.ibatis.executor.ExecutorException;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.ParameterMapping;
 import org.apache.ibatis.mapping.ParameterMode;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.property.PropertyTokenizer;
+import org.apache.ibatis.scripting.xmltags.ForEachSqlNode;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
@@ -18,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public class SQLHelp {
 
@@ -28,7 +32,7 @@ public class SQLHelp {
      * @param mappedStatement MappedStatement
      * @param boundSql        SQL
      * @param parameterObject 参数对象
-     * @throws java.sql.SQLException 数据库异常
+     * @throws SQLException 数据库异常
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static void setParameters(PreparedStatement ps, MappedStatement mappedStatement, BoundSql boundSql, Object parameterObject) throws SQLException {
@@ -51,7 +55,7 @@ public class SQLHelp {
                         value = parameterObject;
                     } else if (boundSql.hasAdditionalParameter(propertyName)) {
                         value = boundSql.getAdditionalParameter(propertyName);
-                    } else if (propertyName.startsWith("__frch_") && boundSql.hasAdditionalParameter(prop.getName())) {
+                    } else if (propertyName.startsWith(ForEachSqlNode.ITEM_PREFIX) && boundSql.hasAdditionalParameter(prop.getName())) {
                         value = boundSql.getAdditionalParameter(prop.getName());
                         if (value != null) {
                             value = configuration.newMetaObject(value).getValue(propertyName.substring(prop.getName().length()));
@@ -79,7 +83,7 @@ public class SQLHelp {
      * @param parameterObject 参数
      * @param boundSql        boundSql
      * @return 总记录数
-     * @throws java.sql.SQLException sql查询错误
+     * @throws SQLException sql查询错误
      */
     public static int getCount(final String sql, final Connection connection,
                                final MappedStatement mappedStatement, final Object parameterObject,
@@ -106,7 +110,7 @@ public class SQLHelp {
                 countStmt.close();
             }
             if(connection != null){
-            	connection.close();
+                connection.close();
             }
         }
     }
@@ -116,30 +120,79 @@ public class SQLHelp {
      * 根据数据库方言，生成特定的排序sql
      *
      * @param sql     Mapper中的Sql语句
-     * @param query    查询对象
+     * @param pager    查询对象
      * @param dialect 方言类型
      * @return 分页SQL
      */
-    public static String generateOrderSql(String sql, Query query, Dialect dialect) {
-    	if(StringUtils.isNotBlank(query.getOrderColumns())){
-    		return dialect.getOrderString(sql, query.getOrderColumns(), query.getOrderType());
-    	}
-    	return sql;
+    public static String generateOrderSql(String sql, Pager pager, Dialect dialect) {
+        return dialect.getOrderString(sql, pager.getOrderColumns(), pager.getOrderType());
     }
-    
+
+    /**
+     * map传参每次都将currentPage重置,先判读map再判断context
+     *
+     * @param parameterObject
+     * @return
+     */
+    public static Pager getPager(Map parameterObject){
+        Pager pager = null;
+        if (parameterObject != null) {
+            // 如果没有参数,直接返回
+            if (parameterObject.isEmpty()) {
+                return null;
+            }
+            //设置query对象
+            if (parameterObject.containsKey("pager")) {
+                pager = convertParameter(parameterObject.get("pager"), pager); //当DAO中的参数为一个Map<String,Object>，且query为map中对象
+            }else{
+                pager = convertParameter(parameterObject.get("param1"), pager); //当DAO为参数列表，且Query对象为第一个参数
+            }
+        }
+        return pager;
+    }
+
+    /**
+     * 对参数进行转换和检查
+     *
+     * @param parameterObject 参数对象
+     * @param pager 参数
+     * @return 参数
+     * @throws NoSuchFieldException 无法找到参数
+     */
+    protected static Pager convertParameter(Object parameterObject, Pager pager) {
+        if (parameterObject instanceof Pager) {
+            pager = (Pager) parameterObject;
+        }
+        return pager;
+    }
     
     /**
      * 根据数据库方言，生成特定的分页sql
      *
      * @param sql     Mapper中的Sql语句
-     * @param query    查询对象
+     * @param pager    查询对象
      * @param dialect 方言类型
      * @return 分页SQL
      */
-    public static String generatePageSql(String sql, Query query, Dialect dialect) {
-        int pageSize = query.getPageSize();
-        int index = (query.getCurrentPage() - 1) * pageSize;
+    public static String generatePageSql(String sql, Pager pager, Dialect dialect) {
+        int pageSize = pager.getPageSize();
+        int index = (pager.getCurrentPage() - 1) * pageSize;
         int start = index < 0 ? 0 : index;
         return dialect.getLimitString(sql, start, pageSize);
     }
+
+    /**
+     * init pager parameter
+     *
+     * @param pager
+     */
+    public static void initPagination(Pager pager) {
+        if(pager.getTotalCount() % pager.getPageSize() == 0){
+            pager.setPageCount(pager.getTotalCount() / pager.getPageSize());
+        }
+        else{
+            pager.setPageCount(pager.getTotalCount() / pager.getPageSize() + 1);
+        }
+    }
+
 }
