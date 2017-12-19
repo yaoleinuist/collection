@@ -99,7 +99,7 @@ public class SpringSearchDemo {
 	
 	public static void main(String[] args) {
 		
-		ApplicationContext atc = new ClassPathXmlApplicationContext("applicationContext-es.xml");
+ 		ApplicationContext atc = new ClassPathXmlApplicationContext("spring/spring-es.xml");
 		SpringSearchDemo demo = (SpringSearchDemo)atc.getBean("searchDemo");
 		// DSL运行
 //		demo.dslDemo();

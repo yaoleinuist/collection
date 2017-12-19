@@ -67,7 +67,7 @@ public class IndexOper {
 	}
 
 	public static void main(String[] args) {
-		ApplicationContext atc = new ClassPathXmlApplicationContext("applicationContext-es.xml");
+		ApplicationContext atc = new ClassPathXmlApplicationContext("spring/spring-es.xml");
 		IndexOper index = (IndexOper) atc.getBean("indexOper");
 
 		String indexName = "ibeifengspring";

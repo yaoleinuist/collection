@@ -2,6 +2,8 @@ package com.lzhsite.technology.thread;
 
 import java.util.HashMap;
 /**
+ * http://www.importnew.com/27440.html
+ * 
  * 如果你定义了一个单实例的java bean，它有若干属性，但是有一个属性不是线程安全的，
  * 比如说HashMap。并且碰巧你并不需要在不同的线程中共享这个属性，也就是说这个属性不存在跨线程的意义。
  * 那么你不要sychronize这么复杂的东西，ThreadLocal将是你不错的选择。

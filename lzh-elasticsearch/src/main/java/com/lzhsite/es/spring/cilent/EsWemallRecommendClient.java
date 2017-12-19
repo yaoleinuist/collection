@@ -18,10 +18,7 @@ import com.lzhsite.es.spring.util.EsOperateCallback;
 import com.lzhsite.es.spring.util.EsOperateParam;
 import com.lzhsite.es.spring.util.EsOperateSdk;
 import com.lzhsite.es.spring.util.EsOperateTemplate;
-
-/**
- * Created by majingqiang on 2017/6/20.
- */
+ 
 @Component
 public class EsWemallRecommendClient {
 

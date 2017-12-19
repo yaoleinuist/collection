@@ -12,7 +12,7 @@ import com.lzhsite.util.JsonUtil;
 /**
  * 庙街数据埋点数据结构
  */
-public class IMJMicroPointModel implements Serializable{
+public class MicroPointModel implements Serializable{
     /** 新添埋点**/
     private Long bhvType;
     private Long merchantId;
@@ -335,7 +335,7 @@ public class IMJMicroPointModel implements Serializable{
 
  
     public static void main(String[] args) {
-    	IMJMicroPointModel imjMicroPoint = new IMJMicroPointModel();
+    	MicroPointModel imjMicroPoint = new MicroPointModel();
     	imjMicroPoint.setBhvType(123L);
     	imjMicroPoint.setMerchantId(123123L); 
     	imjMicroPoint.setMerchantName("merchantName"); 

@@ -41,7 +41,7 @@ public class EsApplyShopClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EsApplyShopClient.class);
 
-    private String indexName="es.coupon.apply.shop";
+    private String indexName="applyShop";
 
     private String typeName = "couponApplyShop";
 
@@ -144,5 +144,6 @@ public class EsApplyShopClient {
         pager.setTotalCount((int) searchHits.getTotalHits());
         return pager;
     }
+ 
 
 }

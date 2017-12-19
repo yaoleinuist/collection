@@ -20,7 +20,7 @@ import com.alibaba.fastjson.JSON;
 import com.lzhsite.es.spring.cilent.EsWemallRecommendClient;
 import com.lzhsite.es.spring.constants.AppConstant;
 import com.lzhsite.es.spring.constants.SystemConstants;
-import com.lzhsite.es.spring.model.IMJMicroPointModel;
+import com.lzhsite.es.spring.model.MicroPointModel;
 import com.lzhsite.es.spring.model.WemallRecommendModel;
 import com.lzhsite.es.util.ElasticSearchHandler;
 import com.lzhsite.util.DateFormart;
@@ -59,11 +59,13 @@ public class ElasticSearchController {
     /**
      * 大数据平台地址列表参数
      */
-    @Value("${elasticSearch.typeServer}")
-    private String typeServer;
-    @Value("${elasticSearch.server.address}")
-    private String elasticSearchServerAddress;
-
+ 
+    @Value("${es.cluster.node}")
+    private String esClusterNode;
+    @Value("${es.user}")
+    private String  esUser;
+    @Value("${es.password}")
+    private String  esPassword;
     
     @Autowired
     private  EsWemallRecommendClient esWemallRecommendClient;
@@ -77,16 +79,18 @@ public class ElasticSearchController {
      */
     @RequestMapping( value = "/elasticSearch/imj/logs",method = RequestMethod.POST)
     @ResponseBody
-    public String logCollect(@RequestBody IMJMicroPointModel imjMicroPoint){
+    public String logCollect(@RequestBody MicroPointModel imjMicroPoint){
 
         StringBuffer indexName = new StringBuffer();
 
         indexName.append(imjIndexName).append("_").append(DateUtils.format(new Date(),DateUtils.PATTERN_YYYYMMDD));
 
-        ElasticSearchHandler esHandler = ElasticSearchHandler.getInstance(elasticSearchServerAddress);
+        ElasticSearchHandler esHandler = ElasticSearchHandler.getInstance(esClusterNode);
 
         Boolean indexExist = createElaticIndex(indexName, esHandler);//创建Index
 
+       String typeServer ="http://"+esUser+":"+esPassword+"@"+esClusterNode;
+        
         if(indexExist) {
             Boolean typeExist = createElaticSearch(indexName, esHandler, imjIndexType, typeServer, imjTypeDdl);
             //已经存在
@@ -115,7 +119,7 @@ public class ElasticSearchController {
      *
      * @param imjMicroPoint
      */
-    public void initIMJMicroPoint(IMJMicroPointModel imjMicroPoint) {
+    public void initIMJMicroPoint(MicroPointModel imjMicroPoint) {
         try {
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'+0800'");
@@ -159,7 +163,8 @@ public class ElasticSearchController {
         Boolean indexExist = esHandler.indexExist(indexName.toString());
         if(!indexExist){
             Long start = System.currentTimeMillis();
-            String indexUrl = typeServer+"/" + indexName.toString();
+            String typeServer ="http://"+esUser+":"+esPassword+"@"+esClusterNode;
+            String indexUrl =  typeServer+"/" + indexName.toString();
             try {
                 CloseableHttpResponse response = esHandler.createIndexResponse(indexUrl);
                 int statusCode = response.getStatusLine().getStatusCode();
@@ -206,8 +211,8 @@ public class ElasticSearchController {
         logger.info("elasticSearch创建Type,indexName:" + indexName + ",idnexType=" + indexType);
         if(!typeExist){
             Long start = System.currentTimeMillis();
-
-            String typeUrl = typeServer + "/"+indexName+"/"+indexType.toString()+"/"+"_mapping";
+ 
+            String typeUrl  = typeServer+ "/"+indexName+"/"+indexType.toString()+"/"+"_mapping";
 
             String newTypeDdl = typeDdl.replace("{elasticSearchType}",indexType);
 
@@ -248,15 +253,20 @@ public class ElasticSearchController {
      */
     @ResponseBody
     @RequestMapping("/saveRecommendCoupon")
-    public Object saveRecommendCoupon(@RequestBody WemallRecommendModel wemallRecommendModel) {
+    public Object saveRecommendCoupon() {
  
- 
-    	wemallRecommendModel.setState(0);
-        Date date = new Date();
-        wemallRecommendModel.setCreateTime(date);
-        wemallRecommendModel.setUpdateTime(date);
-        esWemallRecommendClient.save(wemallRecommendModel);
-
+        for (int i = 0; i < 10; i++) {
+        	WemallRecommendModel wemallRecommendModel=new WemallRecommendModel();
+          	wemallRecommendModel.setState(0);
+          	wemallRecommendModel.setWemallCouponId(Long.valueOf(i));
+         	wemallRecommendModel.setWemallGroupId(Long.valueOf(i));
+            Date date = new Date();
+            wemallRecommendModel.setCreateTime(date);
+            wemallRecommendModel.setUpdateTime(date);
+            esWemallRecommendClient.save(wemallRecommendModel);
+		}
+    	
+  
         return "success";
     }
 

@@ -12,7 +12,7 @@ public class Test {
 
 	public static void main(String[] args) throws Exception {
 	
-		ApplicationContext atc = new ClassPathXmlApplicationContext("applicationContext-es.xml");
+		ApplicationContext atc = new ClassPathXmlApplicationContext("spring-es.xml");
 		CRUDTest crud = (CRUDTest)atc.getBean("CRUDTest");
 		
 		UserModel um = new UserModel();

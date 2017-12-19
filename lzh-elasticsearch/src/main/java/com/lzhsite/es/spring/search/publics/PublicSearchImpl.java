@@ -26,7 +26,7 @@ public class PublicSearchImpl implements PublicSearch{
 	private static final String INDEX_NAME="ibeifeng-project";
 	private static final String TYPE_NAME="search";
 	
-	/*
+	/**
 	 * 1、商品供应商 -》 需要把店铺相关内容填写完整
 	 * 2、促销活动 -》 热搜的一些内容填写完整
 	 * 3、商品维护专员
@@ -47,14 +47,8 @@ public class PublicSearchImpl implements PublicSearch{
 				.build());
 	}
 
-	/*
-	 * 笔记本电脑 
-	 * 笔记
-	 * biji
-	 * bj
-	 * 
-	 * (non-Javadoc)
-	 * @see com.es.spring.publics.search.PublicSearch#getKeyWord(java.lang.String)
+	/**
+	 * 如果我们希望两个字段进行匹配，其中一个字段有这个文档就满足的话，使用multi_match
 	 */
 	@Override
 	public List<GoodsDescModel> getKeyWord(String keyWord) {
@@ -90,7 +84,9 @@ public class PublicSearchImpl implements PublicSearch{
 		return null;
 	}
 
-	
+	/**
+	 * term是代表完全匹配，即不进行分词器分析，文档中必须包含整个搜索的词汇
+	 */
 	@Override
 	public GoodsDescModel getByKey(int uuid) {
 		NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder()
@@ -108,32 +104,32 @@ public class PublicSearchImpl implements PublicSearch{
 	
 	
 	public static void main(String[] args) {
-		ApplicationContext atc = new ClassPathXmlApplicationContext("applicationContext-es.xml");
+		ApplicationContext atc = new ClassPathXmlApplicationContext("spring-es.xml");
 		PublicSearchImpl impl = (PublicSearchImpl)atc.getBean("publicSearchImpl");
 		// 模拟商品专员，对商品进行添加
-//		for(int i=1;i<20;i++){
-//			List<String> descs = new ArrayList<String>();
-//			descs.add("电脑 "+i);
-//			descs.add("速度快 "+i);
-//			GoodsDescModel gdm = new GoodsDescModel();
-//			gdm.setUuid(i);
-//			gdm.setGoodsTitle("笔记本电脑 "+i);
-//			gdm.setGoodsSpilt("bjb bjbdn "+i);
-//			gdm.setGoodsDesc(descs);
-//			
-//			impl.addKeyWord(gdm);
-//		}
+/*		for(int i=1;i<20;i++){
+			List<String> descs = new ArrayList<String>();
+			descs.add("电脑 "+i);
+			descs.add("速度快 "+i);
+			GoodsDescModel gdm = new GoodsDescModel();
+			gdm.setUuid(i);
+			gdm.setGoodsTitle("笔记本电脑 "+i);
+			gdm.setGoodsSpilt("bjb bjbdn "+i);
+			gdm.setGoodsDesc(descs);
+			
+			impl.addKeyWord(gdm);
+		}*/
 		
-//		String keyword = "bjb";
-		// 获取前台给的字符串 
-//		List<GoodsDescModel> keywordModels = impl.getKeyWord(keyword);
-//		for(GoodsDescModel keywordModel : keywordModels){
-//			System.out.println("keywordModel="+keywordModel);
-//		}
+/*		String keyword = "bjb";
+		 //获取前台给的字符串 
+		List<GoodsDescModel> keywordModels = impl.getKeyWord(keyword);
+		for(GoodsDescModel keywordModel : keywordModels){
+			System.out.println("keywordModel="+keywordModel);
+		}*/
 		
 		// 根据主键查询keyword
-//		GoodsDescModel desc = impl.getByKey(2);
-//		System.out.println("desc="+desc);
+		GoodsDescModel desc = impl.getByKey(2);
+		System.out.println("desc="+desc);
 		
 		// 根据热搜词获取商品列表
 		
