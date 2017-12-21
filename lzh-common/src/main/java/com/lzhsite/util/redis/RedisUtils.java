@@ -19,16 +19,16 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.lzhsite.context.SpringContextHolder;
-import com.lzhsite.util.DateUtils;
-import com.lzhsite.util.SerializeUtils;
+import com.lzhsite.core.context.ApplicationContextHelper;
+import com.lzhsite.core.utils.DateUtils;
+import com.lzhsite.core.utils.SerializeUtils;
 
 import redis.clients.jedis.BuilderFactory;
 import redis.clients.util.SafeEncoder;
 
 public class RedisUtils {
 	private static Logger logger = LoggerFactory.getLogger(RedisUtils.class);
-	private static RedisTemplate template = (RedisTemplate) SpringContextHolder.getApplicationContext()
+	private static RedisTemplate template = (RedisTemplate) ApplicationContextHelper.getContext()
 			.getBean(RedisTemplate.class);
 
 	public RedisUtils() {

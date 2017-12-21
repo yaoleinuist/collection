@@ -17,8 +17,8 @@ import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.lzhsite.exception.XExceptionFactory;
-import com.lzhsite.util.ValidatorUtils;
+import com.lzhsite.core.exception.XExceptionFactory;
+import com.lzhsite.core.utils.ValidatorUtils;
 
 /**
  * 查询条件构造器

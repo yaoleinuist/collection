@@ -9,9 +9,10 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotEmpty;
-import com.lzhsite.exception.XExceptionFactory;
-import com.lzhsite.util.CollectionUtils;
-import com.lzhsite.util.ValidatorUtils;
+
+import com.lzhsite.core.exception.XExceptionFactory;
+import com.lzhsite.core.utils.CollectionUtils;
+import com.lzhsite.core.utils.ValidatorUtils;
 
 /**
  * es操作参数类

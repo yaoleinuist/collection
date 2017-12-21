@@ -1,7 +1,7 @@
 package com.lzhsite.ensure.extensions;
 
+import com.lzhsite.core.exception.XExceptionFactory;
 import com.lzhsite.ensure.EnsureParam;
-import com.lzhsite.exception.XExceptionFactory;
 
 /**
  * Created by Jintao on 2015/6/8.

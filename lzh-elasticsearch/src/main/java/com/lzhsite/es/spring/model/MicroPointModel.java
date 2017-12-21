@@ -6,8 +6,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.lzhsite.exception.MicroWebException;
-import com.lzhsite.util.JsonUtil;
+import com.lzhsite.core.exception.XBusinessException;
+import com.lzhsite.core.utils.JsonUtil;
 
 /**
  * 庙街数据埋点数据结构
@@ -372,7 +372,7 @@ public class MicroPointModel implements Serializable{
     	imjMicroPoint.setCouponId(893729L);
     	try {
 			System.out.println(JsonUtil.obj2Json(imjMicroPoint));
-		} catch (MicroWebException e) {
+		} catch (XBusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

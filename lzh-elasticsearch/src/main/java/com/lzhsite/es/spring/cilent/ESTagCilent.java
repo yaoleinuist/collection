@@ -25,8 +25,8 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lzhsite.core.utils.DateUtils;
 import com.lzhsite.es.spring.util.EsOperateSdk;
-import com.lzhsite.util.DateUtils;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -367,26 +367,21 @@ public class ESTagCilent {
 	}
 
 	/***
-	 * 一个字段聚合，类似数据库的group by field1
-	 * 
-	 * @param field
-	 *            测试聚合的字段
+	 * @param field 聚合的字段测试
 	 * @throws Exception
 	 */
-	public void testOneAggString(String field) throws Exception {
+	public void testOneAggString() throws Exception {
+ 
 		// 构造search请求
-		SearchRequestBuilder search = esOperateSdk.esClient().prepareSearch("userlog*").setTypes("logs");
-		// 查询昨天的数据
-		search.setQuery(QueryBuilders.queryStringQuery(
-				"@timestamp:[ " + new Date().getTime() + " TO " + DateUtils.addMins(new Date(), 123).getTime() + "}"));
+		SearchRequestBuilder search = esOperateSdk.esClient().prepareSearch("ibeifeng_aggs*").setTypes("infos");
 		// 聚合构造
-		TermsBuilder termsBuilder = AggregationBuilders.terms("agg").field(field);
+		TermsBuilder termsBuilder = AggregationBuilders.terms("aggs_terms").field("title");
 		// 添加到search请求
 		search.addAggregation(termsBuilder);
 		// 获取结果
 		SearchResponse searchResponse = search.get();
 		// 获取agg标识下面的结果
-		Terms agg1 = searchResponse.getAggregations().get("agg");
+		Terms agg1 = searchResponse.getAggregations().get("aggs_terms");
 		// 获取bucket
 		List<Terms.Bucket> buckets = (List<Terms.Bucket>) agg1.getBuckets();
 		long sum = 0;
@@ -395,6 +390,12 @@ public class ESTagCilent {
 			System.out.println(b.getKeyAsString() + "  " + b.getDocCount());
 			sum += b.getDocCount();
 		}
+		//class  3
+		//ibeifeng  3
+		//01  1
+		//02  1
+		//03  1
+		//总数：9
 		System.out.println("总数：" + sum);
 	}
 
@@ -446,3 +447,5 @@ public class ESTagCilent {
 	}
 
 }
+
+

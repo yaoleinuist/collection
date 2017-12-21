@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.lzhsite.util.StringUtil;
+import com.lzhsite.core.utils.StringUtils;
  
 
 /**
@@ -211,7 +211,7 @@ public class BaseController<T> {
  	 */
  	public Double getDouble(String key) {
  		String value = request.getParameter(key);
- 		if (!StringUtil.isEmpty(value)) {
+ 		if (!StringUtils.isEmpty(value)) {
  			return Double.parseDouble(value);
  		}
  		return null;
@@ -226,7 +226,7 @@ public class BaseController<T> {
  	 */
  	public Integer getInteger(String key) {
  		String value = request.getParameter(key);
- 		if (!StringUtil.isEmpty(value)) {
+ 		if (!StringUtils.isEmpty(value)) {
  			return Integer.parseInt(value);
  		}
  		return null;
@@ -241,7 +241,7 @@ public class BaseController<T> {
  	 */
  	public Long getLong(String key) {
  		String value = request.getParameter(key);
- 		if (!StringUtil.isEmpty(value)) {
+ 		if (!StringUtils.isEmpty(value)) {
  			return Long.parseLong(value);
  		}
  		return null;
@@ -271,7 +271,7 @@ public class BaseController<T> {
 		// 当前页数
 		String pageNumStr = request.getParameter("pageNum");
 		int pageNum = 1;
-		if (!StringUtil.isEmpty(pageNumStr)) {
+		if (!StringUtils.isEmpty(pageNumStr)) {
 			pageNum = Integer.valueOf(pageNumStr);
 		}
 		return pageNum;

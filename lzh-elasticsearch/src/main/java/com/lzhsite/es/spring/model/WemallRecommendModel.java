@@ -1,13 +1,19 @@
 package com.lzhsite.es.spring.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by majingqiang on 2017/6/20.
  */
-public class WemallRecommendModel {
+public class WemallRecommendModel implements Serializable{
 
-    private Long wemallGroupId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1125932534065827530L;
+
+	private Long wemallGroupId;
 
     private Long wemallCouponId;
 

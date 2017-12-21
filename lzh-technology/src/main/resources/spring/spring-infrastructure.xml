@@ -5,7 +5,14 @@
                         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
     <description>spring-infrastructure-configuration</description>
-
+    
+  	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<array>
+				 <value>classpath:/propss/application.properties</value>
+			</array>
+		</property>
+	</bean>
     <bean class="com.lzhsite.exception.ExceptionDefinitions" />
  
 

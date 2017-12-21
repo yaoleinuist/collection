@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.lzhsite.util.HttpUtils;
+import com.lzhsite.core.utils.HttpUtils;
 
 import gui.ava.html.image.generator.HtmlImageGenerator;
 

@@ -135,7 +135,7 @@ public class HttpUtil {
     	
     	Map<String,String> params = new HashMap<String,String>();
   
-    	if(!StringUtil.isEmpty(data)){
+    	if(!StringUtils.isEmpty(data)){
     		
     		String[] pairedParams= data.split("&");
     		for (int i = 0; i < pairedParams.length; i++) {

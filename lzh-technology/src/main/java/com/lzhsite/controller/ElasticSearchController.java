@@ -17,38 +17,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.lzhsite.core.utils.DateFormart;
+import com.lzhsite.core.utils.DateUtils;
+import com.lzhsite.core.utils.ResponseUtils;
+import com.lzhsite.es.spring.cilent.ESTagCilent;
 import com.lzhsite.es.spring.cilent.EsWemallRecommendClient;
 import com.lzhsite.es.spring.constants.AppConstant;
 import com.lzhsite.es.spring.constants.SystemConstants;
 import com.lzhsite.es.spring.model.MicroPointModel;
 import com.lzhsite.es.spring.model.WemallRecommendModel;
 import com.lzhsite.es.util.ElasticSearchHandler;
-import com.lzhsite.util.DateFormart;
-import com.lzhsite.util.DateUtils;
-import com.lzhsite.util.ResponseUtils;
 import com.lzhsite.util.redis.RedisUtils;
- 
 
 
 /**
- * 微商城数据埋点
  *
- * 添加并整合庙街数据埋点
+ * es cilent测试类
  */
 @Controller
 public class ElasticSearchController {
 
     private static final Logger logger = Logger.getLogger(ElasticSearchController.class);
 
-    /**微商城数据埋点参数**/
+    
     @Value("${elasticSearch.name}")
     private String microIndexName;
     @Value("${elasticSearch.type}")
     private String microIndexType;
     @Value("${elasticSearch.typeDdl}")
     private String microTypeDdl;
-
-    /**庙街数据埋点参数**/
     @Value("${elasticSearch.imj.name}")
     private String imjIndexName;
     @Value("${elasticSearch.imj.type}")
@@ -57,11 +54,11 @@ public class ElasticSearchController {
     private String imjTypeDdl;
 
     /**
-     * 大数据平台地址列表参数
+     * es地址列表参数
      */
  
-    @Value("${es.cluster.node}")
-    private String esClusterNode;
+    @Value("${es.cluster.nodes}")
+    private String esClusterNodes;
     @Value("${es.user}")
     private String  esUser;
     @Value("${es.password}")
@@ -70,13 +67,9 @@ public class ElasticSearchController {
     @Autowired
     private  EsWemallRecommendClient esWemallRecommendClient;
     
-    /**
-     * 庙街日志服务类接口
-     *
-     * @param imjMicroPoint
-     * @return
-     * @throws Exception
-     */
+    @Autowired
+    private  ESTagCilent esTagCilent;
+   
     @RequestMapping( value = "/elasticSearch/imj/logs",method = RequestMethod.POST)
     @ResponseBody
     public String logCollect(@RequestBody MicroPointModel imjMicroPoint){
@@ -85,11 +78,11 @@ public class ElasticSearchController {
 
         indexName.append(imjIndexName).append("_").append(DateUtils.format(new Date(),DateUtils.PATTERN_YYYYMMDD));
 
-        ElasticSearchHandler esHandler = ElasticSearchHandler.getInstance(esClusterNode);
+        ElasticSearchHandler esHandler = ElasticSearchHandler.getInstance(esClusterNodes);
 
         Boolean indexExist = createElaticIndex(indexName, esHandler);//创建Index
 
-       String typeServer ="http://"+esUser+":"+esPassword+"@"+esClusterNode;
+       String typeServer ="http://"+esUser+":"+esPassword+"@"+esClusterNodes;
         
         if(indexExist) {
             Boolean typeExist = createElaticSearch(indexName, esHandler, imjIndexType, typeServer, imjTypeDdl);
@@ -103,7 +96,7 @@ public class ElasticSearchController {
 
                 try {
                     esHandler.replaceIndexResponse(indexName.toString(), imjIndexType, logsText);
-                    return JSON.toJSONString(ResponseUtils.getResponseBase(SystemConstants.RES_STAT_OK));
+                    return JSON.toJSONString(ResponseUtils.getSuccessResult(SystemConstants.RES_STAT_OK));
                 } catch (Exception e) {
                     logger.error("elasticSearch 添加日志发送错误，e=" + e.getMessage());
                 }
@@ -163,7 +156,7 @@ public class ElasticSearchController {
         Boolean indexExist = esHandler.indexExist(indexName.toString());
         if(!indexExist){
             Long start = System.currentTimeMillis();
-            String typeServer ="http://"+esUser+":"+esPassword+"@"+esClusterNode;
+            String typeServer ="http://"+esUser+":"+esPassword+"@"+esClusterNodes;
             String indexUrl =  typeServer+"/" + indexName.toString();
             try {
                 CloseableHttpResponse response = esHandler.createIndexResponse(indexUrl);
@@ -252,7 +245,7 @@ public class ElasticSearchController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/saveRecommendCoupon")
+    @RequestMapping("/testEsWemallRecommendClient")
     public Object saveRecommendCoupon() {
  
         for (int i = 0; i < 10; i++) {
@@ -266,22 +259,30 @@ public class ElasticSearchController {
             esWemallRecommendClient.save(wemallRecommendModel);
 		}
     	
-  
+        WemallRecommendModel wemallRecommendModel =new  WemallRecommendModel();
+        wemallRecommendModel.setWemallCouponId(1L);
+        wemallRecommendModel.setState(222);
+        esWemallRecommendClient.updateState(wemallRecommendModel.getWemallGroupId(), "state", wemallRecommendModel.getState());
+        
         return "success";
     }
 
+  
     /**
-     *
-     * @param request
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("/updateState")
-    public Object updateState(@RequestBody WemallRecommendModel wemallRecommendModel) {
-        esWemallRecommendClient.updateState(wemallRecommendModel.getWemallGroupId(), "state", wemallRecommendModel.getState());
-        return "success";
-    }
-    
-    
+    *
+    * @param request
+    * @return
+     * @throws Exception 
+    */
+   @ResponseBody
+   @RequestMapping("/testEsTagCilent")
+   public Object testESTagCilent() throws Exception {
+	   
+	   esTagCilent.testOneAggString();
+       
+	   return "success";
+   }
+   
+   
 
 }

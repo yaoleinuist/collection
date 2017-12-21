@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import com.lzhsite.util.HttpUtils;
+import com.lzhsite.core.utils.HttpUtils;
 
 public class TestUpload {
 

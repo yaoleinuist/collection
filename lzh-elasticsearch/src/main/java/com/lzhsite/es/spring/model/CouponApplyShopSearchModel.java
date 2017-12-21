@@ -1,5 +1,7 @@
 package com.lzhsite.es.spring.model;
 
+import java.io.Serializable;
+
 /**
  * 描述:
  * 适用门店搜索dto
@@ -7,7 +9,7 @@ package com.lzhsite.es.spring.model;
  * @author pangpeijie
  * @create 2017-11-23 10:20
  */
-public class CouponApplyShopSearchModel {
+public class CouponApplyShopSearchModel implements Serializable{
 
     /**
      * 券编码

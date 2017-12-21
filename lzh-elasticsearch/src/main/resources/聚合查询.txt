@@ -1,0 +1,73 @@
+﻿1、创造数据
+curl -XPOST http://192.168.226.3:9200/ibeifeng_aggs/infos/1?pretty -d'
+{
+	"title":"ibeifeng class 01",
+	"price": 20,
+	"desc": ["good","very","handsome"]
+}'
+
+curl -XPOST http://192.168.226.3:9200/ibeifeng_aggs/infos/2?pretty -d'
+{
+	"title":"ibeifeng class 02",
+	"price": 30,
+	"desc": ["good2","very","handsome"]
+}'
+
+curl -XPOST http://192.168.226.3:9200/ibeifeng_aggs/infos/3?pretty -d'
+{
+	"title":"ibeifeng class 03",
+	"price": 50,
+	"desc": ["good3","very2","handsome"]
+}'
+
+
+2、构建聚合函数语句
+ES聚合的基本语法
+示例1:
+curl -XPOST http://192.168.226.3:9200/ibeifeng_aggs/infos/_search?pretty -d'
+{
+	"size":0,
+	"query":{"match_all":{}},
+	"aggs":{
+		"aggs_terms":{
+			"min":{
+				 "field":"price"
+			}
+		}
+	}
+}'
+
+示例2：
+curl -XPOST http://192.168.226.3:9200/ibeifeng_aggs/infos/_search?pretty -d'
+{
+	"size":0,
+	"query":{"match_all":{}},
+	"aggs":{
+		"aggs_terms":{
+			"terms":{
+				 "field":"title"
+			},
+			"aggs":{
+			 		"aggs_avg":{
+			 			"avg":{
+			 				"field":"price"
+			 			}
+			 		}
+			 }
+		}
+	}
+}'
+
+
+curl -XPOST http://192.168.226.3:9200/ibeifeng_aggs/infos/_search?pretty -d'
+{
+	"size":0,
+	"query":{"match_all":{}},
+	"aggs":{
+		"aggs_terms":{
+			"stats":{
+				 "field":"price"
+			}
+		}
+	}
+}'

@@ -7,47 +7,76 @@
            xmlns:aop="http://www.springframework.org/schema/aop"
            xmlns:util="http://www.springframework.org/schema/util"
            xmlns:p="http://www.springframework.org/schema/p"
+           xmlns:secret="http://www.secret.com/schema/secret"
            xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.2.xsd
-           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
-           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util-3.0.xsd
+           http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
            http://www.springframework.org/schema/mvc
            http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
            http://www.springframework.org/schema/aop
-           http://www.springframework.org/schema/aop/spring-aop.xsd"
-           default-lazy-init="false">
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.secret.com/schema/secret">
 
-      
+    <context:annotation-config/>
     <aop:aspectj-autoproxy/>
+    
     <!-- @controler等mvc注解驱动-->
     <mvc:annotation-driven>
-        <!-- fastjson配置，替换默认的jackson -->
-        <mvc:message-converters>
-            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
-                <!-- 兼容性设置 -->
-                <property name="features">
+        <mvc:message-converters register-defaults="true">
+            <ref bean="xMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+   <!--json数据转换-->
+    <bean id="xMessageConverter" class="com.lzhsite.webkits.converters.XMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/json;charset=UTF-8</value>
+                <value>application/json;charset=UTF-8</value>
+                <value>text/plain;charset=UTF-8</value>
+                <value>application/octet-stream</value>
+            </list>
+        </property>
+        <property name="features">
+            <list>
+                <value>QuoteFieldNames</value>
+                <value>WriteMapNullValue</value>
+                <value>WriteNullStringAsEmpty</value>
+                <value>WriteDateUseDateFormat</value>
+                <value>DisableCircularReferenceDetect</value>
+            </list>
+        </property>
+    </bean>
+ 
+    <!--拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.lzhsite.webkits.interceptors.XInterceptor">
+                <property name="XInterceptorList">
                     <list>
-                        <!-- 输出空置字段 -->
-                        <value>WriteMapNullValue</value>
-                        <!-- list字段如果为null，输出为[]，而不是null -->
-                        <value>WriteNullListAsEmpty</value>
-                        <!-- 数值字段如果为null，输出为0，而不是null -->
-                        <value>WriteNullNumberAsZero</value>
-                        <!-- Boolean字段如果为null，输出为false，而不是null -->
-                        <value>WriteNullBooleanAsFalse</value>
-                        <!-- string字段如果为null，输出为空，而不是null -->
-                        <value>WriteNullStringAsEmpty</value>
-                        <!-- 禁用循环引用 -->
-                        <value>DisableCircularReferenceDetect</value>
+                        <bean class="com.lzhsite.webkits.interceptors.ApiGatewayInterceptor"/>
+                        <bean class="com.lzhsite.webkits.interceptors.SignInterceptor">
+                            <property name="signatureConfigs">
+                                <list>
+                                    <secret:sign type="WAP" skipCheck="true" skipWrite="true"/>
+                                    <secret:sign type="WXWAP" skipCheck="true" skipWrite="true"/>
+                                    <secret:sign type="ALIPAYWAP" skipCheck="true" skipWrite="true"/>
+                                    <secret:sign type="APP" skipCheck="false" skipWrite="false" signatureService-type="com.lzhsite.webkits.security.signature.DefaultAppSignatureService"/>
+                                    <secret:sign type="ICBCBANKWAP" skipCheck="true" skipWrite="true"/>
+                                    <secret:sign type="SYD" skipCheck="false" skipWrite="false" signatureService-type="com.lzhsite.webkits.security.signature.DefaultAppSignatureService"/>
+                                </list>
+                            </property>
+                        </bean>
                     </list>
                 </property>
             </bean>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
-
-
+        </mvc:interceptor>
+    </mvc:interceptors>
  
     
 	<!-- 自动扫描controller层Bean -->

@@ -14,7 +14,7 @@ import javax.persistence.Id;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lzhsite.util.IDUtils;
+import com.lzhsite.core.utils.IDUtils;
 
 /**
  * PO 基础模板类

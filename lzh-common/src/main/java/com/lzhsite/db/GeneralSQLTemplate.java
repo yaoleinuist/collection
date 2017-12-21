@@ -13,7 +13,7 @@ import org.apache.ibatis.jdbc.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lzhsite.exception.XSystemException;
+import com.lzhsite.core.exception.XSystemException;
 
 public class GeneralSQLTemplate {
 

@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import com.lzhsite.util.HttpUtils;
+import com.lzhsite.core.utils.HttpUtils;
 
 /**
  * http://blog.csdn.net/xyang81/article/details/7292380#NetWorkClassLoader

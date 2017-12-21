@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 
-import com.lzhsite.context.SpringContextHolder;
+import com.lzhsite.core.context.ApplicationContextHelper;
+import com.lzhsite.core.utils.CookieUtil;
 import com.lzhsite.service.SessionService;
-import com.lzhsite.util.CookieUtil;
 
 public class HttpSessionWrapper implements HttpSession {
 
@@ -25,7 +25,7 @@ public class HttpSessionWrapper implements HttpSession {
 
 	private Map<String, Object> map = null;
 
-	private SessionService sessionService = (SessionService) SpringContextHolder.getBean("sessionService");
+	private SessionService sessionService = (SessionService) ApplicationContextHelper.getBean("sessionService");
 
 	public HttpSessionWrapper() {
 	}

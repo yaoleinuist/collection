@@ -2,7 +2,7 @@ package com.lzhsite.ensure.extensions;
 
 import java.util.Collection;
 
-import com.lzhsite.exception.XExceptionFactory;
+import com.lzhsite.core.exception.XExceptionFactory;
 
 /**
  * Created by Jintao on 2015/6/8.

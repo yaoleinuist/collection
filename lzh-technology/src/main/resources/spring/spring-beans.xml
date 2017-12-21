@@ -30,9 +30,9 @@
 	<!-- 设定Spring 去哪些包中找Annotation,不需要像传统的方式配置多个bean-->
 	<context:component-scan base-package="com.lzhsite" />
  
-    <bean class="com.lzhsite.context.SpringContextHolder" />
+    <bean class="com.lzhsite.core.context.ApplicationContextHelper" />
     
-    <bean class="com.lzhsite.exception.ExceptionDefinitions" />
+    <bean class="com.lzhsite.core.exception.ExceptionDefinitions" />
     
     <bean id="sessionService" class="com.lzhsite.service.SessionService"></bean>
     

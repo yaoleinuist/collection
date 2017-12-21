@@ -21,8 +21,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.lzhsite.core.utils.HttpUtils;
 import com.lzhsite.technology.util.PrintView;
-import com.lzhsite.util.HttpUtils;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
