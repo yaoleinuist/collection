@@ -9,6 +9,8 @@ import javax.sql.DataSource;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 /**
+ * https://www.cnblogs.com/surge/p/3582248.html
+ * 
  * Created by pangpeijie on 16/11/11.
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {

@@ -29,13 +29,13 @@
 
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		class="com.lzhsite.core.datasource.DynamicDataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<!-- 阿里 druid数据库连接池 -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+ 
+	<bean id="masterdataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
 		<!-- 数据库基本信息配置 -->
 		<property name="url" value="${jdbc.url}" />
@@ -69,11 +69,42 @@
 	</bean>
 
 
+	<bean id="slavedataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+	</bean>
+
+    <!-- 配置主从数据库 -->
+    <bean id="dataSource" class="com.lzhsite.core.datasource.DynamicDataSource">
+        <property name="master" ref="masterdataSource" />
+        <property name="slaves">
+            <list>
+                <ref bean="slavedataSource"/>
+            </list>
+        </property>
+        <property name="defaultTargetDataSource" ref="masterdataSource"/>
+    </bean>
+
+
+   <!-- 配置数据库注解aop -->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+    <bean id="manyDataSourceAspect" class="com.lzhsite.core.datasource.DataSourceAspect" />
+    <aop:config>
+        <aop:aspect id="c" ref="manyDataSourceAspect">
+            <aop:pointcut id="tx" expression="execution(* com.lzhsite.dao.*.*(..))"/>
+            <aop:before pointcut-ref="tx" method="before"/>
+        </aop:aspect>
+    </aop:config>
+    <!-- 配置数据库注解aop -->
+
 	<!-- myBatis文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath:mapper/*.xml" />
-		<property name="configLocation" value="classpath:mybatis/mybatis-configuration.xml" />
+		<property name="configLocation"  value="classpath:mybatis/mybatis-configuration.xml" />
 	</bean>
 
 	<!-- 配置dao -->

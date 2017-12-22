@@ -32,7 +32,7 @@ public class XInterceptor implements HandlerInterceptor {
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     /**
-     * 来源，例如openApi，wemall，ecoupon等
+     * 来源，例如openApi，ecoupon等
      */
     private String source;
 

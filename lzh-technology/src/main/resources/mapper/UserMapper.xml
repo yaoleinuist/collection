@@ -31,5 +31,18 @@
     <result column="sex" property="sex" jdbcType="INTEGER" />
   </resultMap>
  
+   <select id="getUserlist" resultMap="BaseResultMap">
+      select * from t_user
+   </select>
+   
+    
+   <select id="loadbyname" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select * from t_user where name = #{name}
+   </select>
+   
+       
+   <select id="loadbyid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select * from t_user where id = #{id}
+   </select>
   
 </mapper>

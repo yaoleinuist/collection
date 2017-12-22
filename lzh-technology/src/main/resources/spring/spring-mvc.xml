@@ -54,14 +54,14 @@
     </bean>
  
     <!--拦截器-->
-    <mvc:interceptors>
+   <!--  <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="com.lzhsite.webkits.interceptors.XInterceptor">
+             <bean class="com.lzhsite.webkits.interceptors.XInterceptor">
                 <property name="XInterceptorList">
                     <list>
                         <bean class="com.lzhsite.webkits.interceptors.ApiGatewayInterceptor"/>
-<!--                         <bean class="com.lzhsite.webkits.interceptors.SignInterceptor">
+                       <bean class="com.lzhsite.webkits.interceptors.SignInterceptor">
                             <property name="signatureConfigs">
                                 <list>
                                     <secret:sign type="WAP" skipCheck="true" skipWrite="true"/>
@@ -72,12 +72,12 @@
                                     <secret:sign type="SYD" skipCheck="false" skipWrite="false" signatureService-type="com.lzhsite.webkits.security.signature.DefaultAppSignatureService"/>
                                 </list>
                             </property>
-                        </bean> -->
+                        </bean> 
                     </list>
                 </property>
             </bean>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors>-->
  
     
 	<!-- 自动扫描controller层Bean -->

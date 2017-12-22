@@ -5,7 +5,7 @@ import javax.sql.DataSource;
 
 /**
  * 设置主从
- * https://www.cnblogs.com/surge/p/3582248.html
+ * 
  */
 public class DataSourceHolder {
 
@@ -66,14 +66,19 @@ public class DataSourceHolder {
     }
 
     public static boolean isMaster() {
-        return dataSources.get().equals(MASTER);
+        return MASTER.equals(dataSources.get());
     }
 
     public static boolean isSlave() {
-        return dataSources.get().equals(SLAVE);
+        return SLAVE.equals(dataSources.get());
     }
 
-    /**
+    
+    public static String  getDatasourcesType() {
+		return dataSources.get();
+	}
+
+	/**
      * 清除thread local中的数据源
      */
     public static void clearDataSource() {
