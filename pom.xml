@@ -19,7 +19,7 @@
 		<spring.version>4.3.5.RELEASE</spring.version>
 		<slf4j-release-version>1.7.16</slf4j-release-version>
 		<junit.version>4.11</junit.version>
-		<mapper.version>3.3.0</mapper.version>
+		<mybatis.version>3.3.0</mybatis.version>
 		<eclipse.jetty.version>7.6.3.v20120416</eclipse.jetty.version>
 		<hibernate.version>4.3.10.Final</hibernate.version>
 	</properties>
@@ -454,7 +454,7 @@
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.2.3</version>
+			<version>${mybatis.version}</version>
 		</dependency>
 
 		<dependency>
@@ -474,7 +474,7 @@
 		<dependency>
 			<groupId>tk.mybatis</groupId>
 			<artifactId>mapper</artifactId>
-			<version>${mapper.version}</version>
+			<version>${mybatis.version}</version>
 		</dependency>
 
 

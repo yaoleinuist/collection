@@ -25,8 +25,8 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lzhsite.core.es.EsOperateSdk;
 import com.lzhsite.core.utils.DateUtils;
-import com.lzhsite.es.spring.util.EsOperateSdk;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;

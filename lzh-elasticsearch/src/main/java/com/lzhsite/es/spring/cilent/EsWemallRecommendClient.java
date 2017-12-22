@@ -13,11 +13,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
+import com.lzhsite.core.es.EsOperateCallback;
+import com.lzhsite.core.es.EsOperateParam;
+import com.lzhsite.core.es.EsOperateSdk;
+import com.lzhsite.core.es.EsOperateTemplate;
 import com.lzhsite.es.spring.model.WemallRecommendModel;
-import com.lzhsite.es.spring.util.EsOperateCallback;
-import com.lzhsite.es.spring.util.EsOperateParam;
-import com.lzhsite.es.spring.util.EsOperateSdk;
-import com.lzhsite.es.spring.util.EsOperateTemplate;
  
 @Component
 public class EsWemallRecommendClient {

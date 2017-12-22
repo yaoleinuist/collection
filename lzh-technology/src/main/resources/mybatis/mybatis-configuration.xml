@@ -21,7 +21,7 @@
 	</typeAliases>
 
   <plugins>
-    <plugin interceptor="com.lzhsite.db.QueryInterceptor"/>
+    <plugin interceptor="com.lzhsite.core.orm.db.QueryInterceptor"/>
   </plugins>
  
 </configuration> 

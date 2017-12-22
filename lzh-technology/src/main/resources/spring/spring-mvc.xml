@@ -20,7 +20,8 @@
            http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
            http://www.springframework.org/schema/aop
            http://www.springframework.org/schema/aop/spring-aop.xsd
-           http://www.secret.com/schema/secret">
+           http://www.secret.com/schema/secret
+           http://www.secret.com/schema/secret/secret.xsd">
 
     <context:annotation-config/>
     <aop:aspectj-autoproxy/>
@@ -60,7 +61,7 @@
                 <property name="XInterceptorList">
                     <list>
                         <bean class="com.lzhsite.webkits.interceptors.ApiGatewayInterceptor"/>
-                        <bean class="com.lzhsite.webkits.interceptors.SignInterceptor">
+<!--                         <bean class="com.lzhsite.webkits.interceptors.SignInterceptor">
                             <property name="signatureConfigs">
                                 <list>
                                     <secret:sign type="WAP" skipCheck="true" skipWrite="true"/>
@@ -71,7 +72,7 @@
                                     <secret:sign type="SYD" skipCheck="false" skipWrite="false" signatureService-type="com.lzhsite.webkits.security.signature.DefaultAppSignatureService"/>
                                 </list>
                             </property>
-                        </bean>
+                        </bean> -->
                     </list>
                 </property>
             </bean>

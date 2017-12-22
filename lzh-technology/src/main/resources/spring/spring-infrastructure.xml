@@ -6,16 +6,14 @@
 
     <description>spring-infrastructure-configuration</description>
     
-  	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  	<bean class="com.lzhsite.core.utils.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<array>
-				 <value>classpath:/propss/application.properties</value>
+				 <value>classpath:/props/application.properties</value>
 			</array>
 		</property>
 	</bean>
-    <bean class="com.lzhsite.exception.ExceptionDefinitions" />
  
-
     <bean id="dozerMapper" class="org.dozer.DozerBeanMapper">
         <property name="mappingFiles">
             <list>

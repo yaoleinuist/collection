@@ -20,6 +20,7 @@ import com.alibaba.fastjson.JSON;
 import com.lzhsite.core.utils.DateFormart;
 import com.lzhsite.core.utils.DateUtils;
 import com.lzhsite.core.utils.ResponseUtils;
+import com.lzhsite.core.utils.redis.RedisUtils;
 import com.lzhsite.es.spring.cilent.ESTagCilent;
 import com.lzhsite.es.spring.cilent.EsWemallRecommendClient;
 import com.lzhsite.es.spring.constants.AppConstant;
@@ -27,7 +28,6 @@ import com.lzhsite.es.spring.constants.SystemConstants;
 import com.lzhsite.es.spring.model.MicroPointModel;
 import com.lzhsite.es.spring.model.WemallRecommendModel;
 import com.lzhsite.es.util.ElasticSearchHandler;
-import com.lzhsite.util.redis.RedisUtils;
 
 
 /**

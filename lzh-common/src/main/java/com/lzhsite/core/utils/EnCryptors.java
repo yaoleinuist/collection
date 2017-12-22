@@ -1,11 +1,11 @@
 package com.lzhsite.core.utils;
 
-import com.lzhsite.util.cryptors.AESCryptor;
-import com.lzhsite.util.cryptors.Base64Cryptor;
-import com.lzhsite.util.cryptors.DSACryptor;
-import com.lzhsite.util.cryptors.MD5Cryptor;
-import com.lzhsite.util.cryptors.RSACryptor;
-import com.lzhsite.util.cryptors.SHA512Cryptor;
+import com.lzhsite.core.utils.cryptors.AESCryptor;
+import com.lzhsite.core.utils.cryptors.Base64Cryptor;
+import com.lzhsite.core.utils.cryptors.DSACryptor;
+import com.lzhsite.core.utils.cryptors.MD5Cryptor;
+import com.lzhsite.core.utils.cryptors.RSACryptor;
+import com.lzhsite.core.utils.cryptors.SHA512Cryptor;
 
 public class EnCryptors {
     public static final SHA512Cryptor SHA512 = SHA512Cryptor.getInstance();

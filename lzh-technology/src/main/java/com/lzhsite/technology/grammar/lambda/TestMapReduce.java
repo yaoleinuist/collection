@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.lzhsite.entity.Averager;
+import com.lzhsite.dto.AveragerDto;
 import com.lzhsite.entity.User;
 
 public class TestMapReduce {
@@ -22,10 +22,10 @@ public class TestMapReduce {
 	          
 	        //与stream.reduce方法不同，Stream.collect修改现存的值，而不是每处理一个元素，创建一个新值 
 	        //获取所有男性用户的平均级别
-	        Averager averageCollect = users.parallelStream() 
+	        AveragerDto averageCollect = users.parallelStream() 
 	                .filter(p -> p.getSex() == 1) 
 	                .map(User::getScale) 
-	                .collect(Averager::new, Averager::accept, Averager::combine); 
+	                .collect(AveragerDto::new, AveragerDto::accept, AveragerDto::combine); 
 	  
 	        System.out.println("Average age of male members: " 
 	                + averageCollect.average()); 

@@ -13,7 +13,7 @@ import org.springframework.util.StringUtils;
 
 import com.lzhsite.core.constant.RedisConstant;
 import com.lzhsite.core.utils.KeyUtil;
-import com.lzhsite.util.redis.RedisUtils;
+import com.lzhsite.core.utils.redis.RedisUtils;
 
 /**
  * 限流接口 - 分布式实现

@@ -12,7 +12,7 @@ import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.unit.DistanceUnit;
-import org.elasticsearch.index.query.*;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
@@ -24,10 +24,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
-import com.lzhsite.db.Pager;
+import com.lzhsite.core.es.EsOperateSdk;
+import com.lzhsite.core.orm.db.Pager;
 import com.lzhsite.es.spring.model.CouponApplyShopModel;
 import com.lzhsite.es.spring.model.CouponApplyShopSearchModel;
-import com.lzhsite.es.spring.util.EsOperateSdk;
 
 /**
  * 描述:

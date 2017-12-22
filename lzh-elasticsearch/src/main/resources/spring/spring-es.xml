@@ -16,7 +16,7 @@
 		http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd">
 
 	<!-- 开始Spring全注解 -->
-	<context:component-scan base-package="com.lzhsite.es.spring">
+	<context:component-scan base-package="com.lzhsite.core.es">
 	</context:component-scan>
 
 	<!-- Client client = transport-client.... -->
@@ -31,7 +31,7 @@
 	</bean>
 
 
-	<bean id="propertyConfigurer" class="com.lzhsite.util.config.PropertyPlaceholderConfigurer"
+	<bean id="propertyConfigurer" class="com.lzhsite.core.utils.config.PropertyPlaceholderConfigurer"
 		lazy-init="false">
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 		<property name="fileEncoding" value="UTF-8" />

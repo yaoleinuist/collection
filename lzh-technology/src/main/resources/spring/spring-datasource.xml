@@ -78,8 +78,8 @@
 
 	<!-- 配置dao -->
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.lzhsite.*.dao" />
-	    <property name="markerInterface" value="com.lzhsite.mapper.BaseMapper" />
+		<property name="basePackage" value="com.lzhsite.dao" />
+	    <property name="markerInterface" value="com.lzhsite.core.orm.mybatis.BaseMapper" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 		<property name="properties">
 			<value>
@@ -135,10 +135,10 @@
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
 		p:connectionFactory-ref="jedisConnectionFactory">
 		<property name="keySerializer"><!-- 使用框架中自定义的key序列化方式 -->
-			<bean class="com.lzhsite.util.redis.RedisKeySerializer" />
+			<bean class="com.lzhsite.core.utils.redis.RedisKeySerializer" />
 		</property>
 		<property name="valueSerializer"><!-- 使用框架中自定义的value序列化方式 -->
-			<bean class="com.lzhsite.util.redis.RedisValueSerializer" />
+			<bean class="com.lzhsite.core.utils.redis.RedisValueSerializer" />
 		</property>
 	</bean>
 
