@@ -704,9 +704,23 @@
 			<artifactId>protostuff-runtime</artifactId>
 			<version>1.0.8</version>
 		</dependency>
+		
+		<!--当当分库分表扩展框架-->
+	   <dependency>  
+            <groupId>com.dangdang</groupId>  
+            <artifactId>sharding-jdbc-core</artifactId>  
+            <version>1.0.0</version>  
+        </dependency>  
+        
+        <!-- 依赖kafka -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.10</artifactId>
+            <version>0.8.2.1</version>
+        </dependency>
 	</dependencies>
 
-
+ 
 	<build>
 		<resources>
 			<resource>

@@ -1,6 +1,5 @@
 package com.lzhsite.service;
 
-import static org.junit.Assert.*;
 
 import java.util.List;
 

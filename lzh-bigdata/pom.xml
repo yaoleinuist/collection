@@ -2,24 +2,19 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.lzhsite</groupId>
-    <artifactId>lzh-maven-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<groupId>com.lzhsite</groupId>
+		<artifactId>lzh-maven-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
   <groupId>com.lzhsite</groupId>
   <artifactId>lzh-bigdata</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>lzh-zookeeper Maven Webapp</name>
+  <name>lzh-bigdata Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+ 
  
   </dependencies>
   <build>
