@@ -20,6 +20,7 @@ public class JavaKafkaProducerMessageSenderTest {
      *
      * @throws InterruptedException
      */
+    @Test
     public static void test2() throws InterruptedException {
         // 构建kafka生产者
         String topicName = "beifeng0";

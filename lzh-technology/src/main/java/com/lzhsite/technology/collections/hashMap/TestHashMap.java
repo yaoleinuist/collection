@@ -1,4 +1,4 @@
-package com.lzhsite.technology.collections;
+package com.lzhsite.technology.collections.hashMap;
 
 import java.util.HashMap;
 
