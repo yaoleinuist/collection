@@ -2,6 +2,7 @@ package com.lzhsite.technology.util;
  
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -18,17 +19,17 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.weibo.weibo4j.util.WeiboConfig;
+import com.lzhsite.core.utils.config.Property;
  
  
 
 public class WeiboOauthClient {
 	
-	private String WEIBO_APPKEY=WeiboConfig.getValue("client_ID");
+	private String WEIBO_APPKEY=Property.getProperty("client_ID");
 
-	private String WEIBO_APPSECRET=WeiboConfig.getValue("client_SERCRET");
+	private String WEIBO_APPSECRET=Property.getProperty("client_SERCRET");
 
-	private String WEIBO_CALLBACK=WeiboConfig.getValue("redirect_URI");
+	private String WEIBO_CALLBACK=Property.getProperty("redirect_URI");
 
 	private String WEIBO_APPKEY_OLD;
 

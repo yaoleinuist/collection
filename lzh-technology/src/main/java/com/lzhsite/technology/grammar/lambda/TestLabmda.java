@@ -1,6 +1,5 @@
 package com.lzhsite.technology.grammar.lambda;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,8 +10,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.Test;
-
-import com.weibo.weibo4j.model.User;
 // http://tianmaotalk.iteye.com/blog/2273314
 public class TestLabmda {
 
@@ -84,13 +81,13 @@ public class TestLabmda {
 	@Test
 	public void test4() {
 		Stream<User> userStream = Stream.of(new User(0, "张三", 18), new User(1, "张四", 19), new User(2, "张五", 19), new User(3, "老张", 50));
-		Map<Integer, Integer> userMap = userStream.collect(Collectors.toMap(User::getFollowersCount, item -> item.getbiFollowersCount()));
+		Map<Integer, Integer> userMap = userStream.collect(Collectors.toMap(User::getFollowersCount, item -> item.getBiFollowersCount()));
 		System.out.println(userMap.get(5));
 	  
 		
 		userStream = Stream.of(new User(0, "张三", 18), new User(1, "张四", 19), new User(2, "张五", 19), new User(3, "老张", 50));
         Integer  result = userStream.reduce(0,
-                (sum, item) -> sum+item.getbiFollowersCount(), (i, j) -> i+j);
+                (sum, item) -> sum+item.getBiFollowersCount(), (i, j) -> i+j);
        // 或者这样写
        // Integer  result = userStream.mapToInt(User::getbiFollowersCount).reduce(0,
        //        (sum, item) -> sum+item);
