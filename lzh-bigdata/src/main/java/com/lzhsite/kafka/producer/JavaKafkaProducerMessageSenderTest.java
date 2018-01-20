@@ -24,7 +24,7 @@ public class JavaKafkaProducerMessageSenderTest {
     public static void test2() throws InterruptedException {
         // 构建kafka生产者
         String topicName = "beifeng0";
-        String brokerList = "hadoop.senior02:9092";
+        String brokerList = "hadoop.senior02:9092,hadoop.senior02:9093,hadoop.senior02:9094,hadoop.senior02:9095";
         String serilizerClassName = "kafka.serializer.StringEncoder";
         String partitionerClassName = "com.lzhsite.kafka.producer.JavaKafkaProducerePartitioner";
         JavaKafkaProducer<String, String> producer = new JavaKafkaProducer<String, String>(topicName, brokerList, serilizerClassName, partitionerClassName);
@@ -63,7 +63,7 @@ public class JavaKafkaProducerMessageSenderTest {
     public static void test1() throws InterruptedException {
         // 构建kafka生产者
         String topicName = "beifeng0";
-        String brokerList = "hadoop.senior02:9092";
+        String brokerList = "hadoop.senior02:9092,hadoop.senior02:9093,hadoop.senior02:9094,hadoop.senior02:9095";
         String serilizerClassName = "kafka.serializer.StringEncoder";
         JavaKafkaProducer<String, String> producer = new JavaKafkaProducer<String, String>(topicName, brokerList, serilizerClassName);
 

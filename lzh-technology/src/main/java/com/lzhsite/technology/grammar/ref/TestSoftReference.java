@@ -1,4 +1,4 @@
-package com.lzhsite.technology.quto;
+package com.lzhsite.technology.grammar.ref;
 
 import java.lang.ref.SoftReference;
 
@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
 	
 	4) 虚引用（PhantomReference）也称为幽灵引用或者幻影引用，它是最弱的一种引用关系，一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，
 	也无法通过虚引用来取得一个对象实例。*/
-public class Test {
+public class TestSoftReference {
 	public static void main(String[] args) {
 		// 申请一个图像对象
 		ImageIcon image = new ImageIcon(); // 创建Image对象

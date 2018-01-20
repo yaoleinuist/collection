@@ -22,6 +22,7 @@
 		<mybatis.version>3.3.0</mybatis.version>
 		<eclipse.jetty.version>7.6.3.v20120416</eclipse.jetty.version>
 		<hibernate.version>4.3.10.Final</hibernate.version>
+	    <zookeeper.version>3.4.5</zookeeper.version>
 	</properties>
 
 	<dependencies>
@@ -271,24 +272,7 @@
 		</dependency>
 		<!-- dubbo end -->
 
-		<!-- Zookeeper 用于分布式服务管理 -->
-		<dependency>
-			<groupId>org.apache.zookeeper</groupId>
-			<artifactId>zookeeper</artifactId>
-			<version>3.4.5</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.jboss.netty</groupId>
-					<artifactId>netty</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.101tec</groupId>
-			<artifactId>zkclient</artifactId>
-			<version>0.3</version>
-		</dependency>
-		<!-- Zookeeper 用于分布式服务管理 end -->
+
 
 		<!-- json begin -->
 		<dependency>
@@ -533,44 +517,7 @@
 		</dependency>
 		<!-- Mysql Driver End -->
 
-		<!-- elasticsearch Begin -->
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-elasticsearch</artifactId>
-			<version>2.0.4.RELEASE</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-tx</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.elasticsearch</groupId>
-			<artifactId>elasticsearch</artifactId>
-			<version>2.4.0</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.fasterxml.jackson.core</groupId>
-					<artifactId>jackson-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- elasticsearch End -->
-
+		
 		<dependency>
 			<groupId>org.csource</groupId>
 			<artifactId>fastdfs_client</artifactId>
@@ -685,21 +632,6 @@
 		    <version>2.3.1</version>  
 		</dependency>  
 		
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-client</artifactId>
-			<version>2.5.0</version>
-			<exclusions>
-				<exclusion>
-					<groupId>io.netty</groupId>
-					<artifactId>netty</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.guava</groupId>
-					<artifactId>guava</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 
         <!-- dozer -->
         <dependency>
@@ -738,13 +670,7 @@
             	</exclusion>
             </exclusions>
 	   </dependency>  
-        
-        <!-- 依赖kafka -->
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka_2.10</artifactId>
-            <version>0.8.2.1</version>
-        </dependency>
+
 	</dependencies>
 
  
@@ -839,6 +765,7 @@
 
 
 	<modules>
+		<module>lzh-common</module>
 		<module>lzh-technology</module>
 		<module>lzh-fdfs</module>
 		<module>lzh-elasticsearch</module>
