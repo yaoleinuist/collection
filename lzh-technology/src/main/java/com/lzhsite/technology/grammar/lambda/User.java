@@ -34,11 +34,11 @@ import java.util.Date;
 public class User{
 
 	private static final long serialVersionUID = -332738032648843482L;
-	private String id;                      //用户UID
+	private Integer id;                      //用户UID
 	private String screenName;            //微博昵称
 	private String name;                  //友好显示名称，如Bill Gates,名称中间的空格正常显示(此特性暂不支持)
 	private int province;                 //省份编码（参考省份编码表）
-	private int city;                     //城市编码（参考城市编码表）
+	private Integer city;                     //城市编码（参考城市编码表）
 	private String location;              //地址
 	private String description;           //个人描述
 	private String url;                   //用户博客地址
@@ -66,6 +66,11 @@ public class User{
 	private String statusId;
 	
 	
+	public User() {
+		super();
+	}
+
+
 	public User(int followersCount, String name, int biFollowersCount) {
 		super();
 		this.followersCount = followersCount;
@@ -74,12 +79,12 @@ public class User{
 	}
 
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -114,12 +119,12 @@ public class User{
 	}
 
 
-	public int getCity() {
+	public Integer getCity() {
 		return city;
 	}
 
 
-	public void setCity(int city) {
+	public void setCity(Integer city) {
 		this.city = city;
 	}
 

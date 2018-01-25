@@ -30,15 +30,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public final class JavaWordCount {
+public final class JavaWordCountCluster {
 	
   private static final Pattern SPACE = Pattern.compile(" ");
  
   
   public static void main(String[] args) throws Exception {
  
-	 
-
+	// 如果要在spark集群上运行，需要修改的，只有两个地方
+	// 第一，将SparkConf的setMaster()方法给删掉，默认它自己会去连接
+	// 第二，我们针对的不是本地文件了，修改为hadoop hdfs上的真正的存储大数据的文件
+	// 实际执行步骤：
+	// 1、将spark.txt文件上传到hdfs上去
+	// 2、使用我们最早在pom.xml里配置的maven插件，对spark工程进行打包
+	// 3、将打包后的spark工程jar包，上传到机器上执行
+	// 4、编写spark-submit脚本
+	// 5、执行spark-submit脚本，提交spark应用到集群执行
     SparkConf sparkConf = new SparkConf().setAppName("JavaWordCount");
     /**
      *    local 本地单线程
@@ -54,8 +61,8 @@ public final class JavaWordCount {
     
     JavaSparkContext ctx = new JavaSparkContext(sparkConf);
   
-    //工程打包后放置在windows上的路径
-    ctx.addJar("file:///d:/demosrc/lzh-maven-parent/lzh-bigdata/target/lzh-bigdata.jar");
+    //如果要在本地运行Spark standalone cluster,这个属性必须制定(工程打包后放置在windows上的路径)
+    //ctx.addJar("file:///d:/demosrc/lzh-maven-parent/lzh-bigdata/target/lzh-bigdata.jar");
     
     //JavaRDD<String> lines = ctx.textFile("hdfs://hadoop.senior02:8020/user/beifeng/mapreduce/wordcount/input/wc.input", 1);
     JavaRDD<String> lines = ctx.textFile("/user/beifeng/mapreduce/wordcount/input/wc.input", 1);
