@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -29,6 +28,7 @@ public class TestLabmda {
 		// New way:
 		List<Integer> costBeforeTax2 = Arrays.asList(100, 200, 300, 400, 500);
 		double bill = costBeforeTax2.stream().map((cost) -> cost + 0.12 * cost).reduce((sum, cost) -> sum + cost).get();
+
 		System.out.println("Total : " + bill);
 
 	}
@@ -77,27 +77,26 @@ public class TestLabmda {
 		}
 		Collections.sort(users, new Comparator<User>() {
 			public int compare(User x, User y) {
-                //返回结果大于0 x放后面，返回结果小于0 x放前面
-				if(x.getBiFollowersCount()!=1 && y.getBiFollowersCount()!=1){
+				// 返回结果大于0 x放后面，返回结果小于0 x放前面
+				if (x.getBiFollowersCount() != 1 && y.getBiFollowersCount() != 1) {
 					if (x.getId().compareTo(y.getId()) != 0) {
-                        //按id降序排
+						// 按id降序排
 						return y.getId().compareTo(x.getId());
 
 					} else {
-                        //按city升序排
+						// 按city升序排
 						return x.getCity().compareTo(y.getCity());
 					}
-				}else{
-					//BiFollowersCount==1时一定排在最后
-					if(x.getBiFollowersCount()==1){
+				} else {
+					// BiFollowersCount==1时一定排在最后
+					if (x.getBiFollowersCount() == 1) {
 						return 1;
-					}else if(y.getBiFollowersCount()==1){
+					} else if (y.getBiFollowersCount() == 1) {
 						return -1;
-					}else{
+					} else {
 						return 0;
 					}
 				}
-
 
 			}
 		});
@@ -112,19 +111,22 @@ public class TestLabmda {
 
 	@Test
 	public void test4() {
-		Stream<User> userStream = Stream.of(new User(0, "张三", 18), new User(1, "张四", 19), new User(2, "张五", 19),
-				new User(3, "老张", 50));
+		Stream<User> userStream = Stream.of(new User(0, "张三", 18,"f"), new User(1, "张四", 19,"f"), new User(2, "张五", 19,"f"),
+				new User(3, "老张", 50,"f"));
 		Map<Integer, Integer> userMap = userStream
-				.collect(Collectors.toMap(User::getFollowersCount, item -> item.getBiFollowersCount()));
+				.collect(Collectors.toMap(User::getId, item -> item.getId()));
 		System.out.println(userMap.get(5));
 
-		userStream = Stream.of(new User(0, "张三", 18), new User(1, "张四", 19), new User(2, "张五", 19),
-				new User(3, "老张", 50));
-		Integer result = userStream.reduce(0, (sum, item) -> sum + item.getBiFollowersCount(), (i, j) -> i + j);
+		userStream = Stream.of(new User(0, "张三", 18,"f"), new User(1, "张四", 19,"f"), new User(2, "张五", 19,"f"),
+				new User(3, "老张", 50,"f"));
+		Integer result = userStream.reduce(0, (sum, item) -> sum + item.getAge(), (i, j) -> i + j);
 		// 或者这样写
 		// Integer result =
-		// userStream.mapToInt(User::getbiFollowersCount).reduce(0,
+		// userStream.mapToInt(User::getAge).reduce(0,
 		// (sum, item) -> sum+item);
 
 	}
 }
+ 
+	
+	 

@@ -51,7 +51,7 @@ public class JavaWordCountLocal {
 		// 在Java中，创建的普通RDD，都叫做JavaRDD
 		// 在这里呢，RDD中，有元素这种概念，如果是hdfs或者本地文件呢，创建的RDD，每一个元素就相当于
 		// 是文件里的一行
-		JavaRDD<String> lines = sc.textFile("C://Users//Administrator//Desktop//spark.txt");
+		JavaRDD<String> lines = sc.textFile("D:/大数据/spark/Spark深入剖析/第一章：Spark核心编程/资料/第29讲-Spark核心编程：使用Java、Scala和spark-shell开发wordcount程序/spark.txt");
 	
 		// 第四步：对初始RDD进行transformation操作，也就是一些计算操作
 		// 通常操作会通过创建function，并配合RDD的map、flatMap等算子来执行

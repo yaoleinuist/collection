@@ -30,7 +30,7 @@ public class TestMapReduce {
 	        System.out.println("Average age of male members: " 
 	                + averageCollect.average()); 
 	  
-	        //获取年龄大于12的用户列表 
+	        //获取级别大于12的用户列表 
 	        List<User> list = users.parallelStream().filter(p -> p.getScale() > 12) 
 	                .collect(Collectors.toList()); 
 	        System.out.println(list); 

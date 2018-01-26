@@ -53,6 +53,25 @@
 			</exclusions>
 		</dependency>
 		<!-- elasticsearch End -->
+		
+				<dependency>
+			<groupId>org.htmlparser</groupId>
+			<artifactId>filterbuilder</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.htmlparser</groupId>
+			<artifactId>htmllexer</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.htmlparser</groupId>
+			<artifactId>htmlparser</artifactId>
+			<version>2.1</version>
+		</dependency>
+		
+		
+		
 	</dependencies>
  
 </project>

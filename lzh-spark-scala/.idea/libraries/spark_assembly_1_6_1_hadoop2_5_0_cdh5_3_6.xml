@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="spark-assembly-1.6.1-hadoop2.5.0-cdh5.3.6">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../lzh-bigdata/src/main/webapp/WEB-INF/lib/spark-assembly-1.6.1-hadoop2.5.0-cdh5.3.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../lzh-bigdata/src/main/webapp/WEB-INF/lib/spark-assembly-1.6.1-hadoop2.5.0-cdh5.3.6.jar!/" />
+    </SOURCES>
+  </library>
+</component>

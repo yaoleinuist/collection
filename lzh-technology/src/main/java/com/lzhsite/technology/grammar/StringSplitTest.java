@@ -1,4 +1,4 @@
-package com.lzhsite.technology.string;
+package com.lzhsite.technology.grammar;
 
 import java.util.StringTokenizer;
 

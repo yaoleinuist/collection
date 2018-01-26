@@ -64,18 +64,18 @@ public class User{
 	private String verifiedReason;		  //认证原因
 	private String weihao;				  //微號
 	private String statusId;
-	
+	private int age;                       //年龄
 	
 	public User() {
 		super();
 	}
-
-
-	public User(int followersCount, String name, int biFollowersCount) {
+ 
+	public User(int id, String name, int age,String gender) {
 		super();
-		this.followersCount = followersCount;
+		this.id = id;
 		this.name = name;
-		this.biFollowersCount = biFollowersCount;
+		this.age = age;
+		this.gender = gender;
 	}
 
 
@@ -376,6 +376,14 @@ public class User{
 
 	public void setStatusId(String statusId) {
 		this.statusId = statusId;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 	 
 }
