@@ -1,4 +1,4 @@
-package com.lzhsite.spark.scala
+package com.lzhsite.scala
 
 /**
   * Created by lzhcode on 2018/1/28.
@@ -41,7 +41,9 @@ object LearnScala02 {
   def execise6(input:String):BigInt = {
     var sum:BigInt = 1
     val length = input.length
-    for(i <- 0 to length-1){
+    //for(i <- 0 to length-1){
+    //until和to相比，它是不包含上限区间或者上边界
+    for(i <- 0 until length){
       sum = sum * input(i).toLong
     }
     sum

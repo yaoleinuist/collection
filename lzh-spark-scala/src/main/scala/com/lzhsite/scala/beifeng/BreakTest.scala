@@ -1,4 +1,4 @@
-package com.lzhsite.spark.scala.beifeng
+package com.lzhsite.scala.beifeng
 
 import scala.util.control.Breaks
 

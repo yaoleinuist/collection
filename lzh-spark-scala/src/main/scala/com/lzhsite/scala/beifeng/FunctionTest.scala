@@ -1,4 +1,4 @@
-package com.lzhsite.spark.scala.beifeng
+package com.lzhsite.scala.beifeng
 
 /**
  * Created by ibf on 2016/12/24.
