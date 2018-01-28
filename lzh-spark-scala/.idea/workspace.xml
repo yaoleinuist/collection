@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f6a1a79a-2a13-4dd2-bf59-1262618633f6" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lzh-bigdata/src/main/java/com/lzhsite/spark/BroadcastVariable.java" afterPath="$PROJECT_DIR$/../lzh-bigdata/src/main/java/com/lzhsite/spark/BroadcastVariable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lzh-bigdata/src/main/java/com/lzhsite/spark/GroupTop3.java" afterPath="$PROJECT_DIR$/../lzh-bigdata/src/main/java/com/lzhsite/spark/GroupTop3.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lzh-bigdata/src/main/java/com/lzhsite/spark/Top3.java" afterPath="$PROJECT_DIR$/../lzh-bigdata/src/main/java/com/lzhsite/spark/Top3.java" />
@@ -957,12 +958,20 @@
       <updated>1516945972973</updated>
       <workItem from="1516945980470" duration="4354000" />
       <workItem from="1516951504087" duration="4398000" />
-      <workItem from="1517026429160" duration="11949000" />
+      <workItem from="1517026429160" duration="12043000" />
     </task>
+    <task id="LOCAL-00001" summary="git配置">
+      <created>1517111355563</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1517111355563</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20701000" />
+    <option name="totallyTimeSpent" value="20795000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1003,6 +1012,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="git配置" />
+    <option name="LAST_COMMIT_MESSAGE" value="git配置" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
