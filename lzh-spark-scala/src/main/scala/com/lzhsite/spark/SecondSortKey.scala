@@ -1,4 +1,4 @@
-package com.lzhsite.spark.scala
+package com.lzhsite.spark
 
 /**
  * @author Administrator

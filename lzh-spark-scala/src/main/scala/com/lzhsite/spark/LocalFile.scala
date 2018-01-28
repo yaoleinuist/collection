@@ -1,4 +1,4 @@
-package com.lzhsite.spark.scala
+package com.lzhsite.spark
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
@@ -6,14 +6,15 @@ import org.apache.spark.SparkContext
 /**
  * @author Administrator
  */
-object HDFSFile {
+object LocalFile {
   
   def main(args: Array[String]) {
     val conf = new SparkConf()
-        .setAppName("HDFSFile").setMaster("local[4]");  
+        .setAppName("LocalFile") 
+        .setMaster("local");  
     val sc = new SparkContext(conf)
     
-    val lines = sc.textFile("hdfs://spark1:9000/spark.txt", 1);
+    val lines = sc.textFile("C://Users//Administrator//Desktop//spark.txt", 1);
     val count = lines.map { line => line.length() }.reduce(_ + _)  
     
     println("file's count is " + count)  

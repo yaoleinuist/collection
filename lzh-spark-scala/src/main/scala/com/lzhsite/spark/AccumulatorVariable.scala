@@ -1,5 +1,5 @@
 
-package  com.lzhsite.spark.scala
+package com.lzhsite.spark
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
