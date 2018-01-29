@@ -1,4 +1,4 @@
-package com.lzhsite.technology.algoritom;
+package com.lzhsite.technology.algoritom.dataSructure.sort;
 
 /*所谓的快速排序的思想就是，首先把数组的第一个数拿出来做为一个key，
 在前后分别设置一个i,j做为标识，然后拿这个key对这个数组从后面往前遍历，

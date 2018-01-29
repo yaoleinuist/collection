@@ -1,4 +1,4 @@
-package com.lzhsite.technology.algoritom;
+package com.lzhsite.technology.algoritom.dataSructure.sort;
 //归并排序算法稳定，数组需要O(n)的额外空间，链表需要O(log(n))的额外空间，时间复杂度为O(nlog(n))，
 //算法不是自适应的，不需要对数据的随机读取。
 public class MergeSort {

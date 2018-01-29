@@ -25,7 +25,7 @@ public class GroupTop3 {
 				.setMaster("local");  
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		
-		JavaRDD<String> lines = sc.textFile("C://Users//Administrator//Desktop//score.txt");
+		JavaRDD<String> lines = sc.textFile("file:///D:/大数据/spark/Spark深入剖析/第一章：Spark核心编程/资料/第40讲-Spark核心编程：高级编程之topn/score.txt");
 		
 		JavaPairRDD<String, Integer> pairs = lines.mapToPair(
 				

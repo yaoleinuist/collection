@@ -1,4 +1,4 @@
-package com.lzhsite.technology.algoritom;
+package com.lzhsite.technology.algoritom.dataSructure.sort;
 
 public class SelectSort {
     //选择排序  每一趟从待排序的数据元素中选出最小（或最大）的一个元素，顺序放在已排好序的数列的最后，直到全部待排序的数据元素排完。 

@@ -1,4 +1,4 @@
-package com.lzhsite.technology.algoritom;
+package com.lzhsite.technology.algoritom.dataSructure.sort;
  
 
 /*

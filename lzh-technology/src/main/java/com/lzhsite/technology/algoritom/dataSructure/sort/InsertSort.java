@@ -1,4 +1,4 @@
-package com.lzhsite.technology.algoritom;
+package com.lzhsite.technology.algoritom.dataSructure.sort;
 /*
    插入排序就是把当前待排序的元素插入到一个已经排好序的列表里面。 一个非常形象的例子就是右手抓取一张扑克牌，
   并把它插入左手拿着的排好序的扑克里面。插入排序的最坏运行时间是O(n2)， 

@@ -13,6 +13,12 @@ import org.apache.spark.broadcast.Broadcast;
 /**
  * 广播变量
  * @author Administrator
+ * 
+ * Spark提供的Broadcast Variable，是只读的。并且在每个节点上只会有一份副本，
+ * 而不会为每个task都拷贝一份副本。因此其最大作用，就是减少变量到各个节点的网络传输消耗，以及在各个节点上的内存消耗。
+ * 此外，spark自己内部也使用了高效的广播算法来减少网络消耗。
+ * 可以通过调用SparkContext的broadcast()方法，来针对某个变量创建广播变量。然后在算子的函数内，使用到广播变量时，
+ * 每个节点只会拷贝一份副本了。每个节点可以使用广播变量的value()方法获取值。记住，广播变量，是只读的。
  *
  */
 public class BroadcastVariable {

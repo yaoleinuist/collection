@@ -15,6 +15,9 @@ import org.junit.Test;
 // http://tianmaotalk.iteye.com/blog/2273314
 public class TestLabmda {
 
+	/**
+	 * 计算
+	 */
 	@Test
 	public void test1() {
 		// Old way:
@@ -52,6 +55,8 @@ public class TestLabmda {
 	}
 
 	/**
+	 * 排序
+	 * 
 	 * 第一步：去掉冗余的匿名类 Collections.sort(users,(User x, User y) ->
 	 * x.getId().compareTo(y.getId()));
 	 * 
@@ -109,24 +114,37 @@ public class TestLabmda {
 
 	}
 
+	/**
+	 * 数据结构的转化
+	 */
 	@Test
 	public void test4() {
-		Stream<User> userStream = Stream.of(new User(0, "张三", 18,"f"), new User(1, "张四", 19,"f"), new User(2, "张五", 19,"f"),
-				new User(3, "老张", 50,"f"));
-		Map<Integer, Integer> userMap = userStream
-				.collect(Collectors.toMap(User::getId, item -> item.getId()));
+
+		List<User> users = new ArrayList<>();
+		users.add(new User(0, "张三", 18, "f"));
+		users.add(new User(1, "张四", 19, "f"));
+		users.add(new User(2, "张五", 19, "f"));
+		users.add(new User(3, "老张", 50, "f"));
+
+		//转map
+		Map<Integer, Integer> userMap = users.stream().collect(Collectors.toMap(User::getId, item -> item.getId()));
 		System.out.println(userMap.get(5));
 
-		userStream = Stream.of(new User(0, "张三", 18,"f"), new User(1, "张四", 19,"f"), new User(2, "张五", 19,"f"),
-				new User(3, "老张", 50,"f"));
-		Integer result = userStream.reduce(0, (sum, item) -> sum + item.getAge(), (i, j) -> i + j);
+		//计算值
+		Integer result = users.stream().reduce(0, (sum, item) -> sum + item.getAge(), (i, j) -> i + j);
 		// 或者这样写
 		// Integer result =
 		// userStream.mapToInt(User::getAge).reduce(0,
 		// (sum, item) -> sum+item);
 
+		
+		//转成新的list
+		List<com.lzhsite.entity.User> users2 =null;
+		users2=users.stream().map(user -> {
+			com.lzhsite.entity.User user2 = new com.lzhsite.entity.User();
+
+			return user2;
+		}).collect(Collectors.toList());
+
 	}
 }
- 
-	
-	 
