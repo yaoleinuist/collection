@@ -21,6 +21,7 @@ object LearnScala14 {
 
   def swap(arr: Array[String]) = {
     arr match {
+      // Array(b,a) ++ ar合并成新数组
       case Array(a,b, ar @ _*) => Array(b,a) ++ ar
       case _ => arr
     }
@@ -98,25 +99,30 @@ object LearnScala14 {
 
   def leafSum_7(tree: BinaryTree): Int = {
     tree match {
+      //看不懂怎么可以吧函数名做参数传进来
       case Node7(r @ _*) => r.map(leafSum_7).sum
       case Leaf(v) => v
     }
   }
 
 
-  //  14.8 扩展前一个练习中的树，使得每个非叶子节点除了后代之外，能够存放一个操作符。然后编写一个eval函数来计算它的值。举例来说：
-  //  +
-  //    / | \
-  //  *  2  -
+  //  14.8 扩展前一个练习中的树，使得每个非叶子节点除了后代之外，能够存放一个操作符。然后编写一个eval函数来计算它的值。
+  // 举例来说：
+  //          +
+  //        / | \
+  //      *  2  -
   //    /  \    |
-  //  3   8    5
+  //  3     8   5
   //  上面这棵树的值为(3 * 8) + 2 + (-5) = 21
-
-
+  //Node8('+' , Node8('*',Leaf(3), Leaf(8)), Leaf(2), Node8('-' , Leaf(5)))
+  //怎么知道要这样构造
 
   def eval(tree: BinaryTree): Int = {
       tree match {
-        case Node8(c : Char , r @ _*) => if( c == '+') r.map(eval).sum else if (c == '*') r.map(eval).reduceLeft(_ * _) else r.map(eval).foldLeft(0)(_ - _)
+        case Node8(c : Char , r @ _*) =>
+          if( c == '+') r.map(eval).sum
+          else if (c == '*') r.map(eval).reduceLeft(_ * _)
+          else r.map(eval).foldLeft(0)(_ - _)
         case Leaf(v) => v
       }
     }
@@ -136,7 +142,7 @@ object LearnScala14 {
   //  def g(x : Double) = if ( x != 1) Some( 1 / ( x - 1)) else None
   //  val h = compose(f,g)
   //h(2)将得到Some(1)，而h(1)和h(0)将得到None
-
+  //看不懂
 
   def execise10(): Unit = {
     def f(x : Double) = if ( x >= 0) Some(sqrt(x)) else None

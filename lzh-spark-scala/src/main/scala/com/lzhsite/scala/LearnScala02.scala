@@ -20,11 +20,13 @@ object LearnScala02 {
   //4.针对下列java循环编写一个scala版
   //for(int i=10;i>=0;i--)System.out.println(i)
   def execise4():Unit={
-   var i = 10
-    while(i >= 0){
-      println(i)
-      i = i -1
-    }
+//   var i = 10
+//    while(i >= 0){
+//      println(i)
+//      i = i -1
+//    }
+    for(i<- 10 to 1 by -1)
+      System.out.println(i)
   }
 
   //5.编写一个过程countdown(n:Int)，打印从n到0的数字

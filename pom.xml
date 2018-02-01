@@ -644,12 +644,6 @@
             <groupId>com.dangdang</groupId>  
             <artifactId>sharding-jdbc-core</artifactId>  
             <version>1.0.0</version>
-            <exclusions>
-            	<exclusion>
-            		<groupId>com.google.guava</groupId>
-            		<artifactId>guava</artifactId>
-            	</exclusion>
-            </exclusions>
 	   </dependency>  
 
 	</dependencies>

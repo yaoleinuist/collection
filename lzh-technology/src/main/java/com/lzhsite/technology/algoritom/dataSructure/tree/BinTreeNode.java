@@ -2,7 +2,11 @@ package com.lzhsite.technology.algoritom.dataSructure.tree;
 
 import com.lzhsite.technology.algoritom.dataSructure.Node;
 
-//二叉树
+/**
+ * 二叉树的节点
+ * @author lzhcode
+ *
+ */
 public class BinTreeNode implements Node {
 	
 	private Object data;		//数据域
@@ -70,6 +74,8 @@ public class BinTreeNode implements Node {
 	//断开与父亲的关系
 	public void sever(){
 		if (!hasParent()) return;
+		//当前节点不是其父节点的的左孩子就是右孩子
+		//断开以后当前节点的所有子节点均失效
 		if (isLChild()) parent.lChild = null;
 		else			parent.rChild = null;
 		parent.updateHeight();	//更新父结点及其祖先高度

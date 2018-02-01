@@ -26,6 +26,7 @@ public class GroupTop3 {
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		
 		JavaRDD<String> lines = sc.textFile("file:///D:/大数据/spark/Spark深入剖析/第一章：Spark核心编程/资料/第40讲-Spark核心编程：高级编程之topn/score.txt");
+	 
 		
 		JavaPairRDD<String, Integer> pairs = lines.mapToPair(
 				
@@ -46,6 +47,7 @@ public class GroupTop3 {
 		
 		JavaPairRDD<String, Iterable<Integer>> top3Score = groupedPairs.mapToPair(
 				
+				//第二个参数为什么不和call的返回值参数一样?
 				new PairFunction<Tuple2<String,Iterable<Integer>>, String, Iterable<Integer>>() {
 
 					private static final long serialVersionUID = 1L;

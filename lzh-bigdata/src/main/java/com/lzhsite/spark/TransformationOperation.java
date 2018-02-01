@@ -436,7 +436,7 @@ public class TransformationOperation {
 		JavaPairRDD<Integer, String> students = sc.parallelizePairs(studentList);
 		JavaPairRDD<Integer, Integer> scores = sc.parallelizePairs(scoreList);
 		
-		// cogroup与join不同
+		// 当出现相同Key时, join会出现笛卡尔积, 而cogroup的处理方式不同
 		// 相当于是，一个key join上的所有value，都给放到一个Iterable里面去了 
 		// cogroup，不太好讲解，希望大家通过动手编写我们的案例，仔细体会其中的奥妙
 		JavaPairRDD<Integer, Tuple2<Iterable<String>, Iterable<Integer>>> studentScores = 

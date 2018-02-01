@@ -26,6 +26,7 @@ public class Top3 {
 	
 		JavaRDD<String> lines = sc.textFile("file:///D:/大数据/spark/Spark深入剖析/第一章：Spark核心编程/资料/第40讲-Spark核心编程：高级编程之topntop.txt");
 		
+		//转化为map的RDD是为了调用sortByKey
 		JavaPairRDD<Integer, String> pairs = lines.mapToPair(
 				
 				new PairFunction<String, Integer, String>() {
@@ -39,10 +40,13 @@ public class Top3 {
 					
 				});
 		
+		//降序排
 		JavaPairRDD<Integer, String> sortedPairs = pairs.sortByKey(false);
-		
+		//转回单个元素的RDD
 		JavaRDD<Integer> sortedNumbers = sortedPairs.map(
 				
+				
+				//第一个参数是入参，第二个是返回值
 				new Function<Tuple2<Integer,String>, Integer>() {
 
 					private static final long serialVersionUID = 1L;

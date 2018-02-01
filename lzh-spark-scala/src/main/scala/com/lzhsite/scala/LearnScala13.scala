@@ -48,6 +48,7 @@ object LearnScala13 {
 
   //4.编写一个函数，接受一个字符串的集合和一个字符串到整型的映射，返回整型集合
   def execise4(arr:Array[String],map:Map[String,Integer]):Array[Integer] = {
+    //arr过滤掉了map中不包含的key
     val filterArr:Array[String] = arr.filter(map.contains(_))
     val flatRtn = filterArr.flatMap(word=>{
       map.get(word)

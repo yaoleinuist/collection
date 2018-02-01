@@ -21,6 +21,7 @@
 		<scala.binary.version>2.11</scala.binary.version>
 		<spark.version>1.6.3</spark.version>
 		<hadoop.version>2.5.0</hadoop.version>
+	    <hive.version>0.13.1</hive.version>
 	</properties>
 
 	<dependencies>
@@ -151,6 +152,19 @@
 			<version>0.3</version>
 		</dependency>
 		<!-- Zookeeper 用于分布式服务管理 end -->
+ 
+ 
+ 		<!-- Hive Client -->
+		<dependency>
+			<groupId>org.apache.hive</groupId>
+			<artifactId>hive-jdbc</artifactId>
+			<version>${hive.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hive</groupId>
+			<artifactId>hive-exec</artifactId>
+			<version>${hive.version}</version>
+		</dependency>
  
 	</dependencies>
 	<build>

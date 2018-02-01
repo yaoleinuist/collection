@@ -10,7 +10,11 @@ import com.lzhsite.technology.algoritom.dataSructure.StackSLinked;
 import com.lzhsite.technology.algoritom.dataSructure.strategy.DefaultStrategy;
 import com.lzhsite.technology.algoritom.dataSructure.strategy.Strategy;
 
-//遍历二叉树
+/**
+ * 二叉树
+ * @author lzhcode
+ *
+ */
 public class BinaryTreeLinked implements BinTree {
 	protected BinTreeNode root;
 	protected Strategy strategy;
