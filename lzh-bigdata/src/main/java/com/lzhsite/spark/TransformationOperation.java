@@ -1,5 +1,6 @@
 package com.lzhsite.spark;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.Function2;
+import org.apache.spark.api.java.function.PairFlatMapFunction;
 import org.apache.spark.api.java.function.VoidFunction;
 
 import scala.Tuple2;
@@ -24,14 +26,14 @@ import scala.Tuple2;
 public class TransformationOperation {
 
 	public static void main(String[] args) {
-		// map();
+	    // map();
 		// filter();
-		// flatMap();
+	    flatMap();
 		// groupByKey();
 		// reduceByKey();
 		// sortByKey();
 		// join();
-		cogroup();
+		//cogroup();
 	}
 	
 	/**
@@ -150,8 +152,8 @@ public class TransformationOperation {
 	private static void flatMap() {
 		// 创建SparkConf
 		SparkConf conf = new SparkConf()
-				.setAppName("flatMap")  
-				.setMaster("local");  
+				.setAppName("flatMap")
+				.setMaster("local");
 		// 创建JavaSparkContext
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		
@@ -180,6 +182,45 @@ public class TransformationOperation {
 			}
 			
 		});
+		
+		
+		/** 
+         * mappartition 
+         * rdd的mapPartitions是map的一个变种，它们都可进行分区的并行处理。两者的主要区别是调用的粒度不一样： 
+         * map的输入变换函数是应用于RDD中每个元素，而mapPartitions的输入函数是应用于每个分区。
+         * 也就是把每个分区中的内容作为整体来处理的。 
+         * 
+         */  
+		JavaRDD<String> mappartition=lines.mapPartitions(new FlatMapFunction<Iterator<String>, String>() {  
+            ArrayList<String> results = new ArrayList<String>();  
+  
+            @Override  
+            public Iterable<String> call(Iterator<String> s) throws Exception {  
+                while (s.hasNext()) {  
+                    results.addAll(Arrays.asList(s.next().split(":")));  
+                }  
+                return results;  
+            }  
+        });//.saveAsTextFile("/Users/luoluowushengmimi/Documents/result");  
+  
+        /** 
+         * flatMapToPair 
+         * 操作1：同map函数一样：对每一条输入进行指定的操作，然后为每一条输入返回一个key－value对象 
+         * 操作2：最后将所有key－value对象合并为一个对象 Iterable<Tuple2<String, String>> 
+         * 
+         */  
+  
+        JavaPairRDD<String,String> pair=lines.flatMapToPair(new PairFlatMapFunction<String, String, String>() {  
+  
+            @Override  
+            public Iterable<Tuple2<String, String>> call(String s) throws Exception {  
+                String[] temp=s.split(":");  
+                ArrayList<Tuple2<String,String>> list=new ArrayList<Tuple2<String,String>>();  
+                list.add(new Tuple2<String,String>(temp[0],temp[1]));  
+                return list;  
+            }  
+        });  
+		
 		
 		// 打印新的RDD
 		words.foreach(new VoidFunction<String>() {
