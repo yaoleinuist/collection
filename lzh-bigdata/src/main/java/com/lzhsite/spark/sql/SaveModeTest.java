@@ -16,7 +16,7 @@ public class SaveModeTest {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		SparkConf conf = new SparkConf()   
-				.setAppName("SaveModeTest");
+				.setAppName("SaveModeTest").setMaster("local");  
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		SQLContext sqlContext = new SQLContext(sc);
 		

@@ -16,12 +16,14 @@ import org.apache.spark.sql.hive.HiveContext;
  * 将hive-site.xml拷贝到spark/conf目录下，将mysql connector拷贝到spark/lib目录下
  */
 public class HiveDataSource {
-
+ 
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
-		// 首先还是创建SparkConf
+		// 首先还是创建SparkConf,本地调试时 Could not read 'yarn-version-info.properties'
 		SparkConf conf = new SparkConf()
-				.setAppName("HiveDataSource").setMaster("local");
+				.setAppName("HiveDataSource").setMaster("local")
+				.set("spark.sql.hive.metastore.version", "0.13.1") 
+				.set("spark.sql.hive.metastore.jars", "F://tool/hive-0.13.1-cdh5.3.6/lib/*");
 		// 创建JavaSparkContext
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		// 创建HiveContext，注意，这里，它接收的是SparkContext作为参数，不是JavaSparkContext
@@ -58,7 +60,7 @@ public class HiveDataSource {
 		
 		// 接着将DataFrame中的数据保存到good_student_infos表中
 		hiveContext.sql("DROP TABLE IF EXISTS good_student_infos");  
-		goodStudentsDF.saveAsTable("good_student_infos");  
+	    goodStudentsDF.saveAsTable("good_student_infos");  
 		
 		// 第四个功能，可以用table()方法，针对hive表，直接创建DataFrame
 		

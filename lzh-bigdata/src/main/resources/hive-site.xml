@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+ 
+<configuration>
+	<property>  <!--连接地址，需要改主机名-->
+		  <name>javax.jdo.option.ConnectionURL</name>
+		  <value>jdbc:mysql://hadoop.senior02:3306/metastore?createDatabaseIfNotExist=true</value>
+	</property>
+	<property> <!--驱动-->
+		  <name>javax.jdo.option.ConnectionDriverName</name>
+		  <value>com.mysql.jdbc.Driver</value>
+	</property>
+	<property><!--mysql用户名-->
+		  <name>javax.jdo.option.ConnectionUserName</name>
+		  <value>root</value>
+		</property>
+	<property><!--mysql密码，以你自己的为准-->
+		  <name>javax.jdo.option.ConnectionPassword</name>
+		  <value>123456..</value>
+	</property>
+	<property>	<!--定义显示数据库名称和列名-->
+	  <name>hive.cli.print.header</name>
+	  <value>true</value>
+	</property>
+	<property>
+	  <name>hive.cli.print.current.db</name>
+	  <value>true</value>
+	</property>	
+ 
+	
+	<!--126行，指明存放metastore的mysql所在的机器号-->
+    <property>  
+	  <name>hive.metastore.uris</name>
+	  <value>thrift://hadoop.senior02:9083</value>
+	</property> 
+	
+	<!--Hiveserver2-->
+	<property>	<!--2196行，不变,端口若冲突再修改-->
+	  <name>hive.server2.thrift.port</name>
+	  <value>10000</value>
+	</property>
+	<property>	<!--2203行，安装hive的机器，并作为server端-->
+	  <name>hive.server2.thrift.bind.host</name>
+	  <value>hadoop.senior02</value>
+	</property>
+	<property>	<!--2185行，bug，要把5000L改为5000-->
+	  <name>hive.server2.long.polling.timeout</name>
+	  <value>5000</value>
+	</property>
+	<!--Hive2.0才有的WEBUI的配置-->
+	<!--
+	<property>
+		<name>hive.server2.webui.host</name>
+		<value>hadoop.senior02</value>
+    </property>
+	<property>
+		<name>hive.server2.webui.port</name>
+		<value>10002</value>
+	</property>-->
+</configuration>
