@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzhsite.dao.OrderMapper">
+    <resultMap id="baseResultMap" type="com.lzhsite.entity.Order">
+        <result column="order_id" property="orderId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <sql id="baseColumnList">
+        order_id,
+        user_id,
+        status
+    </sql>
+
+    <select id="getSum" resultType="int">
+        SELECT SUM(t.order_id) orderSum FROM `t_order` t
+    </select>
+
+   
+    
+    <delete id="deleteAll">
+        DELETE FROM `t_order`
+    </delete>
+    
+    <select id="selectById" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM `t_order`
+        WHERE `order_id` = #{orderId} AND `user_id` = #{userId}
+    </select>
+    
+    <select id="selectAll" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM `t_order`
+    </select>
+
+    <select id="selectLike" resultMap="baseResultMap">
+        SELECT * FROM `t_order` t WHERE t.`status` LIKE CONCAT('%',#{status},'%') ORDER BY order_id DESC
+    </select>
+
+    <select id="selectByUserId" resultMap="baseResultMap">
+        SELECT * FROM `t_order` t WHERE t.`user_id` = #{id}
+    </select>
+
+    <insert id="batchInsert">
+        INSERT INTO `t_order`(
+        <include refid="baseColumnList"/>
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.orderId,jdbcType=INTEGER},
+            #{item.userId,jdbcType=INTEGER},
+            #{item.status,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+</mapper>

@@ -11,4 +11,5 @@
 	 <import resource="classpath*:spring/spring-es.xml" />
 	 <import resource="classpath*:spring/spring-infrastructure.xml" />
 	 <import resource="classpath*:spring/spring-websocket.xml" />
+	 <import resource="classpath*:spring/spring-shardingContext.xml" />
 </beans>

@@ -27,7 +27,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//@Component @Service @Repository @Controller
+//@Component、@Repository   @Service、@Controller
+//看字面含义，很容易却别出其中三个：
+//@Controller   控制层，就是我们的action层
+//@Service        业务逻辑层，就是我们的service或者manager层
+//@Repository  持久层，就是我们常说的DAO层
+//而@Component  （字面意思就是组件），它在你确定不了事哪一个层的时候使用。
+//其实，这四个注解的效果都是一样的，spring都会把它们当做需要注入的Bean加载在上下文中；
+//但是在项目中，却建议你严格按照除Componen的其余三个注解的含义使用在项目中。这对分层结构的web架构很有好处！！
+
 @Service
 public class SeckillServiceImpl implements SeckillService {
 	// 日志对象

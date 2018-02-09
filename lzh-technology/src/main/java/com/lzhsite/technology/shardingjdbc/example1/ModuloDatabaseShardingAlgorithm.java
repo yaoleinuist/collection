@@ -1,4 +1,4 @@
-package com.lzhsite.technology.shardingjdbc;
+package com.lzhsite.technology.shardingjdbc.example1;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;

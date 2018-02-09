@@ -35,7 +35,7 @@
     <bean id="exceptionDefinitions" class="com.lzhsite.core.exception.ExceptionDefinitions" />
     
     <bean id="sessionService" class="com.lzhsite.service.SessionService"></bean>
-    <bean id="redisLimiter"   class="com.lzhsite.core.limiter.RedisLimiter"></bean>
+    <bean id="redisLimiter"   class="com.lzhsite.core.limiter.RedisLimiter"  init-method="init"/></bean>
         
     <bean id="dozerMapper" class="org.dozer.DozerBeanMapper">
     <property name="mappingFiles">

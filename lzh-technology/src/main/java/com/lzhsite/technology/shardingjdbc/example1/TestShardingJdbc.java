@@ -1,4 +1,4 @@
-package com.lzhsite.technology.shardingjdbc;
+package com.lzhsite.technology.shardingjdbc.example1;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
