@@ -53,9 +53,8 @@ public class TestClassLoader {
 	 * ClassLoader的加载目录下（JAVA_HOME/jre/lib/ext），然后重新运行这个程序，得到的结果会是什么样呢？ 打印结果：
 	 * sun.misc.Launcher$ExtClassLoader@f2a0b8e null 打印结果分析：
 	 * 为什么第一行的结果是ExtClassLoader呢？
-	 * 因为ClassLoader的委托模型机制，当我们要用ClassLoaderTest.class这个类的时候，AppClassLoader在试图加载之前，先委托给Bootstrcp
-	 * ClassLoader，Bootstracp
-	 * ClassLoader发现自己没找到，它就告诉ExtClassLoader，兄弟，我这里没有这个类，你去加载看看，然后Extension
+	 * 因为ClassLoader的委托模型机制，当我们要用ClassLoaderTest.class这个类的时候，AppClassLoader在试图加载之前，先委托给Bootstrcp  ClassLoader，
+	 * Bootstracp  ClassLoader发现自己没找到，它就告诉ExtClassLoader，兄弟，我这里没有这个类，你去加载看看，然后Extension
 	 * ClassLoader拿着这个类去它指定的类路径（JAVA_HOME/jre/lib/ext）试图加载，唉，它发现在ClassLoaderTest.jar这样一个文件中包含ClassLoaderTest.class这样的一个文件，然后它把找到的这个类加载到内存当中，并生成这个类的Class实例对象，最后把这个实例返回。所以ClassLoaderTest.class的类加载器是ExtClassLoader。
 	 * 第二行的结果为null，是因为ExtClassLoader的父类加载器是Bootstrap ClassLoader。
 	 */
@@ -105,7 +104,7 @@ public class TestClassLoader {
 			}
 		};
 
-		Object obj = myLoader.loadClass("com.technology.jvm.classLoader.NetClassLoaderSimple").newInstance();
+		Object obj = myLoader.loadClass("com.lzhsite.technology.jvm.classLoader.NetClassLoaderSimple").newInstance();
 		System.out.println(obj.getClass());
 		System.out.println(obj instanceof NetClassLoaderSimple);
 	}
@@ -129,7 +128,7 @@ public class TestClassLoader {
 	public void Test4() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
 		
         String rootUrl = "http://localhost:8080/lzh-technology/classes";  
-        String className = "com.technology.jvm.classLoader.NetClassLoaderSimple";  
+        String className = "com.lzhsite.technology.jvm.classLoader.NetClassLoaderSimple";  
         NetworkClassLoader ncl1 = new NetworkClassLoader(rootUrl);  
         Class<?> clazz1 = ncl1.loadClass(className);  
         Object obj1 = clazz1.newInstance();  

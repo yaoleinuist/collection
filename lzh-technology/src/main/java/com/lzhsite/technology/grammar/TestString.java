@@ -39,7 +39,7 @@ public class TestString {
 	@Test
 	public void test3() {
 		/**
-		 *  String s = newString("1")，生成了常量池中的“1” 和堆空间中的字符串对象。
+		 *  String s = new String("1")，生成了常量池中的“1” 和堆空间中的字符串对象。
 		 *  s.intern()，这一行的作用是s对象去常量池中寻找后发现"1"已经存在于常量池中了。
 		 *	String s2 = "1"，这行代码是生成一个s2的引用指向常量池中的“1”对象。
 		 *	结果就是 s 和 s2 的引用地址明显不同。因此返回了false。
@@ -52,7 +52,7 @@ public class TestString {
 		 *  但是发现已经有这个对象了，此时也就是指向 s3 引用对象的一个引用。因此s3 == s4返回了true。
 		 */
 		String s = new String("1");  
-		s.intern();  
+		//s.intern();  
 		String s2 = "1";  
 		System.out.println(s == s2);  
 		  
