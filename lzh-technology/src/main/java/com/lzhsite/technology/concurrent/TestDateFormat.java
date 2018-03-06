@@ -3,6 +3,7 @@ package com.lzhsite.technology.concurrent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+
 //http://blog.csdn.net/zdp072/article/details/41044059
 /*
  * 创建三个进程， 使用静态成员变量SimpleDateFormat的parse和format方法，
@@ -19,9 +20,8 @@ import java.util.Locale;
         解决方案 :使用ThreadLocal: 每个线程都将拥有自己的SimpleDateFormat对象副本。
  **/
 
-
 public class TestDateFormat extends Thread {
-	
+
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy", Locale.US);
 	private static String date[] = { "01-Jan-1999", "01-Jan-2000", "01-Jan-2001" };
 
@@ -33,7 +33,12 @@ public class TestDateFormat extends Thread {
 				public void run() {
 					try {
 						while (true) {
+
 							String str1 = date[temp];
+
+							//Date date = DateUtil.parse(str1);
+							//String str2 = DateUtil.format(date);
+
 							String str2 = sdf.format(sdf.parse(str1));
 							System.out.println(Thread.currentThread().getName() + ", " + str1 + "," + str2);
 							if (!str1.equals(str2)) {

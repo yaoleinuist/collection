@@ -23,6 +23,7 @@ public class TestThreadPoolExecutor2 {
 	private static int produceTaskSleepTime = 2;
 	private static int produceTaskMaxNumber = 10;
 
+	//超过最大线程数时会放在队列里
 	public static void main(String[] args) {
 		// 构造一个线程池
 		ThreadPoolExecutor threadPool = new ThreadPoolExecutor(2, 4, 3, TimeUnit.SECONDS,

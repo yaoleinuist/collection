@@ -4,6 +4,7 @@ import org.junit.Test;
 
 public class TestString {
 
+
 	@Test
 	public void test1() {
 
@@ -85,5 +86,16 @@ public class TestString {
 		System.out.println(str1 == "SEUCalvin");   
  
 	}
-
+	
+	@Test
+	public void test5(){
+		String a="abc";
+		String b="abc";
+		String c=new String("abc");
+		String d="ab"+"c";
+		
+		
+		System.out.println((a==b)+" "+(b==c)+" "+(a==d));
+	}
+	
 }
