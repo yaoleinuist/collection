@@ -126,6 +126,9 @@ public class TestLabmda {
 		users.add(new User(2, "张五", 19, "f"));
 		users.add(new User(3, "老张", 50, "f"));
 
+		//提取集合中每个对象的属性
+		List<String> list=users.stream().map(User::getName).collect(Collectors.toList());
+		
 		//转map
 		Map<Integer, Integer> userMap = users.stream().collect(Collectors.toMap(User::getId, item -> item.getId()));
 		System.out.println(userMap.get(5));

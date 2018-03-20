@@ -2,6 +2,7 @@ package com.lzhsite.zookeeper.lock;
 
 import java.net.InetAddress;
 
+//https://segmentfault.com/a/1190000012185813
 public class Main {
 
 	/**

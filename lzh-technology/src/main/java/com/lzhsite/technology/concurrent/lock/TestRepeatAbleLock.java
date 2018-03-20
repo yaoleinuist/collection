@@ -1,4 +1,4 @@
-package com.lzhsite.technology.concurrent;
+package com.lzhsite.technology.concurrent.lock;
 /**
  * 测试可重入锁
  * @author Administrator

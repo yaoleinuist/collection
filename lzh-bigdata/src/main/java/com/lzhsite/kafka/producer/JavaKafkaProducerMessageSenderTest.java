@@ -17,7 +17,17 @@ public class JavaKafkaProducerMessageSenderTest {
 
     /**
      * 测试自定义数据分区器的JavaProducer的实现
-     *
+     * 
+     * 1、Kafka的消费并行度依赖Topic配置的分区数，如分区数为10，那么最多10台机器来并行消费（每台机器只能开启一个线程），或者一台机器消费（10个线程并行消费）。即消费并行度和分区数一致。
+     * 2、（1）如果指定了某个分区,会只讲消息发到这个分区上
+	 *	   （2）如果同时指定了某个分区和key,则也会将消息发送到指定分区上,key不起作用 
+	 *   （3）如果没有指定分区和key,那么将会随机发送到topic的分区中
+	 *	   （4）如果指定了key,那么将会以hash<key>的方式发送到分区中 
+	 *	           
+     * 编写一个Java的Kafka数据生产者出来，要求：
+	 *   1. 支持多线程写出数据
+	 *   2. 给定规则进行数据分区
+	 *   3. 采用异步的方式进行数据传递
      * @throws InterruptedException
      */
     @Test
@@ -26,6 +36,7 @@ public class JavaKafkaProducerMessageSenderTest {
         String topicName = "beifeng0";
         String brokerList = "hadoop.senior02:9092,hadoop.senior02:9093,hadoop.senior02:9094,hadoop.senior02:9095";
         String serilizerClassName = "kafka.serializer.StringEncoder";
+        //这样就实现了kafka生产者随机分区提交数据
         String partitionerClassName = "com.lzhsite.kafka.producer.JavaKafkaProducerePartitioner";
         JavaKafkaProducer<String, String> producer = new JavaKafkaProducer<String, String>(topicName, brokerList, serilizerClassName, partitionerClassName);
 

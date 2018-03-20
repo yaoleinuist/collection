@@ -35,7 +35,8 @@ YES
 
 */
 public class 迷宫 {
-
+    //1访问过的flage不能再访问，x不能访问,遇到D,周围都是X和访问过的flage组合时break
+	//2break时depth取最小值
 	
 	int migon[][]={{1,1,0,1,1},
 					{1,1,0,1},

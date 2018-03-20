@@ -146,8 +146,8 @@ public class JavaKafakHighLevelConsumer {
             this.stream = stream;
             this.seqNo = seqNo;
             this.topicName = topicName;
-        }
-
+        }  
+        //在消费方面得注意，这里得遍历所有分区，否则还是只消费了一个区
         @Override
         public void run() {
             // 1. 将stream流转换为一个迭代器对象

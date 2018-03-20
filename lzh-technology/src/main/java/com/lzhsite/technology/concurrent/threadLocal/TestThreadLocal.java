@@ -1,4 +1,4 @@
-package com.lzhsite.technology.concurrent;
+package com.lzhsite.technology.concurrent.threadLocal;
 
 import java.util.HashMap;
 /**
