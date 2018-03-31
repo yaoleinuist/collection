@@ -16,15 +16,18 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<junit.version>4.11</junit.version>
 		<hbase.version>0.98.7-hadoop2</hbase.version>
 		<commons.math3.version>3.4.1</commons.math3.version>
 		<scala.binary.version>2.11</scala.binary.version>
 		<spark.version>1.6.3</spark.version>
 		<hadoop.version>2.5.0</hadoop.version>
-	    <hive.version>0.13.1</hive.version>
+		<hive.version>0.13.1</hive.version>
+		<zookeeper.version>3.4.5</zookeeper.version>
 	</properties>
 
 	<dependencies>
+		 
 		<!-- spark Dependency Begin -->
 		<dependency>
 			<groupId>org.apache.spark</groupId>
@@ -38,8 +41,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
-		
+
+
 		<dependency>
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-streaming_${scala.binary.version}</artifactId>
@@ -112,15 +115,15 @@
 		<!-- spark Dependency End -->
 
 
-        
-        <!-- kafka Dependency -->
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka_2.10</artifactId>
-            <version>0.8.2.1</version>
-        </dependency>
-        
-        <!-- hadoop Dependency -->
+
+		<!-- kafka Dependency -->
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.10</artifactId>
+			<version>0.8.2.1</version>
+		</dependency>
+
+		<!-- hadoop Dependency -->
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-client</artifactId>
@@ -132,8 +135,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
-		
+
+
 		<!-- Zookeeper 用于分布式服务管理 -->
 		<dependency>
 			<groupId>org.apache.zookeeper</groupId>
@@ -152,9 +155,9 @@
 			<version>0.3</version>
 		</dependency>
 		<!-- Zookeeper 用于分布式服务管理 end -->
- 
- 
- 		<!-- Hive Client -->
+
+
+		<!-- Hive Client -->
 		<dependency>
 			<groupId>org.apache.hive</groupId>
 			<artifactId>hive-jdbc</artifactId>
@@ -165,7 +168,7 @@
 			<artifactId>hive-exec</artifactId>
 			<version>${hive.version}</version>
 		</dependency>
-		 <dependency>
+		<dependency>
 			<groupId>org.apache.hive</groupId>
 			<artifactId>hive-jdbc</artifactId>
 			<version>${hive.version}</version>
@@ -174,7 +177,7 @@
 	<build>
 		<finalName>lzh-bigdata</finalName>
 		<plugins>
-		 
+
 		</plugins>
 	</build>
 </project>

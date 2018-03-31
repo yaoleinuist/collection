@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lzhsite.core.context.ApplicationContextHelper;
+import com.lzhsite.core.exception.XBusinessException;
 import com.lzhsite.core.exception.XExceptionFactory;
 
 /**
@@ -22,7 +23,7 @@ public class MyBatisBatch {
 
     private static SqlSessionFactory sqlSessionFactory = ApplicationContextHelper.getContext().getBean("sqlSessionFactory", SqlSessionFactory.class);
 
-    public static <T> void doBatch(Class<T> daoClass, Consumer<T> consumer){
+    public static <T> void doBatch(Class<T> daoClass, Consumer<T> consumer) throws XBusinessException{
         Objects.requireNonNull(consumer);
         if (sqlSessionFactory == null) {
             logger.error("无法获取mybatis sqlSessionFactory,请检查mybatis配置");

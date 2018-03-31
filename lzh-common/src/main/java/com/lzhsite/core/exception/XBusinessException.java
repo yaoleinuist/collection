@@ -29,7 +29,6 @@ public class XBusinessException extends XRuntimeException {
     }
 
     public XBusinessException(String xCode, String message, String internalMessage, Throwable throwable) {
-        super(RpcException.BIZ_EXCEPTION, "[" + xCode + "] - " + message + internalMessage, throwable);
         this.message = message;
         this.xCode = xCode;
     }

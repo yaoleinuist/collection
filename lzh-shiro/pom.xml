@@ -15,7 +15,19 @@
 	<name>lzh-shiro Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
- 
+		<!-- shiro -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>1.2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>1.2.5</version>
+		</dependency>
+		<!-- shiro END -->
 	</dependencies>
 	<build>
 		<finalName>lzh-shiro</finalName>

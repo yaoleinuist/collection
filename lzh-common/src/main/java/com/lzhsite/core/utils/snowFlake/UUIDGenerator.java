@@ -3,6 +3,7 @@ package com.lzhsite.core.utils.snowFlake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lzhsite.core.exception.XBusinessException;
 import com.lzhsite.core.exception.XExceptionFactory;
 
 /**
@@ -14,7 +15,7 @@ public class UUIDGenerator {
     private static Long machineId = null;//机器号
     private static SnowFlake snowFlake;
 
-    public static Long getNextId(){
+    public static Long getNextId() throws XBusinessException{
         SnowFlake snowFlake = getInstance();
         return snowFlake.nextId();
     }
@@ -34,8 +35,9 @@ public class UUIDGenerator {
     /**
      * 单例SnowFlake
      * @return
+     * @throws XBusinessException 
      */
-    public static synchronized SnowFlake getInstance() {
+    public static synchronized SnowFlake getInstance() throws XBusinessException {
         if (snowFlake == null) {
             if(null == machineId){
                 throw XExceptionFactory.create("WEMAILL_SERIAL_1001");
@@ -46,7 +48,7 @@ public class UUIDGenerator {
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws XBusinessException{
         UUIDGenerator.setMachineId(1l);
         for (int i = 0; i < (1 << 20); i++) {
             System.out.println(UUIDGenerator.getNextId());

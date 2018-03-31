@@ -6,13 +6,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.junit.Test;
+
 /**
  * 两个HashMap里面的内容是否相等
+ * 
  * @author lzhcode
  *
  */
 public class TestMap {
- 
+
 	@Test
 	public void test1() {
 
@@ -21,15 +23,14 @@ public class TestMap {
 		map1.put("1", 1);
 		map1.put("2", 2);
 		map1.put("3", 3);
- 
-		
+
 		map2.put("1", 1);
 		map2.put("2", 2);
 		map2.put("3", 3);
 		map2.put("4", 4);
-		Boolean b=true;
+		Boolean b = true;
 
-		if(map1.values().size()!=map2.values().size()){
+		if (map1.values().size() != map2.values().size()) {
 			b = false;
 		}
 		Iterator<Entry<String, Integer>> it1 = map1.entrySet().iterator();
@@ -44,6 +45,28 @@ public class TestMap {
 		System.out.println(b);
 
 	}
-	
-	 
+
+	@Test
+	public void test2() {
+		// https://www.cnblogs.com/cxxjohnson/p/6258742.html
+		// https://blog.csdn.net/lzkkevin/article/details/6667958
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("key1", 1);
+
+		Map<String, Integer> mapFirst = new HashMap<String, Integer>();
+		mapFirst.putAll(map); // 只对基本数据类型进行深拷贝，改成objet就出错了
+
+		System.out.println(mapFirst);
+
+		map.put("key2", 2);
+
+		System.out.println(mapFirst);
+		// 如上，输出结果为：
+		// {key1=1}
+		// {key1=1}
+		//有一种方法，是使用序列化的方式来实现对象的深拷贝，但是前提是，对象必须是实现了Serializable接口才可以，Map本身没有实现 Serializable 这个接口，所以这种方式不能序列化Map，也就是不能深拷贝Map。但是HashMap是可以的，因为它实现了 Serializable。下面的方式，基于HashMap来讲，非Map的拷贝。
+
+		//具体实现如下：com.lzhsite.core.utils.CloneUtils 
+	}
+
 }

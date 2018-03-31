@@ -6,7 +6,6 @@ import java.util.Date;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.log4j.Logger;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -128,9 +127,7 @@ public class ElasticSearchController {
 
             Date date = new Date();
             imjMicroPoint.setCreateTime(sdf.format(date));
-            imjMicroPoint.setCreateDt(DateFormart.convertToYYYYMMDD(date));
-            imjMicroPoint.setSessionId((String) SecurityUtils.getSubject().getSession().getId());
-
+   
 
         } catch (Exception e) {
             logger.error("初始化采集埋点数据失败：" + e.getMessage());
