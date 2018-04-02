@@ -1,9 +1,9 @@
 package com.lzhsite.spring.web.controller;
 
 import com.lzhsite.spring.util.Result;
-import com.lzhsite.spring.web.config.DataSourceCarProperties;
-import com.lzhsite.spring.web.entity.car.MessagePackageNo;
-import com.lzhsite.spring.web.entity.test.User;
+import com.lzhsite.spring.web.config.DataSourceDB0Properties;
+import com.lzhsite.spring.web.entity.db0.MessagePackageNo;
+import com.lzhsite.spring.web.entity.db1.User;
 import com.lzhsite.spring.web.service.group.IndexService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class TransactionalController {
     private IndexService indexService; // 可以测试分布式事务
 
     @Autowired
-    private DataSourceCarProperties dataSourceCarProperties; // 自定义属性映射到POJO对象
+    private DataSourceDB0Properties dataSourceDB1Properties; // 自定义属性映射到POJO对象
 
     @GetMapping("/index")
     public Result index(){

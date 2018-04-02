@@ -2,6 +2,7 @@ package com.lzhsite.spring.web.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,9 +14,9 @@ import org.springframework.stereotype.Component;
  * @Datetime: 2017/9/28 9:16
  */
 @Component //自动注入
-@ConfigurationProperties(prefix = "spring.datasource.car")
+@ConfigurationProperties(prefix = "spring.datasource.db0")
 @Data
-public class DataSourceCarProperties {
+public class DataSourceDB0Properties {
     private String type;
     private String driverClassName;
     private String url;

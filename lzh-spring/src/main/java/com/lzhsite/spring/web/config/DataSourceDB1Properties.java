@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
  * @Datetime: 2017/9/28 9:16
  */
 @Component //自动注入
-@ConfigurationProperties(prefix = "spring.datasource.test")
+@ConfigurationProperties(prefix = "spring.datasource.db1")
 @Data
-public class DataSourceTestProperties {
+public class DataSourceDB1Properties {
     private String type;
     private String driverClassName;
     private String url;

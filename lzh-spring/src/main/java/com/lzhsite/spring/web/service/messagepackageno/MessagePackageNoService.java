@@ -1,7 +1,7 @@
-package com.lzhsite.spring.web.service.car;
+package com.lzhsite.spring.web.service.messagepackageno;
 
 import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.lzhsite.spring.web.entity.car.MessagePackageNo;
+import com.lzhsite.spring.web.entity.db0.MessagePackageNo;
 
 /**
  * <p>

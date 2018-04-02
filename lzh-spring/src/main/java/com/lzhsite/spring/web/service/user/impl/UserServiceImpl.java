@@ -1,11 +1,11 @@
-package com.lzhsite.spring.web.service.test.impl;
+package com.lzhsite.spring.web.service.user.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lzhsite.spring.web.entity.test.User;
-import com.lzhsite.spring.web.mapper.test.UserMapper;
-import com.lzhsite.spring.web.service.test.UserService;
+import com.lzhsite.spring.web.entity.db1.User;
+import com.lzhsite.spring.web.mapper.db1.user.UserMapper;
+import com.lzhsite.spring.web.service.user.UserService;
 
 /**
  * <p>

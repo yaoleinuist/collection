@@ -1,4 +1,4 @@
-package com.lzhsite.spring.web.entity.test;
+package com.lzhsite.spring.web.entity.db1;
 
 import java.util.Date;
 

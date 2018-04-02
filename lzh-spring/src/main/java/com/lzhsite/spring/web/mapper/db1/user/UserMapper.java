@@ -1,10 +1,10 @@
-package com.lzhsite.spring.web.mapper.test;
+package com.lzhsite.spring.web.mapper.db1.user;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.lzhsite.spring.web.entity.test.User;
+import com.lzhsite.spring.web.entity.db1.User;
 
 /**
  * <p>

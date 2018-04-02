@@ -1,12 +1,12 @@
-package com.lzhsite.spring.web.service.car.impl;
+package com.lzhsite.spring.web.service.messagepackageno.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.lzhsite.spring.web.entity.car.MessagePackageNo;
-import com.lzhsite.spring.web.mapper.car.MessagePackageNoMapper;
-import com.lzhsite.spring.web.service.car.MessagePackageNoService;
+import com.lzhsite.spring.web.entity.db0.MessagePackageNo;
+import com.lzhsite.spring.web.mapper.db0.car.MessagePackageNoMapper;
+import com.lzhsite.spring.web.service.messagepackageno.MessagePackageNoService;
 
 /**
  * <p>
@@ -28,6 +28,7 @@ public class MessagePackageNoServiceImpl  implements MessagePackageNoService {
 	@Override
 	public MessagePackageNo selectOne(Wrapper<MessagePackageNo> eq) {
 		// TODO Auto-generated method stub
+		System.out.println(eq.getSqlSegment());
 		return messagePackageNoMapper.selectOne(eq);
 	}
 }

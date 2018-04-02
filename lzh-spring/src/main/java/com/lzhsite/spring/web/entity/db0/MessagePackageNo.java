@@ -1,4 +1,4 @@
-package com.lzhsite.spring.web.entity.car;
+package com.lzhsite.spring.web.entity.db0;
 
 import java.util.Date;
 

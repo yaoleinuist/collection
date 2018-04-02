@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.lzhsite.spring.web.entity.car.MessagePackageNo;
-import com.lzhsite.spring.web.entity.test.User;
-import com.lzhsite.spring.web.service.car.MessagePackageNoService;
-import com.lzhsite.spring.web.service.test.UserService;
+import com.lzhsite.spring.web.entity.db0.MessagePackageNo;
+import com.lzhsite.spring.web.entity.db1.User;
+import com.lzhsite.spring.web.service.messagepackageno.MessagePackageNoService;
+import com.lzhsite.spring.web.service.user.UserService;
 
 /**
  * @Project: design-pattern
@@ -36,7 +36,8 @@ public class IndexService {
     public void save(MessagePackageNo messagePackageNo, User user) {
         messagePackageNoService.insert(messagePackageNo);
         userService.insert(user);
-        //int i = 4 / 0; // 除0异常,测试事务
+        int i = 4 / 0; // 除0异常,测试事务
+        System.out.println("aaa");
     }
 
     /**

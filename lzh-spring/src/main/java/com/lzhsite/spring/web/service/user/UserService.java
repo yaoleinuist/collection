@@ -1,6 +1,6 @@
-package com.lzhsite.spring.web.service.test;
+package com.lzhsite.spring.web.service.user;
 
-import com.lzhsite.spring.web.entity.test.User;
+import com.lzhsite.spring.web.entity.db1.User;
 
 /**
  * <p>
