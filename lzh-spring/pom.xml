@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.lzhsite</groupId>
-	<artifactId>lzh-spring</artifactId>
+	<artifactId>lzh-springboot-provider</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>lzh-spring</name>
 	<url>http://maven.apache.org</url>
@@ -27,7 +27,7 @@
 		<fastjson.version>1.2.35</fastjson.version>
 		<jsch.version>0.1.54</jsch.version>
 		<hutool-all.version>3.3.2</hutool-all.version>
-    	<junit.version>4.11</junit.version>
+		<junit.version>4.11</junit.version>
 		<!--使用阿里的Druid连接池 -->
 		<druid.version>1.0.24</druid.version>
 		<!--mybatis starter -->
@@ -78,9 +78,9 @@
 			<version>${commons-lang3.version}</version>
 		</dependency>
 		<dependency>
-		       <groupId>com.baomidou</groupId>
-		       <artifactId>mybatis-plus</artifactId>
-		       <version>2.0.1</version> 
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus</artifactId>
+			<version>2.0.1</version>
 		</dependency>
 		<!--lombok jar -->
 		<dependency>
@@ -94,19 +94,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 		<!--springtest -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-        <!-- Spring Boot Dubbo 依赖 -->
-        <dependency>
-            <groupId>io.dubbo.springboot</groupId>
-            <artifactId>spring-boot-starter-dubbo</artifactId>
-            <version>${dubbo-spring-boot}</version>
-        </dependency>
+		<!-- Spring Boot Dubbo 依赖 -->
+		<dependency>
+			<groupId>io.dubbo.springboot</groupId>
+			<artifactId>spring-boot-starter-dubbo</artifactId>
+			<version>${dubbo-spring-boot}</version>
+		</dependency>
 		<!--数据库操作 start -->
 		<!--使用mysql数据库,导入mysql驱动 -->
 		<dependency>
@@ -137,7 +137,8 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
+		
+ 
 	</dependencies>
 
 	<build>

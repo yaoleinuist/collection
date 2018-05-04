@@ -98,4 +98,9 @@ public class TestString {
 		System.out.println((a==b)+" "+(b==c)+" "+(a==d));
 	}
 	
+	@Test
+	public void test6(){
+		String test="270047_XE210SH_CX11_AAA";
+		System.out.println(test.substring(0,test.lastIndexOf("_")));
+	}
 }

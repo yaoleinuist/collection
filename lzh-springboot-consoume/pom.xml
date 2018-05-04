@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.lzhsite</groupId>
+	<artifactId>lzh-springboot-consoume</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>lzh-springboot-consoume</name>
+	<url>http://maven.apache.org</url>
+
+	<parent>
+		<groupId>com.lzhsite</groupId>
+		<artifactId>lzh-springboot</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.lzhsite</groupId>
+			<artifactId>lzh-spirngboot-openapi</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+		<!--分布式事务支持 -->
+<!-- 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jta-atomikos</artifactId>
+		</dependency> -->
+		<!--spring boot只要你在pom中引入了mybatis-spring-boot-starter 他就会默认需要加载数据库相关的配置 -->
+		<!-- mybatis start -->
+	<!--	<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${mybatis-spring-boot-starter.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>-->
+	</dependencies>
+</project>

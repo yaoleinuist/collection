@@ -21,6 +21,8 @@
 				<value>classpath:/props/es.properties</value>
 				<value>classpath:/props/jdbc.properties</value>
 				<value>classpath:/props/redis.properties</value>
+				<value>classpath:/props/log4j.properties</value>
+				<value>classpath:/props/dubbo.properties</value>
 			</array>
 		</property>
 	</bean>

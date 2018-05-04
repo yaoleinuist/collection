@@ -3,7 +3,6 @@
 	<name>lzh-technology</name>
 	<comment></comment>
 	<projects>
-		<project>lzh-fdfs</project>
 		<project>lzh-elasticsearch</project>
 		<project>lzh-common</project>
 	</projects>

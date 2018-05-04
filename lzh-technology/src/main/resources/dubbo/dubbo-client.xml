@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://code.alibabatech.com/schema/dubbo
+           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:consumer check="false" timeout="4000" loadbalance="roundrobin" retries="0" validation="false"
+                    group="${dubbo.consumer.group}" version="${dubbo.consumer.version}"/>
+
+    <!--dubbo消费者服务列表-->
+<!--     <dubbo:reference id="marketIntelligencerDubboService"
+                     interface="com.xkeshi.coupon.apis.market.MarketIntelligencerDubboService" timeout="20000"
+                     retries="0"/> -->
+</beans>
