@@ -39,6 +39,7 @@ import org.elasticsearch.search.SearchHitField;
 import org.elasticsearch.search.SearchHits;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -53,7 +54,7 @@ import com.lzhsite.core.ensure.Ensure;
  * @since 2017-03-29 16:29
  */
 @Component
-public class EsOperateSdk {
+public class EsOperateSdk  implements DisposableBean {
 
     private static Logger logger = LoggerFactory.getLogger(EsOperateSdk.class);
 
@@ -461,4 +462,12 @@ public class EsOperateSdk {
         }
         return fields;
     }
+
+	@Override
+	public void destroy() throws Exception {
+		// TODO Auto-generated method stub
+	    if (client != null) {
+	    	client.close();
+        }
+	}
 }
