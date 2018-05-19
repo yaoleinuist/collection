@@ -144,7 +144,7 @@ public class MultiPortEcho{
 
 
 
-  static public void main( String args[] ) throws Exception {
+  public static  void main( String args[] ) throws Exception {
 
     if (args.length<=0) {
 

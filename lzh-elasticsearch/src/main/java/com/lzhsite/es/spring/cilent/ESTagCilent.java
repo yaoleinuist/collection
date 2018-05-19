@@ -324,6 +324,13 @@ public class ESTagCilent {
 	 * @throws Exception
 	 */
 	public void testTwoAggString() throws Exception {
+		
+		
+		// Select @timestamp,count(@timestamp)
+		// from logs where timestamp in (now(),adddate(now(),123)) 
+		// Group by @timestamp,module
+		
+		
 		// 构造search请求
 		SearchRequestBuilder search = esOperateSdk.esClient().prepareSearch("userlog*").setTypes("logs");
 		search.setQuery(QueryBuilders.queryStringQuery(
@@ -335,6 +342,7 @@ public class ESTagCilent {
 		dateagg.format("yyyy-MM-dd HH"); // 格式化时间
 		dateagg.timeZone("Asia/Shanghai");// 设置时区，注意如果程序部署在其他国家使用时，使用Joda-Time来动态获取时区
 										 // new DateTime().getZone()
+
 
 		// 二级分组字段
 		TermsBuilder twoAgg = AggregationBuilders.terms("stragg").field("module");
@@ -398,6 +406,9 @@ public class ESTagCilent {
 		//总数：9
 		System.out.println("总数：" + sum);
 	}
+	
+	 
+
 
 	/***
 	 * 每一天的select count(distinct(actid)) from talbe group by date

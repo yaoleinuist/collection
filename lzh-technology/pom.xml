@@ -36,7 +36,74 @@
 			<groupId>com.lzhsite</groupId>
 			<artifactId>lzh-common</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.lzhsite.component</groupId>
+			<artifactId>lzh-fdfs</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.lzhsite.component</groupId>
+			<artifactId>lzh-elasticsearch</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.lzhsite</groupId>
+			<artifactId>lzh-common</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>3.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-annotation</artifactId>
+            <version>3.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-graphite</artifactId>
+            <version>3.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>1.1.10</version>
+        </dependency>
+		<dependency>
+			<groupId>io.reactivex.rxjava2</groupId>
+			<artifactId>rxjava</artifactId>
+			<version>2.1.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
+			<version>3.3.6</version>
+		</dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-core</artifactId>
+			<version>3.1.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<version>3.1.2.RELEASE</version>
+		</dependency>
+		        <dependency>
+            <groupId>io.projectreactor.ipc</groupId>
+            <artifactId>reactor-netty</artifactId>
+            <version>0.7.2.RELEASE</version>
+        </dependency>
 
 	</dependencies>
 
@@ -65,38 +132,4 @@
 		</plugins>
 	</build>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.lzhsite.component</groupId>
-				<artifactId>lzh-fdfs</artifactId>
-				<version>1.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>com.lzhsite.component</groupId>
-				<artifactId>lzh-elasticsearch</artifactId>
-				<version>1.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>com.lzhsite</groupId>
-				<artifactId>lzh-common</artifactId>
-				<version>1.0-SNAPSHOT</version>
-			</dependency>
-			<!-- shiro -->
-			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-core</artifactId>
-				<version>1.2.5</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-web</artifactId>
-				<version>1.2.5</version>
-			</dependency>
-			<!-- shiro END -->
-
-
-		</dependencies>
-	</dependencyManagement>
 </project>

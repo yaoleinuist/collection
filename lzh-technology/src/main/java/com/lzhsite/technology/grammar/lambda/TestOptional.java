@@ -1,6 +1,7 @@
 package com.lzhsite.technology.grammar.lambda;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import org.junit.Test;
@@ -35,6 +36,26 @@ public class TestOptional {
 				.findFirst();
 		String alternate = longest.orElse("Nimrod");
 		System.out.println(alternate); // prints out "Nimrod"
+	}
+	
+	@Test
+	public void test3() {
+		Optional<Integer> optional1 = Optional.ofNullable(1);  
+		Optional<Integer> optional2 = Optional.ofNullable(null);  
+ 
+		System.out.println(optional2.orElse(1)); 
+	 
+		// isPresent判断值是否存在  
+		System.out.println(optional1.isPresent());  
+		
+ 
+		// null,不调用Consumer  
+		optional2.ifPresent(new Consumer<Integer>() {  
+		    @Override  
+		    public void accept(Integer t) {  
+		        System.out.println("value is " + t);  
+		    }  
+		});  
 	}
 
 }
