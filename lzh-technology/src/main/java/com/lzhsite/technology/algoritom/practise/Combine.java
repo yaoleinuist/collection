@@ -12,7 +12,7 @@ public class Combine {
 	//纵向看，1、2、3刚好是一个for循环，初值为5，终值为m  
 	//横向看，该问题为一个前i-1个中选m-1的递归。  
 
-	
+	private static int count=0;
 	
 	static void  comb(int arr[], int n, int m, int out[], int outLen)  
 	{  
@@ -21,6 +21,7 @@ public class Combine {
 	        for (int j = 0; j < outLen; j++)  
 	        	System.out.print(out[j]+" ");
 	        System.out.println();
+	        count++;
 	        return;
 	    }  
 	  
@@ -35,5 +36,6 @@ public class Combine {
 	  int arr[]={0,1,2,3,4,5,6,7,8,9};
 	  int out[]=new int[3];
 	  comb(arr,10,3,out,3);
+	  System.out.println(count);
 	}
 }

@@ -1,4 +1,4 @@
-package com.lzhsite.technology.algoritom;
+package com.lzhsite.technology.algoritom.practise;
 
 //把JSON数据格式化输出到控制台
 
