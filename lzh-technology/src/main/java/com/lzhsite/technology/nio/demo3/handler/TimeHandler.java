@@ -1,12 +1,12 @@
-package com.lzhsite.technology.grammar.reactor.nio.handler;
+package com.lzhsite.technology.nio.demo3.handler;
 
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import com.lzhsite.technology.grammar.reactor.nio.Request;
-import com.lzhsite.technology.grammar.reactor.nio.Response;
-import com.lzhsite.technology.grammar.reactor.nio.event.EventAdapter;
+import com.lzhsite.technology.nio.demo3.Request;
+import com.lzhsite.technology.nio.demo3.Response;
+import com.lzhsite.technology.nio.demo3.event.EventAdapter;
 
 public class TimeHandler extends EventAdapter {
 	public TimeHandler() {

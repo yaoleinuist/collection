@@ -6,7 +6,8 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-/*1、类说明：
+/*
+1、类说明：
 
 一个同步辅助类，它允许一组线程互相等待，直到到达某个公共屏障点 (common barrier point)。
 在涉及一组固定大小的线程的程序中，这些线程必须不时地互相等待，此时 CyclicBarrier 很有用。
@@ -14,7 +15,8 @@ import java.util.concurrent.Executors;
 
 2、使用场景：
 
-需要所有的子任务都完成时，才执行主任务，这个时候就可以选择使用CyclicBarrier。*/
+需要所有的子任务都完成时，才执行主任务，这个时候就可以选择使用CyclicBarrier
+*/
 public class TestCyclicBarrier {
 
 	public static void main(String[] args) throws IOException, InterruptedException {

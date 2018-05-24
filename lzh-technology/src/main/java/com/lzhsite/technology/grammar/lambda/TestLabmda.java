@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.apache.commons.lang.math.RandomUtils;
 import org.junit.Test;
@@ -126,28 +126,83 @@ public class TestLabmda {
 		users.add(new User(2, "张五", 19, "f"));
 		users.add(new User(3, "老张", 50, "f"));
 
-		//提取集合中每个对象的属性
-		List<String> list=users.stream().map(User::getName).collect(Collectors.toList());
-		
-		//转map
+		// 提取集合中每个对象的属性
+		List<String> list = users.stream().map(User::getName).collect(Collectors.toList());
+
+		// 转map
 		Map<Integer, Integer> userMap = users.stream().collect(Collectors.toMap(User::getId, item -> item.getId()));
 		System.out.println(userMap.get(5));
 
-		//计算值
+		// 计算值
 		Integer result = users.stream().reduce(0, (sum, item) -> sum + item.getAge(), (i, j) -> i + j);
 		// 或者这样写
 		// Integer result =
 		// userStream.mapToInt(User::getAge).reduce(0,
 		// (sum, item) -> sum+item);
 
-		
-		//转成新的list
-		List<com.lzhsite.entity.User> users2 =null;
-		users2=users.stream().map(user -> {
+		// 转成新的list
+		List<com.lzhsite.entity.User> users2 = null;
+		users2 = users.stream().map(user -> {
 			com.lzhsite.entity.User user2 = new com.lzhsite.entity.User();
 
 			return user2;
 		}).collect(Collectors.toList());
 
 	}
+
+	/**
+	 * 使用java的lambda表达式实现word count的两种方法
+	 */
+	@Test
+	public void test5() {
+		// 创建数据源
+		List<String> list = new ArrayList<>();
+		list.add("Hello world");
+		list.add("Hello java");
+		list.add("This is a java program");
+		list.add("Give your program a little Spring");
+		list.add("So You Think You Can Dance");
+		list.add("Word Count");
+		list.add("Hello Job");
+		list.add("To be or not to be is a question");
+		// 方法一将单词放入一个hashmap中
+		// 结果Map，用于存放Word和Count
+		Map<String, Integer> map = new HashMap<>();
+
+		// Lambda表达式
+		list.stream()
+				// flatMap方法可以将一个元素映射为一个流，然后整合，此处将一句话映射为一个word流
+				.flatMap(line -> Arrays.stream(line.toLowerCase().split(" ")))
+				// 将各单词放入HashMap中
+				.forEach(word -> {
+					if (map.containsKey(word)) {
+						int count = map.get(word) + 1;
+						map.put(word, count);
+					} else {
+						map.put(word, 1);
+					}
+				});
+
+		// 输出结果
+		map.entrySet().forEach(System.out::println);
+		//////////////////////////////////////////////////////////////////////////
+		// 方法二： 先对单词流进行排序，然后reduce进行计数
+		// 临时变量，用于计数(这里用数组是因为lambda表达式内不能改变外部变量，java的闭包有缺陷)
+		int[] count = { 1 };
+		// Lambda表达式
+		list.stream()
+				// flatMap方法可以将一个元素映射为一个流，然后整合，此处将一句话映射为一个word流
+				.flatMap(line -> Arrays.stream(line.toLowerCase().split(" ")))
+				// 将单词排序
+				.sorted().reduce("", (preWord, word) -> {
+					if (word.equals(preWord)) {
+						count[0]++;
+					} else if (!"".equals(preWord)) {
+						System.out.println(preWord + " = " + count[0]);
+						count[0] = 1;
+					}
+					return word;
+				});
+	}
+
 }
