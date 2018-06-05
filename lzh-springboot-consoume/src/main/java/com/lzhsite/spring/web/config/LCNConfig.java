@@ -4,11 +4,12 @@ package com.lzhsite.spring.web.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import com.codingapi.tx.config.service.TxManagerTxUrlService;
 
-
 @Configuration
+@EnableAspectJAutoProxy(proxyTargetClass=true,exposeProxy=true)
 @ComponentScan(basePackages={"com.codingapi.tx.*","com.lzhsite.spring.*"})
 public class LCNConfig implements TxManagerTxUrlService{
 
@@ -21,4 +22,7 @@ public class LCNConfig implements TxManagerTxUrlService{
         System.out.println("load tm.manager.url ");
         return url;
     }
+    
+    
+
 }

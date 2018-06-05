@@ -10,6 +10,6 @@ import com.lzhsite.spring.web.entity.db1.User;
  * @author lcj
  * @since 2017-09-27
  */
-public interface UserService{
+public interface UserWriteService{
 	void insert(User user);
 }

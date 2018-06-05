@@ -1,13 +1,18 @@
 package com.lzhsite.spring.web.config;
 
-import javax.sql.DataSource;
+import javax.transaction.TransactionManager;
+import javax.transaction.UserTransaction;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.jta.JtaTransactionManager;
+
+import com.atomikos.icatch.jta.UserTransactionImp;
+import com.atomikos.icatch.jta.UserTransactionManager;
 
 
 /**
@@ -34,16 +39,18 @@ public class XATransactionManagerConfig {
 //        userTransactionManager.setForceShutdown(false);
 //        return userTransactionManager;
 //    }
+// 
+//	/**
+//	 * 注入LCN的代理连接池
+//	 * 
+//	 * @return
+//	 */
+//	@Bean(name = "transactionManager")
+//	@DependsOn({ "userTransaction", "atomikosTransactionManager" })
+//	public PlatformTransactionManager transactionManager() throws Throwable {
+//		PlatformTransactionManager platformTransactionManager=new JtaTransactionManager(userTransaction(), atomikosTransactionManager());
+//		return   platformTransactionManager;
+//	}
 
-//    /**
-//     * 注入LCN的代理连接池
-//     * @return
-//     */
-//    @Bean(name = "transactionManager")
-//    @DependsOn({ "userTransaction", "atomikosTransactionManager" })
-//    public PlatformTransactionManager transactionManager() throws Throwable {
-//        return new JtaTransactionManager(userTransaction(),atomikosTransactionManager());
-//    }
 
-  
 }

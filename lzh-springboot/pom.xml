@@ -135,13 +135,7 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
-
-		<!--使用actuator监控spring boot各种指标,需要打开指标对应的开关 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-
+ 
 		<!--LCN分布式事务包 -->
 		<dependency>
 			<groupId>com.codingapi</groupId>

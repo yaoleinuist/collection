@@ -46,10 +46,10 @@
 			<version>${druid.version}</version>
 		</dependency>
 		<!--分布式事务支持 -->
-<!-- 		<dependency>
+ 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jta-atomikos</artifactId>
-		</dependency> -->
+		</dependency>  
  
 		<!-- mybatis start -->
 		<dependency>

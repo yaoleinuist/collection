@@ -1,6 +1,5 @@
 package com.lzhsite.spring.web.service.localservice.impl.group;
 
-//import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -9,12 +8,11 @@ import com.codingapi.tx.annotation.TxTransaction;
 import com.lzhsite.spring.web.entity.db0.MessagePackageNo;
 import com.lzhsite.spring.web.entity.db1.User;
 import com.lzhsite.spring.web.service.localservice.group.GroupService;
-import com.lzhsite.spring.web.service.messagepackageno.MessagePackageNoService;
-import com.lzhsite.spring.web.service.user.UserService;
+import com.lzhsite.spring.web.service.messagepackageno.MessagePackageNoWriteService;
+import com.lzhsite.spring.web.service.user.UserWriteService;
 
 /**
  * @Project: design-pattern
- * @Package: com.lcj.service.impl
  * @Author: Administrator
  * @Description: TODO
  * @Version: 1.0
@@ -23,10 +21,10 @@ import com.lzhsite.spring.web.service.user.UserService;
 @Service
 public class GroupServiceImpl implements GroupService {
 	@Reference(version = "1.0.0")
-	private MessagePackageNoService messagePackageNoService;
+	private MessagePackageNoWriteService messagePackageNoWriteService;
 
 	@Reference(version = "1.0.0")
-	private UserService userService;
+	private UserWriteService userWriteService;
 
 	/**
 	 * 保存数据
@@ -38,8 +36,8 @@ public class GroupServiceImpl implements GroupService {
 	@TxTransaction(isStart = true)
 	//@Transactional
 	public void save(MessagePackageNo messagePackageNo, User user){
-		messagePackageNoService.insert(messagePackageNo);
-		//userService.insert(user);
+		messagePackageNoWriteService.insert(messagePackageNo);
+		userWriteService.insert(user);
 		int i = 4 / 0; // 除0异常,测试事务
 		System.out.println("aaa");
 	}
@@ -54,6 +52,6 @@ public class GroupServiceImpl implements GroupService {
 	 * @return: com.lcj.web.entity.car.MessagePackageNo
 	 */
 	public MessagePackageNo findByNo(int no) {
-		return messagePackageNoService.selectOne(new EntityWrapper<MessagePackageNo>().eq("no", no));
+		return messagePackageNoWriteService.selectOne(new EntityWrapper<MessagePackageNo>().eq("no", no));
 	}
 }

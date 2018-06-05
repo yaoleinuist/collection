@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.lzhsite</groupId>
@@ -152,18 +153,18 @@
 			<version>3.12.1.GA</version>
 		</dependency>
 		<!-- websocket -->
-		 <dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-websocket</artifactId>
-		    <version>${spring.version}</version>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
-		
-        <dependency>
-           <groupId>org.springframework</groupId>
-           <artifactId>spring-messaging</artifactId>
-             <version>${spring.version}</version>
-        </dependency>
- 
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
 
 		<!-- Servlet web支持 -->
 		<dependency>
@@ -187,7 +188,7 @@
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
 		</dependency>
-		
+
 		<!-- 和spark 1.6整合jackson必须用2.4.4 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -201,14 +202,14 @@
 			</exclusions>
 		</dependency>
 		<!-- Servlet web END -->
-  
+
 		<dependency>
 			<groupId>javax.transaction</groupId>
 			<artifactId>jta</artifactId>
 			<version>1.1</version>
 		</dependency>
 
- 
+
 		<dependency>
 			<groupId>net.sourceforge.jexcelapi</groupId>
 			<artifactId>jxl</artifactId>
@@ -277,14 +278,14 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.4.1</version>
+			<version>4.5.2</version>
 		</dependency>
 		<dependency>
-		  <groupId>org.apache.httpcomponents</groupId>
-		  <artifactId>httpcore</artifactId>
-		  <version>4.4.1</version>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.5</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -463,7 +464,7 @@
 		</dependency>
 		<!-- Mysql Driver End -->
 
-		
+
 		<dependency>
 			<groupId>org.csource</groupId>
 			<artifactId>fastdfs_client</artifactId>
@@ -560,25 +561,25 @@
 			</exclusions>
 		</dependency>
 
-		<dependency>  
-		    <groupId>com.google.code.gson</groupId>  
-		    <artifactId>gson</artifactId>  
-		    <version>2.3.1</version>  
-		</dependency>  
-		
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.3.1</version>
+		</dependency>
 
-        <!-- dozer -->
-        <dependency>
-            <groupId>net.sf.dozer</groupId>
-            <artifactId>dozer</artifactId>
-            <version>5.5.1</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.53</version>
-        </dependency>
+		<!-- dozer -->
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.5.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.53</version>
+		</dependency>
 
 		<!--prostuff序列化依赖 -->
 		<dependency>
@@ -591,13 +592,13 @@
 			<artifactId>protostuff-runtime</artifactId>
 			<version>1.0.8</version>
 		</dependency>
-		
-		<!--当当分库分表扩展框架-->
-	   <dependency>  
-            <groupId>com.dangdang</groupId>  
-            <artifactId>sharding-jdbc-core</artifactId>  
-            <version>1.0.0</version>
-	   </dependency>  
+
+		<!--当当分库分表扩展框架 -->
+		<dependency>
+			<groupId>com.dangdang</groupId>
+			<artifactId>sharding-jdbc-core</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 		<!-- 日志 java日志有:slf4j,log4j,logback,common-logging slf4j:是规范/接口 日志实现:log4j,logback,common-logging 
 			使用:slf4j+logback -->
 		<dependency>
@@ -620,10 +621,10 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-        <!-- 日志END -->
+		<!-- 日志END -->
 	</dependencies>
 
- 
+
 	<build>
 		<resources>
 			<resource>
@@ -723,11 +724,11 @@
 		<module>lzh-shiro</module>
 		<module>lzh-generator</module>
 		<module>lzh-seckill</module>
-    <module>lzh-tomcat</module>
-    <module>?</module>
-    <module>lzh-spring</module>
-    <module>lzh-springboot-consoume</module>
-    <module>lzh-springboot</module>
-    <module>lzh-netty-reactor</module>
-  </modules>
+		<module>lzh-tomcat</module>
+		<module>?</module>
+		<module>lzh-spring</module>
+		<module>lzh-springboot-consoume</module>
+		<module>lzh-springboot</module>
+		<module>lzh-netty-reactor</module>
+	</modules>
 </project>

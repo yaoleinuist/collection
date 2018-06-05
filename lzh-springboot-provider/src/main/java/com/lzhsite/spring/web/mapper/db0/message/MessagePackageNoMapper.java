@@ -1,10 +1,6 @@
 package com.lzhsite.spring.web.mapper.db0.message;
 
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Repository;
-
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.lzhsite.spring.web.entity.db0.MessagePackageNo;
 
