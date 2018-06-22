@@ -123,6 +123,27 @@ public class TestLabmda {
 			System.out.println(user.getId() + " " + user.getCity() + " " + user.getBiFollowersCount());
 		}
 
+		//////////////////////////////////////////////////////////////////////////////////////////////// 
+		List<Integer> list = Arrays.asList(1, 12, 21, 3, 13);
+		System.out.println("sort前：" + list);
+		Collections.sort(list);
+		System.out.println("使用传统特性sort后：" + list);
+		Collections.sort(list, new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return o1.compareTo(o2);
+			}
+
+		});
+		System.out.println("使用传统特性sort后：" + list);
+
+
+		Collections.sort(list, (a, b) -> b.compareTo(a));
+		System.out.println("使用lambda表达式降序排序后：" + list);
+		list.sort((a, b) -> a.compareTo(b));
+		System.out.println("使用lambda表达式升序排序后：" + list);
+
 	}
 
 	/**
@@ -189,35 +210,30 @@ public class TestLabmda {
 			}
 		};
 
-		//分组统计
+		// 分组统计
 		Map<Integer, Long> stastic = list.stream().collect(Collectors.groupingBy(p -> p, Collectors.counting()));
 		stastic.forEach((k, v) -> System.out.println(k + ":" + v));
-		
-		//字段分组
-		Map<String, List<User>> usersByGender =
-				users.stream().collect(Collectors.groupingBy(User::getGender));
-		
-		
-		
-		//条件分组
+
+		// 字段分组
+		Map<String, List<User>> usersByGender = users.stream().collect(Collectors.groupingBy(User::getGender));
+
+		// 条件分组
 		Map<String, List<User>> tripleUsers = users.stream()
-		        .collect(Collectors.groupingBy((Function<User, String>) user -> {
-		    String key;
-		    if (user.getAge() <= 20) {
-		        key = "less20";
-		    } else if (user.getAge() <= 40) {
-		        key = "less40";
-		    } else {
-		        key = "more40";
-		    }
-		    return key;
-		}, Collectors.toList()));
-		
-		
-		//嵌套分组
+				.collect(Collectors.groupingBy((Function<User, String>) user -> {
+					String key;
+					if (user.getAge() <= 20) {
+						key = "less20";
+					} else if (user.getAge() <= 40) {
+						key = "less40";
+					} else {
+						key = "more40";
+					}
+					return key;
+				}, Collectors.toList()));
+
+		// 嵌套分组
 		Map<String, Map<Integer, List<User>>> mulity = users.stream()
-			    .collect(Collectors.groupingBy(User::getName,
-			        Collectors.groupingBy(User::getAge)));
+				.collect(Collectors.groupingBy(User::getName, Collectors.groupingBy(User::getAge)));
 
 	}
 }

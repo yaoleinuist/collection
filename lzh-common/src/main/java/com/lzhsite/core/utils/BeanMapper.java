@@ -13,7 +13,7 @@ import com.google.common.collect.Lists;
 /**
  * Created by lyl on 2016/10/10.
  */
-public class BeanMapper {
+public class BeanMapper extends BeanUtils{
 
     /**
      * dozer单例
@@ -78,5 +78,6 @@ public class BeanMapper {
         BeanUtils.copyProperties(source, innerInstance);
         return innerInstance;
     } 
-
+  
+  
 }
