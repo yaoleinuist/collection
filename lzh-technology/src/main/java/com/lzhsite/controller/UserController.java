@@ -35,19 +35,19 @@ public class UserController extends BaseController{
 			paramMap.put("status", getInteger("status")); // 状态
 	 
 		    list=userMapper.getUserlist();
-			logger.info("用户列表-----"+JsonUtil.obj2Json(list));
+			logger.info("用户列表-----"+JsonUtil.toJson(list));
 			
 			User user=userMapper.loadbyname("管理员");
-			logger.info("name='管理员'管理员-----"+JsonUtil.obj2Json(user));
+			logger.info("name='管理员'管理员-----"+JsonUtil.toJson(user));
 			
 			user=userMapper.loadbyid(1);
-			logger.info("id=1的用户-----"+JsonUtil.obj2Json(user));
+			logger.info("id=1的用户-----"+JsonUtil.toJson(user));
 			
 		} catch (Exception e) {
 			logger.error("== listPmsUser exception:", e);
 		 
 		}
 		
-		   return JsonUtil.obj2Json(list);
+		   return JsonUtil.toJson(list);
 	}
 }

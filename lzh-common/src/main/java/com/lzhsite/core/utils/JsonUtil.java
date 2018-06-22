@@ -1,114 +1,77 @@
 package com.lzhsite.core.utils;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
-import org.elasticsearch.common.xcontent.XContentBuilder;
-import org.elasticsearch.common.xcontent.XContentFactory;
-
-import com.lzhsite.core.exception.XBusinessException;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 public class JsonUtil {
 
-    /**
-     * 实现将实体对象转换成json对象
-     *
-     * @param object 实体对象
-     * @return
-     */
-    public static String obj2Json(Object object) throws XBusinessException {
-        String jsonData = null;
-        try {
-            XContentBuilder jsonBuild = XContentFactory.jsonBuilder().startObject();
-            Field[] fields = getAllField(object.getClass());
-            for (Field field : fields) {
-                if (!isNull(object, field)) {
-                    Object value = field.get(object);
-                    if (field.getType() == BigDecimal.class) {
-                        value = Double.parseDouble("" + value);
-                    } else if (field.getType() == Date.class || field.getType() == Timestamp.class) {//
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'+0800'");
-                        value = sdf.format(value);
-                    }
-                    jsonBuild.field(field.getName(), value);
-                }
-            }
-            jsonData = jsonBuild.string();
-        } catch (IOException | IllegalAccessException e) {
-            throw new XBusinessException("ELASTIC_0005","创建json失败");
-        }
-        return jsonData;
+    private static Gson gson = null;
+
+    public JsonUtil() {
     }
 
-    /**
-     * 获取类clazz的所有Field，包括其父类的Field，如果重名，以子类Field为准。
-     * @param clazz
-     * @return Field数组
-     */
-    public static Field[] getAllField(Class<?> clazz) {
-        ArrayList<Field> fieldList = new ArrayList<Field>();
-        Field[] dFields = clazz.getDeclaredFields();
-        if (null != dFields && dFields.length > 0) {
-            fieldList.addAll(Arrays.asList(dFields));
+    public static synchronized Gson newInstance() {
+        if(gson == null) {
+            gson = new Gson();
         }
 
-        Class<?> superClass = clazz.getSuperclass();
-        if (superClass != Object.class) {
-            Field[] superFields = getAllField(superClass);
-            if (null != superFields && superFields.length > 0) {
-                for(Field field:superFields){
-                    if(!isContain(fieldList, field)){
-                        fieldList.add(field);
-                    }
-                }
-            }
+        return gson;
+    }
+
+    public static String toJson(Object obj) {
+        return gson.toJson(obj);
+    }
+
+    public static <T> T toBean(String json, Class<T> clz) {
+        return gson.fromJson(json, clz);
+    }
+
+    public static <T> Map<String, T> toMap(String json, Class<T> clz) {
+        Map map = (Map)gson.fromJson(json, (new TypeToken() {
+        }).getType());
+        HashMap result = new HashMap();
+        Iterator var4 = map.keySet().iterator();
+
+        while(var4.hasNext()) {
+            String key = (String)var4.next();
+            result.put(key, gson.fromJson((JsonElement)map.get(key), clz));
         }
-        Field[] result=new Field[fieldList.size()];
-        fieldList.toArray(result);
+
         return result;
     }
 
-    /**检测Field List中是否已经包含了目标field
-     * @param fieldList
-     * @param field 带检测field
-     * @return
-     */
-    public static boolean isContain(ArrayList<Field> fieldList,Field field){
-        for(Field temp:fieldList){
-            if(temp.getName().equals(field.getName())){
-                return true;
-            }
-        }
-        return false;
+    public static Map<String, Object> toMap(String json) {
+        Map map = (Map)gson.fromJson(json, (new TypeToken() {
+        }).getType());
+        return map;
     }
 
-    public static String map2Json(Map<String, Object> map) {
-        String jsonData = null;
-        try {
-            XContentBuilder jsonBuild = XContentFactory.jsonBuilder().startObject();
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                jsonBuild.field(entry.getKey(), entry.getValue());
-            }
-            jsonData = jsonBuild.string();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static <T> List<T> toList(String json, Class<T> clz) {
+        JsonArray array = (new JsonParser()).parse(json).getAsJsonArray();
+        ArrayList list = new ArrayList();
+        Iterator var4 = array.iterator();
+
+        while(var4.hasNext()) {
+            JsonElement elem = (JsonElement)var4.next();
+            list.add(gson.fromJson(elem, clz));
         }
-        return jsonData;
+
+        return list;
     }
 
-    private static boolean isNull(Object object, Field field) {
-        try {
-            field.setAccessible(true);
-            return field.get(object) == null;
-        } catch (Exception e) {
-            return false;
-        }
+    public static void main(String[] args) {
+    }
+
+    static {
+        gson = new Gson();
     }
 }

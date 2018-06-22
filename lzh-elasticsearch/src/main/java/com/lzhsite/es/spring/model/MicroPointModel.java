@@ -371,7 +371,7 @@ public class MicroPointModel implements Serializable{
     	imjMicroPoint.setCouponInfoName("couponInfoName");
     	imjMicroPoint.setCouponId(893729L);
     	try {
-			System.out.println(JsonUtil.obj2Json(imjMicroPoint));
+			System.out.println(JsonUtil.toJson(imjMicroPoint));
 		} catch (XBusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

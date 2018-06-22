@@ -13,7 +13,7 @@ import org.junit.Test;
  * @author lzhcode
  *
  */
-public class TestMap {
+public class TestCompareMap {
 
 	@Test
 	public void test1() {

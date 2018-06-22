@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang.math.RandomUtils;
@@ -14,6 +16,15 @@ import org.junit.Test;
 
 // http://tianmaotalk.iteye.com/blog/2273314
 public class TestLabmda {
+
+	private static List<User> users = new ArrayList<>();
+
+	static {
+		users.add(new User(0, "张三", 18, "f"));
+		users.add(new User(1, "张四", 19, "f"));
+		users.add(new User(2, "张五", 19, "f"));
+		users.add(new User(3, "老张", 50, "f"));
+	}
 
 	/**
 	 * 计算
@@ -120,12 +131,6 @@ public class TestLabmda {
 	@Test
 	public void test4() {
 
-		List<User> users = new ArrayList<>();
-		users.add(new User(0, "张三", 18, "f"));
-		users.add(new User(1, "张四", 19, "f"));
-		users.add(new User(2, "张五", 19, "f"));
-		users.add(new User(3, "老张", 50, "f"));
-
 		// 提取集合中每个对象的属性
 		List<String> list = users.stream().map(User::getName).collect(Collectors.toList());
 
@@ -142,7 +147,7 @@ public class TestLabmda {
 
 		// 转成新的list
 		List<com.lzhsite.entity.User> users2 = null;
-		users2 = users.stream().map(user -> {
+		users2 = Optional.ofNullable(users).orElse(new ArrayList<>()).stream().map(user -> {
 			com.lzhsite.entity.User user2 = new com.lzhsite.entity.User();
 
 			return user2;
@@ -151,58 +156,68 @@ public class TestLabmda {
 	}
 
 	/**
-	 * 使用java的lambda表达式实现word count的两种方法
+	 * list转map
 	 */
 	@Test
 	public void test5() {
-		// 创建数据源
-		List<String> list = new ArrayList<>();
-		list.add("Hello world");
-		list.add("Hello java");
-		list.add("This is a java program");
-		list.add("Give your program a little Spring");
-		list.add("So You Think You Can Dance");
-		list.add("Word Count");
-		list.add("Hello Job");
-		list.add("To be or not to be is a question");
-		// 方法一将单词放入一个hashmap中
-		// 结果Map，用于存放Word和Count
-		Map<String, Integer> map = new HashMap<>();
+		// 重复问题
+		Map<Integer, User> keyRedo = users.stream()
+				.collect(Collectors.toMap(User::getId, Function.identity(), (key1, key2) -> key2));
+		// 方式二：指定实例的map
+		Map<Integer, User> linkedHashMap = users.stream()
+				.collect(Collectors.toMap(User::getId, User -> User, (key1, key2) -> key2, LinkedHashMap::new));
 
-		// Lambda表达式
-		list.stream()
-				// flatMap方法可以将一个元素映射为一个流，然后整合，此处将一句话映射为一个word流
-				.flatMap(line -> Arrays.stream(line.toLowerCase().split(" ")))
-				// 将各单词放入HashMap中
-				.forEach(word -> {
-					if (map.containsKey(word)) {
-						int count = map.get(word) + 1;
-						map.put(word, count);
-					} else {
-						map.put(word, 1);
-					}
-				});
-
-		// 输出结果
-		map.entrySet().forEach(System.out::println);
-		//////////////////////////////////////////////////////////////////////////
-		// 方法二： 先对单词流进行排序，然后reduce进行计数
-		// 临时变量，用于计数(这里用数组是因为lambda表达式内不能改变外部变量，java的闭包有缺陷)
-		int[] count = { 1 };
-		// Lambda表达式
-		list.stream()
-				// flatMap方法可以将一个元素映射为一个流，然后整合，此处将一句话映射为一个word流
-				.flatMap(line -> Arrays.stream(line.toLowerCase().split(" ")))
-				// 将单词排序
-				.sorted().reduce("", (preWord, word) -> {
-					if (word.equals(preWord)) {
-						count[0]++;
-					} else if (!"".equals(preWord)) {
-						System.out.println(preWord + " = " + count[0]);
-						count[0] = 1;
-					}
-					return word;
-				});
+		System.out.println(keyRedo);
+		System.out.println(linkedHashMap);
 	}
 
+	/**
+	 * 分组
+	 */
+	@Test
+	public void test6() {
+		List<Integer> list = new ArrayList() {
+			{
+				add(12);
+				add(20);
+				add(12);
+				add(22);
+				add(22);
+				add(23);
+				add(159);
+				add(12);
+			}
+		};
+
+		//分组统计
+		Map<Integer, Long> stastic = list.stream().collect(Collectors.groupingBy(p -> p, Collectors.counting()));
+		stastic.forEach((k, v) -> System.out.println(k + ":" + v));
+		
+		//字段分组
+		Map<String, List<User>> usersByGender =
+				users.stream().collect(Collectors.groupingBy(User::getGender));
+		
+		
+		
+		//条件分组
+		Map<String, List<User>> tripleUsers = users.stream()
+		        .collect(Collectors.groupingBy((Function<User, String>) user -> {
+		    String key;
+		    if (user.getAge() <= 20) {
+		        key = "less20";
+		    } else if (user.getAge() <= 40) {
+		        key = "less40";
+		    } else {
+		        key = "more40";
+		    }
+		    return key;
+		}, Collectors.toList()));
+		
+		
+		//嵌套分组
+		Map<String, Map<Integer, List<User>>> mulity = users.stream()
+			    .collect(Collectors.groupingBy(User::getName,
+			        Collectors.groupingBy(User::getAge)));
+
+	}
 }
