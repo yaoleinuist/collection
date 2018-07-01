@@ -1,5 +1,8 @@
 package com.lzhsite.technology.collections;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -16,30 +19,66 @@ LinkedHashMap 是HashMap的一个子类，保存了记录的插入顺序，在�
 TreeMap实现SortMap接口，能够把它保存的记录根据键排序,默认是按键值的升序排序，也可以指定排序的比较器，
 当用Iterator 遍历TreeMap时，得到的记录是排过序的。
 */
+import java.util.Map.Entry;
+
+import org.junit.Test;
+
 public class TestLinkedHashMap {
-	public static void main(String args[])  {
-	   System.out.println("*************************LinkedHashMap*************");
-	   Map<Integer,String> map = new LinkedHashMap<Integer,String>();
-	   map.put(6, "apple");
-	   map.put(3, "banana");
-	   map.put(2,"pear");
-	   
-	   for (Iterator it =  map.keySet().iterator();it.hasNext();)
-	   {
-	    Object key = it.next();
-	    System.out.println( key+"="+ map.get(key));
-	   }
-	   
-	   System.out.println("*************************HashMap*************");
-	   Map<Integer,String> map1 = new  HashMap<Integer,String>();
-	   map1.put(6, "apple");
-	   map1.put(3, "banana");
-	   map1.put(2,"pear");
-	   
-	   for (Iterator it =  map1.keySet().iterator();it.hasNext();)
-	   {
-	    Object key = it.next();
-	    System.out.println( key+"="+ map1.get(key));
-	   }
-	  }
+
+	@Test
+	public void test1() {
+		System.out.println("*************************LinkedHashMap*************");
+		Map<Integer, String> map = new LinkedHashMap<Integer, String>();
+		map.put(6, "apple");
+		map.put(3, "banana");
+		map.put(2, "pear");
+
+		for (Iterator it = map.keySet().iterator(); it.hasNext();) {
+			Object key = it.next();
+			System.out.println(key + "=" + map.get(key));
+		}
+
+		System.out.println("*************************HashMap*************");
+		Map<Integer, String> map1 = new HashMap<Integer, String>();
+		map1.put(6, "apple");
+		map1.put(3, "banana");
+		map1.put(2, "pear");
+
+		for (Iterator it = map1.keySet().iterator(); it.hasNext();) {
+			Object key = it.next();
+			System.out.println(key + "=" + map1.get(key));
+		}
+	}
+
+	/**
+	 * LinkedHashMap排序
+	 */
+	@Test
+	public void test2() {
+		LinkedHashMap<String, Float> map = new LinkedHashMap<>();
+
+		// 先转成ArrayList集合
+		ArrayList<Entry<String, Float>> list = new ArrayList<Map.Entry<String, Float>>(map.entrySet());
+
+		// 从小到大排序（从大到小将o1与o2交换即可）
+		Collections.sort(list, new Comparator<Map.Entry<String, Float>>() {
+
+			@Override
+			public int compare(Entry<String, Float> o1, Entry<String, Float> o2) {
+				return ((o1.getValue() - o2.getValue() == 0) ? 0 : (o1.getValue() - o2.getValue() > 0) ? 1 : -1);
+			}
+
+		});
+
+		// 新建一个LinkedHashMap，把排序后的List放入
+		LinkedHashMap<String, Float> map2 = new LinkedHashMap<>();
+		for (Map.Entry<String, Float> entry : list) {
+			map2.put(entry.getKey(), entry.getValue());
+		}
+
+		// 遍历输出
+		for (Map.Entry<String, Float> entry : map2.entrySet()) {
+			System.out.println(entry.getKey() + ":" + entry.getValue());
+		}
+	}
 }
