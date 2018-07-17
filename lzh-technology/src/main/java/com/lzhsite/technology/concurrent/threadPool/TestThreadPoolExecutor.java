@@ -8,6 +8,12 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+//如果并发的线程数量很多，并且每个线程都是执行一个时间很短的任务就结束了，
+//这样频繁创建线程就会大大降低系统的效率，因为频繁创建线程和销毁线程需要时间。
+//
+//那么有没有一种办法使得线程可以复用，就是执行完一个任务，并不被销毁，而是可以继续执行其他的任务
+//
+//在Java中可以通过线程池来达到这样的效果
 public class TestThreadPoolExecutor {
 	  
     private ThreadPoolExecutor pool = null;  

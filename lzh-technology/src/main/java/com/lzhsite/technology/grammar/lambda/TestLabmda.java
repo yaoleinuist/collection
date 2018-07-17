@@ -186,7 +186,7 @@ public class TestLabmda {
 				.collect(Collectors.toMap(User::getId, Function.identity(), (key1, key2) -> key2));
 		// 方式二：指定实例的map
 		Map<Integer, User> linkedHashMap = users.stream()
-				.collect(Collectors.toMap(User::getId, User -> User, (key1, key2) -> key2, LinkedHashMap::new));
+				.collect(Collectors.toMap(User::getId, temp -> temp, (key1, key2) -> key2, LinkedHashMap::new));
 
 		System.out.println(keyRedo);
 		System.out.println(linkedHashMap);
@@ -209,6 +209,7 @@ public class TestLabmda {
 				add(12);
 			}
 		};
+
 
 		// 分组统计
 		Map<Integer, Long> stastic = list.stream().collect(Collectors.groupingBy(p -> p, Collectors.counting()));
@@ -234,6 +235,7 @@ public class TestLabmda {
 		// 嵌套分组
 		Map<String, Map<Integer, List<User>>> mulity = users.stream()
 				.collect(Collectors.groupingBy(User::getName, Collectors.groupingBy(User::getAge)));
-
+ 
+	
 	}
 }

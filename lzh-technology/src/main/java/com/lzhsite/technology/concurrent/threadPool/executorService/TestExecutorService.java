@@ -1,4 +1,4 @@
-package com.lzhsite.technology.concurrent.threadPool;
+package com.lzhsite.technology.concurrent.threadPool.executorService;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

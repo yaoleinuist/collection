@@ -61,6 +61,7 @@ public class TestFutureTask {
         System.out.println("主线程在执行完成");  
     }  
 	
+ 
 	@Test
 	public void Test2(){
 		   //创建线程池  
@@ -74,7 +75,8 @@ public class TestFutureTask {
         try {  
             Thread.sleep(2000);  
         System.out.println("主线程在执行其他任务");  
-          
+         //接口方法超时异常处理 设置超时时间
+         // future.get(5, TimeUnit.SECONDS); 
         if(future.get()!=null){  
             //输出获取到的结果  
             System.out.println("future.get()-->"+future.get());  

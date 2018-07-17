@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <beans xmlns="http://www.springframework.org/schema/beans" 
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xmlns:context="http://www.springframework.org/schema/context"
-           xmlns:mvc="http://www.springframework.org/schema/mvc"
-           xmlns:beans="http://www.springframework.org/schema/beans"
-           xmlns:aop="http://www.springframework.org/schema/aop"
-           xmlns:util="http://www.springframework.org/schema/util"
-           xmlns:p="http://www.springframework.org/schema/p"
-           xmlns:secret="http://www.secret.com/schema/secret"
-           xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:secret="http://www.secret.com/schema/secret"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.2.xsd
@@ -23,83 +19,77 @@
            http://www.secret.com/schema/secret
            http://www.secret.com/schema/secret/secret.xsd">
 
-    <context:annotation-config/>
-    <aop:aspectj-autoproxy/>
-    
-    <!-- @controler等mvc注解驱动-->
-    <mvc:annotation-driven>
-        <mvc:message-converters register-defaults="true">
-            <ref bean="xMessageConverter"/>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
-   <!--json数据转换-->
-    <bean id="xMessageConverter" class="com.lzhsite.webkits.converters.XMessageConverter">
-        <property name="supportedMediaTypes">
-            <list>
-                <value>text/json;charset=UTF-8</value>
-                <value>application/json;charset=UTF-8</value>
-                <value>text/plain;charset=UTF-8</value>
-                <value>application/octet-stream</value>
-            </list>
-        </property>
-        <property name="features">
-            <list>
-                <value>QuoteFieldNames</value>
-                <value>WriteMapNullValue</value>
-                <value>WriteNullStringAsEmpty</value>
-                <value>WriteDateUseDateFormat</value>
-                <value>DisableCircularReferenceDetect</value>
-            </list>
-        </property>
-    </bean>
- 
-    <!--拦截器-->
-   <!--  <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-             <bean class="com.lzhsite.webkits.interceptors.XInterceptor">
-                <property name="XInterceptorList">
-                    <list>
-                        <bean class="com.lzhsite.webkits.interceptors.ApiGatewayInterceptor"/>
-                       <bean class="com.lzhsite.webkits.interceptors.SignInterceptor">
-                            <property name="signatureConfigs">
-                                <list>
-                                    <secret:sign type="WAP" skipCheck="true" skipWrite="true"/>
-                                    <secret:sign type="WXWAP" skipCheck="true" skipWrite="true"/>
-                                    <secret:sign type="ALIPAYWAP" skipCheck="true" skipWrite="true"/>
-                                    <secret:sign type="APP" skipCheck="false" skipWrite="false" signatureService-type="com.lzhsite.webkits.security.signature.DefaultAppSignatureService"/>
-                                    <secret:sign type="ICBCBANKWAP" skipCheck="true" skipWrite="true"/>
-                                    <secret:sign type="SYD" skipCheck="false" skipWrite="false" signatureService-type="com.lzhsite.webkits.security.signature.DefaultAppSignatureService"/>
-                                </list>
-                            </property>
-                        </bean> 
-                    </list>
-                </property>
-            </bean>
-        </mvc:interceptor>
-    </mvc:interceptors>-->
- 
-    
+	<context:annotation-config />
+	<aop:aspectj-autoproxy />
+
+	<!-- @controler等mvc注解驱动 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<ref bean="xMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	<!--json数据转换 -->
+	<bean id="xMessageConverter" class="com.lzhsite.webkits.converters.XMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/json;charset=UTF-8</value>
+				<value>application/json;charset=UTF-8</value>
+				<value>text/plain;charset=UTF-8</value>
+				<value>application/octet-stream</value>
+			</list>
+		</property>
+		<property name="features">
+			<list>
+				<value>QuoteFieldNames</value>
+				<value>WriteMapNullValue</value>
+				<value>WriteNullStringAsEmpty</value>
+				<value>WriteDateUseDateFormat</value>
+				<value>DisableCircularReferenceDetect</value>
+			</list>
+		</property>
+	</bean>
+
+	<!--拦截器 -->
+	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**"/> <bean 
+		class="com.lzhsite.webkits.interceptors.XInterceptor"> <property name="XInterceptorList"> 
+		<list> <bean class="com.lzhsite.webkits.interceptors.ApiGatewayInterceptor"/> 
+		<bean class="com.lzhsite.webkits.interceptors.SignInterceptor"> <property 
+		name="signatureConfigs"> <list> <secret:sign type="WAP" skipCheck="true" 
+		skipWrite="true"/> <secret:sign type="WXWAP" skipCheck="true" skipWrite="true"/> 
+		<secret:sign type="ALIPAYWAP" skipCheck="true" skipWrite="true"/> <secret:sign 
+		type="APP" skipCheck="false" skipWrite="false" signatureService-type="com.lzhsite.webkits.security.signature.DefaultAppSignatureService"/> 
+		<secret:sign type="ICBCBANKWAP" skipCheck="true" skipWrite="true"/> <secret:sign 
+		type="SYD" skipCheck="false" skipWrite="false" signatureService-type="com.lzhsite.webkits.security.signature.DefaultAppSignatureService"/> 
+		</list> </property> </bean> </list> </property> </bean> </mvc:interceptor> 
+		</mvc:interceptors> -->
+
+
 	<!-- 自动扫描controller层Bean -->
 	<context:component-scan base-package="com.lzhsite.controller" />
-   
-    
-    <!-- 静态资源过滤 -->
-    <mvc:resources location="/statics/" mapping="/statics/**"/>
 
-   
-	<mvc:resources location="resources/" mapping="/resources/**"/>
- 
 
-    <!-- jsp视图处理 -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/view/" />
-        <property name="suffix" value=".jsp" />
-    </bean>
+	<!-- 静态资源过滤 -->
+	<mvc:resources location="/statics/" mapping="/statics/**" />
 
-    <!-- 文件上传视图 -->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="10000000"/>
-    </bean>
 
-</beans>
+	<mvc:resources location="resources/" mapping="/resources/**" />
+
+
+	<!-- jsp视图处理 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 文件上传视图 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<!-- 设置在文件上传时允许写到内存中的最大值，以字节为单位计算，默认是10240 -->
+		<!-- 但是经实验，上传文件大小若小于此参数，则不会生成临时文件，故改为2048 -->
+		<property name="maxInMemorySize" value="2048" />
+		<property name="maxUploadSize" value="10000000" />
+	</bean>
+
+

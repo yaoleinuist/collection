@@ -93,7 +93,8 @@ public class MultiTheradDownLoad {
 	 *   断点设置方法,当有临时文件时,直接在临时文件中读取上次下载中断时的断点位置。没有临时文件,即第一次下载时,重新设置断点。 
 	 *   rantmpfile.seek()跳转到一个位置的目的是为了让各个断点存储的位置尽量分开。 
 	 *   这是实现断点续传的重要基础。
-	 **/ private void setBreakPoint(long[] startPos, long[] endPos, File tmpfile) {
+	 **/ 
+	private void setBreakPoint(long[] startPos, long[] endPos, File tmpfile) {
 		RandomAccessFile rantmpfile = null;
 		try {
 			if (tmpfile.exists()) {
