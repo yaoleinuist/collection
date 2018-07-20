@@ -214,10 +214,15 @@ public class TestLabmda {
 		// 分组统计
 		Map<Integer, Long> stastic = list.stream().collect(Collectors.groupingBy(p -> p, Collectors.counting()));
 		stastic.forEach((k, v) -> System.out.println(k + ":" + v));
-
+		
+		Map<String,Long> stastic2 = users.stream().collect(Collectors.groupingBy(User::getGender, Collectors.counting()));
+		stastic2.forEach((k, v) -> System.out.println(k + ":" + v));
+		
+		
 		// 字段分组
 		Map<String, List<User>> usersByGender = users.stream().collect(Collectors.groupingBy(User::getGender));
 
+	
 		// 条件分组
 		Map<String, List<User>> tripleUsers = users.stream()
 				.collect(Collectors.groupingBy((Function<User, String>) user -> {

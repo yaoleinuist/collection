@@ -1,4 +1,4 @@
-package com.lzhsite.technology.grammar;
+package com.lzhsite.technology.collections.hashMap;
 
 import java.util.IdentityHashMap;
 import java.util.Iterator;
@@ -11,7 +11,7 @@ import java.util.Set;
 //如果需要在遍历过程中删除元素推荐使用Iterator
 //如果需要在遍历过程中增加元素，可以新建一个临时map存放新增的元素，等遍历完毕，再把临时map放到原来的map中
 
-public class TestHashMap {
+public class TestHashMap2 {
 
 	public static void main(String[] args) {
 
