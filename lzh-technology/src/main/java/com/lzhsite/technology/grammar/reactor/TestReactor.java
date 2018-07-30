@@ -30,7 +30,8 @@ import reactor.test.StepVerifier;
 //Reactor模式的缺点
 //1. 相比传统的简单模型，Reactor增加了一定的复杂性，因而有一定的门槛，并且不易于调试。
 //2. Reactor模式需要底层的Synchronous Event Demultiplexer支持，比如Java中的Selector支持，操作系统的select系统调用支持，如果要自己实现Synchronous Event Demultiplexer可能不会有那么高效。
-//3. Reactor模式在IO读写数据时还是在同一个线程中实现的，即使使用多个Reactor机制的情况下，那些共享一个Reactor的Channel如果出现一个长时间的数据读写，会影响这个Reactor中其他Channel的相应时间，比如在大文件传输时，IO操作就会影响其他Client的相应时间，因而对这种操作，使用传统的Thread-Per-Connection或许是一个更好的选择，或则此时使用Proactor模式。
+//3. Reactor模式在IO读写数据时还是在同一个线程中实现的，即使使用多个Reactor机制的情况下，那些共享一个Reactor的Channel如果出现一个长时间的数据读写，会影响这个Reactor中其他Channel的相应时间，
+//   比如在大文件传输时，IO操作就会影响其他Client的相应时间，  因而对这种操作，使用传统的Thread-Per-Connection或许是一个更好的选择，或则此时使用Proactor模式。
 
 //Reactor 3 参考文档
 //https://htmlpreview.github.io/?https://github.com/get-set/reactor-core/blob/master-zh/src/docs/index.html#flux
@@ -44,7 +45,6 @@ public class TestReactor {
 
 	@Test
 	public void generate() {
-		// 这里的写法基本上和JS版没有太大差距了，J8这个版本要闹哪样？
 		Flux.generate(consumer -> {
 			consumer.next("Hello Flux");
 			consumer.complete();
