@@ -11,10 +11,46 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class JavaKafkaProducerMessageSenderTest {
     public static void main(String[] args) throws InterruptedException {
-//        test1();
-        test2();
+         test1();
+         //test2();
     }
+    /**
+     * 测试默认数据分区器的JavaProducer测试
+     *
+     * @throws InterruptedException
+     */
+    @Test
+    public static void test1() throws InterruptedException {
+        // 构建kafka生产者
+        String topicName = "test";//"beifeng0";
+        String brokerList = "localhost:9092";//"hadoop.senior02:9092,hadoop.senior02:9093,hadoop.senior02:9094,hadoop.senior02:9095";
+        String serilizerClassName = "kafka.serializer.StringEncoder";
+        JavaKafkaProducer<String, String> producer = new JavaKafkaProducer<String, String>(topicName, brokerList, serilizerClassName);
 
+        // 构建线程
+        int numThreads = 10;
+        // 构建一个线程池
+        ExecutorService pool = Executors.newFixedThreadPool(numThreads);
+
+        // 标识是否正在运行
+        AtomicBoolean running = new AtomicBoolean(true);
+
+        // 发送数据到Kafka
+        JavaKafkaProducerMessageSender.sendMessages(producer, pool, numThreads, running);
+
+        // 等待一段时间，然后进行关闭操作
+        int sleepMils = 6000;
+        Thread.sleep(sleepMils);
+
+        // 标记结束数据发送操作
+        running.set(false);
+
+        // 关闭kafka连接
+        producer.close();
+
+        // 关闭线程池
+        pool.shutdown();
+    }
     /**
      * 测试自定义数据分区器的JavaProducer的实现
      * 
@@ -65,41 +101,5 @@ public class JavaKafkaProducerMessageSenderTest {
         pool.shutdown();
     }
 
-    /**
-     * 测试默认数据分区器的JavaProducer测试
-     *
-     * @throws InterruptedException
-     */
-    @Test
-    public static void test1() throws InterruptedException {
-        // 构建kafka生产者
-        String topicName = "beifeng0";
-        String brokerList = "hadoop.senior02:9092,hadoop.senior02:9093,hadoop.senior02:9094,hadoop.senior02:9095";
-        String serilizerClassName = "kafka.serializer.StringEncoder";
-        JavaKafkaProducer<String, String> producer = new JavaKafkaProducer<String, String>(topicName, brokerList, serilizerClassName);
-
-        // 构建线程
-        int numThreads = 10;
-        // 构建一个线程池
-        ExecutorService pool = Executors.newFixedThreadPool(numThreads);
-
-        // 标识是否正在运行
-        AtomicBoolean running = new AtomicBoolean(true);
-
-        // 发送数据到Kafka
-        JavaKafkaProducerMessageSender.sendMessages(producer, pool, numThreads, running);
-
-        // 等待一段时间，然后进行关闭操作
-        int sleepMils = 6000;
-        Thread.sleep(sleepMils);
-
-        // 标记结束数据发送操作
-        running.set(false);
-
-        // 关闭kafka连接
-        producer.close();
-
-        // 关闭线程池
-        pool.shutdown();
-    }
+   
 }

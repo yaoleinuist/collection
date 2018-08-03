@@ -61,6 +61,8 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
 		<!--fastjson json库 -->
 		<dependency>
@@ -135,7 +137,7 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
- 
+
 		<!--LCN分布式事务包 -->
 		<dependency>
 			<groupId>com.codingapi</groupId>

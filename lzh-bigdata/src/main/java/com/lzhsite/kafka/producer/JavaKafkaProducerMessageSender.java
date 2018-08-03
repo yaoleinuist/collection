@@ -96,7 +96,7 @@ public class JavaKafkaProducerMessageSender {
      */
     public static KeyedMessage<String, String> generateKeyedMessage(String topicName) {
         // 随机出key值
-        String key = "key_" + random.nextInt(10, 100);
+        String key = "key_001"; //+ random.nextInt(10, 100);
         // 随机出value中包含的单词数量,[1,4]
         int wordNums = random.nextInt(1, 5);
         // 开始随机字符串

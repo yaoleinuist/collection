@@ -6,22 +6,29 @@ public class TestHashMap {
 
 	public static void main(String[] args) {
 
-		HashMap map = new HashMap<>();
+		HashMap<String,Integer> map = new HashMap<>();
 
 		map.put("1", 1);
 		map.put("2", 2);
 		map.put("3", 3);
 		map.put("4", 4);
-		map.put("1", 1);
-		map.put("2", 2);
-		map.put("3", 3);
-		map.put("4", 4);
+	 
 
-		java.util.Iterator it = map.entrySet().iterator();
-		while (it.hasNext()) {
-			java.util.Map.Entry entry = (java.util.Map.Entry) it.next();
-			System.out.println(entry.getValue());
+		HashMap<String,Integer> map2 = new HashMap<>();
+
+		map2.put("1", 4);
+		map2.put("2", 3);
+		map2.put("3", 2);
+		map2.put("4", 1);
+
+		//后面put进来的会覆盖之前的
+		map2.putAll(map);
+	 
+		for (String key : map2.keySet()) {
+			System.out.println(key + ":" + map2.get(key));
 		}
+		
+		
 
 	}
 }
