@@ -12,7 +12,8 @@ import javax.servlet.ServletRequest;
 /**
  * 外观模式：防止用户把用户把ServletRequest转为Request传递给servlet的servie方法
  * 
- * Request 的parseUri 和 parse其他方法=也要调用不能设为私有
+ * Request  的parseUri 和 parse 也要被其他类调用调用不能设为私有
+ * Response 的sendStaticResource
  * @author lzhcode
  *
  */

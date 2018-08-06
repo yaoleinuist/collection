@@ -1,0 +1,20 @@
+容器只会调用一次init()进行初始化
+所有线程执行完service并且退出后会执行destory()
+
+关键代码：
+URLClassLoader loader = null;
+myClass = loader.loadClass(servletName);
+servlet = (Servlet) myClass.newInstance();
+servlet.service((ServletRequest) request, (ServletResponse) response);
+
+
+外观模式的运用
+public class RequestFacade implements ServletRequest {
+
+  private ServletRequest request = null;
+
+  public RequestFacade(Request request) {
+    this.request = request;
+  }
+  ...
+ }

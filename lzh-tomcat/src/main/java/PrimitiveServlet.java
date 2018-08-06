@@ -14,6 +14,9 @@ public class PrimitiveServlet implements Servlet {
     PrintWriter out = response.getWriter();
     out.println("Hello. Roses are red.");
     out.print("Violets are blue.");
+    
+     //response.getWriter().write("Hello. Roses are red.");
+    //response.getOutputStream().write("Hello. Roses are red.".getBytes());
   }
 
   public void destroy() {
