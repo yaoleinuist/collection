@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 Total Size: 50315772180
 Time taken: 23.029064337*/
-public class CountdownLatch0 {
+public class TestCountdownLatch {
 	
 	private ExecutorService service;
 	final private AtomicLong pendingFileVisits = new AtomicLong();
@@ -61,7 +61,7 @@ public class CountdownLatch0 {
 
 	public static void main(final String[] args) throws InterruptedException {
 		final long start = System.nanoTime();
-		final long total = new CountdownLatch0().getTotalSizeOfFile("C:\\Users");
+		final long total = new TestCountdownLatch().getTotalSizeOfFile("C:\\Users");
 		final long end = System.nanoTime();
 		System.out.println("Total Size: " + total);
 		System.out.println("Time taken: " + (end - start) / 1.0e9);

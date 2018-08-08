@@ -15,7 +15,7 @@ import java.util.concurrent.CountDownLatch;
 	awaint方法，调用此方法会一直阻塞当前线程，直到计时器的值为0
 	*/
 	 
-public class TestDownLatchDemo {
+public class TestCountDownLatch2 {
 	final static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	public static void main(String[] args) throws InterruptedException {
