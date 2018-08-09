@@ -1,4 +1,4 @@
-package com.lzhsite.zookeeper.demo4;
+package com.lzhsite.zookeeper.demo;
 
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.WatchedEvent;
@@ -6,7 +6,7 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.ZooDefs.Ids;
 
-public class ZkTest2 implements Watcher {
+public class ZkDataTest implements Watcher {
 
 	/**
 	 * @param args
@@ -20,7 +20,7 @@ public class ZkTest2 implements Watcher {
 	public static String authPasswd2 = "passwd123" ;
 	
 	public static void main(String[] args) throws Exception {
-		ZkTest2 zkTest2 = new ZkTest2();
+		ZkDataTest zkTest2 = new ZkDataTest();
 
 		ZooKeeper zk = new ZooKeeper(url, 3000, zkTest2);
 		zk.addAuthInfo(authType, authPasswd.getBytes());

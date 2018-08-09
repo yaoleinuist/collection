@@ -1,4 +1,4 @@
-package com.lzhsite.zookeeper.demo4;
+package com.lzhsite.zookeeper.demo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Auth implements Watcher {
+public class ZKAuthTest implements Watcher {
 
 	
 	final static String SERVER_LIST = "192.168.226.3:2181";
@@ -108,7 +108,7 @@ public class Auth implements Watcher {
 	}
 	public static void main(String[] args) throws Exception {
 		
-		Auth testAuth = new Auth();
+		ZKAuthTest testAuth = new ZKAuthTest();
 		testAuth.createConnection(SERVER_LIST,2000);
 		//删除所有的父子节点
 		deleteParent();

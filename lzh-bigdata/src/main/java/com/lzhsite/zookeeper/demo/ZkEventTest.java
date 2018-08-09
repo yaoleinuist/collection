@@ -1,4 +1,4 @@
-package com.lzhsite.zookeeper.demo3;
+package com.lzhsite.zookeeper.demo;
 
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.WatchedEvent;
@@ -9,7 +9,7 @@ import org.apache.zookeeper.ZooDefs.Ids;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 
-public class ZkTest {
+public class ZkEventTest {
 
 	/**
 	 * @param args
