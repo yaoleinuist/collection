@@ -1,7 +1,6 @@
 package com.lzhsite.technology.grammar.reactor;
 
 import java.time.Duration;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,12 +8,12 @@ import java.util.function.BiFunction;
 
 import org.junit.Test;
 import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
-import reactor.core.Exceptions;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import reactor.test.StepVerifier;
+ 
 
 //http://www.blogjava.net/DLevin/archive/2015/09/02/427045.html
 //
@@ -112,6 +111,22 @@ public class TestReactor {
 						.flatMap(i -> Flux.interval(Duration.ofMillis(i * 100))))
 				.subscribe(System.out::println);
 
+	}
+	
+	@Test
+	public void test() {
+		Observable observable = Observable.create(new ObservableOnSubscribe() {
+
+			@Override
+			public void subscribe(ObservableEmitter emitter) throws Exception {
+				emitter.onNext("Hello");
+				emitter.onNext("Hi");
+				emitter.onNext("Aloha");
+				emitter.onComplete();
+				
+			}
+		});
+		observable = Observable.just("Hello", "Hi", "Aloha");
 	}
 
 	public void push() {

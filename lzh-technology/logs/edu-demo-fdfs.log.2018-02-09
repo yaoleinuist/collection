@@ -1,0 +1,10 @@
+[INFO ][20180209 13:21:45,458][DruidDataSource:785] {dataSource-1} inited
+[INFO ][20180209 13:21:47,934][DruidDataSource:1534] {dataSource-1} closed
+[INFO ][20180209 13:28:50,410][DruidDataSource:785] {dataSource-1} inited
+[INFO ][20180209 13:28:52,713][DruidDataSource:1534] {dataSource-1} closed
+[INFO ][20180209 13:30:15,383][DruidDataSource:785] {dataSource-1} inited
+[INFO ][20180209 13:37:24,553][DruidDataSource:785] {dataSource-1} inited
+[INFO ][20180209 13:41:11,652][DruidDataSource:785] {dataSource-1} inited
+[INFO ][20180209 13:41:12,962][DruidDataSource:1534] {dataSource-1} closed
+[INFO ][20180209 13:42:45,386][DruidDataSource:785] {dataSource-1} inited
+[INFO ][20180209 13:43:33,944][DruidDataSource:785] {dataSource-1} inited
