@@ -729,6 +729,6 @@
 		<module>lzh-springboot-consoume</module>
 		<module>lzh-springboot</module>
 		<module>lzh-netty-reactor</module>
-    <module>lzh-leetcode</module>
+        <module>lzh-leetcode</module>
   </modules>
 </project>
