@@ -2,7 +2,7 @@ package com.lzhsite.core.utils.snowFlake;
 
 /**
  * twitter的snowflake算法 -- java实现
- * Created by pangpeijie on 17/1/11.
+ * Created by lzhcode
  */
 public class SnowFlake {
     /**
@@ -87,5 +87,9 @@ public class SnowFlake {
 
     private long getNewstmp() {
         return System.currentTimeMillis();
+    }
+
+    public static long getMachineBit() {
+        return MACHINE_BIT;
     }
 }

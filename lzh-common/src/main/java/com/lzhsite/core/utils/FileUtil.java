@@ -7,12 +7,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 
 public class FileUtil extends FileUtils{
 
@@ -79,7 +82,7 @@ public class FileUtil extends FileUtils{
 	 *            网络连接地址
 	 * @return
 	 */
-	private static byte[] getImageFromNetByUrl(String strUrl) {
+	public static byte[] getImageFromNetByUrl(String strUrl) {
 		try {
 			URL url = new URL(strUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -102,7 +105,7 @@ public class FileUtil extends FileUtils{
 	 * @return
 	 * @throws Exception
 	 */
-	private static byte[] readInputStream(InputStream inStream) throws Exception {
+	public static byte[] readInputStream(InputStream inStream) throws Exception {
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 		byte[] buffer = new byte[1024];
 		int len = 0;
@@ -136,5 +139,55 @@ public class FileUtil extends FileUtils{
 		}
 		return file;
 	}
+	
+	/**
+	 * Java 中不创建临时文件的情况下如何删除文件前面指定行内容呢？
+	 * 答：这个问题看起来可能会觉得奇怪，也会觉得好像很容易似的，很多人的做法可能会选择使用第三方工具类或者创建 tmp 
+	 * 文件从指定行开始复制写入，完事删除原文件且对 tmp 文件进行重命名。而如果要求不允许创建 tmp 文件如何操作呢？
+	 * 下面给出一个实现方式，其核心就是利用 RandomAccessFile 实现，
+	 * 原理就是把后面内容依次读出来覆盖前面的内容，这样就不用新建文件了 
+	 * 这个问题的的应用场景也很多，譬如我们想往一个文件记录一些信息，当文件大小大于指定阈值时就让文件缩小一半
+	 * （即丢弃前面的记录，保留最近追加的），就可以用上面的工具类实现。
+	 * @param file
+	 * @param clearHeaderLins
+	 * @return
+	 * @throws IOException
+	 */
+	public boolean removeFileHeaderLines(File file, int clearHeaderLins) throws IOException {
+		
+			    RandomAccessFile accessFile = null;
+			    try{
+			        accessFile = new RandomAccessFile(file, "rw");
+
+			        long writePosition = accessFile.getFilePointer();
+			        for (int i = 0 ; i < clearHeaderLins; i++){
+
+			            String line = accessFile.readLine();
+			            if(line == null){
+			                break;
+			            }
+			        }
+			        long readPosition = accessFile.getFilePointer();
+			        byte[] buffer = new byte[1024];
+			        int num;
+
+			        while (-1 != (num = accessFile.read(buffer))) {
+			        	//设置文件的写入位置
+			            accessFile.seek(writePosition);
+			            accessFile.write(buffer, 0, num);
+			            readPosition += num;
+			            writePosition += num;
+			          //设置文件的读取位置
+			            accessFile.seek(readPosition);
+			        }
+			        accessFile.setLength(writePosition);
+			        return true;
+
+			    } catch(Throwable e){
+			        return false;
+			    } finally{
+			      IOUtils.closeQuietly(accessFile);
+			    }
+	 }
 
 }
