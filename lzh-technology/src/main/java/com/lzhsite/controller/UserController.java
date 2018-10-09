@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lzhsite.core.utils.JsonUtil;
+import com.lzhsite.core.utils.JSONUtil;
 import com.lzhsite.dao.UserMapper;
 import com.lzhsite.entity.User;
 
@@ -35,19 +35,19 @@ public class UserController extends BaseController{
 			paramMap.put("status", getInteger("status")); // 状态
 	 
 		    list=userMapper.getUserlist();
-			logger.info("用户列表-----"+JsonUtil.toJson(list));
+			logger.info("用户列表-----"+JSONUtil.toJson(list));
 			
 			User user=userMapper.loadbyname("管理员");
-			logger.info("name='管理员'管理员-----"+JsonUtil.toJson(user));
+			logger.info("name='管理员'管理员-----"+JSONUtil.toJson(user));
 			
 			user=userMapper.loadbyid(1);
-			logger.info("id=1的用户-----"+JsonUtil.toJson(user));
+			logger.info("id=1的用户-----"+JSONUtil.toJson(user));
 			
 		} catch (Exception e) {
 			logger.error("== listPmsUser exception:", e);
 		 
 		}
 		
-		   return JsonUtil.toJson(list);
+		   return JSONUtil.toJson(list);
 	}
 }

@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lzhsite.core.utils.JsonUtil;
+import com.lzhsite.core.utils.JSONUtil;
 
 //http://www.jdon.com/idea/java/using-optional-effectively-in-java-8.html
 public class TestOptional {
@@ -31,7 +31,7 @@ public class TestOptional {
 		A test=new A();
 		test.setLzhcode("lzhcode");
 		user.setTest( test);
-		String body =JsonUtil.toJson(user);
+		String body =JSONUtil.toJson(user);
 
 		String code = Optional.ofNullable(body)
 				.map(JSONObject::parseObject)

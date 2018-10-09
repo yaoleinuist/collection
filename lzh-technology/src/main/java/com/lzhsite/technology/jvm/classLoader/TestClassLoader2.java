@@ -22,7 +22,7 @@ import java.util.jar.JarFile;
 
 import org.junit.Test;
 
-import com.lzhsite.core.utils.JsonUtil;
+import com.lzhsite.core.utils.JSONUtil;
 
 public class TestClassLoader2 {
 
@@ -150,7 +150,7 @@ public class TestClassLoader2 {
 			e.printStackTrace();
 		}
 		System.out.println(classes.size());
-		System.out.println(JsonUtil.toJson(classes));
+		System.out.println(JSONUtil.toJson(classes));
 
 	}
 

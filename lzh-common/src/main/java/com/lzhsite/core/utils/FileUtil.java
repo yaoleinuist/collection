@@ -1,11 +1,14 @@
 package com.lzhsite.core.utils;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
@@ -41,6 +44,68 @@ public class FileUtil extends FileUtils{
 		return file;
 
 	}
+	/**
+     * @Description: 通过文件读取文件内容(txt、properties)
+     * @param file
+     * @return
+     */
+    public static String readContentByFile(File file) {
+        StringBuilder result = new StringBuilder();
+        try {
+            BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            String lineTxt = null;
+            while ((lineTxt = bfr.readLine()) != null) {
+                result.append(lineTxt).append("\n");
+            }
+            bfr.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result.toString();
+    }
+
+    /**
+     * @Description: 通过文件路径读取文件内容(txt、properties)
+     * @param filePath
+     * @return
+     */
+    public static String readContentByPath(String filePath) {
+        StringBuilder result = new StringBuilder();
+        try {
+            BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(new File(filePath)), "UTF-8"));
+            String lineTxt = null;
+            while ((lineTxt = bfr.readLine()) != null) {
+                result.append(lineTxt).append("\n");
+            }
+            bfr.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result.toString();
+    }
+
+    /**
+     * 通过URL获取文本内容
+     * @param urlStr
+     * @return
+     */
+    public static String readContentByUrl(String urlStr) throws Exception {
+        String res=null;
+
+            URL url = new URL(urlStr);
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            //设置超时间为3秒
+            conn.setConnectTimeout(3*1000);
+            //防止屏蔽程序抓取而返回403错误
+            conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+            //得到输入流
+            InputStream inputStream = conn.getInputStream();
+            res = new String(readInputStream(inputStream),"utf-8");
+
+        return res;
+    }
+
+ 
 
 	public static File inputStreamToFile(InputStream ins,File file) {
 		  try {
@@ -189,5 +254,26 @@ public class FileUtil extends FileUtils{
 			      IOUtils.closeQuietly(accessFile);
 			    }
 	 }
+	
+
+    /**
+     * @Description: 读取文件内容(txt、properties)
+     * @param filePath
+     * @return
+     */
+    public static String readFileFromPath(String filePath) {
+        StringBuilder result = new StringBuilder();
+        try {
+            BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(new File(filePath)), "UTF-8"));
+            String lineTxt = null;
+            while ((lineTxt = bfr.readLine()) != null) {
+                result.append(lineTxt).append("\n");
+            }
+            bfr.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result.toString();
+    }
 
 }

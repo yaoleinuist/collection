@@ -1,8 +1,11 @@
 package com.lzhsite.core.es;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,7 +23,11 @@ import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.ActionResponse;
 import org.elasticsearch.action.ListenableActionFuture;
 import org.elasticsearch.action.admin.cluster.state.ClusterStateResponse;
+import org.elasticsearch.action.admin.indices.alias.IndicesAliasesResponse;
+import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest;
+import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsResponse;
 import org.elasticsearch.action.admin.indices.mapping.get.GetMappingsResponse;
+import org.elasticsearch.action.admin.indices.mapping.put.PutMappingRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -28,11 +35,14 @@ import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.client.Requests;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.cluster.metadata.MappingMetaData;
 import org.elasticsearch.common.collect.ImmutableOpenMap;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHitField;
@@ -46,6 +56,8 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Splitter;
 import com.lzhsite.core.ensure.Ensure;
+import com.lzhsite.core.utils.FileUtil;
+import com.lzhsite.core.utils.JSONUtil;
 
 /**
  * elasticsearch操作SDK
@@ -409,6 +421,94 @@ public class EsOperateSdk  implements DisposableBean {
         return obj;
     }
 
+
+    /**
+     * 构建index和type对应的mapping
+     *
+     * @param index
+     * @param type
+     * @param version
+     * @param file
+     */
+    public  Boolean createIndexWithMappingIfNoExists(String index, String type, String version, File file) throws  Exception {
+
+        try {
+
+            String realIndexName = index + "_" + version;
+            IndicesExistsResponse indicesResponse =
+                    client.admin().indices().exists(
+                            new IndicesExistsRequest().indices(new String[]{realIndexName})).actionGet();
+            //如果Index不存在就创建Mapping会报错
+            if (!indicesResponse.isExists()) {
+                client.admin().indices().prepareCreate(realIndexName).execute().actionGet();
+            }
+
+            //索引起别名,一个索引可以起多个别名
+            IndicesAliasesResponse aliasesresponse =
+                    client.admin().indices()
+                            .prepareAliases().addAlias(realIndexName, index)
+                            .execute().actionGet();
+
+            logger.info("索引名=" + realIndexName + ";索引别名=" + index + ";别名创建状态=" + aliasesresponse.isAcknowledged());
+            if (null != file) {
+                String json = FileUtil.readContentByFile(file);
+                PutMappingRequest mapping = Requests.putMappingRequest(realIndexName).type(type).
+                        source(JSONUtil.toMap(json));
+                client.admin().indices().putMapping(mapping).actionGet();
+            }
+
+
+        } catch (Exception e) {
+            logger.info("创建索引失败index=" + index + ";type=" + type + ";version=" + version, e.getMessage());
+            throw new  Exception("创建索引失败index=" + index + ";type=" + type + ";version=" + version + e.getMessage());
+        }
+        return true;
+
+    }
+
+    public  Boolean createIndexIfNoExists(String index, String type, String version) throws  Exception {
+
+        return createIndexWithMappingIfNoExists(index, type, version, null);
+    }
+
+    public static XContentBuilder getMappingByData(Map<String, Object> dataMap) {
+
+        XContentBuilder mapping = null;
+        try {
+            mapping = XContentFactory.jsonBuilder().startObject()
+                    .startObject("properties");
+
+
+            if (!dataMap.isEmpty()) {
+                for (Map.Entry<String, Object> proName : dataMap.entrySet()) {
+                    if (null != proName.getKey()) {
+                        mapping.startObject(proName.getKey());
+                        if (proName.getValue() instanceof LocalDateTime) {
+                            mapping.field("type", "date").field("index", "not_analyzed");
+                        } else if (proName.getValue() instanceof String) {
+                            mapping.field("type", "text").field("index", "not_analyzed");
+                        } else if (proName.getValue() instanceof Long) {
+                            mapping.field("type", "long").field("index", "not_analyzed");
+                        } else if (proName.getValue() instanceof Integer) {
+                            mapping.field("type", "integer").field("index", "not_analyzed");
+                        } else if (proName.getValue() instanceof Short) {
+                            mapping.field("type", "short").field("index", "not_analyzed");
+                        }
+
+                        mapping.endObject();
+                    }
+                }
+            }
+            mapping.endObject().endObject();
+
+        } catch (IOException e) {
+            logger.error("创建mapping时出错:" + e.getMessage());
+        }
+
+        return mapping;
+    }
+
+    
     /**
      * 查询索引列表
      *

@@ -2,13 +2,13 @@ package com.lzhsite.core.utils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.dozer.DozerBeanMapper;
 
-import com.google.common.collect.Lists;
 
 /**
  * Created by lyl on 2016/10/10.
@@ -39,7 +39,7 @@ public class BeanMapper extends BeanUtils{
      * @return
      */
     public static <T> List<T> mapList(Collection sourceList, Class<T> destinationClass) {
-        List<T> destinationList = Lists.newArrayList();
+        List<T> destinationList = new ArrayList<>();
         for (Object sourceObject : sourceList) {
             T destinationObject = dozer.map(sourceObject, destinationClass);
             destinationList.add(destinationObject);
@@ -75,7 +75,7 @@ public class BeanMapper extends BeanUtils{
                 innerInstance = (T) constructor.newInstance(response);
             }
         }
-        BeanUtils.copyProperties(source, innerInstance);
+        copyProperties(source, innerInstance);
         return innerInstance;
     } 
   

@@ -1,10 +1,11 @@
 package com.lzhsite.technology.deepcopy;
 import java.io.*;
-//但是串行化却很耗时，在一些框架中，我们便可以感受到，它们往往将对象进行串行化后进行传递，耗时较多。
+/**
+ * 但是串行化却很耗时，在一些框架中，我们便可以感受到，它们往往将对象进行串行化后进行传递，耗时较多。
+ * 
+ */
 class Professor2 implements Serializable {
-  /**
-   * 
-   */
+ 
   private static final long serialVersionUID = 1L;
   String name;
   int age;
@@ -44,7 +45,7 @@ class Student2 implements Serializable {
 
 }
 
-public class DeepCopy2 {
+public class DeepCopy {
 
   /**
    * @param args

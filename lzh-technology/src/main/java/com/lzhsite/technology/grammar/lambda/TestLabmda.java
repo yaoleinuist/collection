@@ -187,7 +187,7 @@ public class TestLabmda {
 		// 方式二：指定实例的map
 		Map<Integer, User> linkedHashMap = users.stream()
 				.collect(Collectors.toMap(User::getId, temp -> temp, (key1, key2) -> key2, LinkedHashMap::new));
-
+ 
 		System.out.println(keyRedo);
 		System.out.println(linkedHashMap);
 	}
