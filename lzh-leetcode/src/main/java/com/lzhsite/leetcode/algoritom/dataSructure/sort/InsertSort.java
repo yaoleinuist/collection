@@ -5,30 +5,33 @@ package com.lzhsite.leetcode.algoritom.dataSructure.sort;
   所以并不是最优的排序算法。特点是简单，不需要额外的存储空间，在元素少的时候工作得好。*/
 
 public class InsertSort {
-	 public static void insertSort(int[] array) {  
-	        if (array == null || array.length < 2) {  
-	            return;  
-	        }  
-	  
-	        for (int i = 1; i < array.length; i++) {  
-	            int currentValue = array[i];  
-	            int position = i;  
-	            for (int j = i - 1; j >= 0; j--) {  
-	                if (array[j] > currentValue) {  
-	                    array[j + 1] = array[j];  
-	                    position -= 1;  
-	                } else {  
-	                    break;  
-	                }  
-	            }  
-	  
-	            array[position] = currentValue;  
-	        }  
-	    }  
-	  
+ 
+	 
+	  public static void insertSort(int[] arr) {
+		  
+		     if (arr == null || arr.length < 2) {  
+		            return;  
+		        }  		  
+	        for (int i = 1; i < arr.length; i++) {
+	            int j = i;
+	            while (j > 0 && arr[j] < arr[j - 1]) {
+	                swap(arr,j,j-1);
+	                j--;
+	            }
+	        }
+	    }
 
 	 
-	    public static void main(String[] args) {  
+	    private static void swap(int[] arr, int j, int i) {
+		// TODO Auto-generated method stub
+		   int temp;
+		   temp = arr[i];
+		   arr[i]=arr[j];
+		   arr[j] = temp;
+     	}
+
+
+		public static void main(String[] args) {  
 	        int[] array = { 3, -1, 0, -8, 2, 1 };  
 	        ArrayUtils.printArray(array);  
 	        insertSort(array);  
