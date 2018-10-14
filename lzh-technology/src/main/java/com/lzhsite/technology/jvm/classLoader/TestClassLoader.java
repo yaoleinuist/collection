@@ -16,6 +16,13 @@ import com.lzhsite.core.utils.HttpUtils;
  * 这样会存在非常大的安全隐患，而双亲委托的方式，就可以避免这种情况，因为String已经在启动时就被引导类加载器（Bootstrcp
  * ClassLoader）加载， 所以用户自定义的ClassLoader永远也无法加载一个自己写的String，
  * 除非你改变JDK中ClassLoader搜索类的默认算法
+ * 
+ * 一句话概况: 不考虑缓存, 那么装载路径就是,先Classpath, 然后War包,当前工程, 最后才是Tomcat相关目录. 
+ * 不考虑缓存,是因为缓存只是用来加快速度,对外不调用展现出的逻辑效果是可以忽略的.
+ * 作用：保证JDK核心类的优先加载；
+ * 如何打破双亲委派模型
+ * 1自定义类加载器，重写loadClass方法；
+ * 2使用线程上下文类加载器；
  */
 public class TestClassLoader {
 
