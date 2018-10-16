@@ -20,7 +20,21 @@
 		http://www.springframework.org/schema/util
 		http://www.springframework.org/schema/util/spring-util-3.2.xsd"
 	default-autowire="byName">
- 
-	<bean id="initializingBean" class="com.lzhsite.technology.test.TestInitializingBean"  init-method="init"/>
+
+	<bean id="initializingBean" class="com.lzhsite.technology.test.TestInitializingBean"
+		init-method="init" />
+		
+	<bean id="testAdvisor" class="com.lzhsite.technology.aop.demo.TestAdvisor"></bean>
+	<bean id="testTarget"  class="com.lzhsite.technology.aop.demo.TestTarget"></bean>
+	<bean id="testAOP" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="targetName">
+			<value>testTarget</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>testAdvisor</value>
+			</list>
+		</property>
+	</bean>
 
 </beans>

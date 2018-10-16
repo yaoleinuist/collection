@@ -724,7 +724,6 @@
 		<module>lzh-generator</module>
 		<module>lzh-seckill</module>
 		<module>lzh-tomcat</module>
-		<module>?</module>
 		<module>lzh-spring</module>
 		<module>lzh-springboot-consoume</module>
 		<module>lzh-springboot</module>
