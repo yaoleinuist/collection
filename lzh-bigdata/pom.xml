@@ -8,9 +8,7 @@
 		<artifactId>lzh-maven-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<groupId>com.lzhsite</groupId>
 	<artifactId>lzh-bigdata</artifactId>
-	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>lzh-bigdata Maven Webapp</name>
 	<url>http://maven.apache.org</url>
@@ -27,7 +25,7 @@
 	</properties>
 
 	<dependencies>
-		 
+
 		<!-- spark Dependency Begin -->
 		<dependency>
 			<groupId>org.apache.spark</groupId>
@@ -43,6 +41,7 @@
 		</dependency>
 
 
+
 		<dependency>
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-streaming_${scala.binary.version}</artifactId>
@@ -55,29 +54,14 @@
 			<version>${spark.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-bagel_${scala.binary.version}</artifactId>
-			<version>${spark.version}</version>
-			<scope>provided</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-hive_${scala.binary.version}</artifactId>
 			<version>${spark.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-graphx_${scala.binary.version}</artifactId>
-			<version>${spark.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-streaming-twitter_${scala.binary.version}</artifactId>
-			<version>${spark.version}</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-streaming-flume_${scala.binary.version}</artifactId>
@@ -114,6 +98,17 @@
 		</dependency>
 		<!-- spark Dependency End -->
 
+		<!-- hbase Dependency -->
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase-client</artifactId>
+			<version>${hbase.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase-server</artifactId>
+			<version>${hbase.version}</version>
+		</dependency>
 
 
 		<!-- kafka Dependency -->
@@ -173,6 +168,16 @@
 			<artifactId>hive-jdbc</artifactId>
 			<version>${hive.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>jdk.tools</groupId>
+			<artifactId>jdk.tools</artifactId>
+			<version>1.8</version>
+			<scope>system</scope>
+			<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
+		</dependency>
+
+
 	</dependencies>
 	<build>
 		<finalName>lzh-bigdata</finalName>

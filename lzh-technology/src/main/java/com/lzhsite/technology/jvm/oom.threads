@@ -1,0 +1,44 @@
+Thread 0x34175070
+
+  locals:
+
+Thread 0x341750d8
+
+  locals:
+
+Thread 0x34175140
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.ref.ReferenceQueue.remove(J)Ljava/lang/ref/Reference; (ReferenceQueue.java:118)
+  at java.lang.ref.ReferenceQueue.remove()Ljava/lang/ref/Reference; (ReferenceQueue.java:134)
+  at java.lang.ref.Finalizer$FinalizerThread.run()V (Finalizer.java:159)
+
+  locals:
+    objectId=0x341751b0, line=1
+    objectId=0x341751a8, line=1
+    objectId=0x341751b0, line=2
+    objectId=0x34175140, line=3
+
+Thread 0x341751c8
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.Object.wait()V (Object.java:485)
+  at java.lang.ref.Reference$ReferenceHandler.run()V (Reference.java:116)
+
+  locals:
+    objectId=0x34175230, line=1
+    objectId=0x341751c8, line=2
+    objectId=0x34175230, line=2
+
+Thread 0x341752c8
+  at java.util.Arrays.copyOf([CI)[C (Arrays.java:2882)
+  at java.lang.AbstractStringBuilder.expandCapacity(I)V (AbstractStringBuilder.java:100)
+  at java.lang.AbstractStringBuilder.append(I)Ljava/lang/AbstractStringBuilder; (AbstractStringBuilder.java:597)
+  at java.lang.StringBuffer.append(I)Ljava/lang/StringBuffer; (StringBuffer.java:329)
+  at geym.jvm.ch8.oom.homework.StringOOM.main([Ljava/lang/String;)V (StringOOM.java:20)
+
+  locals:
+    objectId=0x34110000, line=0
+    objectId=0x340db578, line=1
+    objectId=0x340db578, line=2
+    objectId=0x340db578, line=3
+    objectId=0x340db578, line=4
+

@@ -1,30 +1,38 @@
 package com.lzhsite.technology.grammar.reactor;
 
-import org.junit.Test;
-import org.reactivestreams.Publisher;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-import reactor.core.CoreSubscriber;
-import reactor.core.Exceptions;
-import reactor.core.Fuseable;
-import reactor.core.publisher.*;
-import reactor.core.scheduler.Schedulers;
-
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Observable;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import org.junit.Test;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+import reactor.core.CoreSubscriber;
+import reactor.core.Exceptions;
+import reactor.core.Fuseable;
+import reactor.core.publisher.BaseSubscriber;
+import reactor.core.publisher.BufferOverflowStrategy;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.FluxOperator;
+import reactor.core.publisher.FluxSink;
+import reactor.core.publisher.Mono;
+import reactor.core.publisher.Operators;
+import reactor.core.publisher.WorkQueueProcessor;
+import reactor.core.scheduler.Schedulers;
 
 /**
  * <p>
@@ -57,7 +65,7 @@ public class TestReactor2 {
 		System.out.println();
 		manyWords.subscribe(System.out::println);
 	}
-
+ 
 	/**
 	 * In order to output the individual letters in the fox sentence we'll also
 	 * need flatMap (as we did in RxJava by Example), but in Reactor we use
@@ -200,7 +208,6 @@ public class TestReactor2 {
 		}).subscribe(System.out::println);
 	}
 
- 
 	@Test
 	public void retryWhen() {
 		Flux<String> flux = Flux.<String>error(new IllegalArgumentException())
@@ -250,8 +257,6 @@ public class TestReactor2 {
 			return Flux.just(sum);
 		}).collect(Collectors.summingLong(Long::longValue)).subscribe(System.out::println);
 	}
-
- 
 
 	@Test
 	public void test_206() {

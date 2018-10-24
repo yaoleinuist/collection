@@ -1,17 +1,8 @@
 package com.lzhsite.technology.grammar.reactor;
 
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.function.BiFunction;
-
+ 
 import org.junit.Test;
-import org.reactivestreams.Subscriber;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import reactor.core.publisher.Flux;
  
 
@@ -59,6 +50,8 @@ public class TestReactor {
 			consumer.complete();
 		}).subscribe(System.out::println);
 	}
+	
+ 
 
 	@Test
 	public void map() {
@@ -74,61 +67,7 @@ public class TestReactor {
 
 	}
 
-	@Test
-	public void reduce() {
-		Flux.range(1, 10).reduce(new BiFunction<Integer, Integer, Integer>() {
-			@Override
-			public Integer apply(Integer integer, Integer integer2) {
-				return integer + integer2;
-			}
-		}).subscribe(System.out::println);
-
-		// Returns a power of two list
-		Flux.range(1, 10).reduce(new HashMap<String, List<Integer>>(16), (accumulator, integer) -> {
-			// i二进制表示中1的个数
-			boolean pow2 = Integer.bitCount(integer) == 1;
-			accumulator.putIfAbsent("power", new ArrayList<>());
-			accumulator.putIfAbsent("other", new ArrayList<>());
-			if (pow2) {
-				accumulator.get("power").add(integer);
-			} else {
-				accumulator.get("other").add(integer);
-			}
-			return accumulator;
-		}).subscribe(next -> {
-			System.out.println(next.get("power"));
-			System.out.println(next.get("other"));
-		});
-	}
-
-	/**
-	 * 每次重试的间隔都会递增 （伪代码： delay = attempt number * 100 milliseconds）：
-	 */
-	@Test
-	public void retryWhen() {
-		Flux.merge(Flux.range(1, 10), Flux.range(10, 20)).buffer()
-				.retryWhen(throwableFlux -> throwableFlux.zipWith(Flux.range(1, 3), (throwable, integer) -> integer)
-						.flatMap(i -> Flux.interval(Duration.ofMillis(i * 100))))
-				.subscribe(System.out::println);
-
-	}
-	
-	@Test
-	public void test() {
-		Observable observable = Observable.create(new ObservableOnSubscribe() {
-
-			@Override
-			public void subscribe(ObservableEmitter emitter) throws Exception {
-				emitter.onNext("Hello");
-				emitter.onNext("Hi");
-				emitter.onNext("Aloha");
-				emitter.onComplete();
-				
-			}
-		});
-		observable = Observable.just("Hello", "Hi", "Aloha");
-	}
-
+	 
 	public void push() {
 		Flux.<Integer>push(c -> {
 			for (int i = 0; i < 10; i++) {
@@ -140,11 +79,9 @@ public class TestReactor {
 
 	public static void main(String[] args) {
 		TestReactor testReactor = new TestReactor();
-		// testReactor.just();
-		// testReactor.generate();
-		// testReactor.create();
-		// testReactor.range();
-		testReactor.retryWhen();
+		 testReactor.just();
+		  testReactor.generate();
+		  testReactor.create();
 	}
 
 }
