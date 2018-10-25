@@ -725,7 +725,6 @@
 		<module>lzh-seckill</module>
 		<module>lzh-tomcat</module>
 		<module>lzh-spring</module>
-		<module>lzh-springboot-consoume</module>
 		<module>lzh-springboot</module>
 		<module>lzh-netty-reactor</module>
         <module>lzh-leetcode</module>
