@@ -15,7 +15,7 @@
 
 	<properties>
 		<junit.version>4.11</junit.version>
-		<hbase.version>0.98.7-hadoop2</hbase.version>
+		<hbase.version>1.2.1</hbase.version>
 		<commons.math3.version>3.4.1</commons.math3.version>
 		<scala.binary.version>2.11</scala.binary.version>
 		<spark.version>1.6.3</spark.version>
@@ -122,7 +122,7 @@
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-client</artifactId>
-			<version>2.5.0</version>
+			<version>${hadoop.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>io.netty</groupId>

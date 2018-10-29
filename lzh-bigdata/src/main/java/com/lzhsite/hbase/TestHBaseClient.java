@@ -15,9 +15,16 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 public class TestHBaseClient {
 	
+	
+	public static Configuration conf=HBaseConfiguration.create();
+//	static {
+//		conf = HBaseConfiguration.create();
+//		conf.set("hbase.zookeeper.property.clientPort", "2181");
+//		conf.set("hbase.zookeeper.quorum", "192.168.226.4");
+//		conf.set("hbase.master", "192.168.226.4:600000");
+//	}
+	
 	public static HTable getTable(String name )throws Exception {
-		
-		Configuration conf = HBaseConfiguration.create();
 		
 		HTable table = new HTable(conf, name);
 		
@@ -96,8 +103,8 @@ public class TestHBaseClient {
 		Scan scan = new Scan();
 		
 		//scan.addColumn(Bytes.toBytes("info"), Bytes.toBytes("name"));
-		scan.setStartRow(Bytes.toBytes("20170819_10002"));
-		scan.setStopRow(Bytes.toBytes("20170819_10003"));
+		scan.setStartRow(Bytes.toBytes("20171019_10001"));
+		scan.setStopRow(Bytes.toBytes("20171019_10003"));
 		
 		ResultScanner rsscan = table.getScanner(scan);
 		for(Result rs : rsscan){
@@ -118,7 +125,7 @@ public class TestHBaseClient {
 		//getData(table);
 		//putData(table);
 		//deleteData(table);
-		//scanData(table);
-		rangData(table);
+		scanData(table);
+		//rangData(table);
 	}
 }

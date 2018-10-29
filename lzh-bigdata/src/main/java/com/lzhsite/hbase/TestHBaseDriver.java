@@ -17,7 +17,6 @@ public class TestHBaseDriver extends Configured implements Tool{
 	public int run(String[] args) throws Exception {
 		
 		Configuration conf = this.getConf();
-		
 		//job
 		Job job = Job.getInstance(conf, "mr-hbase");
 		job.setJarByClass(TestHBaseDriver.class);
@@ -29,11 +28,13 @@ public class TestHBaseDriver extends Configured implements Tool{
 				  TestHBaseMapper.class,     // mapper class
 				  ImmutableBytesWritable.class,         // mapper output key
 				  Put.class,  // mapper output value
-				  job);
+				  job,false);  //最后一个参数表示是否打包运行
+				//job);   
 		TableMapReduceUtil.initTableReducerJob(
 				  "t5",        // output table
 				  null,    // reducer class
-				  job);
+				  job,null,null,null,null,false); //最后一个参数表示是否打包运行
+				  // job);
 				job.setNumReduceTasks(1);   // at least one, adjust as required
 		return job.waitForCompletion(true) ? 0:1;
 	}
