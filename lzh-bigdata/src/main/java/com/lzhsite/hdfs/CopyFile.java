@@ -14,7 +14,7 @@ public class CopyFile {
 
 		// 本地文件
 
-		Path src = new Path("D://大数据//hadoop//大数据Hadoop入门基础必知必会//03.随堂笔记//1.15");
+		Path src = new Path("D://大数据//hadoop//大数据Hadoop入门基础必知必会//03.随堂笔记//1.15.txt");
 
 		// HDFS为止
 

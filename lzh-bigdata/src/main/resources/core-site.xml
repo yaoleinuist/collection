@@ -26,11 +26,11 @@
 	<!--hadoop在运行时产生的文件，元数据在本地的存放目录 -->
 	<property>
 		<name>hadoop.tmp.dir</name>
-		<value>/opt/modules/hadoop-2.5.0/data/tmp</value>
+		<value>/opt/modules/cdh/hadoop-2.5.0-cdh5.3.6/data/tmp</value>
 	</property>
 	
 	<!-- 设置proxyuser的主机和组，第一个*代表本机，第二个*代表任意用户组 -->
-	<!-- <property>
+	<property>
 		<name>hadoop.proxyuser.hadoop.hosts</name>
 		<value>*</value>
 	</property>
@@ -38,7 +38,7 @@
 	<property>
 		<name>hadoop.proxyuser.hadoop.groups</name>
 		<value>*</value>
-	</property>	-->
+	</property>	 
 	<!-- 允许hue的用户访问主机 -->
 	<!-- <property>
 		<name>hadoop.proxyuser.hue.hosts</name>
@@ -48,18 +48,5 @@
 		<name>hadoop.proxyuser.hue.groups</name>
 		<value>*</value>
 	</property> -->
-	
-	
-	<!--- global properties -->
-	<property>
-	        <name>fs.hdfs.impl</name>
-	        <value>org.apache.hadoop.hdfs.DistributedFileSystem</value>
-	        <description>The FileSystem for hdfs: uris.</description>
-	</property>
-	<property>
-	        <name>fs.file.impl</name>
-	        <value>org.apache.hadoop.fs.LocalFileSystem</value>
-	        <description>The FileSystem for hdfs: uris.</description>
-	</property>
-	
+ 
 </configuration>

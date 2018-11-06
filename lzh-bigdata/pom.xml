@@ -15,7 +15,7 @@
 
 	<properties>
 		<junit.version>4.11</junit.version>
-		<hbase.version>1.2.1</hbase.version>
+		<hbase.version>0.98.6-hadoop2</hbase.version>
 		<commons.math3.version>3.4.1</commons.math3.version>
 		<scala.binary.version>2.11</scala.binary.version>
 		<spark.version>1.6.3</spark.version>
@@ -31,7 +31,6 @@
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-core_${scala.binary.version}</artifactId>
 			<version>${spark.version}</version>
-			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>org.apache.hadoop</groupId>
@@ -39,9 +38,21 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
-
-
+		
+		<!-- hbase Dependency -->
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase-client</artifactId>
+			<version>${hbase.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase-server</artifactId>
+			<version>${hbase.version}</version>
+		</dependency>
+		
+ 
+    	<!-- spark Dependency -->
 		<dependency>
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-streaming_${scala.binary.version}</artifactId>
@@ -96,20 +107,10 @@
 			<artifactId>spark-streaming-kafka_${scala.binary.version}</artifactId>
 			<version>${spark.version}</version>
 		</dependency>
-		<!-- spark Dependency End -->
+	
 
-		<!-- hbase Dependency -->
-		<dependency>
-			<groupId>org.apache.hbase</groupId>
-			<artifactId>hbase-client</artifactId>
-			<version>${hbase.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.hbase</groupId>
-			<artifactId>hbase-server</artifactId>
-			<version>${hbase.version}</version>
-		</dependency>
 
+		
 
 		<!-- kafka Dependency -->
 		<dependency>
@@ -149,7 +150,7 @@
 			<artifactId>zkclient</artifactId>
 			<version>0.3</version>
 		</dependency>
-		<!-- Zookeeper 用于分布式服务管理 end -->
+	 
 
 
 		<!-- Hive Client -->
@@ -176,7 +177,6 @@
 			<scope>system</scope>
 			<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
 		</dependency>
-
 
 	</dependencies>
 	<build>
