@@ -31,63 +31,27 @@ public class RedisConstant {
      * redis 超时时间延长 90天
      */
     public static final int REDIS_SET_TIME_OUT_THREE_MONTHS = 7776000;
-
-    /**
-     * 电子券缓存
-     */
-    public static final String PREFIX = "wemall:";
-
-    /**
-     * WEMALL用户token
-     */
-    public static final String WEMALL_USER_TOKEN = PREFIX + "userToken:%s";
-
-    /**
-     * WEMALL券信息
-     */
-    public static final String COUPON_INFO_WEMALL_PREFIX = PREFIX + "couponInfoWemall:%s";
-
-    /**
-     * 渠道信息缓存
-     */
-    public static final String COUPON_CHANNEL_INFO_PREFIX = PREFIX + "couponChannelId:%d";
-
-    /**
-     * 电子券缓存
-     */
-    public static final String COUPON_INFO_PREFIX = PREFIX + "couponChannelDetailId:%d:applyScene:%d";
-
-    /**
-     * 电子券缓存
-     */
-    public static final String WEMALL_COUPON_INFO_PREFIX = PREFIX + "wemallCouponId:%d";
-
-    /**
-     * 电子券详情缓存
-     */
-    public static final String COUPON_DETAIL_DTO_PREFIX = PREFIX + "couponChannelDetailDTOId:%d";
-
-  
  
+  
     /**
      * 限流规则
      */
-    public static final String WEMALL_DISTRUBUTED_LIMITER_RULE = PREFIX + "distributedLimit";
+    public static final String DISTRUBUTED_LIMITER_RULE ="distributedLimit";
 
     /**
      * 限流key
      */
-    public static final String WEMALL_LIMITER_KEY = PREFIX + "redisLimit:%s:%s";
+    public static final String LIMITER_KEY ="redisLimit:%s:%s";
 
     /**
      * 限流key次数
      */
-    public static final String WEMALL_LIMITER_KEY_COUNT = PREFIX + "redisLimitCounts";
+    public static final String LIMITER_KEY_COUNT ="redisLimitCounts";
 
     /**
      * 限流黑名单
      */
-    public static final String WEMALL_LIMITER_BLACKLIST_KEY = PREFIX + "redisBlackListLimit";
+    public static final String LIMITER_BLACKLIST_KEY ="redisBlackListLimit";
     
     
 }

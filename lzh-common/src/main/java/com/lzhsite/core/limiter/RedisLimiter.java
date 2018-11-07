@@ -33,7 +33,7 @@ public class RedisLimiter{
 			limiterBeanMap.clear();
 		}
 		Collection<LimiterBean> limiterList = RedisUtils.hgetAll(
-				RedisConstant.WEMALL_DISTRUBUTED_LIMITER_RULE,LimiterBean.class);
+				RedisConstant.DISTRUBUTED_LIMITER_RULE,LimiterBean.class);
 		reflushDateTime = LocalDateTime.now();
 		if(null == limiterList || limiterList.size() == 0){
 			return;
@@ -56,12 +56,12 @@ public class RedisLimiter{
 	 * @return
 	 */
 	public boolean execute(String routerName,String uniqueKey) {
-		String limitKey = KeyUtil.generteKeyWithPlaceholder(RedisConstant.WEMALL_LIMITER_KEY,
+		String limitKey = KeyUtil.generteKeyWithPlaceholder(RedisConstant.LIMITER_KEY,
 				routerName,String.valueOf(uniqueKey));
 		/**
 		 * 黑名单校验
 		 */
-		String value = RedisUtils.hget(RedisConstant.WEMALL_LIMITER_BLACKLIST_KEY,limitKey,String.class);
+		String value = RedisUtils.hget(RedisConstant.LIMITER_BLACKLIST_KEY,limitKey,String.class);
 		if(!StringUtils.isEmpty(value) && "ok".equalsIgnoreCase(value)){
 			LOGGER.error("黑名单校验不通过,uniqueKey:{},limitKey:{}",uniqueKey,limitKey);
 			return false;
@@ -94,19 +94,19 @@ public class RedisLimiter{
 		long currentCount = RedisUtils.incr(limitKey);
 		if (currentCount > limiterCount) {
 			// 如果超过限流值，则直接返回false
-			Integer count = RedisUtils.hget(RedisConstant.WEMALL_LIMITER_KEY_COUNT,limitKey,Integer.class);
+			Integer count = RedisUtils.hget(RedisConstant.LIMITER_KEY_COUNT,limitKey,Integer.class);
 			if (null == count){
 				count = 0;
 			}
 			if(count >= 50){
 				//大于50次的时候，才会触发加入黑名单
-				RedisUtils.hput(RedisConstant.WEMALL_LIMITER_BLACKLIST_KEY,limitKey,"ok");
-				RedisUtils.setExpire(RedisConstant.WEMALL_LIMITER_BLACKLIST_KEY,RedisConstant.REDIS_SET_TIME_OUT);
+				RedisUtils.hput(RedisConstant.LIMITER_BLACKLIST_KEY,limitKey,"ok");
+				RedisUtils.setExpire(RedisConstant.LIMITER_BLACKLIST_KEY,RedisConstant.REDIS_SET_TIME_OUT);
 				LOGGER.error("触发加入黑名单,uniqueKey:{},limitKey:{}",uniqueKey,limitKey);
 				return false;
 			}
 			count = count + 1;
-			RedisUtils.hput(RedisConstant.WEMALL_LIMITER_KEY_COUNT,limitKey,count);
+			RedisUtils.hput(RedisConstant.LIMITER_KEY_COUNT,limitKey,count);
 			LOGGER.error("请求限流,uniqueKey:{},limitKey:{},count:{}",uniqueKey,limitKey,count);
 			return false;
 		}
