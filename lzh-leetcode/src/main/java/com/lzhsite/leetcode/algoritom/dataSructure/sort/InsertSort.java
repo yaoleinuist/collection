@@ -12,8 +12,11 @@ public class InsertSort {
 		     if (arr == null || arr.length < 2) {  
 		            return;  
 		        }  		  
+		    //从小到大排序
 	        for (int i = 1; i < arr.length; i++) {
+	        	//i的赋给j表示已经有序的数组个数
 	            int j = i;
+	            //发现自己比前面的数小就往前移动
 	            while (j > 0 && arr[j] < arr[j - 1]) {
 	                swap(arr,j,j-1);
 	                j--;

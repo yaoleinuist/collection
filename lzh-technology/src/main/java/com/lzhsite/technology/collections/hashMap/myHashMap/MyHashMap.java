@@ -73,7 +73,7 @@ public class MyHashMap<K,V> {
 		if(capacity > defaulLenth * defaulAddSizeFactory){
 			up2Size();
 		}
-		//不同的key的hash一样时(hash冲突),新进的数据存在同一个数组的链表下
+		//不同的key的hash一样时(hash冲突),新进的数据存在同一个数组下标的链表下
 		int hash =hash(key);
 		Entry<K, V> nE = new Entry<K, V>(key, value, null);
 		Entry<K, V> mE = data[hash];

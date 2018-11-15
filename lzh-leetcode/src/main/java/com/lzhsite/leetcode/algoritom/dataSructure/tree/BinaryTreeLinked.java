@@ -93,7 +93,7 @@ public class BinaryTreeLinked implements BinTree {
 		Stack s = new StackSLinked();
 		while (p != null) {
 			while (p != null) { // 向左走到尽头
-				list.insertLast(p); // 访问根
+				list.insertLast(p); // 访问根    System.out.print(p.getData+"  "); 
 				if (p.hasRChild())
 					s.push(p.getRChild()); // 右子树根结点入栈
 				p = p.getLChild();
@@ -132,7 +132,7 @@ public class BinaryTreeLinked implements BinTree {
 			}
 			if (!s.isEmpty()) {
 				p = (BinTreeNode) s.pop();// 取出栈顶根结点访问之
-				list.insertLast(p);
+				list.insertLast(p);//   System.out.print(p.getData+"  ");  
 				p = p.getRChild(); // 转向根的右子树进行遍历
 			} // if
 		} // out while
