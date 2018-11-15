@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
 
-public class TestAtomic {
+public class TestAtomicInteger {
 	private static final int MAX_THREADS = 3;
 	private static final int TASK_COUNT = 3;
 	private static final int TARGET_COUNT = 1000000;
@@ -35,8 +35,8 @@ public class TestAtomic {
 	public class SyncThread implements Runnable{
 		protected String name;
 		protected long starttime;
-		TestAtomic out;
-		public SyncThread(TestAtomic o,long starttime){
+		TestAtomicInteger out;
+		public SyncThread(TestAtomicInteger o,long starttime){
 			out=o;
 			this.starttime=starttime;
 		}
