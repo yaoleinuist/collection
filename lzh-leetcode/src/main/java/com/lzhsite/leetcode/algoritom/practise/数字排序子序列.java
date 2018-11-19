@@ -56,21 +56,6 @@ public class 数字排序子序列 {
 		}
 		return result;
 	}
-	
-	
-	//数组所有子序列
-	static void allsubsqe(){
-		//i表示偏移量,j表示子序列的起始下标,k表示要打印子序列的所有下标
-		for (int i = 1; i <= a.length; i++) {
-			for (int j = 0; j <=a.length-i; j++) {
-				for (int k = j; k <j+i; k++) {
-					System.out.print(a[k]+" ");
-				}
-				System.out.println();
-			}
-			
-		}
-	}
-	
+ 
 
 }

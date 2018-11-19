@@ -12,7 +12,7 @@ package com.lzhsite.leetcode.algoritom.practise;
  */
 public class 八皇后问题 {
 	static int iCount = 0; // 全局变量
-	static int[] WeiZhi = new int[8]; // 全局数组
+	static int[] WeiZhi = new int[8]; // 数组下标代表行数,值表示列数
 
 	static void Output() // 输出解
 	{
@@ -56,10 +56,10 @@ public class 八皇后问题 {
 			Output(); // 输出求解的结果
 			return;
 		}
-		for (i = 1; i <= 8; i++) // 试探
+		for (i = 1; i <= 8; i++) // 从第n行第i列逐个试探
 		{
-			WeiZhi[n] = i; // 在该列的第i行上放置
-			// 断第n个皇后是否与前面皇后形成攻击
+			WeiZhi[n] = i; // 在该行的第i列上放置
+			// 判断第n个皇后是否与前面皇后形成攻击
 			ct = 1;
 			for (j = 0; j < n; j++) {
 				if (WeiZhi[j] == WeiZhi[n]) // 同列形成攻击
