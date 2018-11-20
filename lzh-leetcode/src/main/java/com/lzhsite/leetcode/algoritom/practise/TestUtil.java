@@ -2,7 +2,7 @@ package com.lzhsite.leetcode.algoritom.practise;
 
 import java.util.Arrays;
 
-public class Test {
+public class TestUtil {
 
 	// for test
 	public static int comparator(int[] nums) {

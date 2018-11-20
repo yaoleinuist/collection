@@ -1,6 +1,6 @@
 package com.lzhsite.leetcode.algoritom.practise.deepFirst;
 
-import com.lzhsite.leetcode.algoritom.practise.Test;
+import com.lzhsite.leetcode.algoritom.practise.TestUtil;
 
 /*
        题意:在矩阵里寻找最长递增路径 hard
@@ -79,7 +79,7 @@ public class Longest_Increasing_Path_in_a_Matrix {
 //							System.out.println();
 						}
 					}else{
-//						//四个方向都找不到下一步时打印路径结果
+//						//越界时打印路径结果
 //						for (int k = 0; k <= length; k++) {
 //							System.out.print(result[k] + " ");
 //						}
@@ -103,7 +103,7 @@ public class Longest_Increasing_Path_in_a_Matrix {
 
 	public static void main(String[] args) {
 		for (int i = 0; i < n; i++) {
-		    matrix[i] = Test.generateRandomArray2(m, 3);
+		    matrix[i] = TestUtil.generateRandomArray2(m, 3);
 			for (int j = 0; j < m; j++) {
 				System.out.print(matrix[i][j] + " ");
 			}
