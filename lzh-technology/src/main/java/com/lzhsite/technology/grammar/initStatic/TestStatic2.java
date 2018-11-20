@@ -1,4 +1,4 @@
-package com.lzhsite.technology.grammar.staticOrder;
+package com.lzhsite.technology.grammar.initStatic;
 /**
  * 一道大多数人都会做错的JVM题
  * @author lzhcode

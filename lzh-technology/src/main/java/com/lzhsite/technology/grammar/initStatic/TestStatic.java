@@ -1,4 +1,4 @@
-package com.lzhsite.technology.grammar.staticOrder;
+package com.lzhsite.technology.grammar.initStatic;
 
 public class TestStatic {
 

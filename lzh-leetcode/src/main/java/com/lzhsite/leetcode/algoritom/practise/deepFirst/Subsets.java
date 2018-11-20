@@ -1,4 +1,4 @@
-package com.lzhsite.leetcode.algoritom.practise.subsets;
+package com.lzhsite.leetcode.algoritom.practise.deepFirst;
 /**
  * 给定不包含重复数的整数集合，返回所有可能的子集。
  * 注意事项：
@@ -47,7 +47,7 @@ public class Subsets {
 	/**
 	 * 
 	 * @param list   已经选中的子集
-	 * @param from   当前递归选中下标为form的数
+	 * @param from   当前递归选中下标为form的数(随着层数递增可重复)
 	 * @param tar    子集元素总个数
 	 */
 	public void backTracking(List<Integer> list, int from, int tar) {

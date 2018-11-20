@@ -1,4 +1,4 @@
-package com.lzhsite.leetcode.algoritom.practise.dynamicProg;
+package com.lzhsite.leetcode.algoritom.practise.dynamicProgramming;
 /*
 
 01背包问题，是用来介绍动态规划算法最经典的例子，网上关于01背包问题的讲解也很多，我写这篇文章力争做到用最简单的方式，最少的公式把01背包问题讲解透彻。

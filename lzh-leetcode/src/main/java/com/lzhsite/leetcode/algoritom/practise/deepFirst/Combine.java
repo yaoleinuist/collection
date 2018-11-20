@@ -1,4 +1,4 @@
-package com.lzhsite.leetcode.algoritom.practise;
+package com.lzhsite.leetcode.algoritom.practise.deepFirst;
 
 import java.util.Scanner;
 
@@ -13,7 +13,14 @@ public class Combine {
 	//横向看，该问题为一个前i-1个中选m-1的递归。  
 
 	private static int count=0;
-	
+	/**
+	 * 
+	 * @param arr     备选数组
+	 * @param n       n个备选数
+	 * @param m       选m个
+	 * @param out     选中的数组
+	 * @param outLen  需要选的总个数
+	 */
 	static void  comb(int arr[], int n, int m, int out[], int outLen)  
 	{  
 	    if(m == 0)  

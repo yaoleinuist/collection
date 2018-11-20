@@ -21,6 +21,8 @@ public class 最大子矩阵 {
 			c = input.nextInt();
 			int i, j, k;
 			initArr(r,c,num);
+			//数据录入的时候，就应该是num[i]+=num[i-1],这样，
+			//要计算从j到i的数据之和，直接num[i]-num[j-1]就能直接得出了
 			for (i = 1; i <= r; i++)
 				for (j = 1; j <= c; j++) {
 					num[i][j] = input.nextInt();
@@ -31,6 +33,8 @@ public class 最大子矩阵 {
 			int tempmax;
 			for (i = 1; i <= r; i++) {
 				for (j = i; j <= r; j++) {
+					//如果某段数据累加和出现负数那么这段数据一定不是最大累加和数据段的一部分，
+					//从第一个数开始累加如果tempmax出现负数，tempmax置为0，重新开始累加。max记录最大的tempmax
 					tempmax = 0;
 					for (k = 1; k <= c; k++) {
 						temp = num[j][k] - num[i - 1][k];
