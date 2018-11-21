@@ -35,7 +35,7 @@ public class Longest_Increasing_Path_in_a_Matrix {
 
 	public static int m = 10; // matrix[0].length; //列数
 
-    public static int matrix[][] = new int[n][m];
+	public static int matrix[][] = new int[n][m];
 
 	public static int length = 0;
 
@@ -54,6 +54,7 @@ public class Longest_Increasing_Path_in_a_Matrix {
 		if (res[x][y] != 0) {
 			return res[x][y];
 		}
+		
 		result[length] = matrix[x][y];
 		int max = 1;
 		for (int i = -1; i <= 1; i++) {
@@ -65,62 +66,70 @@ public class Longest_Increasing_Path_in_a_Matrix {
 						if (matrix[x][y] < matrix[x + i][y + j]) {
 							length++;
 
-							// 注意不要写成 max = Math.max(max, dfs(x + i, y + j, res,list))+1;
+							// 注意不要写成 max = Math.max(max, dfs(x + i, y + j,
+							// res,list))+1;
 							// 要把加1后的结果进行比较而不能比较后再加1
-							// 递归式:maxpath(matrix[x][y]) = 1+ maxpath(matrix[x + i][y + j])
+							// 递归式:maxpath(matrix[x][y]) = 1+ maxpath(matrix[x +
+							// i][y + j])
 							max = Math.max(max, 1 + dfs(x + i, y + j, res));
 							length--;
-						}else{
-							//四个方向都找不到下一步时打印路径结果
-							//在这里打印每个节点的所有搜索路径
-//							for (int k = 0; k <= length; k++) {
-//								System.out.print(result[k] + " ");
-//							}
-//							System.out.println();
+						} else {
+							// 四个方向都找不到下一步时打印路径结果
+							// 在这里打印每个节点的所有搜索路径
+							// for (int k = 0; k <= length; k++) {
+							// System.out.print(result[k] + " ");
+							// }
+							// System.out.println();
 						}
-					}else{
-//						//越界时打印路径结果
-//						for (int k = 0; k <= length; k++) {
-//							System.out.print(result[k] + " ");
-//						}
-//						System.out.println();
- 					}
-
+					} else {
+						// //越界时打印路径结果
+						// for (int k = 0; k <= length; k++) {
+						// System.out.print(result[k] + " ");
+						// }
+						// System.out.println();
+					}
 
 				}
 			}
 
 		}
-	 
+
 		// 记忆化搜索
 		res[x][y] = max;
 
 		// 越界或则四个方向都找不到下一步时的递归分支返回max(不一定等于1,只有一步的层次max返回1)
-		//其余的每次递归max都加了1
+		// 其余的每次递归max都加了1
 		return max;
 
 	}
 
 	public static void main(String[] args) {
 		for (int i = 0; i < n; i++) {
-		    matrix[i] = TestUtil.generateRandomArray2(m, 3);
+			matrix[i] = TestUtil.generateRandomArray2(m, 3);
 			for (int j = 0; j < m; j++) {
-				System.out.print(matrix[i][j] + " ");
+				// System.out.print(matrix[i][j] + " ");
 			}
-			System.out.println();
+			// System.out.println();
 
 		}
-		
+
 		int[][] res = new int[n][m];
- 
 		int max = 0;
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
 				max = Math.max(max, dfs(i, j, res));
+//				每次的记忆化搜索主要为下一次的循环搜索服务
+//				for (int k = 0; k < n; k++) {
+//					for (int l = 0; l < m; l++) {
+//						System.out.print(res[k][l] + " ");
+//					}
+//					System.out.println();
+//				}
+//				System.out.println();
 			}
+			
 		}
 		System.out.println(max);
-
 
 	}
 
