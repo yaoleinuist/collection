@@ -25,7 +25,6 @@ public class SubsetsII {
 	//标记数组对应下标的数据取或不取
 	private  static Boolean[] visits =new Boolean[100];
 	
-	
 	public static void reboot(int index,int nums[]){
 		
 		if(index==nums.length){
@@ -37,7 +36,6 @@ public class SubsetsII {
 			System.out.println();
 			return;
 		}
-		
 		//数据一样的时候保证只以前面的数取或不取为准(前面相同的数据不取的话后面一定不取)
 		if(index>0 && nums[index-1]==nums[index] && visits[index-1]==false){
 			visits[index]=false;
@@ -50,8 +48,7 @@ public class SubsetsII {
 			visits[index]=false;
 			reboot(index+1,nums);
 		}
-
-		
+    
 	}
 	
 	public static void main(String[] args) {

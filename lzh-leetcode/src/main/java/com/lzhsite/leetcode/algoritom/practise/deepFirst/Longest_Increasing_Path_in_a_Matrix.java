@@ -1,6 +1,8 @@
 package com.lzhsite.leetcode.algoritom.practise.deepFirst;
 
-import com.lzhsite.leetcode.algoritom.practise.TestUtil;
+import java.util.Arrays;
+
+import com.lzhsite.leetcode.algoritom.TestArrUtil;
 
 /*
        题意:在矩阵里寻找最长递增路径 hard
@@ -36,6 +38,17 @@ public class Longest_Increasing_Path_in_a_Matrix {
 	public static int m = 10; // matrix[0].length; //列数
 
 	public static int matrix[][] = new int[n][m];
+			
+//			  ={{-1,2 ,2 ,0, 3 ,3, 2, 0, 1, 1},
+//			{0, 3 ,-1 ,0 ,-1 ,0 ,3 ,1, 1 ,2 },
+//			{0 ,1, 0 ,2 ,-2 ,1, 2 ,-2, 1, 1 },
+//			{1 ,-1 ,2 ,2 ,1 ,-2 ,0 ,1 ,0 ,3 },
+//			{3 ,2 ,2, -1 ,3, 2, 0, 3, 1, 3 },
+//			{0 ,0 ,3 ,2 ,2 ,-1 ,1 ,0 ,1 ,2 },
+//			{2 ,0 ,-1 ,1 ,2 ,3 ,0, 3, 2, 0 },
+//			{3 ,3 ,-2 ,-2 ,0 ,1 ,2, 1, 1 ,2 },
+//			{0 ,0 ,3 ,0, 0, 0 ,-2 ,-1 ,3, 1 },
+//			{2 ,0, 3 ,1, 1 ,-1 ,-1, 0 ,2 ,-2 }};
 
 	public static int length = 0;
 
@@ -50,13 +63,26 @@ public class Longest_Increasing_Path_in_a_Matrix {
 	 * @return 当前位置的递增最长路径长度
 	 */
 	public static int dfs(int x, int y, int[][] res) {
+		
+		Boolean hasnext = false;
+		result[length] = matrix[x][y];
+		
 		//// 记忆化搜索
 		if (res[x][y] != 0) {
+			//没有下个更大的数时打印
+//			if(res[x][y]==1){
+//				 System.out.print("x="+x+", y="+y+" ");
+//				 for (int k = 0; k <=length; k++) {
+//					System.out.print(result[k]);
+//				 }
+//				 System.out.println();
+//			}
 			return res[x][y];
 		}
 		
-		result[length] = matrix[x][y];
+	
 		int max = 1;
+	
 		for (int i = -1; i <= 1; i++) {
 			for (int j = -1; j <= 1; j++) {
 				// 保证是上下左右四个方向
@@ -64,8 +90,9 @@ public class Longest_Increasing_Path_in_a_Matrix {
 					// 检查坐标有效性
 					if (x + i > -1 && x + i < n && y + j > -1 && y + j < m) {
 						if (matrix[x][y] < matrix[x + i][y + j]) {
+							result[length] = matrix[x][y];
 							length++;
-
+							hasnext=true;
 							// 注意不要写成 max = Math.max(max, dfs(x + i, y + j,
 							// res,list))+1;
 							// 要把加1后的结果进行比较而不能比较后再加1
@@ -73,31 +100,28 @@ public class Longest_Increasing_Path_in_a_Matrix {
 							// i][y + j])
 							max = Math.max(max, 1 + dfs(x + i, y + j, res));
 							length--;
-						} else {
-							// 四个方向都找不到下一步时打印路径结果
-							// 在这里打印每个节点的所有搜索路径
-							// for (int k = 0; k <= length; k++) {
-							// System.out.print(result[k] + " ");
-							// }
-							// System.out.println();
-						}
-					} else {
-						// //越界时打印路径结果
-						// for (int k = 0; k <= length; k++) {
-						// System.out.print(result[k] + " ");
-						// }
-						// System.out.println();
-					}
+						} 
+ 
+					}   
 
 				}
 			}
 
 		}
+		
+		if(!hasnext){
+			 //没有下个更大的数时打印
+			 System.out.print("x="+x+", y="+y+" ");
+			 for (int k = 0; k <=length; k++) {
+				System.out.print(result[k]);
+			 }
+			 System.out.println();
+		}
 
 		// 记忆化搜索
 		res[x][y] = max;
 
-		// 越界或则四个方向都找不到下一步时的递归分支返回max(不一定等于1,只有一步的层次max返回1)
+		// 四个方向都找不到下一步时的递归分支返回max(不一定等于1,只有一步的层次max返回1)
 		// 其余的每次递归max都加了1
 		return max;
 
@@ -105,11 +129,11 @@ public class Longest_Increasing_Path_in_a_Matrix {
 
 	public static void main(String[] args) {
 		for (int i = 0; i < n; i++) {
-			matrix[i] = TestUtil.generateRandomArray2(m, 3);
+			//matrix[i] = TestUtil.generateRandomArray2(m, 3);
 			for (int j = 0; j < m; j++) {
-				// System.out.print(matrix[i][j] + " ");
+				System.out.print(matrix[i][j] + " ");
 			}
-			// System.out.println();
+			 System.out.println();
 
 		}
 
@@ -118,14 +142,16 @@ public class Longest_Increasing_Path_in_a_Matrix {
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
 				max = Math.max(max, dfs(i, j, res));
+				//	max = Math.max(max, dfs(2, 4, res));
+			    Arrays.fill(result, 0);
 //				每次的记忆化搜索主要为下一次的循环搜索服务
-//				for (int k = 0; k < n; k++) {
-//					for (int l = 0; l < m; l++) {
-//						System.out.print(res[k][l] + " ");
-//					}
-//					System.out.println();
-//				}
-//				System.out.println();
+				for (int k = 0; k < n; k++) {
+					for (int l = 0; l < m; l++) {
+						System.out.print(res[k][l] + " ");
+					}
+					System.out.println();
+				}
+				System.out.println();
 			}
 			
 		}

@@ -1,8 +1,8 @@
-package com.lzhsite.leetcode.algoritom.practise;
+package com.lzhsite.leetcode.algoritom;
 
 import java.util.Arrays;
 
-public class TestUtil {
+public class TestArrUtil {
 
 	// for test
 	public static int comparator(int[] nums) {

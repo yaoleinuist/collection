@@ -102,16 +102,18 @@ public class Longest_Increasing_Subsequence {
 				}
 				
                if(ends[m] <= nums[i]){
-            	   l =  m+1;
+            	   l = m + 1;
                }else{
-            	   r = m;
+            	   r = m - 1;
                }
 	              
 			}
 			if(isNext){
+				//ends里的已有数找不到比nums[i]小的数所以要放在最后
 				ends[r+1] = nums[i];
 				r = r+1;
 			}else{
+				//ends里的已有数找到比nums[i]小的数所以要替换原来的值
 				ends[r] = nums[i];
 			}
 	 
