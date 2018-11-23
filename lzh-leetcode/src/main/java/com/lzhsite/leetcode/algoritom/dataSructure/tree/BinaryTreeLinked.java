@@ -1,12 +1,11 @@
 package com.lzhsite.leetcode.algoritom.dataSructure.tree;
 
-import com.lzhsite.leetcode.algoritom.dataSructure.Iterator;
-import com.lzhsite.leetcode.algoritom.dataSructure.LinkedList;
-import com.lzhsite.leetcode.algoritom.dataSructure.LinkedListDLNode;
-import com.lzhsite.leetcode.algoritom.dataSructure.Queue;
-import com.lzhsite.leetcode.algoritom.dataSructure.QueueArray;
-import com.lzhsite.leetcode.algoritom.dataSructure.Stack;
-import com.lzhsite.leetcode.algoritom.dataSructure.StackSLinked;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Stack;
+
 import com.lzhsite.leetcode.algoritom.dataSructure.strategy.DefaultStrategy;
 import com.lzhsite.leetcode.algoritom.dataSructure.strategy.Strategy;
 
@@ -71,16 +70,17 @@ public class BinaryTreeLinked implements BinTree {
 
 	// 先序遍历二叉树
 	public Iterator preOrder() {
-		LinkedList list = new LinkedListDLNode();
+		LinkedList list = new LinkedList();
 		preOrderRecursion(this.root, list);
-		return list.elements();
+		return list.iterator();
 	}
+ 
 
 	// 先序遍历的递归算法
 	private void preOrderRecursion(BinTreeNode rt, LinkedList list) {
 		if (rt == null)
 			return; // 递归基,空树直接返回
-		list.insertLast(rt); // 访问根结点
+		list.add(rt); // 访问根结点
 		preOrderRecursion(rt.getLChild(), list); // 遍历左子树
 		preOrderRecursion(rt.getRChild(), list); // 遍历右子树
 	}
@@ -90,10 +90,10 @@ public class BinaryTreeLinked implements BinTree {
 		if (rt == null)
 			return;
 		BinTreeNode p = rt;
-		Stack s = new StackSLinked();
+		Stack s = new Stack<>();
 		while (p != null) {
 			while (p != null) { // 向左走到尽头
-				list.insertLast(p); // 访问根    System.out.print(p.getData+"  "); 
+				list.add(p); // 访问根    System.out.print(p.getData+"  "); 
 				if (p.hasRChild())
 					s.push(p.getRChild()); // 右子树根结点入栈
 				p = p.getLChild();
@@ -105,17 +105,18 @@ public class BinaryTreeLinked implements BinTree {
 
 	// 中序遍历二叉树
 	public Iterator inOrder() {
-		LinkedList list = new LinkedListDLNode();
+		LinkedList list = new LinkedList();
 		inOrderRecursion(this.root, list);
-		return list.elements();
+		return list.iterator();
 	}
+ 
 
 	// 中序遍历的递归算法
 	private void inOrderRecursion(BinTreeNode rt, LinkedList list) {
 		if (rt == null)
 			return; // 递归基,空树直接返回
 		inOrderRecursion(rt.getLChild(), list); // 遍历左子树
-		list.insertLast(rt); // 访问根结点
+		list.add(rt); // 访问根结点
 		inOrderRecursion(rt.getRChild(), list); // 遍历右子树
 	}
 
@@ -124,7 +125,7 @@ public class BinaryTreeLinked implements BinTree {
 		if (rt == null)
 			return;
 		BinTreeNode p = rt;
-		Stack s = new StackSLinked();
+		Stack s = new Stack();
 		while (p != null || !s.isEmpty()) {
 			while (p != null) { // 一直向左走
 				s.push(p); // 将根结点入栈
@@ -132,7 +133,7 @@ public class BinaryTreeLinked implements BinTree {
 			}
 			if (!s.isEmpty()) {
 				p = (BinTreeNode) s.pop();// 取出栈顶根结点访问之
-				list.insertLast(p);//   System.out.print(p.getData+"  ");  
+				list.add(p);//   System.out.print(p.getData+"  ");  
 				p = p.getRChild(); // 转向根的右子树进行遍历
 			} // if
 		} // out while
@@ -140,10 +141,12 @@ public class BinaryTreeLinked implements BinTree {
 
 	// 后序遍历二叉树
 	public Iterator postOrder() {
-		LinkedList list = new LinkedListDLNode();
+		LinkedList list = new LinkedList();
 		postOrderRecursion(this.root, list);
-		return list.elements();
+		return list.iterator();
 	}
+	
+ 
 
 	// 后序遍历的递归算法
 	private void postOrderRecursion(BinTreeNode rt, LinkedList list) {
@@ -151,7 +154,7 @@ public class BinaryTreeLinked implements BinTree {
 			return; // 递归基,空树直接返回
 		postOrderRecursion(rt.getLChild(), list);// 遍历左子树
 		postOrderRecursion(rt.getRChild(), list);// 遍历右子树
-		list.insertLast(rt); // 访问根结点
+		list.add(rt); // 访问根结点
 	}
 
 	// 后序遍历的非递归算法
@@ -159,7 +162,7 @@ public class BinaryTreeLinked implements BinTree {
 		if (rt == null)
 			return;
 		BinTreeNode p = rt;
-		Stack s = new StackSLinked();
+		Stack s = new Stack();
 		while (p != null || !s.isEmpty()) {
 			while (p != null) { // 先左后右不断深入
 				s.push(p); // 将根节点入栈
@@ -170,12 +173,12 @@ public class BinaryTreeLinked implements BinTree {
 			}
 			if (!s.isEmpty()) {
 				p = (BinTreeNode) s.pop(); // 取出栈顶根结点访问之
-				list.insertLast(p);
+				list.add(p);
 			}
 			// 满足条件时，说明栈顶根节点右子树已访问，应出栈访问之
 			while (!s.isEmpty() && ((BinTreeNode) s.peek()).getRChild() == p) {
 				p = (BinTreeNode) s.pop();
-				list.insertLast(p);
+				list.add(p);
 			}
 			// 转向栈顶根结点的右子树继续后序遍历
 			if (!s.isEmpty())
@@ -187,24 +190,24 @@ public class BinaryTreeLinked implements BinTree {
 
 	// 按层遍历二叉树
 	public Iterator levelOrder() {
-		LinkedList list = new LinkedListDLNode();
+		LinkedList list = new LinkedList();
 		levelOrderTraverse(this.root, list);
-		return list.elements();
+		return list.iterator();
 	}
 
 	// 使用对列完成二叉树的按层遍历
 	private void levelOrderTraverse(BinTreeNode rt, LinkedList list) {
 		if (rt == null)
 			return;
-		Queue q = new QueueArray();
-		q.enqueue(rt); // 根结点入队
+		Queue q = new PriorityQueue();
+		q.add(rt); // 根结点入队
 		while (!q.isEmpty()) {
-			BinTreeNode p = (BinTreeNode) q.dequeue(); // 取出队首结点p并访问
-			list.insertLast(p);
+			BinTreeNode p = (BinTreeNode) q.remove(); // 取出队首结点p并访问
+			list.add(p);
 			if (p.hasLChild())
-				q.enqueue(p.getLChild());// 将p的非空左右孩子依次入队
+				q.add(p.getLChild());// 将p的非空左右孩子依次入队
 			if (p.hasRChild())
-				q.enqueue(p.getRChild());
+				q.add(p.getRChild());
 		}
 	}
 	

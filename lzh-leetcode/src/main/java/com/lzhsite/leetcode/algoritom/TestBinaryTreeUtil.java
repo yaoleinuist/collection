@@ -1,10 +1,10 @@
 package com.lzhsite.leetcode.algoritom;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.lzhsite.leetcode.algoritom.dataSructure.Iterator;
 import com.lzhsite.leetcode.algoritom.dataSructure.tree.BinTreeNode;
 import com.lzhsite.leetcode.algoritom.dataSructure.tree.BinaryTreeLinked;
 
@@ -82,14 +82,15 @@ public class TestBinaryTreeUtil {
 	}
 
 	public static void printElement(Iterator iterator) {
-		for (Iterator i = iterator; i.isDone();) {
-			String str = (String) i.currentItem();
-			i.next();
-			System.out.println(str);
+		for (Iterator i = iterator; i.hasNext();) {
+			BinTreeNode binTreeNode = (BinTreeNode)  i.next();
+			System.out.println(binTreeNode.getData());
 
 		}
 	}
 
+	
+	
 	/**
 	 * @param datas  实现二叉树各节点值的数组
 	 */

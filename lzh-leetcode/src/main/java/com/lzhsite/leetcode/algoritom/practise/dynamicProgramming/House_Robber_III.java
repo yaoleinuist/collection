@@ -84,7 +84,7 @@ public class House_Robber_III {
 		BinaryTreeLinked binaryTreeLinked =new BinaryTreeLinked(treeNode);
 		
 		
-		TestBinaryTreeUtil.printElement(binaryTreeLinked.preOrder());
+		TestBinaryTreeUtil.printElement(binaryTreeLinked.inOrder());
 		//System.out.println(Math.max(house_Robber_III.dfs(treeNode, true), house_Robber_III.dfs(treeNode, false)));
 		
 	}

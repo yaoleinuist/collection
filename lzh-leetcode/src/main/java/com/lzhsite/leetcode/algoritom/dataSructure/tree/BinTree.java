@@ -1,6 +1,6 @@
 package com.lzhsite.leetcode.algoritom.dataSructure.tree;
 
-import com.lzhsite.leetcode.algoritom.dataSructure.Iterator;
+import java.util.Iterator;
 
 public interface BinTree {
 	//返回树的规模

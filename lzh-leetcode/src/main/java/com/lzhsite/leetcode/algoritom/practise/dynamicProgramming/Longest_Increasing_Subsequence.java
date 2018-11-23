@@ -72,6 +72,7 @@ public class Longest_Increasing_Subsequence {
 	}
 
 	/**
+	 * 解法二
 	 * 利用非递归和二分查找把时间复杂度降为log(n)
 	 * @param nums
 	 */
