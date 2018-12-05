@@ -1,4 +1,4 @@
-package com.lzhsite.technology.concurrent.copyOnWrite;
+package com.lzhsite.technology.concurrent.copyOnWrite.blackList;
 
 import java.util.Map;
 //https://www.cnblogs.com/dolphin0520/p/3938914.html

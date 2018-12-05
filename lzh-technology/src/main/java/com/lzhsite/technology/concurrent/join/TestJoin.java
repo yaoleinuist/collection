@@ -1,5 +1,9 @@
 package com.lzhsite.technology.concurrent.join;
-
+/**
+ * 让父线程等待子线程结束之后才能继续运行。
+ * @author lzhcode
+ *
+ */
 public class TestJoin {
 	public static void main(String[] args) {
 		Thread t = new Thread(new RunnableImpl());
@@ -30,7 +34,7 @@ class RunnableImpl implements Runnable {
 Begin sleep
 End sleep
 joinFinish
-明白了吧， 当main 线程调用t.join 时，main 线程等待t 线程 ，等待时间是1000 ，如果t 线程Sleep 2000 呢
+ 当main 线程调用t.join 时，main 线程等待t 线程 ，等待时间是1000 ，如果t 线程Sleep 2000 呢
 public   void  run() {
 try  {
 System.out.println("Begin sleep");

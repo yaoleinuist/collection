@@ -58,14 +58,11 @@ class RunnableImpl2 implements Runnable {
 	}
 }
 /*
- 
-  通过   synchronized  (thread) ，获取线程对象t 的锁，并Sleep （9000 ）后释放，这就意味着，即使
-main 方法t.join(1000), 等待一秒钟，它必须等待 ThreadTest   线程释放t 锁后才能进入wait 方法中，
-它实际等待时间是9000+1000 MS
-运行结果是：
-getObjectLock
-Begin sleep
-End sleep
-ReleaseObjectLock
-
-joinFinish*/
+ * 
+ * 通过 synchronized (thread) ，获取线程对象t 的锁，并Sleep （9000 ）后释放，这就意味着，即使 main
+ * 方法t.join(1000), 等待一秒钟，它必须等待 ThreadTest 线程释放t 锁后才能进入wait 方法中，
+ * 它实际等待时间是9000+1000 MS 运行结果是： getObjectLock Begin sleep End sleep
+ * ReleaseObjectLock
+ * 
+ * joinFinish
+ */

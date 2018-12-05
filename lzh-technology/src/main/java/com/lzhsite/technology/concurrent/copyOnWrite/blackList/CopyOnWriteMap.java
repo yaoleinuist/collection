@@ -1,4 +1,4 @@
-package com.lzhsite.technology.concurrent.copyOnWrite;
+package com.lzhsite.technology.concurrent.copyOnWrite.blackList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

@@ -1,0 +1,3 @@
+ArrayBlockingQueue ：一个由数组支持的有界队列。
+LinkedBlockingQueue ：一个由链接节点支持的可选有界队列。
+(LinkedBlockingQueue实现中，可以使用takeLock和putLock两个锁)
