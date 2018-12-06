@@ -1,4 +1,4 @@
-package com.lzhsite.technology.concurrent.testLinuxPerformance;
+package com.lzhsite.jvm.testLinuxPerformance;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

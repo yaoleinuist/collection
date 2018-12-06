@@ -1,4 +1,4 @@
-package com.lzhsite.technology.concurrent.testLinuxPerformance;
+package com.lzhsite.jvm.testLinuxPerformance;
 
 /**
  * -agentlib:hprof=cpu=times,interval=10

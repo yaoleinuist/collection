@@ -2,7 +2,7 @@ package com.lzhsite.technology.concurrent.atomic;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.lzhsite.dto.PersionDTO;
+import com.lzhsite.dto.PersonDTO;
 
 //AtomicReference的源码比较简单。它是通过"volatile"和"Unsafe提供的CAS函数实现"原子操作。
 //(01) value是volatile类型。这保证了：当某线程修改value的值时，其他线程看到的value值都是最新的value值，即修改之后的volatile的值。
@@ -10,12 +10,12 @@ import com.lzhsite.dto.PersionDTO;
 
 public class TestAtomicReference {
 	public static void main(String[] args) {
-        PersionDTO people1 =new PersionDTO("Bom", 0);
-        PersionDTO people2 =new PersionDTO("Tom",10);
+        PersonDTO people1 =new PersonDTO("Bom", 0);
+        PersonDTO people2 =new PersonDTO("Tom",10);
 
         //先初始化一个值，如果不初始化则默认值为null
-        AtomicReference<PersionDTO> reference = new AtomicReference<>(people1);
-        PersionDTO people3 = reference.get(); //获取的p3就是p1
+        AtomicReference<PersonDTO> reference = new AtomicReference<>(people1);
+        PersonDTO people3 = reference.get(); //获取的p3就是p1
         if (people3.equals(people1)) {
             System.out.println("people3:" + people3);
         } else {
@@ -39,7 +39,7 @@ public class TestAtomicReference {
             public void run() {
                 System.out.println("Thread1-----------");
 
-                PersionDTO people = reference.get();
+                PersonDTO people = reference.get();
                 people.setName("Tom1");
                 people.setAge(people.getAge()+1);
                 reference.getAndSet(people);
@@ -52,7 +52,7 @@ public class TestAtomicReference {
             public void run() {
                 System.out.println("Thread2-----------");
 
-                PersionDTO people = reference.get();
+                PersonDTO people = reference.get();
                 people.setName("Tom2");
                 people.setAge(people.getAge()+1);
                 reference.getAndSet(people);
