@@ -8,7 +8,6 @@ import java.util.Queue;
  *
  */
 public class BlockingQ {
-	
 	private Object notEmpty = new Object();
 	private Object notFull = new Object();
 	private Queue<Object> linkedList = new LinkedList<Object>();

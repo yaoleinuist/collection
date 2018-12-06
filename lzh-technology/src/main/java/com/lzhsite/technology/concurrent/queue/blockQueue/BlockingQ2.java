@@ -14,7 +14,6 @@ import java.util.concurrent.locks.ReentrantLock;
 	注意： 未锁就直接执行await、 signal、 siganlAll会抛异常
 */
 public class BlockingQ2 {
-	
 	private Lock lock = new ReentrantLock();
 	private Condition notEmpty = lock.newCondition();
 	private Condition notFull = lock.newCondition();
