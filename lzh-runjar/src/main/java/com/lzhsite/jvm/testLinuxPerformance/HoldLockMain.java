@@ -1,4 +1,4 @@
-package com.lzhsite.technology.concurrent.testLinuxPerformance;
+package com.lzhsite.jvm.testLinuxPerformance;
 
 public class HoldLockMain {
 	public static Object[] lock=new Object[10];

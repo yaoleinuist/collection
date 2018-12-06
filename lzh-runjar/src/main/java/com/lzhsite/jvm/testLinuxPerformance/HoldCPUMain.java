@@ -1,4 +1,4 @@
-package com.lzhsite.technology.concurrent.testLinuxPerformance;
+package com.lzhsite.jvm.testLinuxPerformance;
 
 public class HoldCPUMain {
 	public static class HoldCPUTask implements Runnable{

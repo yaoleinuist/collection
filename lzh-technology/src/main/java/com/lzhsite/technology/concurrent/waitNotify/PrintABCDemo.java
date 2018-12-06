@@ -1,13 +1,13 @@
-package com.lzhsite.technology.concurrent.demo;
+package com.lzhsite.technology.concurrent.waitNotify;
 
-public class PrintABC {  
+public class PrintABCDemo {  
 	  
     public static Boolean isThreadA = true;  
     public static Boolean isThreadB = false;  
     public static Boolean isThreadC = false;  
   
     public static void main(String[] args) {  
-        final PrintABC abc = new PrintABC();  
+        final PrintABCDemo abc = new PrintABCDemo();  
         new Thread(new Runnable() {  
             public void run() {  
                 for (int i = 0; i < 10; i++) {  
