@@ -1,4 +1,4 @@
-package com.lzhsite.disruptor.quickstart;
+package com.lzhsite.disruptor.quickstart.order;
 
 public class OrderEvent {
 
