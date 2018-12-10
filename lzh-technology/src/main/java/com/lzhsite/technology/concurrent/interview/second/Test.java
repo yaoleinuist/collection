@@ -4,9 +4,15 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.SynchronousQueue;
 
 public class Test {
-
+    
 	public static void main(String[] args) {
 		final Semaphore semaphore = new Semaphore(1);
+		/**
+		 * https://www.cnblogs.com/duanxz/p/3252267.html
+		 * SynchronousQueue是一个没有数据缓冲的BlockingQueue，生产者线程对其的插入操作put必须等待消费者的移
+		 * 除操作take。在线程池里的一个典型应用是Executors.newCachedThreadPool()就使用了SynchronousQueue，
+		 * 这个线程池根据需要（新任务到来时）创建新的线程，如果有空闲线程则会重复使用，线程空闲了60秒后会被回收。
+		 */
 		final SynchronousQueue<String> queue = new SynchronousQueue<String>();
 		for(int i=0;i<10;i++){
 			new Thread(new Runnable(){
