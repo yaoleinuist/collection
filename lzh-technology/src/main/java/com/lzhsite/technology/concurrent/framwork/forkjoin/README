@@ -1,0 +1,22 @@
+任务分割
+
+ForkJoinTask : 基本任务，使用forkjoin框架必须创建的对象，提供fork,join操作，常用的两个子类
+
+RecursiveAction : 无结果返回的任务
+RecursiveTask : 有返回结果的任务
+说明：
+
+fork : 让task异步执行
+join : 让task同步执行，可以获取返回值
+ForkJoinTask 在不显示使用ForkJoinPool.execute/invoke/submit()方法进行执行的情况下，也可以使用自己的fork/invoke方法进行执行
+结果合并
+
+ForkJoinPool 执行 ForkJoinTask，
+
+任务分割出的子任务会添加到当前工作线程所维护的双端队列中，进入队列的头部。
+当一个工作线程的队列里暂时没有任务时，它会随机从其他工作线程的队列的尾部获取一个任务
+三中提交方式：
+
+execute 异步，无返回结果
+submit 异步，有返回结果 （返回Future<T>）
+invoke 同步，有返回结果 （会阻塞）
