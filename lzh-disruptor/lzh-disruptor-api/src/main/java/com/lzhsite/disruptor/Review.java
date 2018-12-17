@@ -16,7 +16,7 @@ public class Review {
 
 	
 	public static void main(String[] args) throws Exception {
-		
+ 
 		//ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>();
 		
 		//CopyOnWriteArrayList<String> cowal = new CopyOnWriteArrayList<>();
@@ -92,16 +92,7 @@ public class Review {
 		
 		ReentrantLock reentrantLock = new ReentrantLock(true);
 
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
+ 
 		
 	}
 }

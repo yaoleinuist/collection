@@ -1,4 +1,4 @@
-package com.lzhsite.technology.concurrent.producerAndCustomer;
+package com.lzhsite.technology.concurrent.framwork.producerAndCustomer;
 
 import com.lzhsite.technology.concurrent.TestSynchronized;
 
@@ -7,7 +7,7 @@ import com.lzhsite.technology.concurrent.TestSynchronized;
  * @author lzh
  *
  */
-public class ProducerAndCustomer {
+public class PubAndCustom_Synchronized {
 	
 	private int m_iData = 0;  
     private boolean m_bSetData = true;  
@@ -42,7 +42,7 @@ public class ProducerAndCustomer {
     public static void main(String[] args) {
 		
     	
-    	ProducerAndCustomer producerAndCustomer	= new ProducerAndCustomer();
+    	PubAndCustom_Synchronized producerAndCustomer	= new PubAndCustom_Synchronized();
     	
         Thread consumer = new Thread(new Consumer(producerAndCustomer));
         Thread producer = new Thread(new Producer(producerAndCustomer));
@@ -54,8 +54,8 @@ public class ProducerAndCustomer {
 }
 
 class Consumer implements Runnable{  
-    private ProducerAndCustomer m_data;  
-    public Consumer(ProducerAndCustomer d) {  
+    private PubAndCustom_Synchronized m_data;  
+    public Consumer(PubAndCustom_Synchronized d) {  
         m_data = d;  
     }  
       
@@ -68,8 +68,8 @@ class Consumer implements Runnable{
 } 
 
 class Producer implements Runnable{  
-    private ProducerAndCustomer m_data;  
-    public Producer(ProducerAndCustomer d) {  
+    private PubAndCustom_Synchronized m_data;  
+    public Producer(PubAndCustom_Synchronized d) {  
         m_data = d;  
     }  
       
