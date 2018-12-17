@@ -1,4 +1,4 @@
-package com.lzhsite.disruptor.quickstart.tradeTransaction;
+package com.lzhsite.disruptor.heigh.tradeTransaction;
 
 public class TradeTransactionEvent {
 	private String id;// 交易ID

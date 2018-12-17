@@ -1,4 +1,4 @@
-package com.lzhsite.disruptor.quickstart.tradeTransaction;
+package com.lzhsite.disruptor.heigh.tradeTransaction;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,7 +10,7 @@ import com.lmax.disruptor.SequenceBarrier;
 import com.lmax.disruptor.WorkHandler;
 import com.lmax.disruptor.WorkerPool;
 /**
- * 使用WorkerPool辅助创建消费者
+ * 使用WorkerPool构建多消费者
  * @author lzhcode
  *
  */
@@ -31,9 +31,7 @@ public class Main2 {
         ExecutorService executor = Executors.newFixedThreadPool(THREAD_NUMBERS);  
           
         WorkHandler<TradeTransactionEvent> workHandlers=new TradeTransactionInDBHandler();  
-        /* 
-         * 这个类代码很简单的，亲自己看哈！~ 
-         */  
+       
         WorkerPool<TradeTransactionEvent> workerPool=new WorkerPool<TradeTransactionEvent>(ringBuffer, sequenceBarrier, new IgnoreExceptionHandler(), workHandlers);  
           
         workerPool.start(executor);  

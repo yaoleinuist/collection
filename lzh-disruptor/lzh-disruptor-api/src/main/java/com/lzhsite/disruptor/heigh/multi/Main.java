@@ -11,7 +11,11 @@ import com.lmax.disruptor.SequenceBarrier;
 import com.lmax.disruptor.WorkerPool;
 import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.ProducerType;
-
+/**
+ * 多生产者多消费者模型
+ * @author lzhcode
+ *
+ */
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
@@ -87,8 +91,5 @@ public class Main {
 		public void handleOnShutdownException(Throwable ex) {
 		}
 	}
-	
-	
-	
 	
 }
