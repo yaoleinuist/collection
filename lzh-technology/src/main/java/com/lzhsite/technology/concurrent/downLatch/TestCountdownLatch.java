@@ -7,12 +7,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 /*
- 使用countdownlatch工具 
-当pendingFileVisits （原子性线程安全的变量）中访问的文件个数为零时，通知主线程结束
-结果：23秒 提速50% 比单线程
-
-Total Size: 50315772180
-Time taken: 23.029064337*/
+	 使用countdownlatch工具
+	当pendingFileVisits （原子性线程安全的变量）中访问的文件个数为零时，通知主线程结束
+	结果：23秒 提速50% 比单线程
+	
+	Total Size: 50315772180
+	Time taken: 23.029064337
+*/
 public class TestCountdownLatch {
 	
 	private ExecutorService service;

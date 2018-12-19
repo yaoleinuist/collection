@@ -16,6 +16,7 @@ import java.util.concurrent.Executors;
 2、使用场景：
 
 需要所有的子任务都完成时，才执行主任务，这个时候就可以选择使用CyclicBarrier
+(Apache里有分布式的Barrier)
 */
 public class TestCyclicBarrier {
 
