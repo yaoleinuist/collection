@@ -121,17 +121,24 @@ public final class SingleProducerSequencer extends SingleProducerSequencerFields
             throw new IllegalArgumentException("n must be > 0");
         }
 
+        //nextValue初始值-1
         long nextValue = this.nextValue;
-
+        //nextSequence= 0 (-1+1)
         long nextSequence = nextValue + n;
+        //wrapPoint=-10 (bufferSize假设为10)
         long wrapPoint = nextSequence - bufferSize;
+        
         long cachedGatingSequence = this.cachedValue;
 
+        //cachedGatingSequence存储最小的消费者序号,目的是不用每次都去获取最小的消费者序号
+        //cachedGatingSequence都是不断递增的,如果wrapPoint<= cachedGatingSequence这条数据一定可以生产,不必自旋
+        //cachedGatingSequence > nextValue这个条件还不大理解?
         if (wrapPoint > cachedGatingSequence || cachedGatingSequence > nextValue)
         {
             cursor.setVolatile(nextValue);  // StoreLoad fence
-
+            //最小的消费者序号
             long minSequence;
+            //生产者序号wrapPoint,比消费者序号的最小值minSequence大就不断自旋
             while (wrapPoint > (minSequence = Util.getMinimumSequence(gatingSequences, nextValue)))
             {
                 LockSupport.parkNanos(1L); // TODO: Use waitStrategy to spin?

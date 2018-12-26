@@ -12,6 +12,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
     	/**
+    	 * 服务端接收客户端发送的消息
     	TranslatorData request = (TranslatorData)msg;
     	System.err.println("Sever端: id= " + request.getId() 
     					+ ", name= " + request.getName() 
@@ -22,6 +23,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     	response.setName("resp: " + request.getName());
     	response.setMessage("resp: " + request.getMessage());
     	//写出response响应信息:
+    	//下面的操作包含释放了msg
     	ctx.writeAndFlush(response);
     	*/
     	TranslatorData request = (TranslatorData)msg;

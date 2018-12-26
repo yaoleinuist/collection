@@ -13,6 +13,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
     	
     	/**
+    	 * 客服端的接收服务端相应的数据
     	try {
     		TranslatorData response = (TranslatorData)msg;
     		System.err.println("Client端: id= " + response.getId() 

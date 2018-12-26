@@ -17,7 +17,8 @@ public class TestNewFixedThreadPool {
 	        //的线程池，若任务数量大于 poolSize ，任务会被放在一个 queue 里顺序执行。   
 	        
 	        //notice:这个线程池的队列LinkedBlockingQueue没有指定默认大小,高并发环境下
-	        //在大多数 nThreads 线程会处于处理任务的活动状态点,所以生产环境一般都不使用这个
+	        //这个线程池的队列LinkedBlockingQueue没有指定默认大小,高并发环境下
+	        // 在对内存压力很大,所以生产环境一般都不使用这个,所以生产环境一般都不使用这个
 	        ExecutorService executor = Executors.newFixedThreadPool(3);  
 	        // 判断可是线程池可以结束  
 	        int waitTime = 500;  

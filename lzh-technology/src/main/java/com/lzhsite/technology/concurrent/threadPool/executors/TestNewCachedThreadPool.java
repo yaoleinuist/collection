@@ -9,7 +9,8 @@ public class TestNewCachedThreadPool {
 	
 	  public static void main(String[] args) {  
 		  
-		    //SynchronousQueue只能容许一个线程处于阻塞，所以newCachedThreadPool实际项目一般也很少运用
+		    //SynchronousQueue只要有个一个线程处于阻塞,就不允许添加数据
+		    //所以newCachedThreadPool实际项目一般也很少运用
 		    ExecutorService threadPool = Executors.newCachedThreadPool();  
 		    for (int i = 0; i < 10; i++) {  
 		  

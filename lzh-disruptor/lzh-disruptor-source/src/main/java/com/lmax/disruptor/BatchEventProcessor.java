@@ -150,20 +150,24 @@ public final class BatchEventProcessor<T>
     private void processEvents()
     {
         T event = null;
+        //消费者下一个期望消费的数据
         long nextSequence = sequence.get() + 1L;
 
         while (true)
         {
             try
             {
+            	//下一个可用的生产者序号
                 final long availableSequence = sequenceBarrier.waitFor(nextSequence);
                 if (batchStartAware != null)
                 {
+                	
                     batchStartAware.onBatchStart(availableSequence - nextSequence + 1);
                 }
 
                 while (nextSequence <= availableSequence)
                 {
+                	//让nextSequence递增到availableSequence,并消费相应的数据
                     event = dataProvider.get(nextSequence);
                     eventHandler.onEvent(event, nextSequence, nextSequence == availableSequence);
                     nextSequence++;
@@ -177,6 +181,7 @@ public final class BatchEventProcessor<T>
             }
             catch (final AlertException ex)
             {
+            	//线程中断时退出
                 if (running.get() != RUNNING)
                 {
                     break;
