@@ -8,7 +8,12 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
+/**
+ * newSingleThreadScheduledExecutor产生一个 ScheduledExecutorService 对象，这个对象的线程池大小为 1 ，若任务多于一个，任务将按先后顺序执行。
+ * http://www.bubuko.com/infodetail-1286245.html
+ * @author lzhcode
+ *
+ */
 public class TestNewSingleThreadScheduled {
     private static ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 

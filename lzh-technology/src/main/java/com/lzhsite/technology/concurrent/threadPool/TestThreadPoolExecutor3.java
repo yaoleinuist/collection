@@ -11,6 +11,7 @@ public class TestThreadPoolExecutor3 {
 	public void createThreadPool() {
 		/*
 		 * 1.IO密集型 估算线程池大小 线程数 = CPU可用核心数/(1-阻塞系数)
+		 * 阻塞系数= IO时间/(IO时间+CPU时间)
 		 * 计算密集型任务的阻塞系数为0，而IO密集型任务的阻塞系数则接近于1。一个完全阻塞的任务是注定要挂掉的，所以我们无须担心阻塞系数会达到1。
 		 * 阻塞系数可以采用一些性能分析工具或java.lang.managenment
 		 * API来确定线程话在系统I/O操作上的时间与CPU密集任务所消耗的时间比值。

@@ -3,7 +3,7 @@ Queue接口与List、Set同一级别，都是继承了Collection接口。LinkedL
 Queue的实现
 
 
-1、没有实现的阻塞接口的LinkedList： 实现了java.util.Queue接口和java.util.AbstractQueue接口
+1、 没有实现的阻塞接口的LinkedList： 实现了java.util.Queue接口和java.util.AbstractQueue接口
 　　内置的不阻塞队列： PriorityQueue 和 ConcurrentLinkedQueue
 　　PriorityQueue 和 ConcurrentLinkedQueue 类在 Collection Framework 中加入两个具体集合实现。 
 　　

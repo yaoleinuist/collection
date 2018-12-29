@@ -1,4 +1,4 @@
-package com.lzhsite.technology.redis.testRedislockframework;
+package com.lzhsite.technology.redis.testSeckill;
 
 import java.io.IOException;
 import java.lang.reflect.Proxy;
@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.lzhsite.technology.redis.redislockframework.CacheLockInterceptor;
 import com.lzhsite.technology.redis.redislockframework.RedisClient;
-import com.lzhsite.technology.redis.testRedislockframework.impl.SecKillImpl;
+import com.lzhsite.technology.redis.testSeckill.impl.SecKillImpl;
 
 import redis.clients.jedis.JedisPool;
 /**

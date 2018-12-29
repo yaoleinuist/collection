@@ -1,4 +1,4 @@
-package com.lzhsite.technology.redis.testRedislockframework;
+package com.lzhsite.technology.redis.testSeckill;
 
 import com.lzhsite.technology.redis.redislockframework.CacheLock;
 import com.lzhsite.technology.redis.redislockframework.LockedObject;

@@ -1,9 +1,9 @@
-package com.lzhsite.technology.redis.testRedislockframework.impl;
+package com.lzhsite.technology.redis.testSeckill.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.lzhsite.technology.redis.testRedislockframework.SeckillInterface;
+import com.lzhsite.technology.redis.testSeckill.SeckillInterface;
 
 public class SecKillImpl implements SeckillInterface {
 	public static Map<Long, Long> inventory;
