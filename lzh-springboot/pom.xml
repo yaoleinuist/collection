@@ -159,7 +159,8 @@
 
 	<modules>
 		<module>lzh-spirngboot-openapi</module>
-		<module>lzh-springboot-consoume</module>
+		<module>lzh-springboot-consoumer</module>
 		<module>lzh-springboot-provider</module>
+		<module>lzh-springboot-spi</module>
 	</modules>
 </project>
