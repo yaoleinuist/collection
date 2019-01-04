@@ -1,4 +1,4 @@
-package com.lzhsite.technology.redis.redislockframework;
+package com.lzhsite.core.utils.redis;
 
 
 import org.slf4j.Logger;
@@ -14,7 +14,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @author lzhcode
  *
  */
-public class RedisLock2 {
+public class RedisLock {
 
 	  private static Logger logger = LoggerFactory.getLogger(RedisLock.class);
 
@@ -44,7 +44,7 @@ public class RedisLock2 {
 	     *
 	     * @param lockKey lock key (ex. account:1, ...)
 	     */
-	    public RedisLock2(RedisTemplate redisTemplate, String lockKey) {
+	    public RedisLock(RedisTemplate redisTemplate, String lockKey) {
 	        this.redisTemplate = redisTemplate;
 	        this.lockKey = lockKey + "_lock";
 	    }
@@ -53,7 +53,7 @@ public class RedisLock2 {
 	     * Detailed constructor with default lock expiration of 60000 msecs.
 	     *
 	     */
-	    public RedisLock2(RedisTemplate redisTemplate, String lockKey, int timeoutMsecs) {
+	    public RedisLock(RedisTemplate redisTemplate, String lockKey, int timeoutMsecs) {
 	        this(redisTemplate, lockKey);
 	        this.timeoutMsecs = timeoutMsecs;
 	    }
@@ -62,7 +62,7 @@ public class RedisLock2 {
 	     * Detailed constructor.
 	     *
 	     */
-	    public RedisLock2(RedisTemplate redisTemplate, String lockKey, int timeoutMsecs, int expireMsecs) {
+	    public RedisLock(RedisTemplate redisTemplate, String lockKey, int timeoutMsecs, int expireMsecs) {
 	        this(redisTemplate, lockKey, timeoutMsecs);
 	        this.expireMsecs = expireMsecs;
 	    }
