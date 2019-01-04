@@ -20,6 +20,9 @@ import com.lzhsite.spring.web.service.spi.Printer;
 	<version>1.0-SNAPSHOT</version>
 	</dependency>
 */
+
+
+
 public class Application {
 
 	public static void main(String[] args) {
