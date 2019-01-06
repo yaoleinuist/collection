@@ -70,6 +70,11 @@ public class TestThreadPoolExecutor {
     }  
       
       
+    /**
+     * 重写拒绝策略
+     * @author lzhcode
+     *
+     */
     private class CustomRejectedExecutionHandler implements RejectedExecutionHandler {  
   
         @Override  
