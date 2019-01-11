@@ -105,14 +105,16 @@ public class SeckillServiceImpl implements SeckillService {
 		return md5;
 	}
 
-	// 秒杀是否成功，成功:减库存，增加明细；失败:抛出异常，事务回滚
+/**	
+ * 秒杀是否成功，成功:减库存，增加明细；失败:抛出异常，事务回滚
+ * 
+ * 上面我们总结过，行级锁的主要发生地，主要是库存update操作这里，之前的业务逻辑如下图 
+ *	由下图可知，无论这个商品是否可以被秒杀，都会执行update语句，获得行级锁，再返回是否update成功的结果，并通过这个update操作结果，来插入购买明细，这是非常错误的。 
+ *	我们知道，insert操作也可以判断是否插入成功（返回值0代表失败，1代表成功），但是，insert操作是不用通过行级锁来阻塞其他事务的，
+ *	因此，我们可以将update语句和insert语句调换位置（先过滤不符合update操作条件的事务，即挡住一部分重复秒杀），通过insert语句的结果，
+ *	来判断是否需要update操作，这样，阻塞时间将会大大减少，增加了系统的性能
+ */
 	@Transactional
-	/**
-	 * 使用注解控制事务方法的优点:
-	 * 1.开发团队达成一致约定，明确标注事务方法的编程风格
-	 * 2.保证事务方法的执行时间尽可能短，不要穿插其他网络操作RPC/HTTP请求或者剥离到事务方法外部
-	 * 3.不是所有的方法都需要事务，如只有一条修改操作、只读操作不要事务控制
-	 */
 	public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5) throws SeckillException,
 			RepeatKillException, SeckillCloseException {
 
@@ -165,7 +167,7 @@ public class SeckillServiceImpl implements SeckillService {
 		map.put("phone", userPhone);
 		map.put("killTime", killTime);
 		map.put("result", null);
-		// 执行储存过程,result被复制
+		// 执行储存过程,result被赋值
 		seckillDao.killByProcedure(map);
 		// 获取result
 		int result = MapUtils.getInteger(map, "result", -2);
