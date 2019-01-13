@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import com.lzhsite.dto.EmployeeDto;
 
-public class EmployeeSortTest {
+public class TestEmployeeSort {
 	/**
 	 * @param args
 	 */

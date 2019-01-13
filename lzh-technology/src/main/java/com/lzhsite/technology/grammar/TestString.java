@@ -4,7 +4,6 @@ import org.junit.Test;
 
 public class TestString {
 
-
 	@Test
 	public void test1() {
 
@@ -33,74 +32,126 @@ public class TestString {
 		System.out.println(str); // 0001
 
 	}
+
 	/**
-	 * jdk1.6和1.7中intern的用法 
+	 * jdk1.6和1.7中intern的用法 j Jdk6
+	 * 以及以前的版本中，字符串的常量池是放在堆的Perm区的，Perm区是一个类静态的区域(方法区)，主要存储一些加载类的信息，常量池，方法片段等内容，默认大小只有4m
+	 * jdk7 主要对 intern 操作和常量池做了以下改动 1.将String常量池从Perm区移动到了Java Heap区
+	 * 2.String#intern方法时，如果存在堆中的对象，会直接保存对象的引用，而不会重新创建对象。
 	 * http://blog.csdn.net/seu_calvin/article/details/52291082
 	 */
 	@Test
 	public void test3() {
 		/**
-		 *  String s = new String("1")，生成了常量池中的“1” 和堆空间中的字符串对象。
-		 *  s.intern()，这一行的作用是s对象去常量池中寻找后发现"1"已经存在于常量池中了。
-		 *	String s2 = "1"，这行代码是生成一个s2的引用指向常量池中的“1”对象。
-		 *	结果就是 s 和 s2 的引用地址明显不同。因此返回了false。
-			
-		 *	s3.intern()，这一行代码，是将 s3中的“11”字符串放入 String 常量池中，此时常量池中不存在“11”字符串，
-		 *  JDK1.6的做法是直接在常量池中生成一个 "11" 的对象。
-		 *	但是在JDK1.7中，常量池中不需要再存储一份对象了，
-		 *  可以直接存储堆中的引用。这份引用直接指向 s3 引用的对象，也就是说s3.intern() ==s3会返回true。
-		 *	String s4 = "11"， 这一行代码会直接去常量池中创建，
-		 *  但是发现已经有这个对象了，此时也就是指向 s3 引用对象的一个引用。因此s3 == s4返回了true。
+		 * String s = new String("1")，生成了常量池中的"1" 和堆空间中的字符串对象。
+		 * s.intern()，这一行的作用是s对象去常量池中寻找后发现"1"已经存在于常量池中了,返回常量池里的字符串对象 String s2 =
+		 * "1"，这行代码是生成一个s2的引用指向常量池中的"1"对象。 结果就是 s 和 s2 的引用地址明显不同。因此返回了false。
+		 * 
+		 * s3.intern()，这一行代码，是将 s3中的"11"字符串放入 String 常量池中，此时常量池中不存在“11”字符串，
+		 * JDK1.6的做法是直接在常量池中生成一个 "11" 的对象。 但是在JDK1.7中，常量池中不需要再存储一份对象了，
+		 * 可以直接存储堆中的引用。这份引用直接指向 s3 引用的对象，也就是说s3.intern() ==s3会返回true。 String s4
+		 * = "11"， 这一行代码会直接去常量池中创建， 但是发现已经有这个对象了，此时也就是指向 s3 引用对象的一个引用。因此s3 ==
+		 * s4返回了true。
 		 */
-		String s = new String("1");  
-		//s.intern();  
-		String s2 = "1";  
-		System.out.println(s == s2);  
-		  
-		String s3 = new String("1") + new String("1");  
-		s3.intern();  
-		String s4 = "11";  
-		System.out.println(s3 == s4);  
+		String s = new String("1");
+		s.intern();
+		String s2 = "1";
+		System.out.println("s == s2 ? " + (s == s2));
+		System.out.println("s.intern() == s2 ? " + (s.intern() == s2));
 
-		/**
-		 * str1.intern() == str1就是上面例子中的情况，str1.intern()发现常量池中不存在“SEUCalvin”，
-		 * 因此指向了str1。 "SEUCalvin"在常量池中创建时，也就直接指向了str1了。
-		 * 两个都返回true就理所当然啦。
-		 */
-		String str1 = new String("SEU") + new String("Calvin");        
-		System.out.println(str1.intern() == str1);     
-		System.out.println(str1 == "SEUCalvin");  
+		String s3 = new String("1") + new String("1");
+		s3.intern();
+		String s4 = "11";
+		System.out.println("s3 == s4 ? " + (s3 == s4));
+
+	    
+		String str1 = new String("SEU") + new String("Calvin");
+		System.out.println(str1.intern() == str1);
+		System.out.println(str1 == "SEUCalvin");
 	}
-	
+
 	@Test
 	public void test4() {
- 
-		/**
-		 * str2先在常量池中创建了“SEUCalvin”，那么str1.intern()当然就直接指向了str2，
-		 * 你可以去验证它们两个是返回的true。后面的"SEUCalvin"也一样指向str2。
-		 * 所以谁都不搭理在堆空间中的str1了，所以都返回了false。
-		 */
-		String str2 = "SEUCalvin";//新加的一行代码，其余不变  
-		String str1 = new String("SEU")+ new String("Calvin");      
-		System.out.println(str1.intern() == str1);   
-		System.out.println(str1 == "SEUCalvin");   
- 
+
+
+		//str2指向常量池,堆中没有SEUCalvin对象
+		String str2 = "SEUCalvin"; 
+		//str1指向堆中新的对象SEUCalvin,常量池里有SEU,Calvin,SEUCalvin
+		String str1 = new String("SEU") + new String("Calvin");
+		System.out.println(str1.intern() == str1);
+		System.out.println(str1 == "SEUCalvin");
+
 	}
-	
+
+	/**
+	 * 直接使用纯字符串串联来创建String对象，则仅仅会检
+	 * 查维护String池中的字符串，池中没有就在池中创建一个，有则罢了！
+	 * 但绝不会在堆栈区再去创建该String对 象；
+	 */
 	@Test
-	public void test5(){
-		String a="abc";
-		String b="abc";
-		String c=new String("abc");
-		String d="ab"+"c";
-		
-		
-		System.out.println((a==b)+" "+(b==c)+" "+(a==d));
+	public void test5() {
+		//a指向常量池,堆中没有abc对象
+		String a = "abc";
+		//b指向常量池,堆中没有abc对象
+		String b = "abc";
+		//c指向堆中新的对象
+		String c = new String("abc");
+		//d指向常量池
+		String d = "ab" + "c";
+        // false false false
+		System.out.println((a == b) + " " + (b == c) + " " + (a == d));
 	}
-	
+
+	/**
+	 * 使用在编译期间可以确定结果的变量表达式来创建String对象，则仅仅会检 查维护String池中的字符串，池中没有就在池中创建一个，有则罢了！
+	 * 但绝不会在堆栈区再去创建该String对 象；
+	 * 
+	 * 
+	 */
 	@Test
-	public void test6(){
-		String test="270047_XE210SH_CX11_AAA";
-		System.out.println(test.substring(0,test.lastIndexOf("_")));
+	public void test6() {
+		//a指向常量池
+		String a = "xiaomeng2";
+		final String b = "xiaomeng";
+		String d = "xiaomeng";
+		// c = b + 2在编译期间就可以确定,指向常量池
+		String c = b + 2;
+		//e指向堆中新的对象
+		String e = d + 2;
+		System.out.println((a == c));
+		System.out.println((a == e));
 	}
+
+	@Test
+	public void test7() {
+		// 在池中和堆中分别创建String对象"abc",s1指向堆中对象
+		String s1 = new String("abc");
+		// s2直接指向池中对象"abc"
+		String s2 = "abc";
+		// 在堆中新创建"abc"对象，s3指向该对象
+		String s3 = new String("abc");
+		// 在池中创建对象"ab" 和 "c"，并且s4指向池中对象"abc"
+		String s4 = "ab" + "c";
+		// c指向池中对象"c"
+		String c = "c";
+		// 在堆中创建新的对象"abc"，并且s5指向该对象
+		String s5 = "ab" + c;
+
+		// 在堆中创建新的对象"abc"，并且s6指向该对象
+		String s6 = "ab".concat("c");
+		// 在堆中创建新的对象"abc"，并且s7指向该对象
+		String s7 = "ab".concat(c);
+
+		System.out.println("------------实串-----------");
+		System.out.println(s1 == s2); // false
+		System.out.println(s1 == s3); // false
+		System.out.println(s2 == s3); // false
+		System.out.println(s2 == s4); // true
+		System.out.println(s2 == s5); // false
+		System.out.println(s2 == s6); // false
+		System.out.println(s2 == s7); // false
+		System.out.println(s6 == s3); // false
+		System.out.println(s7 == s3); // false
+	}
+
 }
