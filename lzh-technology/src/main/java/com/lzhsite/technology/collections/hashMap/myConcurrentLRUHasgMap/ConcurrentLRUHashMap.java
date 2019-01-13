@@ -1,4 +1,4 @@
-package com.lzhsite.technology.collections;
+package com.lzhsite.technology.collections.hashMap.myConcurrentLRUHasgMap;
  
 
 import java.io.IOException;
@@ -27,41 +27,19 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                 ConcurrentMap<K, V>, Serializable {
-
-        /*
-         * The basic strategy is to subdivide the table among Segments, each of
-         * which itself is a concurrently readable hash table.
-         */
-
-        /* ---------------- Constants -------------- */
-
-        /**
-         * 
-         */
+ 
         private static final long serialVersionUID = -5031526786765467550L;
 
         /**
          * Segement默认最大数
          */
         static final int DEFAULT_SEGEMENT_MAX_CAPACITY = 100;
-
-        /**
-         * The default load factor for this table, used when not otherwise specified
-         * in a constructor.
-         */
+ 
         static final float DEFAULT_LOAD_FACTOR = 0.75f;
-
-        /**
-         * The default concurrency level for this table, used when not otherwise
-         * specified in a constructor.
-         */
+ 
         static final int DEFAULT_CONCURRENCY_LEVEL = 16;
 
-        /**
-         * The maximum capacity, used if a higher value is implicitly specified by
-         * either of the constructors with arguments. MUST be a power of two <=
-         * 1<<30 to ensure that entries are indexable using ints.
-         */
+    
         static final int MAXIMUM_CAPACITY = 1 << 30;
 
         /**
@@ -69,46 +47,23 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
          * arguments.
          */
         static final int MAX_SEGMENTS = 1 << 16; // slightly conservative
-
-        /**
-         * Number of unsynchronized retries in size and containsValue methods before
-         * resorting to locking. This is used to avoid unbounded retries if tables
-         * undergo continuous modification which would make it impossible to obtain
-         * an accurate result.
-         */
+ 
         static final int RETRIES_BEFORE_LOCK = 2;
-
-        /* ---------------- Fields -------------- */
-
-        /**
-         * Mask value for indexing into segments. The upper bits of a key's hash
-         * code are used to choose the segment.
-         */
+ 
         final int segmentMask;
 
         /**
          * Shift value for indexing within segments.
          */
         final int segmentShift;
-
-        /**
-         * The segments, each of which is a specialized hash table
-         */
+ 
         final Segment<K, V>[] segments;
 
         transient Set<K> keySet;
         transient Set<Map.Entry<K, V>> entrySet;
         transient Collection<V> values;
 
-        /* ---------------- Small Utilities -------------- */
-
-        /**
-         * Applies a supplemental hash function to a given hashCode, which defends
-         * against poor quality hash functions. This is critical because
-         * ConcurrentHashMap uses power-of-two length hash tables, that otherwise
-         * encounter collisions for hashCodes that do not differ in lower or upper
-         * bits.
-         */
+    
         private static int hash(int h) {
                 // Spread bits to regularize both segment and index locations,
                 // using variant of single-word Wang/Jenkins hash.
@@ -120,13 +75,7 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                 return h ^ (h >>> 16);
         }
 
-        /**
-         * Returns the segment that should be used for key with given hash
-         * 
-         * @param hash
-         *            the hash code for the key
-         * @return the segment
-         */
+ 
         final Segment<K, V> segmentFor(int hash) {
                 return segments[(hash >>> segmentShift) & segmentMask];
         }
@@ -195,74 +144,19 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
          * @param <V>
          */
         static final class Segment<K, V> extends ReentrantLock implements Serializable {
-                /*
-                 * Segments maintain a table of entry lists that are ALWAYS kept in a
-                 * consistent state, so can be read without locking. Next fields of
-                 * nodes are immutable (final). All list additions are performed at the
-                 * front of each bin. This makes it easy to check changes, and also fast
-                 * to traverse. When nodes would otherwise be changed, new nodes are
-                 * created to replace them. This works well for hash tables since the
-                 * bin lists tend to be short. (The average length is less than two for
-                 * the default load factor threshold.)
-                 * 
-                 * Read operations can thus proceed without locking, but rely on
-                 * selected uses of volatiles to ensure that completed write operations
-                 * performed by other threads are noticed. For most purposes, the
-                 * "count" field, tracking the number of elements, serves as that
-                 * volatile variable ensuring visibility. This is convenient because
-                 * this field needs to be read in many read operations anyway:
-                 * 
-                 * - All (unsynchronized) read operations must first read the "count"
-                 * field, and should not look at table entries if it is 0.
-                 * 
-                 * - All (synchronized) write operations should write to the "count"
-                 * field after structurally changing any bin. The operations must not
-                 * take any action that could even momentarily cause a concurrent read
-                 * operation to see inconsistent data. This is made easier by the nature
-                 * of the read operations in Map. For example, no operation can reveal
-                 * that the table has grown but the threshold has not yet been updated,
-                 * so there are no atomicity requirements for this with respect to
-                 * reads.
-                 * 
-                 * As a guide, all critical volatile reads and writes to the count field
-                 * are marked in code comments.
-                 */
-
+          
                 private static final long serialVersionUID = 2249069246763182397L;
-
-                /**
-                 * The number of elements in this segment's region.
-                 */
+ 
                 transient volatile int count;
 
-                /**
-                 * Number of updates that alter the size of the table. This is used
-                 * during bulk-read methods to make sure they see a consistent snapshot:
-                 * If modCounts change during a traversal of segments computing size or
-                 * checking containsValue, then we might have an inconsistent view of
-                 * state so (usually) must retry.
-                 */
+            
                 transient int modCount;
-
-                /**
-                 * The table is rehashed when its size exceeds this threshold. (The
-                 * value of this field is always <tt>(int)(capacity *
-                 * loadFactor)</tt>.)
-                 */
+ 
                 transient int threshold;
-
-                /**
-                 * The per-segment table.
-                 */
+ 
                 transient volatile HashEntry<K, V>[] table;
 
-                /**
-                 * The load factor for the hash table. Even though this value is same
-                 * for all segments, it is replicated to avoid needing links to outer
-                 * object.
-                 * 
-                 * @serial
-                 */
+            
                 final float loadFactor;
 
                 /**
@@ -298,20 +192,12 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                         table = newTable;
                 }
 
-                /**
-                 * Returns properly casted first entry of bin for given hash.
-                 */
+ 
                 HashEntry<K, V> getFirst(int hash) {
                         HashEntry<K, V>[] tab = table;
                         return tab[hash & (tab.length - 1)];
                 }
-
-                /**
-                 * Reads value field of an entry under lock. Called if value field ever
-                 * appears to be null. This is possible only if a compiler happens to
-                 * reorder a HashEntry initialization with its table assignment, which
-                 * is legal under memory model but is not known to ever occur.
-                 */
+ 
                 V readValueUnderLock(HashEntry<K, V> e) {
                         lock();
                         try {
@@ -510,19 +396,7 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                         int oldCapacity = oldTable.length;
                         if (oldCapacity >= MAXIMUM_CAPACITY)
                                 return;
-
-                        /*
-                         * Reclassify nodes in each list to new Map. Because we are using
-                         * power-of-two expansion, the elements from each bin must either
-                         * stay at same index, or move with a power of two offset. We
-                         * eliminate unnecessary node creation by catching cases where old
-                         * nodes can be reused because their next fields won't change.
-                         * Statistically, at the default threshold, only about one-sixth of
-                         * them need cloning when a table doubles. The nodes they replace
-                         * will be garbage collectable as soon as they are no longer
-                         * referenced by any reader thread that may be in the midst of
-                         * traversing table right now.
-                         */
+ 
 
                         HashEntry<K, V>[] newTable = HashEntry.newArray(oldCapacity << 1);
                         threshold = (int) (newTable.length * loadFactor);
@@ -708,14 +582,7 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
          */
         public boolean isEmpty() {
                 final Segment<K, V>[] segments = this.segments;
-                /*
-                 * We keep track of per-segment modCounts to avoid ABA problems in which
-                 * an element in one segment was added and in another removed during
-                 * traversal, in which case the table was never actually empty at any
-                 * point. Note the similar use of modCounts in the size() and
-                 * containsValue() methods, which are the only other methods also
-                 * susceptible to ABA problems.
-                 */
+   
                 int[] mc = new int[segments.length];
                 int mcsum = 0;
                 for (int i = 0; i < segments.length; ++i) {
@@ -724,9 +591,7 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                         else
                                 mcsum += mc[i] = segments[i].modCount;
                 }
-                // If mcsum happens to be zero, then we know we got a snapshot
-                // before any modifications at all were made. This is
-                // probably common enough to bother tracking.
+ 
                 if (mcsum != 0) {
                         for (int i = 0; i < segments.length; ++i) {
                                 if (segments[i].count != 0 || mc[i] != segments[i].modCount)
@@ -736,13 +601,7 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                 return true;
         }
 
-        /**
-         * Returns the number of key-value mappings in this map. If the map contains
-         * more than <tt>Integer.MAX_VALUE</tt> elements, returns
-         * <tt>Integer.MAX_VALUE</tt>.
-         * 
-         * @return the number of key-value mappings in this map
-         */
+ 
         public int size() {
                 final Segment<K, V>[] segments = this.segments;
                 long sum = 0;
@@ -786,52 +645,18 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
 
         }
 
-        /**
-         * Returns the value to which the specified key is mapped, or {@code null}
-         * if this map contains no mapping for the key.
-         * 
-         * <p>
-         * More formally, if this map contains a mapping from a key {@code k} to a
-         * value {@code v} such that {@code key.equals(k)}, then this method returns
-         * {@code v}; otherwise it returns {@code null}. (There can be at most one
-         * such mapping.)
-         * 
-         * @throws NullPointerException
-         *             if the specified key is null
-         */
+ 
         public V get(Object key) {
                 int hash = hash(key.hashCode());
                 return segmentFor(hash).get(key, hash);
         }
 
-        /**
-         * Tests if the specified object is a key in this table.
-         * 
-         * @param key
-         *            possible key
-         * @return <tt>true</tt> if and only if the specified object is a key in
-         *         this table, as determined by the <tt>equals</tt> method;
-         *         <tt>false</tt> otherwise.
-         * @throws NullPointerException
-         *             if the specified key is null
-         */
+     
         public boolean containsKey(Object key) {
                 int hash = hash(key.hashCode());
                 return segmentFor(hash).containsKey(key, hash);
         }
-
-        /**
-         * Returns <tt>true</tt> if this map maps one or more keys to the specified
-         * value. Note: This method requires a full internal traversal of the hash
-         * table, and so is much slower than method <tt>containsKey</tt>.
-         * 
-         * @param value
-         *            value whose presence in this map is to be tested
-         * @return <tt>true</tt> if this map maps one or more keys to the specified
-         *         value
-         * @throws NullPointerException
-         *             if the specified value is null
-         */
+ 
         public boolean containsValue(Object value) {
                 if (value == null)
                         throw new NullPointerException();
@@ -879,21 +704,7 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                 return found;
         }
 
-        /**
-         * Legacy method testing if some key maps into the specified value in this
-         * table. This method is identical in functionality to
-         * {@link #containsValue}, and exists solely to ensure full compatibility
-         * with class {@link java.util.Hashtable}, which supported this method prior
-         * to introduction of the Java Collections framework.
-         * 
-         * @param value
-         *            a value to search for
-         * @return <tt>true</tt> if and only if some key maps to the <tt>value</tt>
-         *         argument in this table as determined by the <tt>equals</tt>
-         *         method; <tt>false</tt> otherwise
-         * @throws NullPointerException
-         *             if the specified value is null
-         */
+ 
         public boolean contains(Object value) {
                 return containsValue(value);
         }
@@ -918,41 +729,19 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                 return segmentFor(hash).put(key, hash, value, true);
         }
 
-        /**
-         * Copies all of the mappings from the specified map to this one. These
-         * mappings replace any mappings that this map had for any of the keys
-         * currently in the specified map.
-         * 
-         * @param m
-         *            mappings to be stored in this map
-         */
+ 
         public void putAll(Map<? extends K, ? extends V> m) {
                 for (Map.Entry<? extends K, ? extends V> e : m.entrySet())
                         put(e.getKey(), e.getValue());
         }
 
-        /**
-         * Removes the key (and its corresponding value) from this map. This method
-         * does nothing if the key is not in the map.
-         * 
-         * @param key
-         *            the key that needs to be removed
-         * @return the previous value associated with <tt>key</tt>, or <tt>null</tt>
-         *         if there was no mapping for <tt>key</tt>
-         * @throws NullPointerException
-         *             if the specified key is null
-         */
+ 
         public V remove(Object key) {
                 int hash = hash(key.hashCode());
                 return segmentFor(hash).remove(key, hash, null);
         }
 
-        /**
-         * {@inheritDoc}
-         * 
-         * @throws NullPointerException
-         *             if the specified key is null
-         */
+ 
         public boolean remove(Object key, Object value) {
                 int hash = hash(key.hashCode());
                 if (value == null)
@@ -960,12 +749,7 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                 return segmentFor(hash).remove(key, hash, value) != null;
         }
 
-        /**
-         * {@inheritDoc}
-         * 
-         * @throws NullPointerException
-         *             if any of the arguments are null
-         */
+ 
         public boolean replace(K key, V oldValue, V newValue) {
                 if (oldValue == null || newValue == null)
                         throw new NullPointerException();
@@ -973,14 +757,7 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                 return segmentFor(hash).replace(key, hash, oldValue, newValue);
         }
 
-        /**
-         * {@inheritDoc}
-         * 
-         * @return the previous value associated with the specified key, or
-         *         <tt>null</tt> if there was no mapping for the key
-         * @throws NullPointerException
-         *             if the specified key or value is null
-         */
+ 
         public V replace(K key, V value) {
                 if (value == null)
                         throw new NullPointerException();
@@ -996,85 +773,29 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                         segments[i].clear();
         }
 
-        /**
-         * Returns a {@link Set} view of the keys contained in this map. The set is
-         * backed by the map, so changes to the map are reflected in the set, and
-         * vice-versa. The set supports element removal, which removes the
-         * corresponding mapping from this map, via the <tt>Iterator.remove</tt>,
-         * <tt>Set.remove</tt>, <tt>removeAll</tt>, <tt>retainAll</tt>, and
-         * <tt>clear</tt> operations. It does not support the <tt>add</tt> or
-         * <tt>addAll</tt> operations.
-         * 
-         * <p>
-         * The view's <tt>iterator</tt> is a "weakly consistent" iterator that will
-         * never throw {@link ConcurrentModificationException}, and guarantees to
-         * traverse elements as they existed upon construction of the iterator, and
-         * may (but is not guaranteed to) reflect any modifications subsequent to
-         * construction.
-         */
+ 
         public Set<K> keySet() {
                 Set<K> ks = keySet;
                 return (ks != null) ? ks : (keySet = new KeySet());
         }
 
-        /**
-         * Returns a {@link Collection} view of the values contained in this map.
-         * The collection is backed by the map, so changes to the map are reflected
-         * in the collection, and vice-versa. The collection supports element
-         * removal, which removes the corresponding mapping from this map, via the
-         * <tt>Iterator.remove</tt>, <tt>Collection.remove</tt>, <tt>removeAll</tt>,
-         * <tt>retainAll</tt>, and <tt>clear</tt> operations. It does not support
-         * the <tt>add</tt> or <tt>addAll</tt> operations.
-         * 
-         * <p>
-         * The view's <tt>iterator</tt> is a "weakly consistent" iterator that will
-         * never throw {@link ConcurrentModificationException}, and guarantees to
-         * traverse elements as they existed upon construction of the iterator, and
-         * may (but is not guaranteed to) reflect any modifications subsequent to
-         * construction.
-         */
+ 
         public Collection<V> values() {
                 Collection<V> vs = values;
                 return (vs != null) ? vs : (values = new Values());
         }
 
-        /**
-         * Returns a {@link Set} view of the mappings contained in this map. The set
-         * is backed by the map, so changes to the map are reflected in the set, and
-         * vice-versa. The set supports element removal, which removes the
-         * corresponding mapping from the map, via the <tt>Iterator.remove</tt>,
-         * <tt>Set.remove</tt>, <tt>removeAll</tt>, <tt>retainAll</tt>, and
-         * <tt>clear</tt> operations. It does not support the <tt>add</tt> or
-         * <tt>addAll</tt> operations.
-         * 
-         * <p>
-         * The view's <tt>iterator</tt> is a "weakly consistent" iterator that will
-         * never throw {@link ConcurrentModificationException}, and guarantees to
-         * traverse elements as they existed upon construction of the iterator, and
-         * may (but is not guaranteed to) reflect any modifications subsequent to
-         * construction.
-         */
+ 
         public Set<Map.Entry<K, V>> entrySet() {
                 Set<Map.Entry<K, V>> es = entrySet;
                 return (es != null) ? es : (entrySet = new EntrySet());
         }
 
-        /**
-         * Returns an enumeration of the keys in this table.
-         * 
-         * @return an enumeration of the keys in this table
-         * @see #keySet()
-         */
+  
         public Enumeration<K> keys() {
                 return new KeyIterator();
         }
-
-        /**
-         * Returns an enumeration of the values in this table.
-         * 
-         * @return an enumeration of the values in this table
-         * @see #values()
-         */
+ 
         public Enumeration<V> elements() {
                 return new ValueIterator();
         }
@@ -1162,11 +883,7 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                         return super.nextEntry().value;
                 }
         }
-
-        /**
-         * Custom Entry class used by EntryIterator.next(), that relays setValue
-         * changes to the underlying map.
-         */
+ 
         final class WriteThroughEntry extends AbstractMap.SimpleEntry<K, V> {
                 /**
                  * 
@@ -1177,14 +894,7 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                         super(k, v);
                 }
 
-                /**
-                 * Set our entry's value and write through to the map. The value to
-                 * return is somewhat arbitrary here. Since a WriteThroughEntry does not
-                 * necessarily track asynchronous changes, the most recent "previous"
-                 * value could be different from what we return (or could even have been
-                 * removed in which case the put will re-establish). We do not and
-                 * cannot guarantee more.
-                 */
+  
                 public V setValue(V value) {
                         if (value == null)
                                 throw new NullPointerException();
@@ -1271,18 +981,7 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                 }
         }
 
-        /* ---------------- Serialization Support -------------- */
-
-        /**
-         * Save the state of the <tt>ConcurrentHashMap</tt> instance to a stream
-         * (i.e., serialize it).
-         * 
-         * @param s
-         *            the stream
-         * @serialData the key (Object) and value (Object) for each key-value
-         *             mapping, followed by a null pair. The key-value mappings are
-         *             emitted in no particular order.
-         */
+ 
         private void writeObject(java.io.ObjectOutputStream s) throws IOException {
                 s.defaultWriteObject();
 
@@ -1305,13 +1004,7 @@ public class ConcurrentLRUHashMap<K, V> extends AbstractMap<K, V> implements
                 s.writeObject(null);
         }
 
-        /**
-         * Reconstitute the <tt>ConcurrentHashMap</tt> instance from a stream (i.e.,
-         * deserialize it).
-         * 
-         * @param s
-         *            the stream
-         */
+ 
         @SuppressWarnings("unchecked")
         private void readObject(java.io.ObjectInputStream s) throws IOException,
                         ClassNotFoundException {

@@ -3,24 +3,24 @@ package com.lzhsite.technology.collections.hashMap.myHashMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyHashMap<K,V> {
+public class HashMap<K,V> {
 	
 	
-	private static int defaulLenth= 1<<4; //默认的整数倍,可以大大减少hash冲突,
+	private static int defaulLenth= 1<<4; //默认2的整数倍,可以大大减少hash冲突,
 	private static double defaulAddSizeFactory = 0.75;
 	private Entry<K, V> [] data;
 	private int capacity;  //最开始的大小,扩容之前
 	private int size;
 	
 
-	public MyHashMap() {
+	public HashMap() {
 		this(defaulLenth,defaulAddSizeFactory);
 	}
-	public MyHashMap(int capacity) {
+	public HashMap(int capacity) {
 		this(capacity,defaulAddSizeFactory);
 	}
 	
-	public MyHashMap(int capacity,double defaulAddSizeFactory) {
+	public HashMap(int capacity,double defaulAddSizeFactory) {
 		if(capacity > 0){
 			data =new Entry[capacity];
 			size = 0;
@@ -124,7 +124,7 @@ public class MyHashMap<K,V> {
 	}
 	
 	//寻找Entry对象
-	private void foundEntryByNext(Entry<K, V> entry,  List<MyHashMap<K, V>.Entry<K, V>> entryList) {
+	private void foundEntryByNext(Entry<K, V> entry,  List<HashMap<K, V>.Entry<K, V>> entryList) {
 		// TODO Auto-generated method stub
 		if(entry !=null && entry.next!=null){
 			//这个entry形成链表结构
@@ -152,7 +152,7 @@ public class MyHashMap<K,V> {
 	
 	
 	public static void main(String[] args) {
-		MyHashMap map=new MyHashMap<>();
+		HashMap map=new HashMap<>();
 		map.put("1", 1);
 		map.put("2", 2);
 		map.put("3", 3);
