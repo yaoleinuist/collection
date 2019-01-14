@@ -42,6 +42,7 @@ public class TestString {
 		//这一行的作用是s对象去常量池中寻找后发现"1"已经存在于常量池中了,返回常量池里的字符串对象
 		s.intern();
 		//s2指向常量池"1"
+
 		String s2 = "1";
 		System.out.println("s == s2 ? " + (s == s2));
 		System.out.println("s.intern() == s2 ? " + (s.intern() == s2));
@@ -62,6 +63,7 @@ public class TestString {
 	 * 查维护String池中的字符串，池中没有就在池中创建一个，有则罢了！
 	 * 但绝不会在堆栈区再去创建该String对 象；
 	 */
+
 	@Test
 	public void test4() {
 
