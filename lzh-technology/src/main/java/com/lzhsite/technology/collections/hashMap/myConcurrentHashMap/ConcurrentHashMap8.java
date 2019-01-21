@@ -413,17 +413,7 @@ public class ConcurrentHashMap8<K, V> extends AbstractMap<K, V> implements Concu
 			putVal(e.getKey(), e.getValue(), false);
 	}
 
-	/**
-	 * Removes the key (and its corresponding value) from this map. This method
-	 * does nothing if the key is not in the map.
-	 *
-	 * @param key
-	 *            the key that needs to be removed
-	 * @return the previous value associated with {@code key}, or {@code null}
-	 *         if there was no mapping for {@code key}
-	 * @throws NullPointerException
-	 *             if the specified key is null
-	 */
+
 	public V remove(Object key) {
 		return replaceNode(key, null, null);
 	}
@@ -530,49 +520,12 @@ public class ConcurrentHashMap8<K, V> extends AbstractMap<K, V> implements Concu
 			addCount(delta, -1);
 	}
 
-	/**
-	 * Returns a {@link Set} view of the keys contained in this map. The set is
-	 * backed by the map, so changes to the map are reflected in the set, and
-	 * vice-versa. The set supports element removal, which removes the
-	 * corresponding mapping from this map, via the {@code Iterator.remove},
-	 * {@code Set.remove}, {@code removeAll}, {@code retainAll}, and
-	 * {@code clear} operations. It does not support the {@code add} or
-	 * {@code addAll} operations.
-	 *
-	 * <p>
-	 * The view's iterators and spliterators are
-	 * <a href="package-summary.html#Weakly"><i>weakly consistent</i></a>.
-	 *
-	 * <p>
-	 * The view's {@code spliterator} reports {@link Spliterator#CONCURRENT},
-	 * {@link Spliterator#DISTINCT}, and {@link Spliterator#NONNULL}.
-	 *
-	 * @return the set view
-	 */
+ 
 	public KeySetView8<K, V> keySet() {
 		KeySetView8<K, V> ks;
 		return (ks = keySet) != null ? ks : (keySet = new KeySetView8<K, V>(this, null));
 	}
-
-	/**
-	 * Returns a {@link Collection} view of the values contained in this map.
-	 * The collection is backed by the map, so changes to the map are reflected
-	 * in the collection, and vice-versa. The collection supports element
-	 * removal, which removes the corresponding mapping from this map, via the
-	 * {@code Iterator.remove}, {@code Collection.remove}, {@code removeAll},
-	 * {@code retainAll}, and {@code clear} operations. It does not support the
-	 * {@code add} or {@code addAll} operations.
-	 *
-	 * <p>
-	 * The view's iterators and spliterators are
-	 * <a href="package-summary.html#Weakly"><i>weakly consistent</i></a>.
-	 *
-	 * <p>
-	 * The view's {@code spliterator} reports {@link Spliterator#CONCURRENT} and
-	 * {@link Spliterator#NONNULL}.
-	 *
-	 * @return the collection view
-	 */
+ 
 	public Collection<V> values() {
 		ValuesView<K, V> vs;
 		return (vs = values) != null ? vs : (values = new ValuesView<K, V>(this));
@@ -600,17 +553,7 @@ public class ConcurrentHashMap8<K, V> extends AbstractMap<K, V> implements Concu
 		}
 		return h;
 	}
-
-	/**
-	 * Returns a string representation of this map. The string representation
-	 * consists of a list of key-value mappings (in no particular order)
-	 * enclosed in braces ("{@code {}}"). Adjacent mappings are separated by the
-	 * characters {@code ", "} (comma and space). Each key-value mapping is
-	 * rendered as the key followed by an equals sign ("{@code =}") followed by
-	 * the associated value.
-	 *
-	 * @return a string representation of this map
-	 */
+ 
 	public String toString() {
 		Node<K, V>[] t;
 		int f = (t = table) == null ? 0 : t.length;
@@ -633,16 +576,7 @@ public class ConcurrentHashMap8<K, V> extends AbstractMap<K, V> implements Concu
 		return sb.append('}').toString();
 	}
 
-	/**
-	 * Compares the specified object with this map for equality. Returns
-	 * {@code true} if the given object is a map with the same mappings as this
-	 * map. This operation may return misleading results if either map is
-	 * concurrently modified during execution of this method.
-	 *
-	 * @param o
-	 *            object to be compared for equality with this map
-	 * @return {@code true} if the specified object is equal to this map
-	 */
+ 
 	public boolean equals(Object o) {
 		if (o != this) {
 			if (!(o instanceof Map))

@@ -1,9 +1,9 @@
 package com.lzhsite.leetcode.algoritom.dataSructure;
 
 public class DLNode implements Node {
-	private Object element;
-	private DLNode pre;
-	private DLNode next;
+	public Object element;
+	public DLNode pre;
+	public DLNode next;
 	
 	public DLNode() {
 		this(null,null,null);
@@ -34,4 +34,8 @@ public class DLNode implements Node {
 	public void setData(Object obj) {
 		element = obj;
 	}	
+	public String toString(){
+		return element+"->";
+	}
+	
 }
