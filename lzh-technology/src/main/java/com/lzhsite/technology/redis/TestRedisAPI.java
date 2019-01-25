@@ -109,14 +109,14 @@ import redis.clients.jedis.SortingParams;
 	hvals(key)：返回名称为key的hash中所有键对应的value
 	hgetall(key)：返回名称为key的hash中所有的键（field）及其对应的value*/
 
-public class TestRedisClient {
+public class TestRedisAPI {
 	
 	private Jedis jedis;// 非切片额客户端连接
 	private JedisPool jedisPool;// 非切片连接池
 	private ShardedJedis shardedJedis;// 切片额客户端连接
 	private ShardedJedisPool shardedJedisPool;// 切片连接池
 
-	public TestRedisClient() {
+	public TestRedisAPI() {
 		initialPool();
 		initialShardedPool();
 		shardedJedis = shardedJedisPool.getResource();
@@ -147,7 +147,7 @@ public class TestRedisClient {
 		config.setTestOnBorrow(false);
 		// slave链接
 		List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>();
-		shards.add(new JedisShardInfo("114.55.7.104", 6379, "master"));
+		shards.add(new JedisShardInfo("127.0.0.1", 6379, "master"));
 
 		// 构造池
 		shardedJedisPool = new ShardedJedisPool(config, shards);
@@ -407,6 +407,9 @@ public class TestRedisClient {
 	        System.out.println("sets1和sets2差集："+jedis.sdiff("sets1", "sets2"));//差集：set1中有，set2中没有的元素
 	}
 
+	/**
+	 * 实现排名
+	 */
 	private void SortedSetOperate() {
 		  System.out.println("======================zset=========================="); 
 	        // 清空数据 
@@ -466,7 +469,7 @@ public class TestRedisClient {
 
 	public static void main(String[] args) {
 
-		new TestRedisClient().show();
+		new TestRedisAPI().show();
 
 	}
 }

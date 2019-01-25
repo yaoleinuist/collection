@@ -22,7 +22,7 @@ import redis.clients.jedis.Transaction;
  * @author lzhcode
  *
  */
-public class TestJedis {
+public class TestRedisPool {
 
 	private static Jedis jedis;
 	private static ShardedJedis sharding;//分布式
@@ -64,7 +64,8 @@ public class TestJedis {
 	 *  事务方式
      *  保障一个client发起的事务中的命令可以连续的执行，而中间不会插入其他client的命令
      *  调用jedis.watch(…)方法来监控key，如果调用后key的值发生变化，则整个事务会执行失败。
-     *  另外，事务中某个操作失败，并不会回滚其他操作。这一点需要注意。还有，我们可以使用discard()方法来取消事务
+     *  另外，事务中某个操作失败，并不会回滚其他操作。这一点需要注意。
+     *  还有，我们可以使用discard()方法来取消事务
 	 */
 	@Test
 	public void trans() {
@@ -90,6 +91,11 @@ public class TestJedis {
 		System.out.println("事务操作时间-----：" + (end - start) / 1000.0 + "秒");
 
 	}
+	
+	
+	
+	
+	
 	@Test
 	public void pipelined () {
 		long start = System.currentTimeMillis();

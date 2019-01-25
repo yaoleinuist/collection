@@ -7,7 +7,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisPubSub;
 
-public class RedisSubscribe {
+public class TestRedisSubscribe {
 	
 	@Test
 	public void subscribe_test() {
