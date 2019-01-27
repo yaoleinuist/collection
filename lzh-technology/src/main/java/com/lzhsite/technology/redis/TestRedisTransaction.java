@@ -1,8 +1,6 @@
 package com.lzhsite.technology.redis;
 
 import java.util.List;
-
-
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisShardInfo;
 import redis.clients.jedis.Transaction;
@@ -18,12 +16,11 @@ public class TestRedisTransaction {
 
 	public static void main(String[] args) {
 
-		
 		JedisShardInfo jedisShardInfo = new JedisShardInfo("127.0.0.1", 6379);
 		jedisShardInfo.setPassword("123456..");
 		Jedis jedis = new Jedis(jedisShardInfo);
 		jedis.set("mykey", "1");
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 1000; i++) {
 
 			new Thread(new Runnable() {
 
@@ -31,8 +28,6 @@ public class TestRedisTransaction {
 				public void run() {
 
 					try {
-
-						JedisShardInfo jedisShardInfo = new JedisShardInfo("127.0.0.1", 6379);
 						jedisShardInfo.setPassword("123456..");
 						Jedis jedis = new Jedis(jedisShardInfo);
 						jedis.watch("mykey");
@@ -79,6 +74,7 @@ public class TestRedisTransaction {
 				}
 			}).start();
 
+			
 		}
 
 	}

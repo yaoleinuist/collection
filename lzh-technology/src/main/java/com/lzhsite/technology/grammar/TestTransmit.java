@@ -2,7 +2,7 @@ package com.lzhsite.technology.grammar;
 
 import com.lzhsite.entity.User;
 
-public class TestQuto {
+public class TestTransmit {
 
 	public static void main(String[] args) {
 		User user=new User();
@@ -33,8 +33,7 @@ public class TestQuto {
 		}finally{
 			a++;
 		}
-		return a;
-		
+		return a;		
 	}
 	
 	public static void setId(User user) {

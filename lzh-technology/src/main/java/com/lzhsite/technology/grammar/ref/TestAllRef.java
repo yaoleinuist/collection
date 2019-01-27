@@ -61,7 +61,7 @@ public class TestAllRef {
 		new CheckRefQueue(weakQueue,"weak queue").start();
 		new CheckRefQueue(phantomQueue,"phantom queue").start();
 		
-		// ȥ��ǿ����
+		// 去除强引用
 		obj = null;
 		System.out.println("Before GC:Soft Get= " + softRef.get());
 		System.out.println("Before GC:weak Get= " + weakRef.get());
@@ -70,7 +70,7 @@ public class TestAllRef {
 		System.out.println("After GC:Soft Get= " + softRef.get());
 		System.out.println("After GC:weak Get= " + weakRef.get());
 		System.out.println("After GC:phantom Get= " + phantomRef.get());
-		System.out.println("���ڴ����");
+		System.out.println("大内存分配");
 		byte[] b = new byte[4 * 1024 * 925];
 		System.out.println("After GC:Soft Get= " + softRef.get());
 		System.out.println("After GC:weak Get= " + weakRef.get());
@@ -79,3 +79,4 @@ public class TestAllRef {
 	}
 
 }
+

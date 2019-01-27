@@ -1,5 +1,6 @@
 package com.lzhsite.technology.grammar.ref;
 
+
 public class CanReliveObj {
 	public static CanReliveObj obj;
 	@Override
@@ -18,18 +19,19 @@ public class CanReliveObj {
 		System.gc();
 		Thread.sleep(1000);
 		if(obj==null){
-			System.out.println("obj �� null");
+			System.out.println("obj 是 null");
 		}else{
-			System.out.println("obj ����");
+			System.out.println("obj 可用");
 		}
-		System.out.println("�ڶ���gc");
+		System.out.println("第二次gc");
 		//obj=null;
 		System.gc();
 		Thread.sleep(1000);
 		if(obj==null){
-			System.out.println("obj �� null");
+			System.out.println("obj 是 null");
 		}else{
-			System.out.println("obj ����");
+			System.out.println("obj 可用");
 		}
 	}
 }
+

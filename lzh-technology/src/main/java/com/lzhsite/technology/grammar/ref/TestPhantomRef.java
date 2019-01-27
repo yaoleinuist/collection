@@ -1,5 +1,6 @@
 package com.lzhsite.technology.grammar.ref;
 
+
 import java.lang.ref.PhantomReference;
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
@@ -42,10 +43,10 @@ public class TestPhantomRef {
 		new CheckRefQueue().start();
 		obj=null;
 		Thread.sleep(1000);
-		//ȥ��ǿ����
+		//去除强引用
 		int i=1;
 		while(true){
-			System.out.println("��"+i+++"��gc");
+			System.out.println("第"+i+++"次gc");
 			System.gc();
 			Thread.sleep(1000);
 		}

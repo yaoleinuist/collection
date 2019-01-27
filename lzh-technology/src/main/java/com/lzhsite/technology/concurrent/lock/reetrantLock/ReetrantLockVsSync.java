@@ -7,7 +7,6 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * 比较ReetrantLock与synchronized的性能对比。
  * 
- * @author xialei(xialei199023@163.com)
  * @version v1.0 2015-9-27上午11:12:20
  */
 public class ReetrantLockVsSync {
