@@ -74,7 +74,7 @@ public class BackPack {
                     else
                         f[i][j] = f[i - 1][j];
                 } else
-                	//第i个物品已经发不下了
+                	//第i个物品已经放不下了
                     f[i][j] = f[i - 1][j];
             }
         }

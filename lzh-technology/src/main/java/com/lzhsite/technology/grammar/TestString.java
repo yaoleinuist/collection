@@ -37,42 +37,40 @@ public class TestString {
 	@Test
 	public void test3() {
  
-		//生成了常量池中的"1" 和堆空间中的字符串对象,s指向堆
+	
+		//生成了常量池中的"1" 和堆空间中的"1",s指向堆
 		String s = new String("1");
 		//这一行的作用是s对象去常量池中寻找后发现"1"已经存在于常量池中了,返回常量池里的字符串对象
 		s.intern();
 		//s2指向常量池"1"
-
 		String s2 = "1";
 		System.out.println("s == s2 ? " + (s == s2));
 		System.out.println("s.intern() == s2 ? " + (s.intern() == s2));
 
-		//str3指向常量池的对象11,常量池里有1,11
+		//s3指向堆,常量池里有1,11
 		String s3 = new String("1") + new String("1");
-		s3.intern();
+		//s4指向常量池"11"
 		String s4 = "11";
 		System.out.println("s3 == s4 ? " + (s3 == s4));
-
+		System.out.println("s3.intern() == s4 ? " + (s3.intern() == s4));
 	    
-		String str1 = new String("SEU") + new String("Calvin");
-		System.out.println(str1.intern() == str1);
-		System.out.println(str1 == "SEUCalvin");
+		//s5指向常量池,常量池里有1,11
+		String s5 = "1" + "1";
+		//s6指向常量池"11"
+		String s6 = "11";
+		System.out.println("s5 == s6 ? " + (s5 == s6));
+		
 	}
-	/**
-	 * 直接使用纯字符串串联来创建String对象，则仅仅会检
-	 * 查维护String池中的字符串，池中没有就在池中创建一个，有则罢了！
-	 * 但绝不会在堆栈区再去创建该String对 象；
-	 */
-
+ 
 	@Test
 	public void test4() {
 
-
 		//str2指向常量池,堆中没有SEUCalvin对象
 		String str2 = "SEUCalvin"; 
-		//str1指向常量池的对象SEUCalvin,常量池里有SEU,Calvin,SEUCalvin
+		//str1指堆的对象SEUCalvin,常量池里有SEU,Calvin,SEUCalvin，堆中有SEU,Calvin,SEUCalvin
 		String str1 = new String("SEU") + new String("Calvin");
 		System.out.println(str1.intern() == str1);
+	    //SEUCalvin是常量池里的对象
 		System.out.println(str1 == "SEUCalvin");
 
 	}
@@ -80,7 +78,7 @@ public class TestString {
 	/**
 	 * 直接使用纯字符串串联来创建String对象，则仅仅会检
 	 * 查维护String池中的字符串，池中没有就在池中创建一个，有则罢了！
-	 * 但绝不会在堆栈区再去创建该String对 象；
+	 * 但绝不会在堆栈区再去创建该String对 象
 	 */
 	@Test
 	public void test5() {
