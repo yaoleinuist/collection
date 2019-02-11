@@ -5,7 +5,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisShardInfo;
 import redis.clients.jedis.Transaction;
 /**
- * redis事务的原子性来防止超卖
+ * redis事务的原子性来防止超卖(单机)
  * 1. redis中的每个单独的命令都是原子性的，在期每个命令单独执行的过程中不用考录并发的问题。
  * 2. 对于redis，处于同一事物中的一组命令的执行也是原子性的，同样是这组命令执行过程中不用考虑并发的问题。
  */
