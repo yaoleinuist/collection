@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
+encoding//src/main/java/com/lzhsite/technology/designPattern/singleton/LazySingleton.java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/main/resources/props/application.properties=UTF-8
 encoding//src/main/resources/props/dubbo.properties=UTF-8

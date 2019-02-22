@@ -62,6 +62,8 @@ public class SeckillController
     {
         SeckillResult<Exposer> result;
         try{
+			//1、当秒杀活动还没有开始时，用户调用这个方法后，将会返回系统时间和秒杀时间，进而控制秒杀活动开启与结束 
+			//2、通过输出随机的秒杀接口地址，避免了用户利用插件或者猜测拼接url等其他方法，在活动未开始之前，访问秒杀地址。
             Exposer exposer=seckillService.exportSeckillUrl(seckillId);
             result=new SeckillResult<Exposer>(true,exposer);
         }catch (Exception e)
@@ -77,7 +79,7 @@ public class SeckillController
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    //illPhone藏在cookie里面，由注解@CookieValue获得，为了方便处理killPhone为null的情况，因此加上required=false属性。 
+    //userPhone藏在cookie里面，由注解@CookieValue获得，为了方便处理userPhone为null的情况，因此加上required=false属性。 
     public SeckillResult<SeckillExecution> execute(@PathVariable("seckillId") Long seckillId,
                                                    @PathVariable("md5") String md5,
                                                    @CookieValue(value = "userPhone",required = false) Long userPhone)

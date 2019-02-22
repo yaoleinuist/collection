@@ -1,7 +1,6 @@
 package com.lzhsite.technology.designPattern.singleton;
 
  
-import com.lzhsite.technology.concurrent.TestSynchronized;
 
 /*不可否认，synchronized关键字是可以保证单例，但是程序的性能却不容乐观，
 原因在于getInstance()整个方法体都是同步的，这就限定了访问速度。
@@ -9,6 +8,7 @@ import com.lzhsite.technology.concurrent.TestSynchronized;
 对于之后的获取不需要同步锁。因此，可以做进一步的改进：*/
 
 public class DoubleCheckedLock {  
+	
     private static DoubleCheckedLock instance;    
         
     public static DoubleCheckedLock getInstance() {    

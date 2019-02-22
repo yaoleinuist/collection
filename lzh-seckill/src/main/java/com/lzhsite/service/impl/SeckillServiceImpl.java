@@ -65,13 +65,14 @@ public class SeckillServiceImpl implements SeckillService {
 	}
 	
 /**	
+ * 暴露接口地址的方法，主要业务流程 
  * 1、判断该秒杀商品是否存在，如果不存在，设置Exposer类中状态(state)为活动未开启，返回暴露接口类(Exposer)，告知用户秒杀商品不存在。 
  * 2、如果秒杀商品存在，判断秒杀活动是否开启，如果活动未开启，设置Exposer类中状态(state)为活动未开启，返回暴露接口类(Exposer)，告知用户秒杀活动开启时间、结束时间。 
  * 3、如果秒杀活动开启，先md5加密后，将加密信息与seckillId封装成暴露接口类(Exposer)，并设置状态(state)为活动开启，返回暴露接口类(Exposer) 
  */
 	public Exposer exportSeckillUrl(long seckillId) {
 		// 优化点:缓存优化:超时的基础上维护一致性
-		// 1.访问redi
+		// 1.访问redis
 
 		Seckill seckill = redisDao.getSeckill(seckillId);
 		if (seckill == null) {

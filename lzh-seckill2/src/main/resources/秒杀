@@ -1,0 +1,61 @@
+Goods sql :
+create table Goods (
+ id bigint  PRIMARY KEY ,
+ goodsName VARCHAR(255) ,
+ goodsTitle VARCHAR(255) ,
+ goodsImg VARCHAR(255) ,
+ goodsDetail VARCHAR(255) ,
+ goodsPrice double precision not null ,
+ goodsStock INTEGER
+ )ENGINE =INNODB DEFAULT  CHARSET= utf8;
+
+MiaoshaGoods sql :
+create table MiaoshaGoods (
+id bigint  PRIMARY KEY ,
+ goodsId bigint ,
+ stockCount INTEGER ,
+ startDate null ,
+ endDate null
+ )ENGINE =INNODB DEFAULT  CHARSET= utf8;
+
+MiaoshaOrder sql :
+create table MiaoshaOrder (
+id bigint  PRIMARY KEY ,
+ userId bigint ,
+ orderId bigint ,
+ goodsId bigint
+ )ENGINE =INNODB DEFAULT  CHARSET= utf8;
+
+MiaoshaUser
+sql :create table MiaoshaUser (
+id bigint  PRIMARY KEY ,
+ nickname VARCHAR(255) ,
+ password VARCHAR(255) ,
+ salt VARCHAR(255) ,
+ head VARCHAR(255) ,
+ registerDate null ,
+ lastLoginDate null ,
+ loginCount INTEGER
+ )ENGINE =INNODB DEFAULT  CHARSET= utf8;
+
+OrderInfo sql :
+create table OrderInfo (
+id bigint  PRIMARY KEY ,
+ userId bigint ,
+ goodsId bigint ,
+ deliveryAddrId bigint ,
+ goodsName VARCHAR(255) ,
+ goodsCount INTEGER ,
+ goodsPrice double precision not null ,
+ orderChannel INTEGER ,
+ status INTEGER ,
+ createDate null ,
+ payDate null
+ )ENGINE =INNODB DEFAULT  CHARSET= utf8;
+
+User sql :
+create table User (
+id null  PRIMARY KEY ,
+ name VARCHAR(255)
+ )ENGINE =INNODB DEFAULT  CHARSET= utf8;
+
