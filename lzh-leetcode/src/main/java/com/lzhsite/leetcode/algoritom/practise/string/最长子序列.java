@@ -1,16 +1,16 @@
-package com.lzhsite.leetcode.algoritom;
+package com.lzhsite.leetcode.algoritom.practise.string;
 
 import java.util.List;
-/*
-	Input:
-	s = "abpcplea", d = ["ale","apple","monkey","plea"]
-	
-	Output:
-	"apple"
-	题目描述：删除 s 中的一些字符，使得它构成字符串列表 d 中的一个字符串，找出能构成的最长字符串。
-	如果有多个相同长度的结果，返回字典序的最大字符串。
-*/
+/**
+ * Input:
+ * s = "abpcplea", d = ["ale","apple","monkey","plea"]
+ *	Output:
+ *	"apple"
+ *	题目描述：删除 s 中的一些字符，使得它构成字符串列表 d 中的一个字符串，找出能构成的最长字符串。
+ *	如果有多个相同长度的结果，返回字典序的最大字符串。
+ */
 public class 最长子序列 {
+	
 	public String findLongestWord(String s, List<String> d) {
 	    String longestWord = "";
 	    for (String target : d) {

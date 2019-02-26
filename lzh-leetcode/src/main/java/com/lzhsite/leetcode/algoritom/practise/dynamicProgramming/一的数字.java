@@ -1,4 +1,7 @@
 package com.lzhsite.leetcode.algoritom.practise.dynamicProgramming;
+
+import java.util.Map;
+
 /**
  * 牛牛新买了一本算法书，算法书一共有n页，页码从1到n。
  * 牛牛于是想了一个算法题目：在这本算法书页码中1每个数字分别出现了多少次？ 
@@ -6,7 +9,6 @@ package com.lzhsite.leetcode.algoritom.practise.dynamicProgramming;
  *
  */
 public class 一的数字 {
-	
 	Long Sum1s(Long n) {
 		Long iCount = 0L;
 

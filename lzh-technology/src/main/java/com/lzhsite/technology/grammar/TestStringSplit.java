@@ -7,7 +7,18 @@ import org.junit.Test;
 public class TestStringSplit {
 
 	@Test
-	public void testSplit() {
+	public void testSplit1() {
+		
+		String[] array="A;B,C".split("",2);
+		for (int i = 0; i < array.length; i++) {
+			  System.out.print(array[i]+" ");
+		}
+		System.out.println();
+	 
+	}
+	
+	@Test
+	public void testSplit2() {
 
 		String orgStr = null;
 		StringBuffer sb = new StringBuffer();
