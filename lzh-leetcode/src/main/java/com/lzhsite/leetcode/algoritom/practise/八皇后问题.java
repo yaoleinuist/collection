@@ -50,7 +50,7 @@ public class 八皇后问题 {
 	static void EightQueen(int n) // 算法
 	{
 		int i, j;
-		int ct; // 用于判断是否冲突
+		int conflict; // 用于判断是否冲突
 		if (n == 8) // 若8个皇后已放置完成
 		{
 			Output(); // 输出求解的结果
@@ -60,19 +60,19 @@ public class 八皇后问题 {
 		{
 			WeiZhi[n] = i; // 在该行的第i列上放置
 			// 判断第n个皇后是否与前面皇后形成攻击
-			ct = 1;
+			conflict = 0;
 			for (j = 0; j < n; j++) {
 				if (WeiZhi[j] == WeiZhi[n]) // 同列形成攻击
 				{
-					ct = 0;
+					conflict = 1;
 				} else if (Math.abs(WeiZhi[j] - WeiZhi[n]) == (n - j))// 斜线形成攻击
 				{
-					ct = 0;
+					conflict = 1;
 				} else {
 				}
 			}
 
-			if (ct == 1) // 没有冲突，就开始下一列的试探
+			if (conflict==0) // 没有冲突，就开始下一列的试探
 				EightQueen(n + 1); // 递归调用
 		}
 	}

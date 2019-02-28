@@ -6,6 +6,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 public class List去重 {
+	
+	private static int size =10000;
+	private static int initSize =10240;
+	
+	 
+	
 	/**
 	 * 效率最低
 	 * @param list
@@ -66,31 +72,31 @@ public class List去重 {
 
 	public static void main(String[] args) {
 
-		final List<String> list = new ArrayList<String>();
-		for (int i = 0; i < 1000; i++) {
+		final List<String> list = new ArrayList<String>(initSize);
+		for (int i = 0; i < size; i++) {
 			list.add("haha-" + i);
 		}
 
 		long time = System.currentTimeMillis();
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < size; i++) {
 			removeDuplicate(list);
 		}
 		long time1 = System.currentTimeMillis();
 		System.out.println("time1:" + (time1 - time));
 
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < size; i++) {
 			removeDuplicate2(list);
 		}
 		long time2 = System.currentTimeMillis();
 		System.out.println("time2:" + (time2 - time1));
 
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < size; i++) {
 			removeDuplicate3(list);
 		}
 		long time3 = System.currentTimeMillis();
 		System.out.println("time3:" + (time3 - time2));
 
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < size; i++) {
 			removeDuplicate4(list);
 		}
 		long time4 = System.currentTimeMillis();

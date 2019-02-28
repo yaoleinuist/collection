@@ -64,8 +64,8 @@ public class 单链表两数相加 {
 		int sum = 0;
 		
 		while(head1 != null && head2 != null){
+			
 			sum =(int)head1.element + (int)head2.element + flag;
-			flag = 0;
 			head3.element = sum % 10;
 			flag =sum/10;
 				

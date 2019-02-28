@@ -6,11 +6,10 @@ import java.util.List;
 public class HashMap<K,V> {
 	
 	
-	private static int defaulLenth= 1<<4; //默认2的整数倍,可以大大减少hash冲突,
+	private static int defaulLenth= 1<<4; //最大容量，默认2的整数倍,可以大大减少hash冲突,
 	private static double defaulAddSizeFactory = 0.75;
 	private Entry<K, V> [] data;
-	private int capacity;  //最开始的大小,扩容之前
-	private int size;
+	private int size; //实际容量
 	
 
 	public HashMap() {
@@ -24,7 +23,6 @@ public class HashMap<K,V> {
 		if(capacity > 0){
 			data =new Entry[capacity];
 			size = 0;
-			this.capacity =capacity;
 			this.defaulAddSizeFactory =defaulAddSizeFactory;
 		}else{
 			System.out.println("error");
@@ -70,7 +68,7 @@ public class HashMap<K,V> {
 		if(key==null){
 			System.out.println("error");
 		}
-		if(capacity > defaulLenth * defaulAddSizeFactory){
+		if(size > defaulLenth * defaulAddSizeFactory){
 			up2Size();
 		}
 		//不同的key的hash一样时(hash冲突),新进的数据存在同一个数组下标的链表下

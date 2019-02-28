@@ -36,7 +36,6 @@ public class 字典序算法 {
 		int[] numbersCopy = Arrays.copyOf(numbers, numbers.length);
 
 		// 1.从后向前查看逆序区域，找到逆序区域的前一位，也就是数字置换的边界
-
 		int index = findTransferPoint(numbersCopy);
 
 		// 如果数字置换边界是0，说明整个数组已经逆序，无法得到更大的相同数字组成的整数，返回自身
