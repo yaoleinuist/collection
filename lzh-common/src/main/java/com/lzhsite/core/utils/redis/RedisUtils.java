@@ -7,10 +7,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisServerCommands;
@@ -24,6 +27,7 @@ import com.lzhsite.core.utils.DateUtils;
 import com.lzhsite.core.utils.SerializeUtils;
 
 import redis.clients.jedis.BuilderFactory;
+import redis.clients.jedis.Jedis;
 import redis.clients.util.SafeEncoder;
 
 public class RedisUtils {
@@ -38,6 +42,8 @@ public class RedisUtils {
 		put(key, value, Integer.valueOf(3600));
 	}
 
+	
+	
 	public static void put(String key, Object value, Integer seconds) {
 
 		template.execute(new RedisCallback() {

@@ -275,5 +275,19 @@ public class FileUtil extends FileUtils{
         }
         return result.toString();
     }
-
+    /**
+     * 加载classpath下的lua脚本
+     * @param inputStream
+     * @return
+     * @throws IOException
+     */
+    public static String loadScript(InputStream inputStream) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuffer buffer = new StringBuffer();
+        String line = null;
+        while ((line = bufferedReader.readLine()) != null){
+            buffer.append(line).append(System.lineSeparator());
+        }
+        return buffer.toString();
+    }
 }
