@@ -89,10 +89,11 @@
         </property>
         <property name="defaultTargetDataSource" ref="masterdataSource"/>
     </bean>
-
-
-   <!-- 配置数据库注解aop -->
-    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<!-- 开启切面 -->
+	<!-- 暴露AOP代理到ThreadLocal -->
+	<aop:aspectj-autoproxy expose-proxy="true"></aop:aspectj-autoproxy>
+    
+    <!-- 配置数据库注解aop -->
     <bean id="manyDataSourceAspect" class="com.lzhsite.core.datasource.DataSourceAspect" />
     <aop:config>
         <aop:aspect id="c" ref="manyDataSourceAspect">
@@ -100,7 +101,7 @@
             <aop:before pointcut-ref="tx" method="before"/>
         </aop:aspect>
     </aop:config>
-    <!-- 配置数据库注解aop -->
+    
 
 	<!-- myBatis文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

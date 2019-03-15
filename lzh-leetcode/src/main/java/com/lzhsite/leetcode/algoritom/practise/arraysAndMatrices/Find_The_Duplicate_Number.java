@@ -14,6 +14,7 @@ public class Find_The_Duplicate_Number {
 	     int l = 1, h = nums.length - 1;
 	     while (l <= h) {
 	         int mid = l + (h - l) / 2;
+	         //cnt代表小于mid的数据
 	         int cnt = 0;
 	         for (int i = 0; i < nums.length; i++) {
 	             if (nums[i] <= mid) cnt++;
@@ -25,4 +26,7 @@ public class Find_The_Duplicate_Number {
 	     }
 	     return l;
 	}
+	
+
+	
 }

@@ -7,14 +7,17 @@ package com.lzhsite.leetcode.algoritom.practise.arraysAndMatrices;
  */
 public class Move_Zeroes {
 	public void moveZeroes(int[] nums) {
-	    int idx = 0;
+		//不等于0时idx不断自增
+	    int idx = 0; 
 	    for (int num : nums) {
 	        if (num != 0) {
-	            nums[idx++] = num;
+	            nums[idx] = num;
+	            idx++;
 	        }
 	    }
 	    while (idx < nums.length) {
-	        nums[idx++] = 0;
+	        nums[idx] = 0;
+	        idx++;
 	    }
 	}
 }

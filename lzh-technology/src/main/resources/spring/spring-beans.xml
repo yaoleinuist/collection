@@ -26,6 +26,8 @@
 	<!-- 自动扫描controller层Bean -->
 	<context:component-scan base-package="com.lzhsite" />
 
+	
+	
 	<bean class="com.lzhsite.core.context.ApplicationContextHelper" />
 
 	<bean id="exceptionDefinitions" class="com.lzhsite.core.exception.ExceptionDefinitions" />
@@ -33,12 +35,12 @@
 	<bean id="redisLimiter" class="com.lzhsite.core.limiter.RedisLimiter"
 		init-method="init">
 	</bean>
-	
-		<bean id="dozerMapper" class="org.dozer.DozerBeanMapper">
 
-			<property name="mappingFiles">
-				<list>
-				</list>
-			</property>
-		</bean>
+	<bean id="dozerMapper" class="org.dozer.DozerBeanMapper">
+
+		<property name="mappingFiles">
+			<list>
+			</list>
+		</property>
+	</bean>
 </beans>

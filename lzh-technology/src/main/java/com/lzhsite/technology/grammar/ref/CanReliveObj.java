@@ -2,6 +2,9 @@ package com.lzhsite.technology.grammar.ref;
 
 
 public class CanReliveObj {
+	
+	
+	
 	public static CanReliveObj obj;
 	@Override
 	protected void finalize() throws Throwable {
@@ -14,6 +17,7 @@ public class CanReliveObj {
 		return "I am CanReliveObj";
 	}
 	public static void main(String[] args) throws InterruptedException{
+
 		obj=new CanReliveObj();
 		obj=null;
 		System.gc();
