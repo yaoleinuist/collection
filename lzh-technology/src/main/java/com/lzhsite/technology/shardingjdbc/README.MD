@@ -1,0 +1,7 @@
+Sharding jdbc是基于JDBC协议实现的，当我们获得dataSource时，这个dataSource是Sharding jdbc自己定义的一个SpringShardingDataSource类型的数据源，该数据源在返回getConnection()及prepareStatement()时，分别返回ShardingConnection和ShardingPreparedStatement的实例对象。然后在executeQuery()时，ShardingPreparedStatement做了这样的一件事：
+
+
+1、根据逻辑sql，经过分库分表策略逻辑计算，获得分库分表的路由结果SQLRouteResult；
+2、SQLRouteResult中包含真实的数据源以及转换后的真正sql，利用真实的数据源去执行获得ResultSet；
+3、将ResultSet列表封装成一个可以顺序读的ResultSet对象IteratorReducerResultSet。
+ 

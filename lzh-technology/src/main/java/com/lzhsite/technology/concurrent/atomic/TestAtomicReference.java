@@ -42,7 +42,14 @@ public class TestAtomicReference {
                 PersonDTO people = reference.get();
                 people.setName("Tom1");
                 people.setAge(people.getAge()+1);
+                //只有这句是原子性的
                 reference.getAndSet(people);
+                try {
+  					Thread.sleep(1000);
+  				} catch (InterruptedException e) {
+  					// TODO Auto-generated catch block
+  					e.printStackTrace();
+  				}
                 System.out.println("Thread1:"+reference.get().toString());
             }
         }).start();
@@ -56,6 +63,12 @@ public class TestAtomicReference {
                 people.setName("Tom2");
                 people.setAge(people.getAge()+1);
                 reference.getAndSet(people);
+                try {
+  					Thread.sleep(2000);
+  				} catch (InterruptedException e) {
+  					// TODO Auto-generated catch block
+  					e.printStackTrace();
+  				}
                 System.out.println("Thread2:"+reference.get().toString());
             }
         }).start();
